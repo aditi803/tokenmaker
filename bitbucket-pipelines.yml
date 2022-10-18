@@ -9,10 +9,8 @@ pipelines:
           caches:
             - node
           script:
-            - cd client
             - npm install --legacy-peer-deps
             - CI=false npm run build
-            - cd ../
           artifacts:
             - build/**
       - step:
