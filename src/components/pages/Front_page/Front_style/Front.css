@@ -1,4 +1,4 @@
-    /* .page-content {
+    .page-content {
         align-self: stretch;
         justify-content: flex-start;
         flex: 1 1 auto;
@@ -364,4 +364,4 @@
     .btn-rounded.btn-h-pad, .btn-rounded.btn-pad {
         padding-left: 2rem;
         padding-right: 2rem;
-    } */
+    }

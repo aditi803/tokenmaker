@@ -8,7 +8,7 @@ export const FrontMain = () => {
           <section className="page-section hero" id="hero">
             <div className="container">
               <h1>
-                <span className="sub-highlight">Automatic Token Maker</span>
+                <span className="sub-highlight">Automatic Token Make - 123r</span>
               </h1>
               <div className="my-5">
                 <p className="m-0">
