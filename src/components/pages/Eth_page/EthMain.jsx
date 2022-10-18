@@ -99,14 +99,14 @@ export const EthMain = () => {
 
   useEffect(() => {
     //
-    if (recoverable === true) {
-      console.log(commissionFee, "gg");
-      setEthFormData((prev) => ({
-        ...prev,
-        mintable: false,
-        commissionFee: Number().toFixed(3),
-      }));
-    }
+    // if (recoverable === true) {
+    //   console.log(commissionFee, "gg");
+    //   setEthFormData((prev) => ({
+    //     ...prev,
+    //     mintable: false,
+    //     commissionFee: Number().toFixed(3),
+    //   }));
+    // }
     // else{
     //    setEthFormData((prev) => ({
     //     ...prev,
@@ -249,7 +249,63 @@ export const EthMain = () => {
         }));
       }
     }
-  }, [tokenType, supplyType, network, pausable, recoverable, burnable]);
+  }, [tokenType, supplyType, network]);
+
+  useEffect(() => {
+    if (tokenType === "custom") {
+      if (burnable === true && pausable === true && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.35,
+        }));
+      }
+      if (pausable === true && burnable === true && recoverable === false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.275,
+        }));
+      }
+      if (pausable === true && burnable === false && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.275,
+        }));
+      }
+      if (
+        (burnable === true && pausable === false && recoverable === false) ||
+        (burnable === false && pausable === false && recoverable === true)
+      ) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.225,
+        }));
+      }
+      if (burnable === false && pausable === true && recoverable === false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.2,
+        }));
+      }
+      if (pausable === false && burnable === true && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.3,
+        }));
+      }
+      if (pausable === false && burnable === false && recoverable === false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.15,
+        }));
+      }
+      // if(burnable === false && pausable === false && recoverable === true ){
+      //   setEthFormData((prev) => ({
+      //     ...prev,
+      //     commissionFee: 0.225,
+      //   }));
+      // }
+    }
+  }, [pausable, recoverable, burnable]);
 
   const ethMainFormHandler = (e) => {
     let boolean = null;
@@ -611,7 +667,7 @@ export const EthMain = () => {
                                   className="form-check-input"
                                   type="checkbox"
                                   name="burnable"
-                                  defaultChecked={burnable}
+                                  checked={burnable}
                                   disabled={f_burnable}
                                   onChange={ethMainFormHandler}
                                 />
@@ -629,7 +685,7 @@ export const EthMain = () => {
                                   className="form-check-input"
                                   type="checkbox"
                                   name="pausable"
-                                  defaultChecked={pausable}
+                                  checked={pausable}
                                   disabled={f_pausable}
                                   onChange={ethMainFormHandler}
                                 />
@@ -750,11 +806,12 @@ export const EthMain = () => {
                                   I have read, understood and agreed to the{" "}
                                   {/* <span className="text-underline"> */}
                                   {/*  modal*/}
-                                  <a href="/"
+                                  <a
+                                    href="/"
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
                                   >
-                                   <u> term of use </u>
+                                    <u> term of use </u>
                                   </a>
                                   <div
                                     class="modal fade"
