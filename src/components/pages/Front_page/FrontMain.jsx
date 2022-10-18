@@ -1,17 +1,17 @@
 import React from "react";
-
+import "./Front_style/Front.css"
 export const FrontMain = () => {
   return (
     <>
-      <div class="page-content">
-        <main class="">
-          <section class="page-section hero" id="hero">
-            <div class="container">
+      <div className="page-content">
+        <main className="">
+          <section className="page-section hero" id="hero">
+            <div className="container">
               <h1>
-                <span class="sub-highlight">Automatic Token Maker</span>
+                <span className="sub-highlight">Automatic Token Maker</span>
               </h1>
-              <div class="my-5">
-                <p class="m-0">
+              <div className="my-5">
+                <p className="m-0">
                   You’re looking for a solution to create your own token on the
                   blockchain?
                 </p>
@@ -20,9 +20,9 @@ export const FrontMain = () => {
                   token automatically, and deploy it in a matter of minutes.
                 </p>
               </div>
-              <div class="my-5">
+              <div className="my-5">
                 <a
-                  class="btn btn-primary btn-pad btn-rounded me-3"
+                  className="btn btn-primary btn-pad btn-rounded me-3"
                   href="/generator"
                 >
                   Create your token
@@ -30,21 +30,21 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-          <section class="page-section section-how" id="how-it-works">
-            <div class="container">
-              <h2 class="section-title">
+          <section className="page-section section-how" id="how-it-works">
+            <div className="container">
+              <h2 className="section-title">
                 Create your token in just a few{" "}
-                <span class="sub-highlight">easy steps:</span>
+                <span className="sub-highlight">easy steps:</span>
               </h2>
-              <div class="row mt-5">
-                <div class="col-12 col-lg-6">
-                  <div class="icon-container">
-                    <span class="svg-icon icon-metamask"></span>
+              <div className="row mt-5">
+                <div className="col-12 col-lg-6">
+                  <div className="icon-container">
+                    <span className="svg-icon icon-metamask"></span>
                   </div>
-                  <div class="title">
-                    <span class="step-number">1 /</span>Install MetasMask
+                  <div className="title">
+                    <span className="step-number">1 /</span>Install MetasMask
                   </div>
-                  <p class="mb-0">
+                  <p className="mb-0">
                     If you don't have it yet, please make sure to{" "}
                     <a
                       href="https://metamask.io/"
@@ -56,41 +56,41 @@ export const FrontMain = () => {
                     or any of the supported wallets
                   </p>
                 </div>
-                <div class="col-12 col-lg-6 mt-5 mt-lg-0">
-                  <div class="icon-container">
-                    <span class="svg-icon icon-deposit"></span>
+                <div className="col-12 col-lg-6 mt-5 mt-lg-0">
+                  <div className="icon-container">
+                    <span className="svg-icon icon-deposit"></span>
                   </div>
-                  <div class="title">
-                    <span class="step-number">2 /</span>Deposit cryto on your
+                  <div className="title">
+                    <span className="step-number">2 /</span>Deposit cryto on your
                     wallet
                   </div>
-                  <p class="mb-0">
+                  <p className="mb-0">
                     Make sure you have enough crypto available to pay for Smart
                     Contract creation
                   </p>
                 </div>
               </div>
-              <div class="row mt-5">
-                <div class="col-12 col-lg-6">
-                  <div class="icon-container">
-                    <span class="svg-icon icon-fill"></span>
+              <div className="row mt-5">
+                <div className="col-12 col-lg-6">
+                  <div className="icon-container">
+                    <span className="svg-icon icon-fill"></span>
                   </div>
-                  <div class="title">
-                    <span class="step-number">3 /</span>Fill-out Token details
+                  <div className="title">
+                    <span className="step-number">3 /</span>Fill-out Token details
                   </div>
-                  <p class="mb-0">
+                  <p className="mb-0">
                     We need basic information (Token Name, Symbol) and
                     eventually more depending on the complexity of your Token
                   </p>
                 </div>
-                <div class="col-12 col-lg-6 mt-5 mt-lg-0">
-                  <div class="icon-container">
-                    <span class="svg-icon icon-deploy"></span>
+                <div className="col-12 col-lg-6 mt-5 mt-lg-0">
+                  <div className="icon-container">
+                    <span className="svg-icon icon-deploy"></span>
                   </div>
-                  <div class="title">
-                    <span class="step-number">4 /</span>Deploy your Token
+                  <div className="title">
+                    <span className="step-number">4 /</span>Deploy your Token
                   </div>
-                  <p class="mb-0">
+                  <p className="mb-0">
                     That's it, you're good to go! Confirm transaction on
                     MetaMask and your Token will be ready in a matter of
                     minutes.
@@ -99,26 +99,26 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-          <section class="page-section section-ready">
-            <div class="container">
-              <h2 class="section-title-small text-center">
+          <section className="page-section section-ready">
+            <div className="container">
+              <h2 className="section-title-small text-center">
                 Ready to deploy your token ?
               </h2>
-              <div class="mt-3 text-center">
-                <a href="/generator" class="btn btn-action btn-rounded btn-pad">
+              <div className="mt-3 text-center">
+                <a href="/generator" className="btn btn-action btn-rounded btn-pad">
                   Start now
                 </a>
               </div>
             </div>
           </section>
-          <section class="page-section section-features" id="features">
-            <div class="container">
-              <h2 class="section-title text-center">
-                <span class="sub-highlight">Features:</span>
+          <section className="page-section section-features" id="features">
+            <div className="container">
+              <h2 className="section-title text-center">
+                <span className="sub-highlight">Features:</span>
               </h2>
-              <div class="feature-item">
-                <div class="icon-container">
-                  <span class="svg-icon icon-compliant"></span>
+              <div className="feature-item">
+                <div className="icon-container">
+                  <span className="svg-icon icon-compliant"></span>
                 </div>
                 <div>
                   <h4>ERC20 / BEP20 Compliant</h4>
@@ -130,9 +130,9 @@ export const FrontMain = () => {
                   </p>
                 </div>
               </div>
-              <div class="feature-item">
-                <div class="icon-container">
-                  <span class="svg-icon icon-token"></span>
+              <div className="feature-item">
+                <div className="icon-container">
+                  <span className="svg-icon icon-token"></span>
                 </div>
                 <div>
                   <h4>Verified Source Code</h4>
@@ -142,9 +142,9 @@ export const FrontMain = () => {
                   </p>
                 </div>
               </div>
-              <div class="feature-item">
-                <div class="icon-container">
-                  <span class="svg-icon icon-burnable"></span>
+              <div className="feature-item">
+                <div className="icon-container">
+                  <span className="svg-icon icon-burnable"></span>
                 </div>
                 <div>
                   <h4>Burnable Token</h4>
@@ -154,9 +154,9 @@ export const FrontMain = () => {
                   </p>
                 </div>
               </div>
-              <div class="feature-item">
-                <div class="icon-container">
-                  <span class="svg-icon icon-money"></span>
+              <div className="feature-item">
+                <div className="icon-container">
+                  <span className="svg-icon icon-money"></span>
                 </div>
                 <div>
                   <h4>Mintable Token</h4>
@@ -166,9 +166,9 @@ export const FrontMain = () => {
                   </p>
                 </div>
               </div>
-              <div class="feature-item">
-                <div class="icon-container">
-                  <span class="svg-icon icon-pausable"></span>
+              <div className="feature-item">
+                <div className="icon-container">
+                  <span className="svg-icon icon-pausable"></span>
                 </div>
                 <div>
                   <h4>Pausable</h4>
@@ -178,9 +178,9 @@ export const FrontMain = () => {
                   </p>
                 </div>
               </div>
-              <div class="feature-item">
-                <div class="icon-container">
-                  <span class="svg-icon icon-ownable"></span>
+              <div className="feature-item">
+                <div className="icon-container">
+                  <span className="svg-icon icon-ownable"></span>
                 </div>
                 <div>
                   <h4>Ownable Access</h4>
@@ -192,18 +192,18 @@ export const FrontMain = () => {
                   </p>
                 </div>
               </div>
-              <div class="feature-item">
-                <div class="icon-container">
-                  <span class="svg-icon icon-supplyControl"></span>
+              <div className="feature-item">
+                <div className="icon-container">
+                  <span className="svg-icon icon-supplyControl"></span>
                 </div>
                 <div>
                   <h4>Control your supply</h4>
                   <p>Choose between fixed, capped or unlimited token supply.</p>
                 </div>
               </div>
-              <div class="feature-item">
-                <div class="icon-container">
-                  <span class="svg-icon icon-recovery"></span>
+              <div className="feature-item">
+                <div className="icon-container">
+                  <span className="svg-icon icon-recovery"></span>
                 </div>
                 <div>
                   <h4>Recover lost tokens</h4>
@@ -215,37 +215,37 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-          <section class="page-section section-custom-dev">
-            <div class="container">
-              <h2 class="section-title-small text-center">
+          <section className="page-section section-custom-dev">
+            <div className="container">
+              <h2 className="section-title-small text-center">
                 Need a custom development ?
               </h2>
-              <div class="mt-3 text-center">
+              <div className="mt-3 text-center">
                 <button
                   type="button"
-                  class="btn btn-primary btn-rounded btn-pad"
+                  className="btn btn-primary btn-rounded btn-pad"
                 >
                   Contact us
                 </button>
               </div>
             </div>
           </section>
-          <section class="page-section section-faq" id="faq">
-            <div class="container">
-              <div class="faq-container">
-                <h2 class="section-title text-center">FAQ</h2>
-                <p class="section-subtitle mt-3 mb-5">
+          <section className="page-section section-faq" id="faq">
+            <div className="container">
+              <div className="faq-container">
+                <h2 className="section-title text-center">FAQ</h2>
+                <p className="section-subtitle mt-3 mb-5">
                   As a leader in the field of Blockchain coding, Eat The Blocks
                   not only teaches you how to make tokens, smart contracts and
                   more, but also offers you tools like this token generator that
                   allows you to save time and deploy tokens automatically
                 </p>
-                <div class="faq-list-container">
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">What is an ERC-20 Token?</h4>
+                <div className="faq-list-container">
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is an ERC-20 Token?</h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         The ERC-20 introduces a standard for Fungible Tokens,
                         which means that each Token has a property that makes it
@@ -256,11 +256,11 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">What is a BEP-20 Token standard?</h4>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is a BEP-20 Token standard?</h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         It is a native token standard of the Binance Smart
                         Chain. It acts as a blueprint of how the BEP-20 tokens
@@ -269,11 +269,11 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">What is Fixed Supply Token?</h4>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is Fixed Supply Token?</h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         Once you deploy the token, the entire supply will be
                         sent to the owner's wallet. Fixed supply means that this
@@ -281,11 +281,11 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">What is Capped Supply Token?</h4>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is Capped Supply Token?</h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         When you create the token, you will have the option to
                         choose to send an initial supply to the owner's wallet.
@@ -295,13 +295,13 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">
                         How is the smart contract's source code verified?
                       </h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         When we deploy your smart contract, a third party such
                         as Etherscan verifies the source code and publishes it
@@ -310,13 +310,13 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">
                         What kind of acces type can i set up?
                       </h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         None: there is no central authority which can make
                         people trust your token more
@@ -332,11 +332,11 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">How can those tokens be used?</h4>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">How can those tokens be used?</h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         The tokens we will generate for you can be used for a
                         wide range of applications. As a crypto currency, to run
@@ -346,37 +346,37 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">Who owns generated tokens</h4>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">Who owns generated tokens</h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         You will be the sole owner of the tokens except if you
                         decide to make somebody else the owner
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">
                         What kind of tokens are used for ICOs
                       </h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         Your tokens generated on this website will meet all the
                         requirements to be used for an ICO
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">
                         What are the famous coins that are based on ERC20?
                       </h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         Here is a list of ERC20 tokens: Chainlink (LINK) Tether
                         (USDT) Wrapped Bitcion (WBTC) OmiseGO (OMG) 0x (ZRX)
@@ -386,11 +386,11 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">What is ERC20</h4>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is ERC20</h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         ERC20 is the main technical standard for Ethereum
                         tokens. It is used to create and issue smart contracts
@@ -399,11 +399,11 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">Create an ERC20 or BEP20 token</h4>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">Create an ERC20 or BEP20 token</h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         If you want to create an ERC20 token you have different
                         options: do it yourself if you have the knowledge, hire
@@ -412,11 +412,11 @@ export const FrontMain = () => {
                       </p>
                     </div>
                   </div>
-                  <div class="faq-item">
-                    <div class="faq-header">
-                      <h4 class="me-3">Where can I buy or sell ERC20 Tokens</h4>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">Where can I buy or sell ERC20 Tokens</h4>
                     </div>
-                    <div class="faq-body">
+                    <div className="faq-body">
                       <p>
                         It will depend on tokens, there is not only one official
                         ERC20 Token exchange. You need to find an exchange where
@@ -428,12 +428,12 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-          <section class="page-section section-ready-i">
-            <div class="container">
-              <div class="mt-3 text-center">
+          <section className="page-section section-ready-i">
+            <div className="container">
+              <div className="mt-3 text-center">
                 <a
                   href="/generator"
-                  class="btn btn-primary btn-lg btn-rounded btn-pad"
+                  className="btn btn-primary btn-lg btn-rounded btn-pad"
                 >
                   Deploy your token
                 </a>

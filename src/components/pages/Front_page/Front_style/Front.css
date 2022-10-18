@@ -1,0 +1,367 @@
+    /* .page-content {
+        align-self: stretch;
+        justify-content: flex-start;
+        flex: 1 1 auto;
+    }
+    @media (min-width: 768px){
+    .container, .container-md, .container-sm {
+        max-width: 720px;
+    }}
+    @media (min-width: 576px){
+    .container, .container-sm {
+        max-width: 540px;
+    }}
+
+    .hero .h1, .hero h1 {
+        font-size: 3.25rem;
+    }
+    .h1, h1 {
+        font-size: calc(1.375rem + 1.5vw);
+    }
+
+
+    .sub-highlight {
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+    }
+    .my-5 {
+        margin-top: 3rem!important;
+        margin-bottom: 3rem!important;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+    .my-5 {
+        margin-top: 3rem!important;
+        margin-bottom: 3rem!important;
+    }
+    .btn-rounded.btn-h-pad, .btn-rounded.btn-pad {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .btn-rounded {
+        border-radius: 2rem;
+        border-width: 2px;
+        border-color: #fff;
+        padding: 0.5rem 1rem;
+    }
+    .btn-pad {
+        padding: 0.5rem;
+    }
+
+    .me-3 {
+        margin-right: 1rem!important;
+    }
+    .btn-primary {
+        color: #000;
+        background-color: #33d3d2;
+        border-color: #33d3d2;
+    }
+    a {
+        color: #051b35;
+        text-decoration: underline;
+    }
+    @media (min-width: 768px){
+    .page-section {
+        padding: 3rem;
+    }}
+    .page-section {
+        padding: 3rem 1rem;
+    }
+
+    @media (min-width: 768px){
+    .container, .container-md, .container-sm {
+        max-width: 720px;
+    }}
+    @media (min-width: 576px){
+    .container, .container-sm {
+        max-width: 540px;
+    }}
+    .section-title {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+    .h2, h2 {
+        font-size: calc(1.325rem + .9vw);
+    }
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-family: Poppins,Helvetica Neue,Arial,sans-serif;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+    .sub-highlight:before {
+        background-image: linear-gradient(120deg,rgba(243,221,29,.4),rgba(243,221,29,.4));
+        content: " ";
+        position: absolute;
+        top: 60%;
+        bottom: 0.25rem;
+        left: -0.25rem;
+        right: -0.25rem;
+        z-index: -1;
+    }
+    .row {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(-1*var(--bs-gutter-y));
+        margin-right: calc(-.5*var(--bs-gutter-x));
+        margin-left: calc(-.5*var(--bs-gutter-x));
+    }
+    .row>* {
+        flex-shrink: 0;
+        width: 100%;
+        max-width: 100%;
+        padding-right: calc(var(--bs-gutter-x)*.5);
+        padding-left: calc(var(--bs-gutter-x)*.5);
+        margin-top: var(--bs-gutter-y);
+    }
+    .section-how .icon-container {
+        font-size: 3rem;
+        color: #33d3d2;
+    }
+    .section-how .icon-container .svg-icon {
+        display: block;
+        height: 4rem;
+        background-position: 50%;
+    }
+    .svg-icon.icon-metamask {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/metaMask.svg");
+    }
+    .svg-icon {
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .section-how .title {
+        font-weight: 700;
+        font-size: 1.125rem;
+        margin: 1rem 0;
+        text-align: center;
+    }
+    a {
+        color: #051b35;
+        text-decoration: underline;
+    }
+    .svg-icon.icon-deposit {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/deposite_crypto.svg");
+    }
+    .section-how .step-number {
+        margin-right: 0.5rem;
+        color: #adb5bd;
+    }
+    .section-how p {
+        color: #495057;
+    }
+    .svg-icon.icon-fill {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/fillOut.svg");
+    }
+    .svg-icon.icon-deploy {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/deploy-token.svg");
+    }
+    .section-ready {
+        background-color: #33d3d2;
+        color: #fff;
+    }
+    @media (min-width: 768px){
+    .page-section {
+        padding: 3rem;
+    }}
+    @media (min-width: 768px){
+    .container, .container-md, .container-sm {
+        max-width: 720px;
+    }}
+    @media (min-width: 576px){
+    .container, .container-sm {
+        max-width: 540px;
+    }}
+    .section-title-small {
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .btn-rounded.btn-h-pad, .btn-rounded.btn-pad {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .btn-action, .btn-action:hover, .btn-outline-action:hover, .btn-outline-primary:hover, .btn-outline-tertiary:hover, .btn-primary, .btn-primary:hover, .btn-tertiary, .btn-tertiary:hover {
+        color: #fff;
+    }
+    .btn-action {
+        color: #000;
+        background-color: #f50058;
+        border-color: #f50058;
+    }
+    @media (min-width: 768px){
+    .page-section {
+        padding: 3rem;
+    }}
+    @media (min-width: 768px){
+    .container, .container-md, .container-sm {
+        max-width: 720px;
+    }}
+    @media (min-width: 576px){
+    .container, .container-sm {
+        max-width: 540px;
+    }}
+
+    .section-features .icon-container {
+        font-size: 3rem;
+        color: #33d3d2;
+        width: 4rem;
+        margin-right: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .svg-icon.icon-compliant {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/compliant.svg");
+    }
+    .section-features .feature-item .h4, .section-features .feature-item h4 {
+        font-size: 1.25rem;
+    }
+    .h4, h4 {
+        font-size: calc(1.275rem + .3vw);
+    }
+    .section-features .feature-item {
+        margin-top: 3rem;
+        display: flex;
+        align-content: flex-start;
+        justify-content: flex-start;
+    }
+    .svg-icon.icon-burnable {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/burnable.svg");
+    }
+    .section-features .icon-container .svg-icon {
+        display: block;
+        height: 4rem;
+        background-position: 0;
+    }
+    .svg-icon.icon-money {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/money.svg");
+    }
+
+    .svg-icon.icon-pausable {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/pausable.svg");
+    }
+
+    .svg-icon.icon-ownable {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/ownable.svg");
+    }
+    .svg-icon.icon-supplyControl {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/supplyControl.svg");
+    }
+    .svg-icon.icon-recovery {
+        background-image: url("https://tokenmaker.eattheblocks.com/images/icons/recovery.svg");
+    }
+    .section-features .feature-item .h4, .section-features .feature-item h4 {
+        font-size: 1.25rem;
+    }
+    .section-custom-dev {
+        background-color: #383838;
+        color: #fff;
+    }
+    @media (min-width: 768px){
+    .container, .container-md, .container-sm {
+        max-width: 720px;
+    }}
+
+    @media (min-width: 576px){
+    .container, .container-sm {
+        max-width: 540px;
+    }}
+    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        width: 100%;
+        padding-right: var(--bs-gutter-x,.75rem);
+        padding-left: var(--bs-gutter-x,.75rem);
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .btn-rounded.btn-h-pad, .btn-rounded.btn-pad {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+        cursor: pointer;
+    }
+    .section-faq {
+        background-color: #f7f3f2;
+    }
+    @media (min-width: 768px){
+    .page-section {
+        padding: 3rem;
+    }}
+    @media (min-width: 768px){
+    .container, .container-md, .container-sm {
+        max-width: 720px;
+    }}
+    @media (min-width: 576px){
+    .container, .container-sm {
+        max-width: 540px;
+    }}
+    .faq-container {
+        max-width: 820px;
+        margin: 0 auto;
+    }
+
+
+
+    .me-3 {
+        margin-right: 1rem!important;
+    }
+
+
+    .faq-list-container .faq-item {
+        border: 1px solid rgba(0,0,0,.055);
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    .faq-list-container .faq-item .h4, .faq-list-container .faq-item h4 {
+        margin: 0;
+        font-size: 1rem;
+    }
+    .h4, h4 {
+        font-size: calc(1.275rem + .3vw);
+    }
+
+    .faq-list-container .faq-item p {
+        margin-bottom: 0;
+    }
+    .faq-list-container .faq-item .faq-header {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+    .faq-list-container .faq-item .faq-body {
+        display: none;
+        padding-top: 1rem;
+    }
+    @media (min-width: 768px){
+    .page-section {
+        padding: 3rem;
+    }}
+    @media (min-width: 768px){
+    .container, .container-md, .container-sm {
+        max-width: 720px;
+    }}
+    @media (min-width: 576px){
+    .container, .container-sm {
+        max-width: 540px;
+    }}
+    .container-sm, .container-xl, .container-xxl {
+        width: 100%;
+        padding-right: var(--bs-gutter-x,.75rem);
+        padding-left: var(--bs-gutter-x,.75rem);
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .text-center {
+        text-align: center!important;
+    }
+    .btn-rounded.btn-h-pad, .btn-rounded.btn-pad {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    } */
