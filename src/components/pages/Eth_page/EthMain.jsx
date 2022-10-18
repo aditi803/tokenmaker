@@ -770,7 +770,7 @@ export const EthMain = () => {
                                             class="modal-title fs-5"
                                             id="exampleModalLabel"
                                           >
-                                            Modal title
+                                            Terms of use of the « Token Maker »
                                           </h1>
                                           <button
                                             type="button"
@@ -779,7 +779,35 @@ export const EthMain = () => {
                                             aria-label="Close"
                                           ></button>
                                         </div>
-                                        <div class="modal-body">...</div>
+                                        <div class="modal-body">The Token Maker provides you with the service of automatically creating ERC20 and BEP20 Tokens.
+
+You or the person you decide to transfer your Tokens to will be the owner of tokens and will have full responsibility over them and how they are used.
+
+We will never own, store or be in control of your Tokens that are created and can be transferred on the Ethereum blockchain.
+
+We decline any responsibility of the use that will be made your Token and of any financial loss that might be related.
+
+Transactions conducted with your Token will be made through your MetaMask wallet. MetaMask is a third party application, we decline responsibility of the use that is being made of MetaMask and of the consequences.
+
+Be aware that your Ethereum public address and the information it contains might be visible to other persons while you will use the Token Maker.
+
+We decline responsibility over the use or of the interaction with MetaMask, the Ethereum network, Binance Smart Chain or any other third party involved in the creation your Token.
+
+We have no control over the transactions you make with MetaMask, the Ethereum network, Binance Smart Chain or any other third party and we are not able to cancel any transaction, or to make any refund.
+
+You are conducting those transactions at your own risk and will bear full responsibility over your Token, your funds in fiat or crypto currency and any loss that might occur.
+
+In the process of building a Token with the Token Maker, all transactions made with MetaMask on the Ethereum network or Binance Smart Chain are out of our control. We won’t be able to reverse those transactions or to reimburse you. Please make sure that you fully understand the consequences before proceeding to the creation of ERC20 Tokens with the Token Maker.
+
+Prices of crypto currencies are volatile, be aware that this could affect the value of your token.
+
+You are responsible for any taxes or any other other cost related to your Token or the transactions conducted with your Token.
+
+We decline any responsalbity for the loss of assets related to any malfunction in hardware, software, internet connection, the attack of any malicious person or software, the possiblity of a third party gaining access to your wallet and its content.
+
+Changes or upgrades of the Ethereum network or Binance Smart Chain might afftect your Token, this is out of our control and we won’t bear any responsibility.
+
+Be aware of the laws and regulations in your country and in any country where you will be operating related to crypto currencies, and blockchain technologies, including your Token. We decline any responsibility of the consequences if you don’t comply with those laws and regulations</div>
                                         <div class="modal-footer">
                                           <button
                                             type="button"
