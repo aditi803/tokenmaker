@@ -70,6 +70,7 @@ footer {
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     cursor: pointer;
 }
+
 .footer-link, .footer-link:hover {
     color: #6c757d;
 }
@@ -115,9 +116,7 @@ button, input, optgroup, select, textarea {
     font-size: inherit;
     line-height: inherit;
 }
-.footer-link, .footer-link:hover {
-    color: #6c757d;
-}
+
 .py-0 {
     padding-top: 0!important;
     padding-bottom: 0!important;
@@ -126,9 +125,10 @@ a {
     color: #051b35;
     text-decoration: underline;
 }
-.footer-link, .footer-link:hover {
-    color: #6c757d;
+.btn-clr{
+    color: #fff;
 }
+
 .footer-link {
     padding: 0.5rem;
     text-decoration: none;

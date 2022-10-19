@@ -12,6 +12,7 @@ import { MaticMain } from './components/pages/Matic_page/MaticMain.jsx';
 import { FinalMain } from './components/pages/Main_page/FinalMain.jsx';
 import {FrontMain} from './components/pages/Front_page/FrontMain.jsx'
 
+import ScrollButton from './components/Layots/ScrollButton.jsx';
 function App() {
   
   return (
@@ -23,7 +24,7 @@ function App() {
     {/* <div className="layout-container main-layout header-fixed"></div> */}
 
       <Route path='/generator' element={[<Header/>,<Main/>,<Footer/>]} />
-      <Route path='/' element={[<EthHeader/>,<FrontMain/>,<Footer/>]} />
+      <Route path='/' element={[<EthHeader/>,<FrontMain/>,<Footer/>,<ScrollButton/>]} />
 
       <Route path='/generator/ethereum'element={[<EthHeader/>,<EthMain/>,<Footer/>]} />
       <Route path='/generator/bsc'element={[<EthHeader/>,<BnbMain/>,<Footer/>]} />
