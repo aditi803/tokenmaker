@@ -39,6 +39,7 @@ export const EthMain = () => {
     tokenNameErr: "",
     tokenSymbolErr: "",
     agreementErr: "",
+    decimalsErr:""
     // tokenNameErr: 'Please fill your token name',
     // tokenSymbolErr: 'Please fill your token symbol',
     // agreementErr: 'Please confirm that you have read and understood our terms of use'
@@ -182,7 +183,7 @@ export const EthMain = () => {
       setEthFormData((prev) => ({
         ...prev,
         noCopyrightLink: true,
-        // commissionFee: 0.15,
+        commissionFee: 0.15,
       }));
       // added
       if (supplyType === "unlimited") {
@@ -339,7 +340,13 @@ export const EthMain = () => {
         tokenSymbolErr: "",
       }));
     }
-  }, [agreement, tokenName, tokenSymbol]);
+    if(decimals !== null){
+      setErr((prev)=>({
+        ...prev,
+        decimalsErr: ""
+      }))
+    }
+  }, [agreement, tokenName, tokenSymbol,decimals]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -363,6 +370,15 @@ export const EthMain = () => {
         agreementErr:
           "Please confirm that you have read and understood our terms of use",
       }));
+    if(ethFormData.decimals>21 || ethFormData.decimals<6){
+      
+      setErr((prev)=>({
+        ...prev,
+        decimalsErr: "The number of decimals must be between 6 and 21"
+        
+      }))
+    }
+
     }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
@@ -484,6 +500,7 @@ export const EthMain = () => {
                             <div className="form-group">
                               <label className="form-label">
                                 Decimals<span className="val-required">*</span>
+                              
                               </label>
                               <input
                                 type="number"
@@ -497,6 +514,10 @@ export const EthMain = () => {
                               />
                               <span className="form-text text-muted">
                                 The number of decimal of your token (default 18)
+                              </span>
+                              <br />
+                              <span className="text-danger">
+                                {err.decimalsErr}
                               </span>
                             </div>
                           </div>
@@ -814,61 +835,111 @@ export const EthMain = () => {
                                     <u> term of use </u>
                                   </a>
                                   <div
-                                    class="modal fade"
+                                    className="modal fade bd-example-modal-lg"
                                     id="exampleModal"
-                                    tabindex="-1"
-                                    aria-labelledby="exampleModalLabel"
+                                    tabIndex="-1"
+                                    role="dialog"
+                                    aria-labelledby="myLargeModalLabel"
                                     aria-hidden="true"
                                   >
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
+                                    <div className="modal-dialog modal-lg">
+                                      <div className="modal-content">
+                                        <div className="modal-header">
                                           <h1
-                                            class="modal-title fs-5"
+                                            className="modal-title fs-5"
                                             id="exampleModalLabel"
                                           >
                                             Terms of use of the « Token Maker »
                                           </h1>
                                           <button
                                             type="button"
-                                            class="btn-close"
+                                            className="btn-close"
                                             data-bs-dismiss="modal"
                                             aria-label="Close"
                                           ></button>
                                         </div>
-                                        <div class="modal-body">The Token Maker provides you with the service of automatically creating ERC20 and BEP20 Tokens.
-
-You or the person you decide to transfer your Tokens to will be the owner of tokens and will have full responsibility over them and how they are used.
-
-We will never own, store or be in control of your Tokens that are created and can be transferred on the Ethereum blockchain.
-
-We decline any responsibility of the use that will be made your Token and of any financial loss that might be related.
-
-Transactions conducted with your Token will be made through your MetaMask wallet. MetaMask is a third party application, we decline responsibility of the use that is being made of MetaMask and of the consequences.
-
-Be aware that your Ethereum public address and the information it contains might be visible to other persons while you will use the Token Maker.
-
-We decline responsibility over the use or of the interaction with MetaMask, the Ethereum network, Binance Smart Chain or any other third party involved in the creation your Token.
-
-We have no control over the transactions you make with MetaMask, the Ethereum network, Binance Smart Chain or any other third party and we are not able to cancel any transaction, or to make any refund.
-
-You are conducting those transactions at your own risk and will bear full responsibility over your Token, your funds in fiat or crypto currency and any loss that might occur.
-
-In the process of building a Token with the Token Maker, all transactions made with MetaMask on the Ethereum network or Binance Smart Chain are out of our control. We won’t be able to reverse those transactions or to reimburse you. Please make sure that you fully understand the consequences before proceeding to the creation of ERC20 Tokens with the Token Maker.
-
-Prices of crypto currencies are volatile, be aware that this could affect the value of your token.
-
-You are responsible for any taxes or any other other cost related to your Token or the transactions conducted with your Token.
-
-We decline any responsalbity for the loss of assets related to any malfunction in hardware, software, internet connection, the attack of any malicious person or software, the possiblity of a third party gaining access to your wallet and its content.
-
-Changes or upgrades of the Ethereum network or Binance Smart Chain might afftect your Token, this is out of our control and we won’t bear any responsibility.
-
-Be aware of the laws and regulations in your country and in any country where you will be operating related to crypto currencies, and blockchain technologies, including your Token. We decline any responsibility of the consequences if you don’t comply with those laws and regulations</div>
-                                        <div class="modal-footer">
+                                        <div className="modal-content" style={{padding:"20px"}}>
+                                          The Token Maker provides you with the
+                                          service of automatically creating
+                                          ERC20 and BEP20 Tokens.<br /><br /> You or the
+                                          person you decide to transfer your
+                                          Tokens to will be the owner of tokens
+                                          and will have full responsibility over
+                                          them and how they are used.<br /><br /> We will
+                                          never own, store or be in control of
+                                          your Tokens that are created and can
+                                          be transferred on the Ethereum
+                                          blockchain.<br /><br /> We decline any
+                                          responsibility of the use that will be
+                                          made your Token and of any financial
+                                          loss that might be related.<br /><br />
+                                          Transactions conducted with your Token
+                                          will be made through your MetaMask
+                                          wallet. MetaMask is a third party
+                                          application, we decline responsibility
+                                          of the use that is being made of
+                                          MetaMask and of the consequences.<br /><br /> Be
+                                          aware that your Ethereum public
+                                          address and the information it
+                                          contains might be visible to other
+                                          persons while you will use the Token
+                                          Maker.<br /><br /> We decline responsibility over
+                                          the use or of the interaction with
+                                          MetaMask, the Ethereum network,
+                                          Binance Smart Chain or any other third
+                                          party involved in the creation your
+                                          Token.<br /><br />  We have no control over the
+                                          transactions you make with MetaMask,
+                                          the Ethereum network, Binance Smart
+                                          Chain or any other third party and we
+                                          are not able to cancel any
+                                          transaction, or to make any refund.<br /><br />
+                                          You are conducting those transactions
+                                          at your own risk and will bear full
+                                          responsibility over your Token, your
+                                          funds in fiat or crypto currency and
+                                          any loss that might occur.<br /><br /> In the
+                                          process of building a Token with the
+                                          Token Maker, all transactions made
+                                          with MetaMask on the Ethereum network
+                                          or Binance Smart Chain are out of our
+                                          control. We won’t be able to reverse
+                                          those transactions or to reimburse
+                                          you. Please make sure that you fully
+                                          understand the consequences before
+                                          proceeding to the creation of ERC20
+                                          Tokens with the Token Maker.<br /><br /> Prices of
+                                          crypto currencies are volatile, be
+                                          aware that this could affect the value
+                                          of your token.<br /><br /> You are responsible for
+                                          any taxes or any other other cost
+                                          related to your Token or the
+                                          transactions conducted with your
+                                          Token.<br /><br /> We decline any responsalbity
+                                          for the loss of assets related to any
+                                          malfunction in hardware, software,
+                                          internet connection, the attack of any
+                                          malicious person or software, the
+                                          possiblity of a third party gaining
+                                          access to your wallet and its content.<br /><br />
+                                          Changes or upgrades of the Ethereum
+                                          network or Binance Smart Chain might
+                                          afftect your Token, this is out of our
+                                          control and we won’t bear any
+                                          responsibility.<br /><br /> Be aware of the laws
+                                          and regulations in your country and in
+                                          any country where you will be
+                                          operating related to crypto
+                                          currencies, and blockchain
+                                          technologies, including your Token. We
+                                          decline any responsibility of the
+                                          consequences if you don’t comply with
+                                          those laws and regulations
+                                        </div>
+                                        <div className="modal-footer">
                                           <button
                                             type="button"
-                                            class="btn btn-secondary"
+                                            className="btn btn-secondary"
                                             data-bs-dismiss="modal"
                                           >
                                             Close
@@ -902,11 +973,11 @@ Be aware of the laws and regulations in your country and in any country where yo
                                 <p>
                                   Commission fee:{" "}
                                   <i
-                                    className="fa-solid fa-circle-info"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    data-bs-custom-class="custom-tooltip"
-                                    data-bs-title="The commison fee will be
+                                    className="fa-solid fa-circle-info tip"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    // data-bs-custom-class="custom-tooltip"
+                                    title="The commison fee will be
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
                                   ></i>

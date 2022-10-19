@@ -1,12 +1,17 @@
 import React from "react";
-import "./Front_style/Front.css"
+import "./Front_style/FrontMain.css";
+import $ from "jquery";
+
+$(".faq-item").click(function () {
+  $(".faq-item").toggleClass("show");
+});
 export const FrontMain = () => {
   return (
     <>
       <div className="page-content">
         <main className="">
           <section className="page-section hero" id="hero">
-            <div className="container">
+            <div className="container self">
               <h1>
                 <span className="sub-highlight">Automatic Token Maker</span>
               </h1>
@@ -16,7 +21,7 @@ export const FrontMain = () => {
                   blockchain?
                 </p>
                 <p>
-                  Eat The Blocks has you covered: we will help you generate a
+                  Blocktech Brew has you covered: we will help you generate a
                   token automatically, and deploy it in a matter of minutes.
                 </p>
               </div>
@@ -61,8 +66,8 @@ export const FrontMain = () => {
                     <span className="svg-icon icon-deposit"></span>
                   </div>
                   <div className="title">
-                    <span className="step-number">2 /</span>Deposit cryto on your
-                    wallet
+                    <span className="step-number">2 /</span>Deposit cryto on
+                    your wallet
                   </div>
                   <p className="mb-0">
                     Make sure you have enough crypto available to pay for Smart
@@ -76,7 +81,8 @@ export const FrontMain = () => {
                     <span className="svg-icon icon-fill"></span>
                   </div>
                   <div className="title">
-                    <span className="step-number">3 /</span>Fill-out Token details
+                    <span className="step-number">3 /</span>Fill-out Token
+                    details
                   </div>
                   <p className="mb-0">
                     We need basic information (Token Name, Symbol) and
@@ -105,7 +111,10 @@ export const FrontMain = () => {
                 Ready to deploy your token ?
               </h2>
               <div className="mt-3 text-center">
-                <a href="/generator" className="btn btn-action btn-rounded btn-pad">
+                <a
+                  href="/generator"
+                  className="btn btn-action btn-rounded btn-pad"
+                >
                   Start now
                 </a>
               </div>
@@ -235,108 +244,223 @@ export const FrontMain = () => {
               <div className="faq-container">
                 <h2 className="section-title text-center">FAQ</h2>
                 <p className="section-subtitle mt-3 mb-5">
-                  As a leader in the field of Blockchain coding, Eat The Blocks
+                  As a leader in the field of Blockchain coding, Blocktech Brew
                   not only teaches you how to make tokens, smart contracts and
                   more, but also offers you tools like this token generator that
                   allows you to save time and deploy tokens automatically
                 </p>
+                {/* Accordion */}
                 <div className="faq-list-container">
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">What is an ERC-20 Token?</h4>
+                <div
+                  class="accordion accordion-flush"
+                  id="accordionFlushExample"
+                >
+                  <div faq-header>
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseOne"
+                      >
+                        <h4 className="me-3">
+                        What is an ERC-20 Token?
+                        </h4>
+                      </button>
+                    </h2>
                     </div>
-                    <div className="faq-body">
-                      <p>
-                        The ERC-20 introduces a standard for Fungible Tokens,
+                    <div
+                      id="flush-collapseOne"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingOne"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+
+                      <div class="accordion-body ">
+                      The ERC-20 introduces a standard for Fungible Tokens,
                         which means that each Token has a property that makes it
                         identical to another Token (in terms of type and value).
                         An ERC-20 Token, for example, functions similarly to
                         ETH, meaning that one Token is and will always be equal
                         to all other Tokens.
-                      </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">What is a BEP-20 Token standard?</h4>
-                    </div>
-                    <div className="faq-body">
-                      <p>
-                        It is a native token standard of the Binance Smart
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseTwo"
+                      >
+                        <h4 className="me-3">
+                        What is a BEP-20 Token standard?
+                        </h4>
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseTwo"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingTwo"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body">
+                      It is a native token standard of the Binance Smart
                         Chain. It acts as a blueprint of how the BEP-20 tokens
                         can be utilized. It is an extension of the ERC-20 token
                         standard and can be used to represent shares or fiat.
-                      </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">What is Fixed Supply Token?</h4>
-                    </div>
-                    <div className="faq-body">
-                      <p>
-                        Once you deploy the token, the entire supply will be
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseThree"
+                      >
+                        <h4 className="me-3">
+                        What is Fixed Supply Token?
+                        </h4>
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseThree"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingThree"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body">
+                      Once you deploy the token, the entire supply will be
                         sent to the owner's wallet. Fixed supply means that this
                         supply can't be modified later on.
-                      </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">What is Capped Supply Token?</h4>
-                    </div>
-                    <div className="faq-body">
-                      <p>
-                        When you create the token, you will have the option to
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFour"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseFour"
+                      >
+                        <h4 className="me-3">
+                        What is Capped Supply Token?
+                        </h4>
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseFour"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingFour"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body">
+                      When you create the token, you will have the option to
                         choose to send an initial supply to the owner's wallet.
                         Supply can be adjusted later on by minting or burning
                         tokens if you chose those options. You won't be able to
                         generate more tokens that supply cap allows.
-                      </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingFive">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFive"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseFive"
+                      >
+                        <h4 className="me-3">
                         How is the smart contract's source code verified?
-                      </h4>
-                    </div>
-                    <div className="faq-body">
-                      <p>
-                        When we deploy your smart contract, a third party such
+                        </h4>
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseFive"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingFive"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body">
+                      When we deploy your smart contract, a third party such
                         as Etherscan verifies the source code and publishes it
                         on their website. The source code can be found on the
                         contract's webpage.
-                      </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">
-                        What kind of acces type can i set up?
-                      </h4>
-                    </div>
-                    <div className="faq-body">
-                      <p>
-                        None: there is no central authority which can make
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingSix">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseSix"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseSix"
+                        >
+                          <h4 className="me-3">
+                       What kind of acces type can i set up?
+                       </h4>
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseSix"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingSix"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body">
+                      None: there is no central authority which can make
                         people trust your token more
-                      </p>
-                      <p>
+                        <br />
                         Ownable: The token will have an owner who will act as
                         admin and be able to conduct different actions such as
                         mining, burning...
-                      </p>
-                      <p>
+                        <br />
                         Role based: You will be able to assign different users
                         to different tasks such as mining, burning...
-                      </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">How can those tokens be used?</h4>
-                    </div>
-                    <div className="faq-body">
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingSeven">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseSeven"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseSeven"
+                      >
+                        <h4 className="me-3">
+                       How can those tokens be used?
+                       </h4>
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseSeven"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingSeven"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body">
                       <p>
                         The tokens we will generate for you can be used for a
                         wide range of applications. As a crypto currency, to run
@@ -344,39 +468,89 @@ export const FrontMain = () => {
                         company), for gaming, charity, loyalty program, you name
                         it!
                       </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">Who owns generated tokens</h4>
-                    </div>
-                    <div className="faq-body">
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingEight">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseEight"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseEight"
+                      >
+                        <h4 className="me-3">
+                        Who owns generated tokens
+                        </h4>
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseEight"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingEight"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body">
                       <p>
                         You will be the sole owner of the tokens except if you
                         decide to make somebody else the owner
                       </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingNine">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseNine"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseNine"
+                      >
+                         <h4 className="me-3">
                         What kind of tokens are used for ICOs
                       </h4>
-                    </div>
-                    <div className="faq-body">
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseNine"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingNine"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body">
                       <p>
                         Your tokens generated on this website will meet all the
                         requirements to be used for an ICO
                       </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">
+                  <div class="accordion-item faq-item">
+                    <h2 class="accordion-header" id="flush-headingTen">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTen"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseTen"
+                      >
+                        <h4 className="me-3">
                         What are the famous coins that are based on ERC20?
                       </h4>
-                    </div>
-                    <div className="faq-body">
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseTen"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingTen"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div class="accordion-body">
                       <p>
                         Here is a list of ERC20 tokens: Chainlink (LINK) Tether
                         (USDT) Wrapped Bitcion (WBTC) OmiseGO (OMG) 0x (ZRX)
@@ -384,47 +558,13 @@ export const FrontMain = () => {
                         IOStoken (IOST) Status (SNT) DigixDAO (DGD and DGX)
                         Loopring (LRC) Basic Attention Token (BAT)
                       </p>
-                    </div>
-                  </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">What is ERC20</h4>
-                    </div>
-                    <div className="faq-body">
-                      <p>
-                        ERC20 is the main technical standard for Ethereum
-                        tokens. It is used to create and issue smart contracts
-                        on the Ethereum blockchain to create tokens. A list of
-                        rules must be followed in order to comply with ERC20
-                      </p>
-                    </div>
-                  </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">Create an ERC20 or BEP20 token</h4>
-                    </div>
-                    <div className="faq-body">
-                      <p>
-                        If you want to create an ERC20 token you have different
-                        options: do it yourself if you have the knowledge, hire
-                        a developer (but make sure to work with someone you can
-                        trust) or do it automatically with our Token Maker
-                      </p>
-                    </div>
-                  </div>
-                  <div className="faq-item">
-                    <div className="faq-header">
-                      <h4 className="me-3">Where can I buy or sell ERC20 Tokens</h4>
-                    </div>
-                    <div className="faq-body">
-                      <p>
-                        It will depend on tokens, there is not only one official
-                        ERC20 Token exchange. You need to find an exchange where
-                        the token is being traded.{" "}
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>
+                </div>
+                {/* Accordion */}
+              
               </div>
             </div>
           </section>
@@ -445,5 +585,3 @@ export const FrontMain = () => {
     </>
   );
 };
-
-

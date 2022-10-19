@@ -1,0 +1,185 @@
+  {/* <div className="faq-list-container">
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is an ERC-20 Token?</h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        The ERC-20 introduces a standard for Fungible Tokens,
+                        which means that each Token has a property that makes it
+                        identical to another Token (in terms of type and value).
+                        An ERC-20 Token, for example, functions similarly to
+                        ETH, meaning that one Token is and will always be equal
+                        to all other Tokens.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is a BEP-20 Token standard?</h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        It is a native token standard of the Binance Smart
+                        Chain. It acts as a blueprint of how the BEP-20 tokens
+                        can be utilized. It is an extension of the ERC-20 token
+                        standard and can be used to represent shares or fiat.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is Fixed Supply Token?</h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        Once you deploy the token, the entire supply will be
+                        sent to the owner's wallet. Fixed supply means that this
+                        supply can't be modified later on.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is Capped Supply Token?</h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        When you create the token, you will have the option to
+                        choose to send an initial supply to the owner's wallet.
+                        Supply can be adjusted later on by minting or burning
+                        tokens if you chose those options. You won't be able to
+                        generate more tokens that supply cap allows.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">
+                        How is the smart contract's source code verified?
+                      </h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        When we deploy your smart contract, a third party such
+                        as Etherscan verifies the source code and publishes it
+                        on their website. The source code can be found on the
+                        contract's webpage.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">
+                        What kind of acces type can i set up?
+                      </h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        None: there is no central authority which can make
+                        people trust your token more
+                      </p>
+                      <p>
+                        Ownable: The token will have an owner who will act as
+                        admin and be able to conduct different actions such as
+                        mining, burning...
+                      </p>
+                      <p>
+                        Role based: You will be able to assign different users
+                        to different tasks such as mining, burning...
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">How can those tokens be used?</h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        The tokens we will generate for you can be used for a
+                        wide range of applications. As a crypto currency, to run
+                        an ICO, as proof of ownership (i.e. shares in a
+                        company), for gaming, charity, loyalty program, you name
+                        it!
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">Who owns generated tokens</h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        You will be the sole owner of the tokens except if you
+                        decide to make somebody else the owner
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">
+                        What kind of tokens are used for ICOs
+                      </h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        Your tokens generated on this website will meet all the
+                        requirements to be used for an ICO
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">
+                        What are the famous coins that are based on ERC20?
+                      </h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        Here is a list of ERC20 tokens: Chainlink (LINK) Tether
+                        (USDT) Wrapped Bitcion (WBTC) OmiseGO (OMG) 0x (ZRX)
+                        Populous (PPT) Maker (MKR) Augur (REP) Golem (GNT)
+                        IOStoken (IOST) Status (SNT) DigixDAO (DGD and DGX)
+                        Loopring (LRC) Basic Attention Token (BAT)
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">What is ERC20</h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        ERC20 is the main technical standard for Ethereum
+                        tokens. It is used to create and issue smart contracts
+                        on the Ethereum blockchain to create tokens. A list of
+                        rules must be followed in order to comply with ERC20
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">Create an ERC20 or BEP20 token</h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        If you want to create an ERC20 token you have different
+                        options: do it yourself if you have the knowledge, hire
+                        a developer (but make sure to work with someone you can
+                        trust) or do it automatically with our Token Maker
+                      </p>
+                    </div>
+                  </div>
+                  <div className="faq-item">
+                    <div className="faq-header">
+                      <h4 className="me-3">Where can I buy or sell ERC20 Tokens</h4>
+                    </div>
+                    <div className="faq-body">
+                      <p>
+                        It will depend on tokens, there is not only one official
+                        ERC20 Token exchange. You need to find an exchange where
+                        the token is being traded.{" "}
+                      </p>
+                    </div>
+                  </div>
+                </div> */}

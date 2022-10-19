@@ -23,7 +23,7 @@ function App() {
     {/* <div className="layout-container main-layout header-fixed"></div> */}
 
       <Route path='/generator' element={[<Header/>,<Main/>,<Footer/>]} />
-      <Route path='/' element={[<Header/>,<FrontMain/>,<Footer/>]} />
+      <Route path='/' element={[<EthHeader/>,<FrontMain/>,<Footer/>]} />
 
       <Route path='/generator/ethereum'element={[<EthHeader/>,<EthMain/>,<Footer/>]} />
       <Route path='/generator/bsc'element={[<EthHeader/>,<BnbMain/>,<Footer/>]} />
