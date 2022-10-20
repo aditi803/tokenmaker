@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import "./eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
+import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
 import {
   freeDisabled,
@@ -11,6 +12,8 @@ import {
 } from "../../../disabledUtils";
 
 export const EthMain = () => {
+  const {compileContract}  = useContext(GlobalContext)
+
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
     tokenName: "",
@@ -397,7 +400,7 @@ export const EthMain = () => {
       ethFormData.tokenSymbol !== "" &&
       ethFormData.agreement !== false
     ) {
-      navigate("/generator/final");
+      // navigate("/generator/final");
     }
   };
 
@@ -905,7 +908,9 @@ export const EthMain = () => {
                           <button
                             type="submit"
                             className="btn-lg btn-success1 w-100"
-                            // onClick={}
+                            onClick={()=>{
+                              compileContract(ethFormData)
+                            }}
                           >
                             Confirm
                           </button>
