@@ -11,13 +11,14 @@ import { BnbMain } from './components/pages/Bnb_page/BnbMain.jsx';
 import { MaticMain } from './components/pages/Matic_page/MaticMain.jsx';
 import { FinalMain } from './components/pages/Main_page/FinalMain.jsx';
 import {FrontMain} from './components/pages/Front_page/FrontMain.jsx'
+import {EtherProvider} from "./contexts/EthContext/EtherProvider"
 
 import ScrollButton from './components/Layots/ScrollButton.jsx';
 function App() {
   
   return (
 
-  <>
+  <EtherProvider>
 
   <Router>
     <Routes>
@@ -35,7 +36,7 @@ function App() {
   {/* <Header />
   <Main />
   <Footer /> */}
-  </> 
+  </EtherProvider> 
     );
 }
 

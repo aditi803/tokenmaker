@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import "../Eth_page/eth_styles/main.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
 import {
   freeDisabled,
@@ -10,6 +11,8 @@ import {
 } from "../../../disabledUtils";
 
 export const BnbMain = () => {
+  const {compileContract}  = useContext(GlobalContext)
+
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
     tokenName: "",
@@ -746,7 +749,9 @@ const [show,setShow] = useState(false)
                           <button
                             type="submit"
                             className="btn-lg btn-success1 w-100"
-                            // onClick={}
+                            onClick={()=>{
+                              compileContract(ethFormData)
+                            }}
                           >
                             Confirm
                           </button>
