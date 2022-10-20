@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
 
 import {
@@ -255,6 +255,7 @@ export const EthMain = () => {
 
   useEffect(() => {
     if (tokenType === "custom") {
+
       if (burnable === true && pausable === true && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
@@ -300,14 +301,14 @@ export const EthMain = () => {
           commissionFee: 0.15,
         }));
       }
-      // if(burnable === false && pausable === false && recoverable === true ){
-      //   setEthFormData((prev) => ({
-      //     ...prev,
-      //     commissionFee: 0.225,
-      //   }));
-      // }
+      if(accessType==="roles"){
+        setEthFormData((prev)=>({
+          ...prev,
+          commissionFee: Number(commissionFee +0.0).toFixed(2)
+        }))
+      }
     }
-  }, [pausable, recoverable, burnable]);
+  }, [pausable, recoverable, burnable,tokenType,accessType]);
 
   const ethMainFormHandler = (e) => {
     let boolean = null;
