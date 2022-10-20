@@ -46,13 +46,7 @@
 .container, .container-sm {
     max-width: 540px;
 }} */
-.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    width: 100%;
-    padding-right: var(--bs-gutter-x,.75rem);
-    padding-left: var(--bs-gutter-x,.75rem);
-    margin-right: auto;
-    margin-left: auto;
-}
+
 .hero .h1, .hero h1 {
     font-size: 3.25rem;
 }
@@ -101,15 +95,6 @@ p {
     left: 0;
     right: 0;
 }
-.row {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(-1*var(--bs-gutter-y));
-    margin-right: calc(-.5*var(--bs-gutter-x));
-    margin-left: calc(-.5*var(--bs-gutter-x));
-}
 /* @media (min-width: 1200px){
 .col-xl-4 {
     flex: 0 0 auto;
@@ -139,18 +124,9 @@ rem
 .card-header {
     border-bottom-width: 0;
 }
-.align-items-center {
-    align-items: center!important;
-}
-.d-flex {
-    display: flex!important;
-}
 
 img, svg {
     vertical-align: middle;
-}
-.m-0 {
-    margin: 0!important;
 }
 /* @media (min-width: 1200px){
 .h4, h4 {
@@ -216,10 +192,7 @@ option {
     padding: 0px 2px 1px;
 }
 /* may be needs to change the css under me */
-.text-muted {
-    --bs-text-opacity: 1;
-    color: #6c757d!important;
-}
+
 .form-text {
     margin-top: 0.25rem;
     font-size: .875em;
@@ -258,17 +231,8 @@ button, input, optgroup, select, textarea {
     background-color: #e9ecef;
     opacity: 1;
 }
-.mt-3 {
-    margin-top: 1rem!important;
-}
 .card-header {
     border-bottom-width: 0;
-}
-.align-items-center {
-    align-items: center!important;
-}
-.d-flex {
-    display: flex!important;
 }
 .card-header {
     padding: 0.5rem 1rem;
@@ -308,14 +272,7 @@ button, input, optgroup, select, textarea {
     flex: 0 0 auto;
     width: 50%;
 }} */
-.row>* {
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
-    padding-right: calc(var(--bs-gutter-x)*.5);
-    padding-left: calc(var(--bs-gutter-x)*.5);
-    margin-top: var(--bs-gutter-y);
-}
+
 .card-header:first-child {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
 }

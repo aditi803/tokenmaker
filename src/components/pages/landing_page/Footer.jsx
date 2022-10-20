@@ -9,12 +9,12 @@ function Footer() {
         <footer className="footer">
             <div className="container py-3">
                 <div className="row">
-                    <div className="col-6 w-50">
+                    <div className="col-12 col-md-6 text-center text-md-start order-2">
                         <span className=" btn-clr">
                         ©Automatic Token Maker
                         </span>
                     </div>
-                    <div className="col-6 w-50 text-end">
+                    <div className="col-12 col-md-6 text-center text-md-end order-1 order-md-2">
                         <button type='button' className="btn footer-link py-0 btn-clr" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
                             Terms of use

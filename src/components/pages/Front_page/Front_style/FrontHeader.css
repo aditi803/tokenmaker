@@ -14,42 +14,6 @@
     justify-content: center;
     background-color: #fff;
 }
-.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    width: 100%;
-    padding-right: var(--bs-gutter-x,.75rem);
-    padding-left: var(--bs-gutter-x,.75rem);
-    margin-right: auto;
-    margin-left: auto;
-}
-.align-items-center {
-    align-items: center!important;
-}
-.row {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(-1*var(--bs-gutter-y));
-    margin-right: calc(-.5*var(--bs-gutter-x));
-    margin-left: calc(-.5*var(--bs-gutter-x));
-}
-.row>* {
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
-    padding-right: calc(var(--bs-gutter-x)*.5);
-    padding-left: calc(var(--bs-gutter-x)*.5);
-    margin-top: var(--bs-gutter-y);
-}
-.navbar {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
 .navbar-brand {
     color: #383838;
     font-size: 1.5rem;

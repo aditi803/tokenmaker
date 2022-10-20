@@ -18,15 +18,22 @@
     font-size: 3rem;
     margin-bottom: 2rem;
 }
-@media (min-width: 768px){
+@media (max-width: 768px){
 .page-section {
     padding: 3rem;
-}}
-@media (min-width: 992px){
-.col-lg-6 {
-    flex: 0 0 auto;
-    width: 50%;
-}}
+    }
+    .sub-highlight{
+        font-size: 36px;
+    }
+}
+@media (max-width: 576px){
+    .sub-highlight{
+        font-size: 25px;
+    }
+    .sub-highlight p{
+        font-size: 16px;
+    }
+}
 .sub-highlight:before {
     background-image: linear-gradient(120deg,rgba(243,221,29,.4),rgba(243,221,29,.4));
     content: " ";

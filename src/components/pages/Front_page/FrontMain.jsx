@@ -1,10 +1,6 @@
 import React from "react";
 import "./Front_style/FrontMain.css";
-import $ from "jquery";
 
-$(".faq-item").click(function () {
-  $(".faq-item").toggleClass("show");
-});
 export const FrontMain = () => {
   return (
     <>
@@ -224,7 +220,7 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-          <section className="page-section section-custom-dev">
+          <section className="page-section section-custom-dev p-4 p-md-5">
             <div className="container">
               <h2 className="section-title-small text-center">
                 Need a custom development ?
