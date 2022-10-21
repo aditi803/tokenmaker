@@ -1,11 +1,24 @@
-import {useState,useEffect}from "react";
-import '../Eth_page/eth_styles/main.css'
+import React, { useState, useEffect, useContext } from "react";
+import "../Eth_page/eth_styles/main.css";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { TermsModal } from "../../Layots/TermsModal";
+import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
+
+//
+// import Link from "react-router-dom";
+// import wallet_model from "../../Modal/Multi-WalletModal";
+// //
+
 import {
   freeDisabled,
   basicDisabled,
   customDisabled,
 } from "../../../disabledUtils";
+
 export const MaticMain = () => {
+  const {compileContract,navigateTo}  = useContext(GlobalContext)
+
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
     tokenName: "",
@@ -22,19 +35,20 @@ export const MaticMain = () => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "PolygonMainnet",
+    network: "polygonMainnet",
     agreement: false,
     commissionFee: 150,
   });
 
-// 
-const [show,setShow] = useState(false)
-// 
-
+  //
+  const [show, setShow] = useState(false);
+  //
+  const navigate = useNavigate();
   const [err, setErr] = useState({
     tokenNameErr: "",
     tokenSymbolErr: "",
     agreementErr: "",
+    decimalsErr: "",
     // tokenNameErr: 'Please fill your token name',
     // tokenSymbolErr: 'Please fill your token symbol',
     // agreementErr: 'Please confirm that you have read and understood our terms of use'
@@ -83,7 +97,6 @@ const [show,setShow] = useState(false)
     f_supplyType,
     f_initialSupply,
     f_maximumSupply,
-    // d_displayMaximum,
     f_conforms,
     f_verified,
     f_noCopyrightLink,
@@ -95,13 +108,45 @@ const [show,setShow] = useState(false)
   } = fieldsDisabled;
 
   useEffect(() => {
+    //
+    // if (recoverable === true) {
+    //   console.log(commissionFee, "gg");
+    //   setEthFormData((prev) => ({
+    //     ...prev,
+    //     mintable: false,
+    //     commissionFee: Number().toFixed(3),
+    //   }));
+    // }
+    // else{
+    //    setEthFormData((prev) => ({
+    //     ...prev,
+    //     mintable: false,
+    //     commissionFee: Number(commissionFee +0.075).toFixed(3),
+    //   }));
+    // }
+    if (pausable === true) {
+      setEthFormData((prev) => ({
+        ...prev,
+        mintable: false,
+        commissionFee: Number(commissionFee + 0.05).toFixed(1),
+      }));
+    }
+    if (burnable === true) {
+      setEthFormData((prev) => ({
+        ...prev,
+        mintable: false,
+        commissionFee: Number(commissionFee + 0.075).toFixed(1),
+      }));
+    }
+
+    //
+
     if (tokenType === "basic") {
       setFieldsDisabled(basicDisabled);
-      
+
       setEthFormData((prev) => ({
-        
         ...prev,
-        
+
         noCopyrightLink: false,
         // commissionFee: null,
         accessType: "owner",
@@ -111,24 +156,19 @@ const [show,setShow] = useState(false)
         pausable: false,
         recoverable: false,
       }));
-      // if (network === "rinkeby") {
-      //   setEthFormData((prev) => ({
-      //     ...prev,
-      //     commissionFee: null,
-      //   }));
-      // }
-      if (network === "PolygonMainnet") {
-        setEthFormData((prev) => ({
-          ...prev,
-          commissionFee: 150,
-        }));
-      }
-      if (network === "PolygonTestnet") {
+      if (network === "polygonMumbai") {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: null,
         }));
       }
+      if (network === "polygonMainnet") {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 150,
+        }));
+      }
+      
     } else if (tokenType === "free") {
       setFieldsDisabled(freeDisabled);
       setEthFormData((prev) => ({
@@ -147,57 +187,227 @@ const [show,setShow] = useState(false)
       setEthFormData((prev) => ({
         ...prev,
         noCopyrightLink: true,
-        commissionFee: 300,
+        commissionFee: 0.15,
       }));
-// added
-      if(supplyType==="unlimited"){
-        setShow(true)
+      // added
+      if (supplyType === "unlimited") {
+        setShow(true);
       }
-      if(supplyType==="fixed" || supplyType==="capped"){
-        setShow(false)
+      if (supplyType === "fixed" || supplyType === "capped") {
+        setShow(false);
       }
 
       if (supplyType === "capped" || supplyType === "unlimited") {
         setEthFormData((prev) => ({
           ...prev,
           noCopyrightLink: true,
-          commissionFee: 450,
+          commissionFee: 0.225,
           mintable: true,
         }));
         setFieldsDisabled({
           ...customDisabled,
-          f_mintable: false,
+          f_mintable: true,
           f_burnable: false,
           f_pausable: false,
           f_recoverable: false,
         });
+
+        if (mintable === false || burnable === false) {
+          setEthFormData((prev) => ({
+            ...prev,
+            // commissionFee : Number(commissionFee +0.075).toFixed(3)
+          }));
+        }
       } else if (supplyType === "fixed") {
-        setEthFormData((prev) => ({
-          ...prev,
-          mintable: false,
-        }));
+        // if(recoverable===true){
+        //   setEthFormData((prev) => ({
+        //     ...prev,
+        //     mintable: false,
+        //     commissionFee: Number(commissionFee +0.075).toFixed(3),
+        //   }));
+        // }else{
+        //   setEthFormData((prev) => ({
+        //     ...prev,
+        //     mintable: false,
+        //     commissionFee: 0.15,
+        //   }));
+        // }
       }
 
-      if (network === "BinanceSmartChainTestnet") {
+      if (network === "polygonMumbai") {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: null,
         }));
       }
-      if (network === "BinanceSmartChain") {
+      if (network === "polygonMainnet") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.5,
-        }));
-      }
-      if (network === "gorli") {
-        setEthFormData((prev) => ({
-          ...prev,
-          commissionFee: null,
+          // commissionFee: 0.15,
         }));
       }
     }
   }, [tokenType, supplyType, network]);
+
+  useEffect(() => {
+    if (tokenType === "custom") {
+
+      // owner && fixed
+      if (burnable === true && pausable === true && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 700,
+        }));
+      }
+      if (pausable === true && burnable === true && recoverable === false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 550,
+        }));
+      }
+      if (pausable === true && burnable === false && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 550,
+        }));
+      }
+      if (
+        (burnable === true && pausable === false && recoverable === false) ||
+        (burnable === false && pausable === false && recoverable === true)
+      ) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 450,
+        }));
+      }
+      if (burnable === false && pausable === true && recoverable === false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 400,
+        }));
+      }
+      if (pausable === false && burnable === true && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee:600,
+        }));
+      }
+      if (pausable === false  && recoverable === false && burnable=== false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 300,
+        }));
+      }
+      // Roles and fixed
+      if (accessType==="roles" && burnable === true && pausable === true && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 800,
+        }));
+      }
+      if (accessType==="roles" && pausable === true && burnable === true && recoverable === false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 650,
+        }));
+      }
+      if (accessType==="roles" && pausable === true && burnable === false && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 650,
+        }));
+      }
+      if (accessType==="roles" && 
+       ( (burnable === true && pausable === false && recoverable === false) ||
+        (burnable === false && pausable === false && recoverable === true))
+      ) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee:550,
+        }));
+      }
+      if (accessType==="roles" && burnable === false && pausable === true && recoverable === false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 500,
+        }));
+      }
+      if (accessType==="roles" && pausable === false && burnable === true && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 700,
+        }));
+      }
+      if (accessType==="roles" && pausable === false  && recoverable === false && burnable=== false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 400,
+        }));
+      }
+
+      // owner && (unlimited || capped)
+      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited")   && pausable===false  && recoverable=== false){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 450,
+        })); 
+      }
+      
+      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable=== true  && recoverable=== false){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 550,
+        })); 
+      }
+      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===false  &&  recoverable=== true){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 600,
+        })); 
+      }
+      // double
+      
+      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===true  &&  recoverable=== true){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 700,
+        })); 
+      }
+      
+
+
+      // roles && (unlimited || capped)
+      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited")   && pausable===false  && recoverable=== false){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 550,
+        })); 
+      }
+      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable=== true  && recoverable=== false){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 650,
+        })); 
+      }
+      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===false  &&  recoverable=== true){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 700,
+        })); 
+      }
+      // double
+   
+      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===true  &&  recoverable=== true){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 800,
+        })); 
+      }
+      
+      
+    }
+
+  }, [pausable, recoverable, burnable, tokenType, accessType]);
 
   const ethMainFormHandler = (e) => {
     let boolean = null;
@@ -231,7 +441,13 @@ const [show,setShow] = useState(false)
         tokenSymbolErr: "",
       }));
     }
-  }, [agreement, tokenName, tokenSymbol]);
+    if (decimals !== null) {
+      setErr((prev) => ({
+        ...prev,
+        decimalsErr: "",
+      }));
+    }
+  }, [agreement, tokenName, tokenSymbol, decimals]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -255,13 +471,46 @@ const [show,setShow] = useState(false)
         agreementErr:
           "Please confirm that you have read and understood our terms of use",
       }));
+      if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
+        setErr((prev) => ({
+          ...prev,
+          decimalsErr: "The number of decimals must be between 6 and 21",
+        }));
+      }
     }
 
-    if (!err.tokenNameErr && !err.tokenSymbolErr && err.agreementErr) {
+    if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
       // do what u want to do with data
+      // console.log("data");
+      console.log(err, "da");
+
+      // < Navigate to= "/generator/final" />
       console.log(ethFormData, ">>>>>>>>>>>>>>>>");
+      // navigate("/generator/final")
+    }
+    if (
+      ethFormData.tokenName !== "" &&
+      ethFormData.tokenSymbol !== "" &&
+      ethFormData.agreement !== false &&
+      navigateTo === true
+    ) {
+      navigate("/generator/final");
+    }else{
+      navigate("/generator/polygon");
+
     }
   };
+
+  // {web3Loading ? (
+  //   <button className=" btn-inner - text " disabled>
+  //     {" "}
+  //     Loading ...{" "}
+  //   </button>
+  // ) : (
+  //   <button className=" btn-inner - text " onClick={connectWallet}>
+  //     get accounts
+  //   </button>
+  // )}
 
   return (
     <>
@@ -276,7 +525,7 @@ const [show,setShow] = useState(false)
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable BEP20 Token.
+                Mintable, Burnable ERC20 Token.
                 <br />
                 No login.No setup.No Coding required.
               </p>
@@ -291,8 +540,7 @@ const [show,setShow] = useState(false)
                       <div className="col mt-3 mt-lg-0">
                         <div className="card">
                           <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}>
-                            </div>
+                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
                             <h4 className="m-0">
                               <i className="fa-solid fa-arrow-right me-3"></i>
                               Informations
@@ -335,6 +583,7 @@ const [show,setShow] = useState(false)
                               <span className="form-text text-muted">
                                 The name of your token
                               </span>
+                              <br />
                               <span className="text-danger">
                                 {err.tokenNameErr}
                               </span>
@@ -354,8 +603,9 @@ const [show,setShow] = useState(false)
                                 onChange={ethMainFormHandler}
                               />
                               <span className="form-text text-muted">
-                                You token's symbol (ie ETH)
+                                You token's symbol (ie MATIC)
                               </span>
+                              <br />
                               <span className="text-danger">
                                 {err.tokenSymbolErr}
                               </span>
@@ -377,12 +627,15 @@ const [show,setShow] = useState(false)
                               <span className="form-text text-muted">
                                 The number of decimal of your token (default 18)
                               </span>
+                              <br />
+                              <span className="text-danger">
+                                {err.decimalsErr}
+                              </span>
                             </div>
                           </div>
                           <div className="card mt-3">
                             <div className="card-header d-flex align-items-center">
-                              <div className="mr-3" style={{ zoom: 1.5 }}>
-                              </div>
+                              <div className="mr-3" style={{ zoom: 1.5 }}></div>
                               <h4 className="m-0">
                                 <i className="fa-solid fa-arrow-right me-3"></i>
                                 Supply
@@ -403,7 +656,7 @@ const [show,setShow] = useState(false)
                                 >
                                   <option value="fixed">Fixed</option>
                                   <option value="capped">Capped</option>
-                                  <option value="unlimited" >Unlimited</option>
+                                  <option value="unlimited">Unlimited</option>
                                 </select>
                                 <span className="form-text text-muted">
                                   Fixed / Capped / Unlimited
@@ -428,9 +681,10 @@ const [show,setShow] = useState(false)
                                   of the contract
                                 </span>
                               </div>
-                              <div className="form-group " 
-                              style={{display: !show ? "block" : "none"}}
-                              // style={{display: {d_displayMaximum}}} 
+                              <div
+                                className="form-group "
+                                style={{ display: !show ? "block" : "none" }}
+                                // style={{display: {d_displayMaximum}}}
                               >
                                 <label className="form-label">
                                   Maximum supply
@@ -456,8 +710,7 @@ const [show,setShow] = useState(false)
                       <div className="col mt-3 mt-lg-0">
                         <div className="card">
                           <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}>
-                            </div>
+                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
                             <h4 className="m-0">
                               <i className="fa-solid fa-arrow-right me-3"></i>
                               Options
@@ -475,12 +728,12 @@ const [show,setShow] = useState(false)
                                   defaultChecked={conforms}
                                 />
                                 <span className="form-check-label">
-                                  Conforms to BEP20 protocol
+                                  Conforms to ERC20 protocol
                                 </span>
                               </label>
                               <span className="form-text text-muted">
                                 Your token will const all the functionalities,
-                                and conforms to BEP20 protocol
+                                and conforms to ERC20 protocol
                               </span>
                             </div>
                             <div className="form-group">
@@ -547,7 +800,7 @@ const [show,setShow] = useState(false)
                                   className="form-check-input"
                                   type="checkbox"
                                   name="burnable"
-                                  defaultChecked={burnable}
+                                  checked={burnable}
                                   disabled={f_burnable}
                                   onChange={ethMainFormHandler}
                                 />
@@ -565,7 +818,7 @@ const [show,setShow] = useState(false)
                                   className="form-check-input"
                                   type="checkbox"
                                   name="pausable"
-                                  defaultChecked={pausable}
+                                  checked={pausable}
                                   disabled={f_pausable}
                                   onChange={ethMainFormHandler}
                                 />
@@ -592,7 +845,7 @@ const [show,setShow] = useState(false)
                                 </span>
                               </label>
                               <span className="form-text text-muted">
-                                Allow to recover any BEP20 tokens sent to your
+                                Allow to recover any ERC20 tokens sent to your
                                 contract
                               </span>
                             </div>
@@ -638,8 +891,7 @@ const [show,setShow] = useState(false)
                       <div className="col mt-3 mt-xl-0">
                         <div className="card">
                           <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}>
-                            </div>
+                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
                             <h4 className="m-0">
                               <i className="fa-solid fa-arrow-right me-3"></i>
                               Network
@@ -653,8 +905,8 @@ const [show,setShow] = useState(false)
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                <option value="PolygonMainnet">Polygon Mainnet</option>
-                                <option value="PolygonMumbai">Polygon Mumbai</option>
+                                <option value="polygonMainnet">Polygon Mainnet</option>
+                                <option value="polygonMumbai">Polygon Mumbai</option>
                               </select>
                               <span className="form-text text-muted">
                                 Select the network on wich you want to deploy
@@ -665,8 +917,7 @@ const [show,setShow] = useState(false)
                         </div>
                         <div className="card mt-3">
                           <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}>
-                            </div>
+                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
                             <h4 className="m-0">
                               <i className="fa-solid fa-arrow-right me-3"></i>
                               Agreement
@@ -685,11 +936,20 @@ const [show,setShow] = useState(false)
 
                                 <span className="form-check-label">
                                   I have read, understood and agreed to the{" "}
-                                  <span className="text-underline">
-                                    Terms of Use
-                                  </span>
-                                  .
+                                  {/* <span className="text-underline"> */}
+                                  {/*  modal*/}
+                                  <a
+                                    href="/"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                  >
+                                    <u> term of use </u>
+                                  </a>
+                                  <TermsModal />
+                                  {/* modal */}
+                                  {/* </span> */}
                                 </span>
+                                <br />
                                 <span className="text-danger">
                                   {err.agreementErr}
                                 </span>
@@ -699,8 +959,7 @@ const [show,setShow] = useState(false)
                         </div>
                         <div className="card mt-3">
                           <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}>
-                            </div>
+                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
                             <h4 className="m-0">
                               <i className="fa-solid fa-arrow-right me-3"></i>
                               Transaction
@@ -711,7 +970,15 @@ const [show,setShow] = useState(false)
                               <div className="Ttext">
                                 <p>
                                   Commission fee:{" "}
-                                  <i className="fa-solid fa-circle-info"></i>
+                                  <i
+                                    className="fa-solid fa-circle-info tip"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    // data-bs-custom-class="custom-tooltip"
+                                    title="The commison fee will be
+                                  transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
+                                  from your wallet.Only the gas fees will be deducted "
+                                  ></i>
                                 </p>
                               </div>
                               <div className="Tbtn">
@@ -723,10 +990,16 @@ const [show,setShow] = useState(false)
                               </div>
                             </div>
                             <div className="transactionWrap">
-                              <div className="Ttext">
+                              <div className="Ttext ">
                                 <p>
                                   Gas fee:{" "}
-                                  <i className="fa-solid fa-circle-info"></i>
+                                  <i
+                                    className="fa-solid fa-circle-info tip"
+                                    data-toggle="tooltip"
+                                    data-placement="top"
+                                    title="The gas fee depend on gas limit and gas price.
+                                  Metamask will automatically display the best fee to use "
+                                  ></i>
                                 </p>
                               </div>
                               <div className="Tbtn">
@@ -740,8 +1013,10 @@ const [show,setShow] = useState(false)
                         <div className="mt-3">
                           <button
                             type="submit"
-                            className="btn-lg btn-success1 w-100"
-                            // onClick={}
+                            className="btn-lg btn-success1 w-100 botn-clr"
+                            onClick={() => {
+                              compileContract(ethFormData);
+                            }}
                           >
                             Confirm
                           </button>
