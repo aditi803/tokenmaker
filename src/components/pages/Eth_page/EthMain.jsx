@@ -535,7 +535,7 @@ export const EthMain = () => {
       console.log(selectedNetwork,"currentNetworkID");
       axios
         .post(
-          "https://token-maker-blocktech.herokuapp.com/api/v1/compile/contract",
+          "https://tokenmaker-block-tech.herokuapp.com/api/v1/compile/contract",
           FormData
         )
         .then((res) => {
