@@ -1,18 +1,45 @@
 import React, { createContext, useState } from "react";
 import { ContractFactory, ethers } from "ethers";
 import axios from "axios";
+import { ToastContainer,toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css"; 
+import { ToastModal } from "../../components/Modal/ToastModal";
+// import { Navigate } from "react-router-dom";
+
 
 export const GlobalContext = createContext();
 
 export const EtherProvider = ({ children }) => {
 
-  const [accAddress,setAccAddress] = useState()
-  
+  const [accAddress,setAccAddress] = useState([])
+  const [showModal,setShowModal] = useState(false)
+  const [deploySuccess,setDeploySuccess] = useState({
+    tokenAddress:"",
+    tokenSymbol:"",
+    tokenDecimals:null,
+    txHash:""
+  })
+  const [navigateTo,setNavigateTo] = useState(true)
+
+ //Hide the connected account address
+  const hideAccAddress = (connectedAccAddress)=>{
+    let accAddress
+    if(connectedAccAddress!== 0){
+      const startAdd = connectedAccAddress.slice(0,6)
+      const endAdd = connectedAccAddress.slice(38,42)
+      accAddress = startAdd+"...." +endAdd
+      return accAddress
+    }else{
+      return connectedAccAddress
+    }
+  }
+  //ends here
+
     //add token to wallet function by user
-    const addToken = async ()=>{
-    const tokenAddress = '0xEAC3ce292F95d779732e7a26c95c57A742cf5119';
-    const tokenSymbol = 'TUT';
-    const tokenDecimals = 18;
+    const addToken = async (contractDetails)=>{
+    const tokenAddress = contractDetails.tokenAddress
+    const tokenSymbol = contractDetails.tokenSymbol
+    const tokenDecimals = contractDetails.tokenDecimals
     
     try {
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
@@ -68,8 +95,9 @@ export const EtherProvider = ({ children }) => {
     const chainIdInDecimal = ethers.utils.hexlify(networkID)
     console.log(chainIdInDecimal,"hexadecimal chainid");
     let parseChainId = "" ;
-    for(let i=0; i<chainIdInDecimal; i++){
+    for(let i=0; i<chainIdInDecimal.length; i++){
       if(chainIdInDecimal[i] > 0){
+        console.log(chainIdInDecimal[i],"ifff");
         parseChainId += chainIdInDecimal[i]
       }
     }
@@ -82,9 +110,16 @@ export const EtherProvider = ({ children }) => {
   });
   };
   //ends here
+  
+//Show Network Toast 
+  const showToast = (selectedNetwork) => {
+    console.log("toast")
+    toast.error(<ToastModal selectedNetwork= {selectedNetwork} changeNetwork={changeNetwork}/>) ;
+    };
+//ends here
 
   //deploy Contract on blockchain
-  const deployContract = async (contractSource) => {
+  const deployContract = async (contractSource,symbol,decimals) => {
     try {
       const abi = contractSource.abi;
       const bytecode = contractSource.bytecode;
@@ -101,15 +136,28 @@ export const EtherProvider = ({ children }) => {
       const contract = await factory.deploy();
       console.log(contract.address, "deployeed contract address");
       console.log(contract.deployTransaction, "deployeed contract address");
+          //set seploy data and pass to the child components
+      setDeploySuccess((prev)=> ({
+        ...prev,
+        tokenAddress:contract.address,
+        tokenSymbol:symbol,
+        tokenDecimals:decimals,
+        txHash:contract.deployTransaction
+      }))
+
       return contract;
     } catch (err) {
-      console.log("errorrr", err);
+      console.log("errorrr deply fn", err);
+      setNavigateTo(false)
+      // toast.error()
+      return err
     }
   };
   //ends here
 
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
+    // Navigate 
     console.log(FormData.network,"fromdatanetwork");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const { chainId } = await provider.getNetwork();
@@ -128,6 +176,7 @@ export const EtherProvider = ({ children }) => {
     }
 
     if (selectedNetwork === chainId) {
+        // navigate("/generator/final")
       console.log(selectedNetwork,"currentNetworkID");
       axios
         .post(
@@ -138,11 +187,15 @@ export const EtherProvider = ({ children }) => {
           console.log(res, "response");
           // contractSource = res.data.result;
           // console.log(contractSource, "contract Source api side ");
-          const deployedData = deployContract(res.data.result);
-          return deployedData
+          const deployedData =  deployContract(res.data.result,FormData.tokenSymbol,FormData.decimals);
+          // if(deployedData.deployTransaction)
+          console.log(deployedData,"deployed data in compile contract side");
+          // return deployedData
         });
     }else{
-        changeNetwork(selectedNetwork)
+           showToast(selectedNetwork)
+          //  setShowModal(true)
+        // changeNetwork(selectedNetwork)
     }
   };
 
@@ -152,10 +205,18 @@ export const EtherProvider = ({ children }) => {
         compileContract : compileContract,
         changeNetwork:changeNetwork,
         SignInMetamask:SignInMetamask,
-        connectedAccAddress:accAddress
+        connectedAccAddress:accAddress ,
+        setAccAddress:setAccAddress ,
+        hideAccAddress:hideAccAddress,
+        addToken:addToken,
+        setShowModal:setShowModal,
+        showModal:showModal,
+        deploySuccess:deploySuccess,
+        navigateTo:navigateTo
         
       }}
     >
+       <ToastContainer/>
       {children}
     </GlobalContext.Provider>
   )

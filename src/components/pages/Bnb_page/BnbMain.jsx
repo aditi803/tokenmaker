@@ -1,7 +1,7 @@
 import React, { useState, useEffect ,useContext} from "react";
 import "../Eth_page/eth_styles/main.css";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css"; 
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
 import {

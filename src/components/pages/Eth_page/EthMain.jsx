@@ -12,7 +12,7 @@ import {
 } from "../../../disabledUtils";
 
 export const EthMain = () => {
-  const {compileContract}  = useContext(GlobalContext)
+  const {compileContract,navigateTo}  = useContext(GlobalContext)
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -397,9 +397,13 @@ export const EthMain = () => {
     if (
       ethFormData.tokenName !== "" &&
       ethFormData.tokenSymbol !== "" &&
-      ethFormData.agreement !== false
+      ethFormData.agreement !== false &&
+      navigateTo === true
     ) {
-      // navigate("/generator/final");
+      navigate("/generator/final");
+    }else{
+      navigate("/generator/ethereum");
+
     }
   };
 
