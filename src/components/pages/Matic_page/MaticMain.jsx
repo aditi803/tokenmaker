@@ -10,14 +10,19 @@ import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 // import wallet_model from "../../Modal/Multi-WalletModal";
 // //
 
+import '../Eth_page/eth_styles/main.css'
 import {
   freeDisabled,
   basicDisabled,
   customDisabled,
 } from "../../../disabledUtils";
+import axios from "axios";
+import { ContractFactory, ethers } from "ethers";
 
 export const MaticMain = () => {
-  const {compileContract,navigateTo}  = useContext(GlobalContext)
+  const navigate = useNavigate();
+
+  const {deployContract,showToast}  = useContext(GlobalContext)
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -43,7 +48,7 @@ export const MaticMain = () => {
   //
   const [show, setShow] = useState(false);
   //
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [err, setErr] = useState({
     tokenNameErr: "",
     tokenSymbolErr: "",
@@ -491,13 +496,45 @@ export const MaticMain = () => {
     if (
       ethFormData.tokenName !== "" &&
       ethFormData.tokenSymbol !== "" &&
-      ethFormData.agreement !== false &&
-      navigateTo === true
+      ethFormData.agreement !== false 
     ) {
-      navigate("/generator/final");
-    }else{
-      navigate("/generator/polygon");
+      // navigate("/generator/final");
+    }
+  };
+  //compile contract and generate bytecode and abi
+  const compileContract = async (FormData) => {
+    // Navigate 
+    console.log(FormData.network,"fromdatanetwork");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const { chainId } = await provider.getNetwork();
+    console.log(chainId, "chainid"); // 42
+    let selectedNetwork;
+    if (FormData.network === "polygonMainnet") {
+      selectedNetwork = 137;
+    } else if (FormData.network === "polygonMumbai") {
+      selectedNetwork = 80001;
+    } 
 
+    console.log(selectedNetwork,"selct net eth main if side");
+    if (selectedNetwork === chainId) {
+        navigate("/generator/final")
+      console.log(selectedNetwork,"currentNetworkID");
+      axios
+        .post(
+          "https://token-maker-blocktech.herokuapp.com/api/v1/compile/contract",
+          FormData
+        )
+        .then((res) => {
+          console.log(res, "response");
+          // contractSource = res.data.result;
+          // console.log(contractSource, "contract Source api side ");
+          const deployedData =  deployContract(res.data.result,FormData.tokenSymbol,FormData.decimals);
+          console.log(deployedData,"deployed data in compile contract side");
+          // return deployedData
+        });
+    }else{
+      console.log(selectedNetwork,"selected netwrk");
+           showToast(selectedNetwork)
     }
   };
 
@@ -1013,9 +1050,9 @@ export const MaticMain = () => {
                         <div className="mt-3">
                           <button
                             type="submit"
-                            className="btn-lg btn-success1 w-100 botn-clr"
-                            onClick={() => {
-                              compileContract(ethFormData);
+                            className="btn-lg btn-success1 w-100"
+                            onClick={()=>{
+                              compileContract(ethFormData)
                             }}
                           >
                             Confirm

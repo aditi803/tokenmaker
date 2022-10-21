@@ -2,7 +2,7 @@ import React from "react";
 import "./Success.css"
 
 export const SuccessDeploy = (props) => {
-  const {addToken,deploySuccess} = props
+  const {addToken,deployData,} = props
   return (
     <div>
       <div className="card w-100">
@@ -51,7 +51,8 @@ export const SuccessDeploy = (props) => {
                   rel="noreferrer"
                   title="View your token on BscScan"
                 >
-                  {deploySuccess.tokenAddress}
+                
+                  {deployData.tokenAddress}
                 </a>
                 <div
                   className="text-light-gray ms-2 pointer d-inline-block"
@@ -117,9 +118,7 @@ export const SuccessDeploy = (props) => {
               Source code validated!
             </div>
             <div className="mt-3">
-              <button type="button" onclick = {()=>{
-                addToken(deploySuccess)
-              }} className="btn btn-success">
+              <button type="button" onClick = {addToken} className="btn btn-success">
                 Add your token to your wallet
               </button>
               <a

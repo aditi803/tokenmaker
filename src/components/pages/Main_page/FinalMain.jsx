@@ -3,11 +3,11 @@ import "../Main_page/Main.css";
 import { SuccessDeploy } from "./SuccessDeploy";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
-export const FinalMain = () => {
+export const FinalMain = (props) => {
+//  const  {deploySuccess} = props
+  const {addToken,deploySuccess,deployData}  = useContext(GlobalContext)
 
-  const {addToken,deploySuccess}  = useContext(GlobalContext)
-
-  console.log(deploySuccess,"deploy Success");
+  console.log(deploySuccess,"deploy Success final side");
 
   console.log("final main");
   return (
@@ -35,8 +35,9 @@ export const FinalMain = () => {
                 <div className="configurator-pending-install">
                   <div className="card">
                   {/* start */}
-                  {deploySuccess.txHash!== ""? 
-                     <SuccessDeploy addToken= {addToken} deploySuccess={deploySuccess}/> :
+                  {deploySuccess? 
+                     <SuccessDeploy addToken= {addToken} deployData={deployData}/>
+                      :
                     <div>
                     <div className="card-header d-flex align-items-center">
                       <div className="mr-3" style={{zoom: 1.5}}></div>

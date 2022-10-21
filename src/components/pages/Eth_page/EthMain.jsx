@@ -4,6 +4,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
+import axios from "axios";
+import { ContractFactory, ethers } from "ethers";
+
 
 //
 // import Link from "react-router-dom";
@@ -17,7 +20,10 @@ import {
 } from "../../../disabledUtils";
 
 export const EthMain = () => {
-  const {compileContract,navigateTo}  = useContext(GlobalContext)
+  // const {compileContract}  = useContext(GlobalContext)
+  const navigate = useNavigate();
+
+  const {deployContract,showToast}  = useContext(GlobalContext)
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -43,7 +49,7 @@ export const EthMain = () => {
   //
   const [show, setShow] = useState(false);
   //
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [err, setErr] = useState({
     tokenNameErr: "",
     tokenSymbolErr: "",
@@ -503,13 +509,45 @@ export const EthMain = () => {
     if (
       ethFormData.tokenName !== "" &&
       ethFormData.tokenSymbol !== "" &&
-      ethFormData.agreement !== false &&
-      navigateTo === true
+      ethFormData.agreement !== false 
     ) {
-      navigate("/generator/final");
-    }else{
-      navigate("/generator/ethereum");
+      // navigate("/generator/final");
+    }
+  };
+  //compile contract and generate bytecode and abi
+  const compileContract = async (FormData) => {
+    // Navigate 
+    console.log(FormData.network,"fromdatanetwork");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const { chainId } = await provider.getNetwork();
+    console.log(chainId, "chainid"); // 42
+    let selectedNetwork;
+    if (FormData.network === "mainnet") {
+      selectedNetwork = 1;
+    } else if (FormData.network === "gorli") {
+      selectedNetwork = 5;
+    } else if (FormData.network === "rinkeby") {
+      selectedNetwork = 4;
+    } 
 
+    if (selectedNetwork === chainId) {
+        navigate("/generator/final")
+      console.log(selectedNetwork,"currentNetworkID");
+      axios
+        .post(
+          "https://token-maker-blocktech.herokuapp.com/api/v1/compile/contract",
+          FormData
+        )
+        .then((res) => {
+          console.log(res, "response");
+          // contractSource = res.data.result;
+          // console.log(contractSource, "contract Source api side ");
+            navigate("/generator/final")
+          const deployedData =  deployContract(res.data.result,FormData.tokenSymbol,FormData.decimals);
+          console.log(deployedData,"deployed data in compile contract side");
+        });
+    }else{
+           showToast(selectedNetwork)
     }
   };
 

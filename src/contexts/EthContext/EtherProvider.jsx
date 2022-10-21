@@ -5,7 +5,8 @@ import { ToastContainer,toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css"; 
 import { ToastModal } from "../../components/Modal/ToastModal";
 // import { Navigate } from "react-router-dom";
-
+import {FinalMain} from "../../components/pages/Main_page/FinalMain"
+import { useEffect } from "react";
 
 export const GlobalContext = createContext();
 
@@ -13,14 +14,22 @@ export const EtherProvider = ({ children }) => {
 
   const [accAddress,setAccAddress] = useState([])
   const [showModal,setShowModal] = useState(false)
-  const [deploySuccess,setDeploySuccess] = useState({
+
+  const [deployData,setDeployData] = useState({
     tokenAddress:"",
     tokenSymbol:"",
     tokenDecimals:null,
     txHash:""
   })
-  const [navigateTo,setNavigateTo] = useState(true)
 
+  const [deploySuccess,setDeploySuccess] = useState(false)
+  const [navigateFinal,setNavigateFinal] = useState(true)
+
+  // useEffect(()=>{
+    
+  // },[])
+
+  // console.log(deploySuccess,"deplo success context side");
  //Hide the connected account address
   const hideAccAddress = (connectedAccAddress)=>{
     let accAddress
@@ -36,10 +45,10 @@ export const EtherProvider = ({ children }) => {
   //ends here
 
     //add token to wallet function by user
-    const addToken = async (contractDetails)=>{
-    const tokenAddress = contractDetails.tokenAddress
-    const tokenSymbol = contractDetails.tokenSymbol
-    const tokenDecimals = contractDetails.tokenDecimals
+    const addToken = async ()=>{
+    const tokenAddress = deployData.tokenAddress
+    const tokenSymbol = deployData.tokenSymbol
+    const tokenDecimals = deployData.tokenDecimals
     
     try {
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
@@ -61,7 +70,7 @@ export const EtherProvider = ({ children }) => {
         console.log('Your loss!');
       }
     } catch (error) {
-      console.log(error);
+      console.log("err addtoken fn",error);
     }
   }
 //ends here
@@ -92,6 +101,7 @@ export const EtherProvider = ({ children }) => {
 
  //change RPC network if not equal to selected network
   const changeNetwork = async (networkID) => {
+    console.log(networkID,"netwrk id in change netwrk");
     const chainIdInDecimal = ethers.utils.hexlify(networkID)
     console.log(chainIdInDecimal,"hexadecimal chainid");
     let parseChainId = "" ;
@@ -136,73 +146,79 @@ export const EtherProvider = ({ children }) => {
       const contract = await factory.deploy();
       console.log(contract.address, "deployeed contract address");
       console.log(contract.deployTransaction, "deployeed contract address");
-          //set seploy data and pass to the child components
-      setDeploySuccess((prev)=> ({
-        ...prev,
-        tokenAddress:contract.address,
-        tokenSymbol:symbol,
-        tokenDecimals:decimals,
-        txHash:contract.deployTransaction
-      }))
+      if(contract.deployTransaction.hash){
+      setDeploySuccess(true)
+      //set seploy data and pass to the child components
+      setDeployData((prev)=> ({
+      ...prev,
+      tokenAddress:contract.address,
+      tokenSymbol:symbol,
+      tokenDecimals:decimals,
+      txHash:contract.deployTransaction.hash
+  }))
+      }
+       
 
       return contract;
     } catch (err) {
       console.log("errorrr deply fn", err);
-      setNavigateTo(false)
+      setNavigateFinal(false)
       // toast.error()
       return err
     }
   };
   //ends here
 
-  //compile contract and generate bytecode and abi
-  const compileContract = async (FormData) => {
-    // Navigate 
-    console.log(FormData.network,"fromdatanetwork");
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const { chainId } = await provider.getNetwork();
-    console.log(chainId, "chainid"); // 42
-    let selectedNetwork;
-    if (FormData.network === "mainnet") {
-      selectedNetwork = 1;
-    } else if (FormData.network === "gorli") {
-      selectedNetwork = 5;
-    } else if (FormData.network === "rinkeby") {
-      selectedNetwork = 4;
-    } else if (FormData.network === "BinanceSmartChain") {
-      selectedNetwork = 56;
-    } else if (FormData.network === "BinanceSmartChainTestnet") {
-      selectedNetwork = 97;
-    }
+  // //compile contract and generate bytecode and abi
+  // const compileContract = async (FormData) => {
+  //   // Navigate 
+  //   console.log(FormData.network,"fromdatanetwork");
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   const { chainId } = await provider.getNetwork();
+  //   console.log(chainId, "chainid"); // 42
+  //   let selectedNetwork;
+  //   if (FormData.network === "mainnet") {
+  //     selectedNetwork = 1;
+  //   } else if (FormData.network === "gorli") {
+  //     selectedNetwork = 5;
+  //   } else if (FormData.network === "rinkeby") {
+  //     selectedNetwork = 4;
+  //   } else if (FormData.network === "BinanceSmartChain") {
+  //     selectedNetwork = 56;
+  //   } else if (FormData.network === "BinanceSmartChainTestnet") {
+  //     selectedNetwork = 97;
+  //   }
 
-    if (selectedNetwork === chainId) {
-        // navigate("/generator/final")
-      console.log(selectedNetwork,"currentNetworkID");
-      axios
-        .post(
-          "https://token-maker-blocktech.herokuapp.com/api/v1/compile/contract",
-          FormData
-        )
-        .then((res) => {
-          console.log(res, "response");
-          // contractSource = res.data.result;
-          // console.log(contractSource, "contract Source api side ");
-          const deployedData =  deployContract(res.data.result,FormData.tokenSymbol,FormData.decimals);
-          // if(deployedData.deployTransaction)
-          console.log(deployedData,"deployed data in compile contract side");
-          // return deployedData
-        });
-    }else{
-           showToast(selectedNetwork)
-          //  setShowModal(true)
-        // changeNetwork(selectedNetwork)
-    }
-  };
+  //   if (selectedNetwork === chainId) {
+  //       // navigate("/generator/final")
+  //     setDeploySuccess(true)
+  //     console.log(selectedNetwork,"currentNetworkID");
+  //     axios
+  //       .post(
+  //         "https://token-maker-blocktech.herokuapp.com/api/v1/compile/contract",
+  //         FormData
+  //       )
+  //       .then((res) => {
+  //         console.log(res, "response");
+  //         // contractSource = res.data.result;
+  //         // console.log(contractSource, "contract Source api side ");
+  //         const deployedData =  deployContract(res.data.result,FormData.tokenSymbol,FormData.decimals);
+  //         // if(deployedData.deployTransaction)
+  //         console.log(deployedData,"deployed data in compile contract side");
+  //         // return deployedData
+  //       });
+  //   }else{
+  //          showToast(selectedNetwork)
+  //         //  setShowModal(true)
+  //       // changeNetwork(selectedNetwork)
+  //   }
+  // };
 
   return (
+    
 <GlobalContext.Provider
       value={{
-        compileContract : compileContract,
+        // compileContract : compileContract,
         changeNetwork:changeNetwork,
         SignInMetamask:SignInMetamask,
         connectedAccAddress:accAddress ,
@@ -212,11 +228,18 @@ export const EtherProvider = ({ children }) => {
         setShowModal:setShowModal,
         showModal:showModal,
         deploySuccess:deploySuccess,
-        navigateTo:navigateTo
+        deployData:deployData,
+        // setDeploySuccess:setDeploySuccess,
+        deployContract:deployContract,
+        navigateFinal:navigateFinal,
+        showToast:showToast
         
       }}
     >
+    {console.log(deploySuccess,"deplo success context side")}
+    
        <ToastContainer/>
+       {/* <FinalMain deploySuccess = {deploySuccess}/> */}
       {children}
     </GlobalContext.Provider>
   )
