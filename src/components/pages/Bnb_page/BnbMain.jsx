@@ -250,10 +250,28 @@ export const BnbMain = () => {
           // commissionFee: 0.15,
         }));
       }
+      if(supplyType==="fixed" || supplyType==="capped" ){
+        setEthFormData((prev) => ({
+          ...prev,
+        maximumSupply:initialSupply
+        }));
+      
+      }
+      
 
 
     }
   }, [tokenType, supplyType, network]);
+
+
+useEffect(()=>{
+  if(supplyType==="fixed" || supplyType==="capped" ){
+    setEthFormData((prev) => ({
+      ...prev,
+    maximumSupply:initialSupply
+    }));}
+},[supplyType,initialSupply,maximumSupply])
+
 
   useEffect(() => {
     if (tokenType === "custom") {

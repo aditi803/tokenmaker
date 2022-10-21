@@ -112,6 +112,13 @@ export const MaticMain = () => {
     f_accessType,
   } = fieldsDisabled;
 
+  useEffect(()=>{
+    if(supplyType==="fixed" || supplyType==="capped" ){
+      setEthFormData((prev) => ({
+        ...prev,
+      maximumSupply:initialSupply
+      }));}
+  },[supplyType,initialSupply,maximumSupply])
   useEffect(() => {
     //
     // if (recoverable === true) {
@@ -1050,7 +1057,7 @@ export const MaticMain = () => {
                         <div className="mt-3">
                           <button
                             type="submit"
-                            className="btn-lg btn-success1 w-100"
+                            className="btn-lg btn-success1 w-100 botn-clr"
                             onClick={()=>{
                               compileContract(ethFormData)
                             }}

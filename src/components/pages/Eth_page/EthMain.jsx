@@ -265,8 +265,18 @@ export const EthMain = () => {
         }));
       }
     }
-  }, [tokenType, supplyType, network]);
-
+    
+    
+    
+  }, [tokenType, supplyType, network
+  ]);
+  useEffect(()=>{
+    if(supplyType==="fixed" || supplyType==="capped" ){
+      setEthFormData((prev) => ({
+        ...prev,
+      maximumSupply:initialSupply
+      }));}
+  },[supplyType,initialSupply,maximumSupply])
   useEffect(() => {
     if (tokenType === "custom") {
 
