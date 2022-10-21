@@ -17,20 +17,7 @@ import {
 } from "../../../disabledUtils";
 
 export const EthMain = () => {
-  const { compileContract } = useContext(GlobalContext);
-
-  
-
-  // const { web3Loading, getweb3 } = wallet_model();
-  // const [myWeb3, setMyWeb3] = useState();
-
-  // async function connectWallet() {
-  //   await getweb3().then((response) => {
-  //     setMyWeb3(response);
-  //     response.eth.getAccounts().then((result) => console.log(result));
-  //   });
-  // }
-  
+  const {compileContract,navigateTo}  = useContext(GlobalContext)
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -516,9 +503,13 @@ export const EthMain = () => {
     if (
       ethFormData.tokenName !== "" &&
       ethFormData.tokenSymbol !== "" &&
-      ethFormData.agreement !== false
+      ethFormData.agreement !== false &&
+      navigateTo === true
     ) {
-      // navigate("/generator/final");
+      navigate("/generator/final");
+    }else{
+      navigate("/generator/ethereum");
+
     }
   };
 

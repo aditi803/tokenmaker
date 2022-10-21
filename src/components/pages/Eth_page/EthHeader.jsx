@@ -1,6 +1,15 @@
-import React from 'react'
+import React,{useContext}from 'react'
 import '../Eth_page/eth_styles/header.css'
+
+import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
+
+
 export const EthHeader = () => {
+
+  const {connectedAccAddress,SignInMetamask,setAccAddress,hideAccAddress}  = useContext(GlobalContext)
+  // console.log(connectedAccAddress,"con addres");
+  const accAddress = hideAccAddress(connectedAccAddress)
+ 
   return (
       <div className="page-header">
         <header className='header navbar-area'>
@@ -29,9 +38,22 @@ export const EthHeader = () => {
                     </span> */}
                   </a>
                   <div className="ms-auto d-none d-lg-block">
-                    <button type='button' className='btn uppercase btn btn-action btn-rounded btn-pad'>
+                    {connectedAccAddress.length !== 0? 
+
+                      <button type='button' onClick={()=>{
+                        setAccAddress("")
+                      }} className='btn uppercase btn btn-action btn-rounded btn-pad'>
+                      {/* {show current acc address } */}
+                      <span className="inline-block">{accAddress}
+                      </span>
+                      
+                    </button>:
+                
+                    <button type='button' onClick={SignInMetamask} className='btn uppercase btn btn-action btn-rounded btn-pad'>
                       <span className="inline-block">Connect your Wallet</span>
                     </button>
+                      }
+
                   </div>
                 </nav>
               </div>

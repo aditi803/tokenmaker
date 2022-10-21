@@ -1,7 +1,15 @@
-import React from "react";
+import React,{useContext} from "react";
 import "../Main_page/Main.css";
+import { SuccessDeploy } from "./SuccessDeploy";
+import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
+
 export const FinalMain = () => {
-  console.log("Sdf");
+
+  const {addToken,deploySuccess}  = useContext(GlobalContext)
+
+  console.log(deploySuccess,"deploy Success");
+
+  console.log("final main");
   return (
     <>
       <div className="page-content">
@@ -26,6 +34,10 @@ export const FinalMain = () => {
               <div className="configurator-container">
                 <div className="configurator-pending-install">
                   <div className="card">
+                  {/* start */}
+                  {deploySuccess.txHash!== ""? 
+                     <SuccessDeploy addToken= {addToken} deploySuccess={deploySuccess}/> :
+                    <div>
                     <div className="card-header d-flex align-items-center">
                       <div className="mr-3" style={{zoom: 1.5}}></div>
                       <i className="fa-solid fa-arrow-right me-3"></i>
@@ -38,10 +50,15 @@ export const FinalMain = () => {
                       </p>
                     </div>
                   </div>
+                  }
+               {/*ends  */}
+
+                  </div>
                 </div>
               </div>
             </div>
           </section>
+
         </main>
       </div>
     </>
