@@ -542,7 +542,6 @@ export const EthMain = () => {
           console.log(res, "response");
           // contractSource = res.data.result;
           // console.log(contractSource, "contract Source api side ");
-            navigate("/generator/final")
           const deployedData =  deployContract(res.data.result,FormData.tokenSymbol,FormData.decimals);
           console.log(deployedData,"deployed data in compile contract side");
         });
