@@ -1,9 +1,14 @@
-import React, { useState, useEffect ,useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
+
+//
+// import Link from "react-router-dom";
+// import wallet_model from "../../Modal/Multi-WalletModal";
+// //
 
 import {
   freeDisabled,
@@ -12,7 +17,20 @@ import {
 } from "../../../disabledUtils";
 
 export const EthMain = () => {
-  const {compileContract}  = useContext(GlobalContext)
+  const { compileContract } = useContext(GlobalContext);
+
+  
+
+  // const { web3Loading, getweb3 } = wallet_model();
+  // const [myWeb3, setMyWeb3] = useState();
+
+  // async function connectWallet() {
+  //   await getweb3().then((response) => {
+  //     setMyWeb3(response);
+  //     response.eth.getAccounts().then((result) => console.log(result));
+  //   });
+  // }
+  
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -43,7 +61,7 @@ export const EthMain = () => {
     tokenNameErr: "",
     tokenSymbolErr: "",
     agreementErr: "",
-    decimalsErr:""
+    decimalsErr: "",
     // tokenNameErr: 'Please fill your token name',
     // tokenSymbolErr: 'Please fill your token symbol',
     // agreementErr: 'Please confirm that you have read and understood our terms of use'
@@ -259,6 +277,7 @@ export const EthMain = () => {
   useEffect(() => {
     if (tokenType === "custom") {
 
+      // owner && fixed
       if (burnable === true && pausable === true && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
@@ -298,20 +317,122 @@ export const EthMain = () => {
           commissionFee: 0.3,
         }));
       }
-      if (pausable === false && burnable === false && recoverable === false) {
+      if (pausable === false  && recoverable === false && burnable=== false) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 0.15,
         }));
       }
-      if(accessType==="roles"){
-        setEthFormData((prev)=>({
+      // Roles and fixed
+      if (accessType==="roles" && burnable === true && pausable === true && recoverable === true) {
+        setEthFormData((prev) => ({
           ...prev,
-          commissionFee: Number(commissionFee +0.0).toFixed(2)
-        }))
+          commissionFee: 0.4,
+        }));
       }
+      if (accessType==="roles" && pausable === true && burnable === true && recoverable === false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.325,
+        }));
+      }
+      if (accessType==="roles" && pausable === true && burnable === false && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.325,
+        }));
+      }
+      if (accessType==="roles" && 
+       ( (burnable === true && pausable === false && recoverable === false) ||
+        (burnable === false && pausable === false && recoverable === true))
+      ) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.275,
+        }));
+      }
+      if (accessType==="roles" && burnable === false && pausable === true && recoverable === false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.25,
+        }));
+      }
+      if (accessType==="roles" && pausable === false && burnable === true && recoverable === true) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.35,
+        }));
+      }
+      if (accessType==="roles" && pausable === false  && recoverable === false && burnable=== false) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.2,
+        }));
+      }
+
+      // owner && (unlimited || capped)
+      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited")   && pausable===false  && recoverable=== false){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.225,
+        })); 
+      }
+      
+      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable=== true  && recoverable=== false){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.275,
+        })); 
+      }
+      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===false  &&  recoverable=== true){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.3,
+        })); 
+      }
+      // double
+      
+      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===true  &&  recoverable=== true){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.35,
+        })); 
+      }
+      
+
+
+      // roles && (unlimited || capped)
+      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited")   && pausable===false  && recoverable=== false){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.275,
+        })); 
+      }
+      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable=== true  && recoverable=== false){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.325,
+        })); 
+      }
+      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===false  &&  recoverable=== true){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.35,
+        })); 
+      }
+      // double
+   
+      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===true  &&  recoverable=== true){
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 0.4,
+        })); 
+      }
+      
+      
     }
-  }, [pausable, recoverable, burnable,tokenType,accessType]);
+
+  }, [pausable, recoverable, burnable, tokenType, accessType]);
 
   const ethMainFormHandler = (e) => {
     let boolean = null;
@@ -345,13 +466,13 @@ export const EthMain = () => {
         tokenSymbolErr: "",
       }));
     }
-    if(decimals !== null){
-      setErr((prev)=>({
+    if (decimals !== null) {
+      setErr((prev) => ({
         ...prev,
-        decimalsErr: ""
-      }))
+        decimalsErr: "",
+      }));
     }
-  }, [agreement, tokenName, tokenSymbol,decimals]);
+  }, [agreement, tokenName, tokenSymbol, decimals]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -375,15 +496,12 @@ export const EthMain = () => {
         agreementErr:
           "Please confirm that you have read and understood our terms of use",
       }));
-    if(ethFormData.decimals>21 || ethFormData.decimals<6){
-      
-      setErr((prev)=>({
-        ...prev,
-        decimalsErr: "The number of decimals must be between 6 and 21"
-        
-      }))
-    }
-
+      if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
+        setErr((prev) => ({
+          ...prev,
+          decimalsErr: "The number of decimals must be between 6 and 21",
+        }));
+      }
     }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
@@ -403,6 +521,17 @@ export const EthMain = () => {
       // navigate("/generator/final");
     }
   };
+
+  // {web3Loading ? (
+  //   <button className=" btn-inner - text " disabled>
+  //     {" "}
+  //     Loading ...{" "}
+  //   </button>
+  // ) : (
+  //   <button className=" btn-inner - text " onClick={connectWallet}>
+  //     get accounts
+  //   </button>
+  // )}
 
   return (
     <>
@@ -505,7 +634,6 @@ export const EthMain = () => {
                             <div className="form-group">
                               <label className="form-label">
                                 Decimals<span className="val-required">*</span>
-                              
                               </label>
                               <input
                                 type="number"
@@ -839,7 +967,7 @@ export const EthMain = () => {
                                   >
                                     <u> term of use </u>
                                   </a>
-                                 <TermsModal />
+                                  <TermsModal />
                                   {/* modal */}
                                   {/* </span> */}
                                 </span>
@@ -907,9 +1035,9 @@ export const EthMain = () => {
                         <div className="mt-3">
                           <button
                             type="submit"
-                            className="btn-lg btn-success1 w-100"
-                            onClick={()=>{
-                              compileContract(ethFormData)
+                            className="btn-lg btn-success1 w-100 botn-clr"
+                            onClick={() => {
+                              compileContract(ethFormData);
                             }}
                           >
                             Confirm
