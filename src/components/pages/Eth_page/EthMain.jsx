@@ -6,6 +6,7 @@ import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import axios from "axios";
 import { ContractFactory, ethers } from "ethers";
+import { toast } from "react-toastify";
 
 
 //
@@ -23,7 +24,7 @@ export const EthMain = () => {
   // const {compileContract}  = useContext(GlobalContext)
   const navigate = useNavigate();
 
-  const {deployContract,showToast}  = useContext(GlobalContext)
+  const {deployContract,showToast,connectedAccAddress}  = useContext(GlobalContext)
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -526,37 +527,63 @@ export const EthMain = () => {
   };
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
-    // Navigate 
-    console.log(FormData.network,"fromdatanetwork");
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const { chainId } = await provider.getNetwork();
-    console.log(chainId, "chainid"); // 42
-    let selectedNetwork;
-    if (FormData.network === "mainnet") {
-      selectedNetwork = 1;
-    } else if (FormData.network === "gorli") {
-      selectedNetwork = 5;
-    } else if (FormData.network === "rinkeby") {
-      selectedNetwork = 4;
-    } 
-
-    if (selectedNetwork === chainId) {
-        navigate("/generator/final")
-      console.log(selectedNetwork,"currentNetworkID");
-      axios
-        .post(
-          "https://tokenmaker-block-tech.herokuapp.com/api/v1/compile/contract",
-          FormData
-        )
-        .then((res) => {
-          console.log(res, "response");
-          // contractSource = res.data.result;
-          // console.log(contractSource, "contract Source api side ");
-          const deployedData =  deployContract(res.data.result,FormData.tokenSymbol,FormData.decimals);
-          console.log(deployedData,"deployed data in compile contract side");
-        });
-    }else{
-           showToast(selectedNetwork)
+    try {
+      console.log(FormData.network, "fromdatanetwork");
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const { chainId } = await provider.getNetwork();
+      console.log(chainId, "chainid");
+      let selectedNetwork;
+      if (FormData.network === "mainnet") {
+        selectedNetwork = 1;
+      } else if (FormData.network === "gorli") {
+        selectedNetwork = 5;
+      }else if (FormData.network === "rinkeby"){
+        selectedNetwork = 4;
+      }
+      console.log(FormData, "formdata eth side");
+      if (selectedNetwork === chainId && connectedAccAddress.length !== 0) {
+        navigate("/generator/final");
+        console.log(selectedNetwork, "currentNetworkID");
+        //hit contract compile api
+        axios
+          .post(
+            "https://tokenmaker-block-tech.herokuapp.com/api/v1/compile/contract",
+            FormData
+          )
+          .then((res) => {
+            console.log(res, "response");
+            // console.log(contractSource, "contract Source api side ");
+            //calling deploy function 
+            deployContract(
+              res.data.result,
+              FormData.tokenSymbol,
+              FormData.decimals,
+              selectedNetwork
+            )
+              .then((res) => {
+                if (res.error) {
+                  navigate("/generator/ethereum");
+                  res.error.code === "ACTION_REJECTED"?toast.error("Transaction Not Signed !! Request Rejected"):toast.error(res.error.message)   
+                } else {
+                  toast.success("Token Deploy Successfully")
+                  navigate("/generator/final");
+                  console.log(res, "else side deploy then return deploy succes");
+                }
+              })
+          })
+          .catch((error) => {
+            console.log("Api fail error", error);
+            navigate("/generator/ethereum");
+            toast.error("Data Fetch Failed or Not Fill All Values Try Again!!");
+          });
+      } else if (connectedAccAddress.length === 0) {
+        toast.error("Please Sign in to Metamask Wallet First");
+      } else {
+        showToast(selectedNetwork);
+      }
+    } catch (error) {
+      toast.error(error.message);
+      console.log("compile contract side catch er", error);
     }
   };
 

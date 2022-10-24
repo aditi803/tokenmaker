@@ -2,21 +2,20 @@ import React from "react";
 
 export const ToastModal = (props) => {
   const {changeNetwork,selectedNetwork} = props
-  const toastStyle = {
-    backgroundColor: "",
-  };
+  
   return (
-    <div style={toastStyle}>
-      <p style={{ color: "red" }}>
+    <div >
+
+      <p style={{ color: "black",fontWeight:"bold"}}>
         Your Wallet is Connected To The Wrong Network!!
       </p>
-      {/* <br /> */}
-      {/* <a href=""> */}
         {" "}
-        <u onClick={()=>{
+        <u style={{"color":"blue"}} onClick={()=>{
           changeNetwork(selectedNetwork)
         }}> Click Here To Switch Network</u>{" "}
-      {/* </a> */}
+
+
     </div>
+    
   );
 };

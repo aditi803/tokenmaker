@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Success.css"
+import { useNavigate } from "react-router-dom";
+
 
 export const SuccessDeploy = (props) => {
-  const {addToken,deployData,} = props
+  const navigate = useNavigate()
+  const {addToken,deployData} = props
+
+  const createNewToken = ()=>{
+    navigate("/generator")
+  }
+
+  // useEffect(()=>{
+  //   createNewToken()
+  // })
+
+  let explorer
+  const TokenExplorer = (chainID)=>{
+   if(chainID === 97){
+    explorer = {link:"https://testnet.bscscan.com/",name:"Bsc Testnet Scan"} 
+   }else if(chainID === 56){
+      explorer = {link:"https://bscscan.com/",name:"Bsc Mainnet Scan"}
+   }else if(chainID === 137){
+   explorer =   {link:"https://polygonscan.com/",name:"Polygon Mainnet Scan"}
+   }else if(chainID === 80001){
+    explorer ={link:"https://mumbai.polygonscan.com/",name:"Polygon Testnet Scan"} 
+   }else if(chainID === 1){
+    explorer = {link:"https://etherscan.io",name:"Ethereum Mainnet Scan"}
+   }else if(chainID === 5){
+   explorer = {link:"https://goerli.etherscan.io",name:"Goerli Testnet Scan"} 
+   }else if(chainID === 4){
+    explorer = {link: "https://rinkeby.etherscan.io/",name:"RinkeyBy Testnet Scan"}
+   }
+
+  }
+  TokenExplorer(deployData.chainID)
+
   return (
     <div>
       <div className="card w-100">
@@ -46,10 +79,10 @@ export const SuccessDeploy = (props) => {
               Your token address is:{" "}
               <div className="token-addr d-inline-block ms-2">
                 <a
-                  href="https://testnet.bscscan.com/token/0xEAC3ce292F95d779732e7a26c95c57A742cf5119"
+                  href={`${explorer.link}/token/${deployData.tokenAddress}`}
                   target="_blank"
                   rel="noreferrer"
-                  title="View your token on BscScan"
+                  title={`View your token on ${explorer.name}`}
                 >
                 
                   {deployData.tokenAddress}
@@ -122,16 +155,16 @@ export const SuccessDeploy = (props) => {
                 Add your token to your wallet
               </button>
               <a
-                href="https://testnet.bscscan.com/tx/0x6e3601083fe74b822d2617690e1117040a4b8a646cfdce33c6c928ffeaba1972"
+                href={`${explorer.link}/tx/${deployData.txHash}`}
                 className="btn btn-secondary ms-2"
                 target="_blank"
                 rel="noreferrer"
               >
-                View the transaction on BscScan
+               { `View the transaction on ${explorer.name}`}
               </a>
             </div>
           </div>
-          <button type="button" className="btn btn-link btn-sm p-0 mt-4 text-body">
+          <button type="button"  onClick={createNewToken} className="btn btn-link btn-sm p-0 mt-4 text-body">
             Create a new token
           </button>
         </div>

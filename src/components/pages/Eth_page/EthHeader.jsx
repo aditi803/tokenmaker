@@ -7,7 +7,7 @@ import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 export const EthHeader = () => {
 
   const {connectedAccAddress,SignInMetamask,setAccAddress,hideAccAddress}  = useContext(GlobalContext)
-  // console.log(connectedAccAddress,"con addres");
+  console.log(connectedAccAddress,"connected addres header side");
   const accAddress = hideAccAddress(connectedAccAddress)
  
   return (
@@ -41,7 +41,7 @@ export const EthHeader = () => {
                     {connectedAccAddress.length !== 0? 
 
                       <button type='button' onClick={()=>{
-                        setAccAddress("")
+                        setAccAddress([])
                       }} className='btn uppercase btn btn-action btn-rounded btn-pad'>
                       {/* {show current acc address } */}
                       <span className="inline-block">{accAddress}

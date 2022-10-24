@@ -1,61 +1,67 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { ContractFactory, ethers } from "ethers";
-import axios from "axios";
-import { ToastContainer,toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css"; 
+// import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 import { ToastModal } from "../../components/Modal/ToastModal";
-// import { Navigate } from "react-router-dom";
-import {FinalMain} from "../../components/pages/Main_page/FinalMain"
-import { useEffect } from "react";
-
 export const GlobalContext = createContext();
 
 export const EtherProvider = ({ children }) => {
+  const [accAddress, setAccAddress] = useState([]);
+  //  const[metaError , setMetaError] = useState(false)
 
-  const [accAddress,setAccAddress] = useState([])
-  const [showModal,setShowModal] = useState(false)
+  const [deployData, setDeployData] = useState({
+    tokenAddress: "",
+    tokenSymbol: "",
+    tokenDecimals: null,
+    txHash: "",
+    chainID: null,
+  });
 
-  const [deployData,setDeployData] = useState({
-    tokenAddress:"",
-    tokenSymbol:"",
-    tokenDecimals:null,
-    txHash:""
-  })
-
-  const [deploySuccess,setDeploySuccess] = useState(false)
-  const [navigateFinal,setNavigateFinal] = useState(true)
-
-  // useEffect(()=>{
-    
-  // },[])
-
+  const [deploySuccess, setDeploySuccess] = useState(false);
   // console.log(deploySuccess,"deplo success context side");
- //Hide the connected account address
-  const hideAccAddress = (connectedAccAddress)=>{
-    let accAddress
-    if(connectedAccAddress!== 0){
-      const startAdd = connectedAccAddress.slice(0,6)
-      const endAdd = connectedAccAddress.slice(38,42)
-      accAddress = startAdd+"...." +endAdd
-      return accAddress
-    }else{
-      return connectedAccAddress
+
+  useEffect(() => {
+    window.ethereum.on("accountsChanged", async function (accounts) {
+      console.log(accounts, "account changed");
+      // eslint-disable-next-line no-unused-expressions
+      accounts[0] !== undefined
+        ? setAccAddress([accounts[0]])
+        : setAccAddress([]);
+    });
+  });
+
+  //Hide the connected account address
+  const hideAccAddress = (connectedAccAddress) => {
+    let accAddress;
+    console.log(connectedAccAddress, "hide acc side ");
+    console.log(connectedAccAddress.length, "acc hide side length");
+    console.log(connectedAccAddress[0], "acc hide  side value  ");
+
+    if (connectedAccAddress.length !== 0) {
+      const startAdd = connectedAccAddress[0].slice(0, 6);
+      const endAdd = connectedAccAddress[0].slice(38, 42);
+      accAddress = startAdd + "...." + endAdd;
+      console.log(startAdd, "startadd if side");
+      return accAddress;
+    } else {
+      console.log("hide acc else side");
+      return connectedAccAddress;
     }
-  }
+  };
   //ends here
 
-    //add token to wallet function by user
-    const addToken = async ()=>{
-    const tokenAddress = deployData.tokenAddress
-    const tokenSymbol = deployData.tokenSymbol
-    const tokenDecimals = deployData.tokenDecimals
-    
+  //add token to wallet function by user
+  const addToken = async () => {
+    const tokenAddress = deployData.tokenAddress;
+    const tokenSymbol = deployData.tokenSymbol;
+    const tokenDecimals = deployData.tokenDecimals;
+
     try {
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
       const wasAdded = await window.ethereum.request({
-        method: 'wallet_watchAsset',
+        method: "wallet_watchAsset",
         params: {
-          type: 'ERC20', // Initially only supports ERC20, but eventually more!
+          type: "ERC20", // Initially only supports ERC20, but eventually more!
           options: {
             address: tokenAddress, // The address that the token is at.
             symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
@@ -63,73 +69,95 @@ export const EtherProvider = ({ children }) => {
           },
         },
       });
-    
-      if (wasAdded) {
-        console.log('Thanks for your interest!');
-      } else {
-        console.log('Your loss!');
-      }
-    } catch (error) {
-      console.log("err addtoken fn",error);
-    }
-  }
-//ends here
 
-//wallet sign in function
-  const SignInMetamask = async (e) => {
+      // eslint-disable-next-line no-unused-expressions
+      wasAdded ? toast.success("Token Added Successfully To Wallet") : "";
+    } catch (error) {
+      // eslint-disable-next-line no-unused-expressions
+      error.code === 4001
+        ? toast.error(" Request Rejected !! Token Not Added")
+        : toast.error(error.message);
+      console.log("err addtoken fn", error);
+    }
+  };
+  //ends here
+
+  //wallet sign in function
+  const SignInMetamask = async () => {
     // Creating Instance Of Web3
     try {
-      e.preventDefault();
-      console.log("hello");
+      // e.preventDefault();
       //Check if Metamask is Installed Or Not
       if (window.ethereum) {
-        let { ethereum } = window;
-        let account = await ethereum.request({ method: "eth_requestAccounts" });
+        let account = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
         console.log(account, "acccc");
-        //set Account Address of Logged In User
-        setAccAddress(account[0]);
 
+        //set Account Address of Logged In User
+        setAccAddress([account[0]]);
       } else {
         //If Metamask Not Installed Or Not Connected
-        window.alert("please connect metamask");
+        toast.error("Please Install Metamask In Your Browser");
       }
     } catch (error) {
-      console.log("Something Wrong ", error.message);
+      // eslint-disable-next-line no-unused-expressions
+      error.code === 4001
+        ? toast.error("Please Connect Your Metamask Wallet ")
+        : toast.error(error.message);
+      console.log("sign in fun err", error);
     }
   };
   //ends here
 
- //change RPC network if not equal to selected network
+  //change RPC network if not equal to selected network
   const changeNetwork = async (networkID) => {
-    console.log(networkID,"netwrk id in change netwrk");
-    const chainIdInDecimal = ethers.utils.hexlify(networkID)
-    console.log(chainIdInDecimal,"hexadecimal chainid");
-    let parseChainId = "" ;
-    for(let i=0; i<chainIdInDecimal.length; i++){
-      if(chainIdInDecimal[i] > 0){
-        console.log(chainIdInDecimal[i],"ifff");
-        parseChainId += chainIdInDecimal[i]
+    try {
+      console.log(networkID, "netwrk id in change netwrk");
+      const chainIdInDecimal = ethers.utils.hexlify(networkID);
+      console.log(chainIdInDecimal, "hexadecimal chainid");
+      let parseChainId = "";
+      for (let i = 0; i < chainIdInDecimal.length; i++) {
+        if (chainIdInDecimal[i] > 0) {
+          console.log(chainIdInDecimal[i], "ifff");
+          parseChainId += chainIdInDecimal[i];
+        }
       }
-    }
-    console.log(parseChainId,"parseChainId");
+      console.log(parseChainId, "parseChainId");
 
-    console.log(networkID,"selectedNetworkID");
-    await window.ethereum.request({
-      method: "wallet_switchEthereumChain",
-      params: [{ chainId: `0x${parseChainId}` }],
-  });
+      console.log(networkID, "selectedNetworkID");
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: `0x${parseChainId}` }],
+      });
+    } catch (error) {
+      error.code === 4001
+        ? toast.error("Please Allow To Change Network To Continue!!")
+        : toast.error(error.message);
+      console.log("err change netwrk side", error);
+    }
   };
   //ends here
-  
-//Show Network Toast 
+
+  //Show Network Toast
   const showToast = (selectedNetwork) => {
-    console.log("toast")
-    toast.error(<ToastModal selectedNetwork= {selectedNetwork} changeNetwork={changeNetwork}/>) ;
-    };
-//ends here
+    try {
+      console.log("toast");
+      toast.warning(
+        <ToastModal
+          selectedNetwork={selectedNetwork}
+          changeNetwork={changeNetwork}
+        />);
+    } catch (error) {
+      toast.error(error.message)
+      console.log("show toast side err",error);
+    }
+   
+  };
+  //ends here
 
   //deploy Contract on blockchain
-  const deployContract = async (contractSource,symbol,decimals) => {
+  const deployContract = async (contractSource, symbol, decimals, chainID) => {
     try {
       const abi = contractSource.abi;
       const bytecode = contractSource.bytecode;
@@ -145,102 +173,50 @@ export const EtherProvider = ({ children }) => {
       // If your contract requires constructor args, you can specify them here
       const contract = await factory.deploy();
       console.log(contract.address, "deployeed contract address");
-      console.log(contract.deployTransaction, "deployeed contract address");
-      if(contract.deployTransaction.hash){
-      setDeploySuccess(true)
-      //set seploy data and pass to the child components
-      setDeployData((prev)=> ({
-      ...prev,
-      tokenAddress:contract.address,
-      tokenSymbol:symbol,
-      tokenDecimals:decimals,
-      txHash:contract.deployTransaction.hash
-  }))
+      console.log(contract.deployTransaction.hash, "deployeed contract hash");
+      if (contract.deployTransaction.hash) {
+        setDeploySuccess(true);
+        //set seploy data and pass to the child components
+        setDeployData((prev) => ({
+          ...prev,
+          tokenAddress: contract.address,
+          tokenSymbol: symbol,
+          tokenDecimals: decimals,
+          txHash: contract.deployTransaction.hash,
+          chainID: chainID,
+        }));
       }
-       
 
       return contract;
     } catch (err) {
-      console.log("errorrr deply fn", err);
-      setNavigateFinal(false)
-      // toast.error()
-      return err
+      console.log("errorrr deply msg fn", err);
+      return {error:err};
     }
   };
   //ends here
 
-  // //compile contract and generate bytecode and abi
-  // const compileContract = async (FormData) => {
-  //   // Navigate 
-  //   console.log(FormData.network,"fromdatanetwork");
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   const { chainId } = await provider.getNetwork();
-  //   console.log(chainId, "chainid"); // 42
-  //   let selectedNetwork;
-  //   if (FormData.network === "mainnet") {
-  //     selectedNetwork = 1;
-  //   } else if (FormData.network === "gorli") {
-  //     selectedNetwork = 5;
-  //   } else if (FormData.network === "rinkeby") {
-  //     selectedNetwork = 4;
-  //   } else if (FormData.network === "BinanceSmartChain") {
-  //     selectedNetwork = 56;
-  //   } else if (FormData.network === "BinanceSmartChainTestnet") {
-  //     selectedNetwork = 97;
-  //   }
-
-  //   if (selectedNetwork === chainId) {
-  //       // navigate("/generator/final")
-  //     setDeploySuccess(true)
-  //     console.log(selectedNetwork,"currentNetworkID");
-  //     axios
-  //       .post(
-  //         "https://token-maker-blocktech.herokuapp.com/api/v1/compile/contract",
-  //         FormData
-  //       )
-  //       .then((res) => {
-  //         console.log(res, "response");
-  //         // contractSource = res.data.result;
-  //         // console.log(contractSource, "contract Source api side ");
-  //         const deployedData =  deployContract(res.data.result,FormData.tokenSymbol,FormData.decimals);
-  //         // if(deployedData.deployTransaction)
-  //         console.log(deployedData,"deployed data in compile contract side");
-  //         // return deployedData
-  //       });
-  //   }else{
-  //          showToast(selectedNetwork)
-  //         //  setShowModal(true)
-  //       // changeNetwork(selectedNetwork)
-  //   }
-  // };
-
   return (
-    
-<GlobalContext.Provider
+    <GlobalContext.Provider
       value={{
         // compileContract : compileContract,
-        changeNetwork:changeNetwork,
-        SignInMetamask:SignInMetamask,
-        connectedAccAddress:accAddress ,
-        setAccAddress:setAccAddress ,
-        hideAccAddress:hideAccAddress,
-        addToken:addToken,
-        setShowModal:setShowModal,
-        showModal:showModal,
-        deploySuccess:deploySuccess,
-        deployData:deployData,
-        // setDeploySuccess:setDeploySuccess,
-        deployContract:deployContract,
-        navigateFinal:navigateFinal,
-        showToast:showToast
-        
+        changeNetwork: changeNetwork,
+        SignInMetamask: SignInMetamask,
+        connectedAccAddress: accAddress,
+        setAccAddress: setAccAddress,
+        hideAccAddress: hideAccAddress,
+        addToken: addToken,
+        deploySuccess: deploySuccess,
+        deployData: deployData,
+        deployContract: deployContract,
+        showToast: showToast,
       }}
     >
-    {console.log(deploySuccess,"deplo success context side")}
-    
-       <ToastContainer/>
-       {/* <FinalMain deploySuccess = {deploySuccess}/> */}
+      {console.log(deploySuccess, "deplo success context side")}
+      {console.log(accAddress, "acc address context side")}
+
+      <ToastContainer />
+      {/* <FinalMain deploySuccess = {deploySuccess}/> */}
       {children}
     </GlobalContext.Provider>
-  )
-}
+  );
+};

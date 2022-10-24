@@ -6,6 +6,8 @@ import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import axios from "axios";
 import { ContractFactory, ethers } from "ethers";
+import { toast } from "react-toastify";
+
 //
 // import Link from "react-router-dom";
 // import wallet_model from "../../Modal/Multi-WalletModal";
@@ -19,9 +21,9 @@ import {
 
 export const BnbMain = () => {
   const navigate = useNavigate();
-
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
-  const {deployContract,showToast}  = useContext(GlobalContext)
+  const { deployContract, showToast, connectedAccAddress } =
+    useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -172,7 +174,6 @@ export const BnbMain = () => {
           commissionFee: 0.5,
         }));
       }
-    
     } else if (tokenType === "free") {
       setFieldsDisabled(freeDisabled);
       setEthFormData((prev) => ({
@@ -250,32 +251,26 @@ export const BnbMain = () => {
           // commissionFee: 0.15,
         }));
       }
-      if(supplyType==="fixed" || supplyType==="capped" ){
+      if (supplyType === "fixed" || supplyType === "capped") {
         setEthFormData((prev) => ({
           ...prev,
-        maximumSupply:initialSupply
+          maximumSupply: initialSupply,
         }));
-      
       }
-      
-
-
     }
   }, [tokenType, supplyType, network]);
 
-
-useEffect(()=>{
-  if(supplyType==="fixed" || supplyType==="capped" ){
-    setEthFormData((prev) => ({
-      ...prev,
-    maximumSupply:initialSupply
-    }));}
-},[supplyType,initialSupply,maximumSupply])
-
+  useEffect(() => {
+    if (supplyType === "fixed" || supplyType === "capped") {
+      setEthFormData((prev) => ({
+        ...prev,
+        maximumSupply: initialSupply,
+      }));
+    }
+  }, [supplyType, initialSupply, maximumSupply]);
 
   useEffect(() => {
     if (tokenType === "custom") {
-
       // owner && fixed
       if (burnable === true && pausable === true && recoverable === true) {
         setEthFormData((prev) => ({
@@ -316,53 +311,84 @@ useEffect(()=>{
           commissionFee: 2,
         }));
       }
-      if (pausable === false  && recoverable === false && burnable=== false) {
+      if (pausable === false && recoverable === false && burnable === false) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 1,
         }));
       }
       // Roles and fixed
-      if (accessType==="roles" && burnable === true && pausable === true && recoverable === true) {
+      if (
+        accessType === "roles" &&
+        burnable === true &&
+        pausable === true &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 2.6,
         }));
       }
-      if (accessType==="roles" && pausable === true && burnable === true && recoverable === false) {
+      if (
+        accessType === "roles" &&
+        pausable === true &&
+        burnable === true &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 2.1,
         }));
       }
-      if (accessType==="roles" && pausable === true && burnable === false && recoverable === true) {
+      if (
+        accessType === "roles" &&
+        pausable === true &&
+        burnable === false &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 2.1,
         }));
       }
-      if (accessType==="roles" && 
-       ( (burnable === true && pausable === false && recoverable === false) ||
-        (burnable === false && pausable === false && recoverable === true))
+      if (
+        accessType === "roles" &&
+        ((burnable === true && pausable === false && recoverable === false) ||
+          (burnable === false && pausable === false && recoverable === true))
       ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 1.8,
         }));
       }
-      if (accessType==="roles" && burnable === false && pausable === true && recoverable === false) {
+      if (
+        accessType === "roles" &&
+        burnable === false &&
+        pausable === true &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 1.6,
         }));
       }
-      if (accessType==="roles" && pausable === false && burnable === true && recoverable === true) {
+      if (
+        accessType === "roles" &&
+        pausable === false &&
+        burnable === true &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 2.3,
         }));
       }
-      if (accessType==="roles" && pausable === false  && recoverable === false && burnable=== false) {
+      if (
+        accessType === "roles" &&
+        pausable === false &&
+        recoverable === false &&
+        burnable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 1.3,
@@ -370,67 +396,102 @@ useEffect(()=>{
       }
 
       // owner && (unlimited || capped)
-      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited")   && pausable===false  && recoverable=== false){
+      if (
+        accessType === "owner" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === false &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 1.5,
-        })); 
+        }));
       }
-      
-      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable=== true  && recoverable=== false){
+
+      if (
+        accessType === "owner" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === true &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 1.8,
-        })); 
+        }));
       }
-      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===false  &&  recoverable=== true){
+      if (
+        accessType === "owner" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === false &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 2,
-        })); 
+        }));
       }
       // double
-      
-      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===true  &&  recoverable=== true){
+
+      if (
+        accessType === "owner" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === true &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 2.3,
-        })); 
+        }));
       }
-      
-
 
       // roles && (unlimited || capped)
-      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited")   && pausable===false  && recoverable=== false){
+      if (
+        accessType === "roles" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === false &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 1.8,
-        })); 
+        }));
       }
-      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable=== true  && recoverable=== false){
+      if (
+        accessType === "roles" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === true &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 2.1,
-        })); 
+        }));
       }
-      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===false  &&  recoverable=== true){
+      if (
+        accessType === "roles" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === false &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 2.3,
-        })); 
+        }));
       }
       // double
-   
-      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===true  &&  recoverable=== true){
+
+      if (
+        accessType === "roles" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === true &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 2.6,
-        })); 
+        }));
       }
-      
-      
     }
-
   }, [pausable, recoverable, burnable, tokenType, accessType]);
 
   const ethMainFormHandler = (e) => {
@@ -515,7 +576,7 @@ useEffect(()=>{
     if (
       ethFormData.tokenName !== "" &&
       ethFormData.tokenSymbol !== "" &&
-      ethFormData.agreement !== false 
+      ethFormData.agreement !== false
     ) {
       // navigate("/generator/final");
     }
@@ -533,35 +594,61 @@ useEffect(()=>{
   // )}
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
-    // Navigate 
-    console.log(FormData.network,"fromdatanetwork");
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const { chainId } = await provider.getNetwork();
-    console.log(chainId, "chainid"); // 42
-    let selectedNetwork;
-    if (FormData.network === "binanceSmartChain") {
-      selectedNetwork = 56;
-    } else if (FormData.network === "binanceSmartChainTestnet") {
-      selectedNetwork = 97;
-    } 
-
-    if (selectedNetwork === chainId) {
-        navigate("/generator/final")
-      console.log(selectedNetwork,"currentNetworkID");
-      axios
-        .post(
-          "https://tokenmaker-block-tech.herokuapp.com/api/v1/compile/contract",
-          FormData
-        )
-        .then((res) => {
-          console.log(res, "response");
-          // contractSource = res.data.result;
-          // console.log(contractSource, "contract Source api side ");
-          const deployedData =  deployContract(res.data.result,FormData.tokenSymbol,FormData.decimals);
-          console.log(deployedData,"deployed data in compile contract side");
-        });
-    }else{
-           showToast(selectedNetwork)
+    try {
+      console.log(FormData.network, "fromdatanetwork");
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const { chainId } = await provider.getNetwork();
+      console.log(chainId, "chainid");
+      let selectedNetwork;
+      if (FormData.network === "binanceSmartChain") {
+        selectedNetwork = 56;
+      } else if (FormData.network === "binanceSmartChainTestnet") {
+        selectedNetwork = 97;
+      }
+      console.log(FormData, "formdata bnbside");
+      if (selectedNetwork === chainId && connectedAccAddress.length !== 0) {
+        navigate("/generator/final");
+        console.log(selectedNetwork, "currentNetworkID");
+        //hit contract compile api
+        axios
+          .post(
+            "https://tokenmaker-block-tech.herokuapp.com/api/v1/compile/contract",
+            FormData
+          )
+          .then((res) => {
+            console.log(res, "response");
+            // console.log(contractSource, "contract Source api side ");
+            //calling deploy function 
+            deployContract(
+              res.data.result,
+              FormData.tokenSymbol,
+              FormData.decimals,
+              selectedNetwork
+            )
+              .then((res) => {
+                if (res.error) {
+                  navigate("/generator/bsc");
+                  res.error.code === "ACTION_REJECTED"?toast.error("Transaction Not Signed !! Request Rejected"):toast.error(res.error.message)   
+                } else {
+                  toast.success("Token Deploy Successfully")
+                  navigate("/generator/final");
+                  console.log(res, "else side deploy then return deplo succes");
+                }
+              })
+          })
+          .catch((error) => {
+            console.log("Api fail error", error);
+            navigate("/generator/bsc");
+            toast.error("Data Fetch Failed or Not Fill All Values Try Again!!");
+          });
+      } else if (connectedAccAddress.length === 0) {
+        toast.error("Please Sign in to Metamask Wallet First");
+      } else {
+        showToast(selectedNetwork);
+      }
+    } catch (error) {
+      toast.error(error.message);
+      console.log("compile contract side catch er", error);
     }
   };
 
@@ -958,9 +1045,13 @@ useEffect(()=>{
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                <option value="binanceSmartChain">Binance Smart Chain</option>
-                               
-                                <option value="binanceSmartChainTestnet">Binance Smart Chain Testnet</option>
+                                <option value="binanceSmartChain">
+                                  Binance Smart Chain
+                                </option>
+
+                                <option value="binanceSmartChainTestnet">
+                                  Binance Smart Chain Testnet
+                                </option>
                               </select>
                               <span className="form-text text-muted">
                                 Select the network on wich you want to deploy
