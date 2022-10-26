@@ -45,6 +45,8 @@ export const EthHeader = () => {
                       }} className='btn uppercase btn btn-action btn-rounded btn-pad'>
                       {/* {show current acc address } */}
                       <span className="inline-block">{accAddress}
+                      <span className="inline-block">{accAddress}
+                      </span>
                       </span>
                       
                     </button>:
