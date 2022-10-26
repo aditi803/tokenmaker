@@ -35,7 +35,7 @@ export const EtherProvider = ({ children }) => {
     gorli: 5,
     rinkeby: 4,
     polygonMainnet: 137,
-    polygonMumbai: 8001,
+    polygonMumbai: 80001,
     binanceSmartChainTestnet: 97,
     binanceSmartChain: 56,
   };
