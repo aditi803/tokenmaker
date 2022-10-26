@@ -638,7 +638,9 @@ export const EthMain = () => {
           .catch((error) => {
             console.log("Api fail error", error);
             navigate("/generator/ethereum");
-            toast.error("Data Fetch Failed or Not Fill All Values Try Again!!");
+            error.response.data.message? toast.error(error.response.data.message):toast.error("Data Fetch Failed Try Again")
+            
+
           });
       } else if (connectedAccAddress.length === 0) {
         toast.error("Please Sign in to Metamask Wallet First");
