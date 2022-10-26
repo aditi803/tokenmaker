@@ -85,7 +85,7 @@ export const EtherProvider = ({ children }) => {
     } catch (error) {
       // eslint-disable-next-line no-unused-expressions
       error.code === 4001
-        ? toast.error(" Request Rejected !! Token Not Added")
+        ? toast.error(" Request Rejected !! Token Not Added to The Wallet")
         : toast.error(error.message);
       console.log("err addtoken fn", error);
     }

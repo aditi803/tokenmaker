@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import "../Main_page/Main.css";
+
 import { SuccessDeploy } from "./SuccessDeploy";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import { ProgressBar } from "react-bootstrap";
@@ -19,7 +20,7 @@ export const FinalMain = (props) => {
     <>
       <div className="page-content">
         <main>
-          <div className="hero mb-3">
+          <div className="hero mb-3 ">
             <div className="container">
               <h1>
                 <span style={{ marginTop: "-60px" }} className="sub-highlight">
@@ -34,8 +35,8 @@ export const FinalMain = (props) => {
               </p>
             </div>
           </div>
-          <section style={{ height: "250px" }}>
-            <div className="container">
+          <section style={{ height: "100vh",maxHeight:"350px" ,bottom:0 }}>
+            <div className="container pt-5">
               <div className="configurator-container">
                 <div className="configurator-pending-install">
                   <div className="card">
