@@ -30,6 +30,16 @@ export const EtherProvider = ({ children }) => {
     });
   });
 
+  const blockchainNetworks = {
+    mainnet: 1,
+    gorli: 5,
+    rinkeby: 4,
+    polygonMainnet: 137,
+    polygonMumbai: 8001,
+    binanceSmartChainTestnet: 97,
+    binanceSmartChain: 56,
+  };
+
   //Hide the connected account address
   const hideAccAddress = (connectedAccAddress) => {
     let accAddress;
@@ -147,12 +157,12 @@ export const EtherProvider = ({ children }) => {
         <ToastModal
           selectedNetwork={selectedNetwork}
           changeNetwork={changeNetwork}
-        />);
+        />
+      );
     } catch (error) {
-      toast.error(error.message)
-      console.log("show toast side err",error);
+      toast.error(error.message);
+      console.log("show toast side err", error);
     }
-   
   };
   //ends here
 
@@ -190,7 +200,7 @@ export const EtherProvider = ({ children }) => {
       return contract;
     } catch (err) {
       console.log("errorrr deply msg fn", err);
-      return {error:err};
+      return { error: err };
     }
   };
   //ends here
@@ -209,6 +219,7 @@ export const EtherProvider = ({ children }) => {
         deployData: deployData,
         deployContract: deployContract,
         showToast: showToast,
+        blockchainNetworks: blockchainNetworks,
       }}
     >
       {console.log(deploySuccess, "deplo success context side")}

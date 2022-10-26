@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 // import wallet_model from "../../Modal/Multi-WalletModal";
 // //
 
-import '../Eth_page/eth_styles/main.css'
+import "../Eth_page/eth_styles/main.css";
 import {
   freeDisabled,
   basicDisabled,
@@ -23,7 +23,8 @@ import { ContractFactory, ethers } from "ethers";
 export const MaticMain = () => {
   const navigate = useNavigate();
 
-  const {deployContract,showToast,connectedAccAddress}  = useContext(GlobalContext)
+  const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
+    useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -113,13 +114,14 @@ export const MaticMain = () => {
     f_accessType,
   } = fieldsDisabled;
 
-  useEffect(()=>{
-    if(supplyType==="fixed" || supplyType==="capped" ){
+  useEffect(() => {
+    if (supplyType === "fixed" || supplyType === "capped") {
       setEthFormData((prev) => ({
         ...prev,
-      maximumSupply:initialSupply
-      }));}
-  },[supplyType,initialSupply,maximumSupply])
+        maximumSupply: initialSupply,
+      }));
+    }
+  }, [supplyType, initialSupply, maximumSupply]);
   useEffect(() => {
     //
     // if (recoverable === true) {
@@ -181,7 +183,6 @@ export const MaticMain = () => {
           commissionFee: 150,
         }));
       }
-      
     } else if (tokenType === "free") {
       setFieldsDisabled(freeDisabled);
       setEthFormData((prev) => ({
@@ -264,7 +265,6 @@ export const MaticMain = () => {
 
   useEffect(() => {
     if (tokenType === "custom") {
-
       // owner && fixed
       if (burnable === true && pausable === true && recoverable === true) {
         setEthFormData((prev) => ({
@@ -302,56 +302,87 @@ export const MaticMain = () => {
       if (pausable === false && burnable === true && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee:600,
+          commissionFee: 600,
         }));
       }
-      if (pausable === false  && recoverable === false && burnable=== false) {
+      if (pausable === false && recoverable === false && burnable === false) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 300,
         }));
       }
       // Roles and fixed
-      if (accessType==="roles" && burnable === true && pausable === true && recoverable === true) {
+      if (
+        accessType === "roles" &&
+        burnable === true &&
+        pausable === true &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 800,
         }));
       }
-      if (accessType==="roles" && pausable === true && burnable === true && recoverable === false) {
-        setEthFormData((prev) => ({
-          ...prev,
-          commissionFee: 650,
-        }));
-      }
-      if (accessType==="roles" && pausable === true && burnable === false && recoverable === true) {
-        setEthFormData((prev) => ({
-          ...prev,
-          commissionFee: 650,
-        }));
-      }
-      if (accessType==="roles" && 
-       ( (burnable === true && pausable === false && recoverable === false) ||
-        (burnable === false && pausable === false && recoverable === true))
+      if (
+        accessType === "roles" &&
+        pausable === true &&
+        burnable === true &&
+        recoverable === false
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee:550,
+          commissionFee: 650,
         }));
       }
-      if (accessType==="roles" && burnable === false && pausable === true && recoverable === false) {
+      if (
+        accessType === "roles" &&
+        pausable === true &&
+        burnable === false &&
+        recoverable === true
+      ) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 650,
+        }));
+      }
+      if (
+        accessType === "roles" &&
+        ((burnable === true && pausable === false && recoverable === false) ||
+          (burnable === false && pausable === false && recoverable === true))
+      ) {
+        setEthFormData((prev) => ({
+          ...prev,
+          commissionFee: 550,
+        }));
+      }
+      if (
+        accessType === "roles" &&
+        burnable === false &&
+        pausable === true &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 500,
         }));
       }
-      if (accessType==="roles" && pausable === false && burnable === true && recoverable === true) {
+      if (
+        accessType === "roles" &&
+        pausable === false &&
+        burnable === true &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 700,
         }));
       }
-      if (accessType==="roles" && pausable === false  && recoverable === false && burnable=== false) {
+      if (
+        accessType === "roles" &&
+        pausable === false &&
+        recoverable === false &&
+        burnable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 400,
@@ -359,67 +390,102 @@ export const MaticMain = () => {
       }
 
       // owner && (unlimited || capped)
-      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited")   && pausable===false  && recoverable=== false){
+      if (
+        accessType === "owner" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === false &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 450,
-        })); 
+        }));
       }
-      
-      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable=== true  && recoverable=== false){
+
+      if (
+        accessType === "owner" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === true &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 550,
-        })); 
+        }));
       }
-      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===false  &&  recoverable=== true){
+      if (
+        accessType === "owner" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === false &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 600,
-        })); 
+        }));
       }
       // double
-      
-      if(accessType==="owner" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===true  &&  recoverable=== true){
+
+      if (
+        accessType === "owner" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === true &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 700,
-        })); 
+        }));
       }
-      
-
 
       // roles && (unlimited || capped)
-      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited")   && pausable===false  && recoverable=== false){
+      if (
+        accessType === "roles" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === false &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 550,
-        })); 
+        }));
       }
-      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable=== true  && recoverable=== false){
+      if (
+        accessType === "roles" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === true &&
+        recoverable === false
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 650,
-        })); 
+        }));
       }
-      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===false  &&  recoverable=== true){
+      if (
+        accessType === "roles" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === false &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 700,
-        })); 
+        }));
       }
       // double
-   
-      if(accessType==="roles" && (supplyType==="capped" || supplyType=== "unlimited") && pausable===true  &&  recoverable=== true){
+
+      if (
+        accessType === "roles" &&
+        (supplyType === "capped" || supplyType === "unlimited") &&
+        pausable === true &&
+        recoverable === true
+      ) {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: 800,
-        })); 
+        }));
       }
-      
-      
     }
-
   }, [pausable, recoverable, burnable, tokenType, accessType]);
 
   const ethMainFormHandler = (e) => {
@@ -504,7 +570,7 @@ export const MaticMain = () => {
     if (
       ethFormData.tokenName !== "" &&
       ethFormData.tokenSymbol !== "" &&
-      ethFormData.agreement !== false 
+      ethFormData.agreement !== false
     ) {
       // navigate("/generator/final");
     }
@@ -517,11 +583,13 @@ export const MaticMain = () => {
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
       let selectedNetwork;
-      if (FormData.network === "polygonMainnet") {
-        selectedNetwork = 137;
-      } else if (FormData.network === "polygonMumbai") {
-        selectedNetwork = 80001;
-      }
+
+      //check selected network and set chain id
+      // eslint-disable-next-line no-unused-expressions
+      blockchainNetworks[FormData.network]
+        ? (selectedNetwork = blockchainNetworks[FormData.network])
+        : "";
+
       console.log(FormData, "formdata bnbside");
       if (selectedNetwork === chainId && connectedAccAddress.length !== 0) {
         navigate("/generator/final");
@@ -535,23 +603,24 @@ export const MaticMain = () => {
           .then((res) => {
             console.log(res, "response");
             // console.log(contractSource, "contract Source api side ");
-            //calling deploy function 
+            //calling deploy function
             deployContract(
               res.data.result,
               FormData.tokenSymbol,
               FormData.decimals,
               selectedNetwork
-            )
-              .then((res) => {
-                if (res.error) {
-                  navigate("/generator/polygon");
-                  res.error.code === "ACTION_REJECTED"?toast.error("Transaction Not Signed !! Request Rejected"):toast.error(res.error.message)   
-                } else {
-                  toast.success("Token Deploy Successfully")
-                  navigate("/generator/final");
-                  console.log(res, "else side deploy then return deplo succes");
-                }
-              })
+            ).then((res) => {
+              if (res.error) {
+                navigate("/generator/polygon");
+                res.error.code === "ACTION_REJECTED"
+                  ? toast.error("Transaction Not Signed !! Request Rejected")
+                  : toast.error(res.error.message);
+              } else {
+                toast.success("Token Deploy Successfully");
+                navigate("/generator/final");
+                console.log(res, "else side deploy then return deplo succes");
+              }
+            });
           })
           .catch((error) => {
             console.log("Api fail error", error);
@@ -587,9 +656,7 @@ export const MaticMain = () => {
           <div className="hero mb-3">
             <div className="container">
               <h1>
-                <span className="sub-highlight">
-                  Create Your Polygon Token
-                </span>
+                <span className="sub-highlight">Create Your Polygon Token</span>
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
@@ -973,8 +1040,12 @@ export const MaticMain = () => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                <option value="polygonMainnet">Polygon Mainnet</option>
-                                <option value="polygonMumbai">Polygon Mumbai</option>
+                                <option value="polygonMainnet">
+                                  Polygon Mainnet
+                                </option>
+                                <option value="polygonMumbai">
+                                  Polygon Mumbai
+                                </option>
                               </select>
                               <span className="form-text text-muted">
                                 Select the network on wich you want to deploy
@@ -1082,8 +1153,8 @@ export const MaticMain = () => {
                           <button
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
-                            onClick={()=>{
-                              compileContract(ethFormData)
+                            onClick={() => {
+                              compileContract(ethFormData);
                             }}
                           >
                             Confirm

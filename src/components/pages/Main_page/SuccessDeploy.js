@@ -11,30 +11,19 @@ export const SuccessDeploy = (props) => {
     navigate("/generator")
   }
 
-  // useEffect(()=>{
-  //   createNewToken()
-  // })
-
   let explorer
-  const TokenExplorer = (chainID)=>{
-   if(chainID === 97){
-    explorer = {link:"https://testnet.bscscan.com/",name:"Bsc Testnet Scan"} 
-   }else if(chainID === 56){
-      explorer = {link:"https://bscscan.com/",name:"Bsc Mainnet Scan"}
-   }else if(chainID === 137){
-   explorer =   {link:"https://polygonscan.com/",name:"Polygon Mainnet Scan"}
-   }else if(chainID === 80001){
-    explorer ={link:"https://mumbai.polygonscan.com/",name:"Polygon Testnet Scan"} 
-   }else if(chainID === 1){
-    explorer = {link:"https://etherscan.io",name:"Ethereum Mainnet Scan"}
-   }else if(chainID === 5){
-   explorer = {link:"https://goerli.etherscan.io",name:"Goerli Testnet Scan"} 
-   }else if(chainID === 4){
-    explorer = {link: "https://rinkeby.etherscan.io/",name:"RinkeyBy Testnet Scan"}
-   }
-
-  }
-  TokenExplorer(deployData.chainID)
+  let urlLinks = {
+  97:{link:"https://testnet.bscscan.com/",name:"Bsc Testnet Scan"},
+  56:{link:"https://bscscan.com/",name:"Bsc Mainnet Scan"},
+  137:{link:"https://polygonscan.com/",name:"Polygon Mainnet Scan"},
+  80001:{link:"https://mumbai.polygonscan.com/",name:"Polygon Testnet Scan"} ,
+  1:{link:"https://etherscan.io",name:"Ethereum Mainnet Scan"},
+  5:{link:"https://goerli.etherscan.io",name:"Goerli Testnet Scan"} ,
+  4:{link: "https://rinkeby.etherscan.io/",name:"RinkeyBy Testnet Scan"},
+}
+//ends here
+// eslint-disable-next-line no-unused-expressions
+urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
 
   return (
     <div>

@@ -14,12 +14,7 @@ export const FinalMain = (props) => {
 
   console.log(deploySuccess, "deploy Success final side");
   console.log("final main");
-  // const createNewToken = ()=>{
-  //   navigate("/generator")
-  // }
-  //   useEffect(()=>{
-  //   createNewToken()
-  // })
+
   return (
     <>
       <div className="page-content">

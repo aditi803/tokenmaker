@@ -22,7 +22,7 @@ import {
 export const BnbMain = () => {
   const navigate = useNavigate();
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
-  const { deployContract, showToast, connectedAccAddress } =
+  const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
     useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -600,11 +600,11 @@ export const BnbMain = () => {
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
       let selectedNetwork;
-      if (FormData.network === "binanceSmartChain") {
-        selectedNetwork = 56;
-      } else if (FormData.network === "binanceSmartChainTestnet") {
-        selectedNetwork = 97;
-      }
+      //check selected network and set chain id
+      // eslint-disable-next-line no-unused-expressions
+      blockchainNetworks[FormData.network]
+        ? (selectedNetwork = blockchainNetworks[FormData.network])
+        : "";
       console.log(FormData, "formdata bnbside");
       if (selectedNetwork === chainId && connectedAccAddress.length !== 0) {
         navigate("/generator/final");
@@ -618,23 +618,24 @@ export const BnbMain = () => {
           .then((res) => {
             console.log(res, "response");
             // console.log(contractSource, "contract Source api side ");
-            //calling deploy function 
+            //calling deploy function
             deployContract(
               res.data.result,
               FormData.tokenSymbol,
               FormData.decimals,
               selectedNetwork
-            )
-              .then((res) => {
-                if (res.error) {
-                  navigate("/generator/bsc");
-                  res.error.code === "ACTION_REJECTED"?toast.error("Transaction Not Signed !! Request Rejected"):toast.error(res.error.message)   
-                } else {
-                  toast.success("Token Deploy Successfully")
-                  navigate("/generator/final");
-                  console.log(res, "else side deploy then return deplo succes");
-                }
-              })
+            ).then((res) => {
+              if (res.error) {
+                navigate("/generator/bsc");
+                res.error.code === "ACTION_REJECTED"
+                  ? toast.error("Transaction Not Signed !! Request Rejected")
+                  : toast.error(res.error.message);
+              } else {
+                toast.success("Token Deploy Successfully");
+                navigate("/generator/final");
+                console.log(res, "else side deploy then return deplo succes");
+              }
+            });
           })
           .catch((error) => {
             console.log("Api fail error", error);
