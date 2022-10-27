@@ -13,12 +13,17 @@ import { FinalMain } from './components/pages/Main_page/FinalMain.jsx';
 import {FrontMain} from './components/pages/Front_page/FrontMain.jsx'
 import {EtherProvider} from "./contexts/EthContext/EtherProvider"
 
+import { useHelper } from './contexts/HelperContext/HelperContext.jsx';
+
+
 import ScrollButton from './components/Layots/ScrollButton.jsx';
 import { useEffect } from 'react';
 function App() {
 
   // useEffect
   
+// const {showRoute, setShowRoute} = useHelper()
+
   return (
 
   <EtherProvider>
