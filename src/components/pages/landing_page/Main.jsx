@@ -8,7 +8,7 @@ function Main() {
     
     <div className="page-content">
         <main>
-            <div className="hero mb-3">
+            <div className="hero mb-3 mt-5">
                 <div className="container">
                     <h1>
                         <span className="sub-highlight">

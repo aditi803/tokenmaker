@@ -268,6 +268,20 @@ export const EthMain = () => {
     }
   }, [tokenType, supplyType, network]);
   useEffect(() => {
+    // if(initialSupply.length===0){
+    //   setEthFormData((prev) => ({
+    //     ...prev,
+    //     initialSupply: 0,
+    //   }));
+    // }
+
+    // if(initialSupply.length!==0){
+    //   setEthFormData((prev) => ({
+    //     ...prev,
+    //     initialSupply: initialSupply,
+    //   }));
+    // }
+
     if (supplyType === "fixed" || supplyType === "capped") {
       setEthFormData((prev) => ({
         ...prev,
@@ -505,6 +519,29 @@ export const EthMain = () => {
     if (e.target.type === "checkbox") {
       boolean = e.target?.checked;
     }
+    if (e.target.name === "initialSupply") {
+      if (e.target.value === '') {
+        setEthFormData((prev) => ({
+          ...prev,
+          [e.target.name]: boolean ?? 0,
+        }));
+      } else {
+        
+        setEthFormData((prev) => ({
+          ...prev,
+          [e.target.name]: (e.target.value).charAt(0) !== '0' ? e.target.value : (e.target.value).substring(1),
+        }));
+      }
+
+      return;
+    }
+
+    if (e.target.name === "tokenSymbol") {
+      return setEthFormData((prev) => ({
+        ...prev,
+        [e.target.name]: boolean ?? e.target.value.toUpperCase(),
+      }));
+    }
     setEthFormData((prev) => ({
       ...prev,
       [e.target.name]: boolean ?? e.target.value,
@@ -562,12 +599,12 @@ export const EthMain = () => {
         agreementErr:
           "Please confirm that you have read and understood our terms of use",
       }));
-      if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
-        setErr((prev) => ({
-          ...prev,
-          decimalsErr: "The number of decimals must be between 6 and 21",
-        }));
-      }
+    }
+    if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
+      setErr((prev) => ({
+        ...prev,
+        decimalsErr: "The number of decimals must be between 6 and 21",
+      }));
     }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
@@ -636,9 +673,9 @@ export const EthMain = () => {
           .catch((error) => {
             console.log("Api fail error", error);
             navigate("/generator/ethereum");
-            error.response.data.message? toast.error(error.response.data.message):toast.error("Data Fetch Failed Try Again")
-            
-
+            error.response.data.message
+              ? toast.error(error.response.data.message)
+              : toast.error("Data Fetch Failed Try Again");
           });
       } else if (connectedAccAddress.length === 0) {
         toast.error("Please Connect Your Metamask Wallet First");
@@ -666,7 +703,7 @@ export const EthMain = () => {
     <>
       <div className="page-content">
         <main>
-          <div className="hero mb-3">
+          <div className="hero mb-3 ">
             <div className="container">
               <h1>
                 <span className="sub-highlight">
@@ -820,7 +857,7 @@ export const EthMain = () => {
                                 <input
                                   type="number"
                                   className="form-control"
-                                  placeholder="1000000"
+                                  placeholder=""
                                   name="initialSupply"
                                   disabled={f_initialSupply}
                                   value={initialSupply}
@@ -843,7 +880,7 @@ export const EthMain = () => {
                                 <input
                                   type="number"
                                   className="form-control"
-                                  placeholder="1000000"
+                                  placeholder=""
                                   value={maximumSupply}
                                   name="maximumSupply"
                                   disabled={f_maximumSupply}

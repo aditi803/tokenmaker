@@ -499,6 +499,28 @@ export const BnbMain = () => {
     if (e.target.type === "checkbox") {
       boolean = e.target?.checked;
     }
+    if (e.target.name === "initialSupply") {
+      if (e.target.value === '') {
+        setEthFormData((prev) => ({
+          ...prev,
+          [e.target.name]: boolean ?? 0,
+        }));
+      } else {
+        
+        setEthFormData((prev) => ({
+          ...prev,
+          [e.target.name]: (e.target.value).charAt(0) !== '0' ? e.target.value : (e.target.value).substring(1),
+        }));
+      }
+
+      return;
+    }
+    if(e.target.name === "tokenSymbol"){
+      return  setEthFormData((prev) => ({
+        ...prev,
+        [e.target.name]: boolean ?? e.target.value.toUpperCase(),
+      }));
+    }
     setEthFormData((prev) => ({
       ...prev,
       [e.target.name]: boolean ?? e.target.value,
@@ -556,12 +578,13 @@ export const BnbMain = () => {
         agreementErr:
           "Please confirm that you have read and understood our terms of use",
       }));
+    }
       if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
         setErr((prev) => ({
           ...prev,
           decimalsErr: "The number of decimals must be between 6 and 21",
         }));
-      }
+      
     }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
