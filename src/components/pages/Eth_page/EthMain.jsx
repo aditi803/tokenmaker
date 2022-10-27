@@ -663,7 +663,7 @@ export const EthMain = () => {
               if (res.error) {
                 navigate("/generator/ethereum");
                 res.error.code === "ACTION_REJECTED"
-                  ? toast.error("Transaction Not Signed !! Request Rejected")
+                  ? toast.error("Transaction Not Signed !! User Rejected The Request")
                   : toast.error(res.error.message);
               } else {
                 toast.success("Token Deploy Successfully");
@@ -680,7 +680,7 @@ export const EthMain = () => {
               : toast.error("Data Fetch Failed Try Again");
           });
       } else if (connectedAccAddress.length === 0) {
-        toast.error("Please Sign in to Metamask Wallet First");
+        toast.error("Please Connect Your Metamask Wallet First");
       } else {
         showToast(selectedNetwork);
       }

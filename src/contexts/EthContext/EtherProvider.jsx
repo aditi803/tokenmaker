@@ -7,6 +7,7 @@ export const GlobalContext = createContext();
 
 export const EtherProvider = ({ children }) => {
   const [accAddress, setAccAddress] = useState([]);
+  const [accBalance,setAccBalance] = useState("")
   //  const[metaError , setMetaError] = useState(false)
 
   const [deployData, setDeployData] = useState({
