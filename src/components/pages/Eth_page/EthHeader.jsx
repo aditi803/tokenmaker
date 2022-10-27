@@ -9,7 +9,11 @@ export const EthHeader = () => {
   const {connectedAccAddress,SignInMetamask,setAccAddress,hideAccAddress}  = useContext(GlobalContext)
   console.log(connectedAccAddress,"connected addres header side");
   const accAddress = hideAccAddress(connectedAccAddress)
- 
+  // function myName(){
+  //   if(connectedAccAddress.length !== 0){
+  //     return accAddress
+  //   }else return "Connect your Wallet"
+  // }
   return (
       <div className="page-header">
         <header className='header navbar-area'>

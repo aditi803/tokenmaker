@@ -33,7 +33,7 @@ export const FrontMain = () => {
           </section>
           <section className="page-section section-how" id="how-it-works">
             <div className="container">
-              <h2 className="section-title">
+              <h2 className="section-title mt-4">
                 Create your token in just a few{" "}
                 <span className="sub-highlight">easy steps:</span>
               </h2>
@@ -101,7 +101,7 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-          <section className="page-section section-ready">
+          <section className="page-section section-ready my-4 py-4" >
             <div className="container">
               <h2 className="section-title-small text-center">
                 Ready to deploy your token ?
@@ -220,7 +220,7 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-          <section className="page-section section-custom-dev p-4 p-md-5">
+          <section className="page-section section-custom-dev p-4 p-md-5 mt-4">
             <div className="container">
               <h2 className="section-title-small text-center">
                 Need a custom development ?
@@ -238,7 +238,7 @@ export const FrontMain = () => {
           <section className="page-section section-faq" id="faq">
             <div className="container">
               <div className="faq-container">
-                <h2 className="section-title text-center">FAQ</h2>
+                <h2 className="section-title text-center mt-4">FAQ</h2>
                 <p className="section-subtitle mt-3 mb-5">
                   As a leader in the field of Blockchain coding, Blocktech Brew
                   not only teaches you how to make tokens, smart contracts and
