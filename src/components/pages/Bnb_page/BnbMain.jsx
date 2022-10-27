@@ -599,16 +599,16 @@ export const BnbMain = () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
-      let selectedNetwork;
+      // let selectedNetwork;
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
-        ? (selectedNetwork = blockchainNetworks[FormData.network])
+        ? (Object.assign(FormData,{network:blockchainNetworks[FormData.network]}) )
         : "";
       console.log(FormData, "formdata bnbside");
-      if (selectedNetwork === chainId && connectedAccAddress.length !== 0) {
+      if (FormData.network === chainId && connectedAccAddress.length !== 0) {
         navigate("/generator/final");
-        console.log(selectedNetwork, "currentNetworkID");
+        console.log(FormData.network, "currentNetworkID");
         //hit contract compile api
         axios
           .post(
@@ -621,9 +621,7 @@ export const BnbMain = () => {
             //calling deploy function
             deployContract(
               res.data.result,
-              FormData.tokenSymbol,
-              FormData.decimals,
-              selectedNetwork
+              FormData,
             ).then((res) => {
               if (res.error) {
                 navigate("/generator/bsc");
@@ -646,7 +644,7 @@ export const BnbMain = () => {
       } else if (connectedAccAddress.length === 0) {
         toast.error("Please Connect Your Metamask Wallet First");
       } else {
-        showToast(selectedNetwork);
+        showToast(FormData.network);
       }
     } catch (error) {
       toast.error(error.message);
@@ -1162,7 +1160,9 @@ export const BnbMain = () => {
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
                             onClick={() => {
-                              compileContract(ethFormData);
+                              if(ethFormData.tokenName && ethFormData.tokenSymbol  && ethFormData.decimals  && ethFormData.agreement === true ){
+                              compileContract(ethFormData)    
+                              }
                             }}
                           >
                             Confirm
