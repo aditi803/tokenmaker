@@ -147,7 +147,7 @@ export const EthMain = () => {
     }
 
     //
-
+   
     if (tokenType === "basic") {
       setFieldsDisabled(basicDisabled);
 
@@ -288,7 +288,12 @@ export const EthMain = () => {
         maximumSupply: initialSupply,
       }));
     }
+    
+
   }, [supplyType, initialSupply, maximumSupply]);
+
+
+
   useEffect(() => {
     if (tokenType === "custom") {
       // owner && fixed
@@ -625,6 +630,14 @@ export const EthMain = () => {
     }
   };
 
+  useEffect(()=>{
+    if(tokenType==="free"){
+      setEthFormData((prev) => ({
+        ...prev,
+       initialSupply:10000
+      }));
+    }
+  },[tokenType,initialSupply,maximumSupply])
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
     try {

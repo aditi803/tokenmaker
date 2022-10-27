@@ -604,6 +604,14 @@ export const BnbMain = () => {
       // navigate("/generator/final");
     }
   };
+  useEffect(()=>{
+    if(tokenType==="free"){
+      setEthFormData((prev) => ({
+        ...prev,
+       initialSupply:10000
+      }));
+    }
+  },[tokenType,initialSupply,maximumSupply])
 
   // {web3Loading ? (
   //   <button className=" btn-inner - text " disabled>

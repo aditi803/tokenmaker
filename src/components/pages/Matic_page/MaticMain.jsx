@@ -598,6 +598,14 @@ export const MaticMain = () => {
       // navigate("/generator/final");
     }
   };
+  useEffect(()=>{
+    if(tokenType==="free"){
+      setEthFormData((prev) => ({
+        ...prev,
+       initialSupply:10000
+      }));
+    }
+  },[tokenType,initialSupply,maximumSupply])
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
     try {
