@@ -622,7 +622,6 @@ export const BnbMain = () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
-      // let selectedNetwork;
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]

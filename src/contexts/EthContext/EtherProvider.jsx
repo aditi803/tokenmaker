@@ -9,7 +9,7 @@ export const EtherProvider = ({ children }) => {
   let provider
   const [accAddress, setAccAddress] = useState([]);
   const [accBalance,setAccBalance] = useState()
-  //  const[metaError , setMetaError] = useState(false)
+  const[chainId , setChainId] = useState()
 
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
@@ -24,6 +24,7 @@ export const EtherProvider = ({ children }) => {
 
   useEffect(() => {
     updateAccount()
+
     // window.ethereum.on("accountsChanged", async function (accounts) {
     //   console.log(accounts, "account changed");
     //   // eslint-disable-next-line no-unused-expressions
@@ -36,6 +37,8 @@ export const EtherProvider = ({ children }) => {
   const updateAccount = async ()=>{
     if(window.ethereum){
       provider = new ethers.providers.Web3Provider(window.ethereum);
+      const { chainId } = await provider.getNetwork();
+      setChainId(chainId)
       window.ethereum.on("accountsChanged", async function (accounts) {
         console.log(accounts, "account changed");
         if(accounts[0] !== undefined){
@@ -255,11 +258,13 @@ export const EtherProvider = ({ children }) => {
         deployContract: deployContract,
         showToast: showToast,
         blockchainNetworks: blockchainNetworks,
-        accBalance:accBalance
+        accBalance:accBalance,
+        chainId:chainId
       }}
     >
       {console.log(deploySuccess, "deplo success context side")}
       {console.log(accAddress, "acc address context side")}
+      {console.log(chainId, "chainId context side")}
 
       <ToastContainer />
       {/* <FinalMain deploySuccess = {deploySuccess}/> */}

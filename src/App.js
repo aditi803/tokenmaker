@@ -14,7 +14,10 @@ import {FrontMain} from './components/pages/Front_page/FrontMain.jsx'
 import {EtherProvider} from "./contexts/EthContext/EtherProvider"
 
 import ScrollButton from './components/Layots/ScrollButton.jsx';
+import { useEffect } from 'react';
 function App() {
+
+  // useEffect
   
   return (
 
@@ -27,9 +30,9 @@ function App() {
       <Route path='/generator' element={[<Header/>,<Main/>,<Footer/>]} />
       <Route path='/' element={[<EthHeader/>,<FrontMain/>,<Footer/>,<ScrollButton/>]} />
 
-      <Route path='/generator/ethereum'element={[<EthHeader/>,<EthMain/>,<Footer/>]} />
-      <Route path='/generator/bsc'element={[<EthHeader/>,<BnbMain/>,<Footer/>]} />
-      <Route path='/generator/polygon'element={[<EthHeader/>,<MaticMain/>,<Footer/>]} />
+      <Route path='/generator/ethereum'element={[<EthHeader />,<EthMain />,<Footer/>]} />
+      <Route path='/generator/bsc'element={[<EthHeader  />,<BnbMain />,<Footer/>]} />
+      <Route path='/generator/polygon'element={[<EthHeader />,<MaticMain />,<Footer/>]} />
       <Route path='/generator/final'element={[<EthHeader/>,<FinalMain/>,<Footer/>]} />
     </Routes>
   </Router>

@@ -3,15 +3,28 @@ import "../Eth_page/eth_styles/header.css";
 
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
-export const EthHeader = () => {
+export const EthHeader = (props) => {
+  // const {chainName} = props
+  let chainName
   const {
     connectedAccAddress,
     SignInMetamask,
     setAccAddress,
     hideAccAddress,
     accBalance,
+    chainId
   } = useContext(GlobalContext);
-  
+  // if()
+  if(chainId === 1 || chainId === 4 || chainId === 5){
+    chainName = "ETH"
+  }else if(chainId === 56 || chainId === 97 ){
+    chainName = "BNB"
+  }else if(chainId === 137 ||chainId === 80001){
+    chainName = "MATIC"
+  }
+console.log(chainName,"chainName header side");
+console.log(chainId,"chainId header side");
+
   console.log(connectedAccAddress,"connected addres header side");
   const accAddress = hideAccAddress(connectedAccAddress)
   // function myName(){
@@ -63,7 +76,7 @@ export const EthHeader = () => {
                       {/* {show current acc address } */}
 
                       <span className="inline-block">
-                        {`${accBalance} ETH `} {accAddress}
+                        {`${accBalance} ${chainName} `} {accAddress}
                       </span>
                     </button>
                   ) : (
