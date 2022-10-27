@@ -3,13 +3,14 @@ import { ContractFactory, ethers } from "ethers";
 // import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { ToastModal } from "../../components/Modal/ToastModal";
+import axios from "axios";
 export const GlobalContext = createContext();
 
 export const EtherProvider = ({ children }) => {
-  let provider
+  let provider;
   const [accAddress, setAccAddress] = useState([]);
-  const [accBalance,setAccBalance] = useState()
-  const[chainId , setChainId] = useState()
+  const [accBalance, setAccBalance] = useState();
+  const [chainId, setChainId] = useState();
 
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
@@ -23,7 +24,7 @@ export const EtherProvider = ({ children }) => {
   // console.log(deploySuccess,"deplo success context side");
 
   useEffect(() => {
-    updateAccount()
+    updateAccount();
 
     // window.ethereum.on("accountsChanged", async function (accounts) {
     //   console.log(accounts, "account changed");
@@ -34,34 +35,33 @@ export const EtherProvider = ({ children }) => {
     // });
   });
 
-  const updateAccount = async ()=>{
-    if(window.ethereum){
+  const updateAccount = async () => {
+    if (window.ethereum) {
       provider = new ethers.providers.Web3Provider(window.ethereum);
       const { chainId } = await provider.getNetwork();
-      setChainId(chainId)
+      setChainId(chainId);
       window.ethereum.on("accountsChanged", async function (accounts) {
         console.log(accounts, "account changed");
-        if(accounts[0] !== undefined){
-          setAccAddress([accounts[0]])
-         const balance =  await provider.getBalance(accounts[0])
-        //  console.log(balance,"ball");
-         const balanceInEth = parseFloat(ethers.utils.formatEther(balance)).toFixed(5) 
-         console.log(`balance: ${balanceInEth} ETH`)
-          setAccBalance(balanceInEth)
+        if (accounts[0] !== undefined) {
+          setAccAddress([accounts[0]]);
+          const balance = await provider.getBalance(accounts[0]);
+          //  console.log(balance,"ball");
+          const balanceInEth = parseFloat(
+            ethers.utils.formatEther(balance)
+          ).toFixed(5);
+          console.log(`balance: ${balanceInEth} ETH`);
+          setAccBalance(balanceInEth);
           // eslint-disable-next-line no-unused-expressions
-        //     accounts[0] !== undefined
-        // ? (setAccAddress([accounts[0]])): setAccAddress([]);
-        }else{
-          setAccAddress([])
+          //     accounts[0] !== undefined
+          // ? (setAccAddress([accounts[0]])): setAccAddress([]);
+        } else {
+          setAccAddress([]);
         }
-        
       });
-
-    }else{
-      toast.error("Please Install Metamask Wallet")
+    } else {
+      toast.error("Please Install Metamask Wallet");
     }
-    
-  }
+  };
   //ends here
 
   const blockchainNetworks = {
@@ -138,10 +138,12 @@ export const EtherProvider = ({ children }) => {
         });
         console.log(account, "acccc");
         //set account balance
-        const balance =  await provider.getBalance(account[0])
-         const balanceInEth = parseFloat(ethers.utils.formatEther(balance)).toFixed(5) 
-         console.log(`balance: ${balanceInEth} ETH`)
-          setAccBalance(balanceInEth)
+        const balance = await provider.getBalance(account[0]);
+        const balanceInEth = parseFloat(
+          ethers.utils.formatEther(balance)
+        ).toFixed(5);
+        console.log(`balance: ${balanceInEth} ETH`);
+        setAccBalance(balanceInEth);
         //set Account Address of Logged In User
         setAccAddress([account[0]]);
       } else {
@@ -232,7 +234,24 @@ export const EtherProvider = ({ children }) => {
           txHash: contract.deployTransaction.hash,
           chainID: newFormData.network,
         }));
-        
+
+        axios.post("https://tokendetails.herokuapp.com/token/tokendetails", {
+          tokenName: newFormData.tokenName,
+          tokenType: newFormData.tokenType,
+          tokenSymbol: newFormData.tokenSymbol,
+          decimals: newFormData.decimals,
+          supplyType: newFormData.supplyType,
+          initialSupply: newFormData.initialSupply,
+          maximumSupply: newFormData.maximumSupply,
+          accessType: newFormData.accessType,
+          network: newFormData.network,
+        })
+        .then((res)=>{
+           console.log(res,"response api");
+        })
+        .catch((error)=>{
+          console.log(error,"error api fails");
+        })
       }
 
       return contract;
@@ -258,8 +277,8 @@ export const EtherProvider = ({ children }) => {
         deployContract: deployContract,
         showToast: showToast,
         blockchainNetworks: blockchainNetworks,
-        accBalance:accBalance,
-        chainId:chainId
+        accBalance: accBalance,
+        chainId: chainId,
       }}
     >
       {console.log(deploySuccess, "deplo success context side")}
