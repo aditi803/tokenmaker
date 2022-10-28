@@ -645,7 +645,7 @@ export const MaticMain1 = (props) => {
                 props.setShow(true)
 
                 res.error.code === "ACTION_REJECTED"
-                  ? toast.error("Transaction Not Signed !! User Rejected The Request")
+                  ? toast.error("User Rejected The Request")
                   : toast.error(res.error.message);
               } else {
                 toast.success("Token Deploy Successfully");

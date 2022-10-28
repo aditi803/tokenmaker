@@ -664,7 +664,7 @@ const BnbMain1 = (props) => {
                 // navigate("/generator/bsc");
                 props.setShow(true)
                 res.error.code === "ACTION_REJECTED"
-                  ? toast.error("Transaction Not Signed !! User Rejected The Request")
+                  ? toast.error("User Rejected The Request")
                   : toast.error(res.error.message);
               } else {
                 toast.success("Token Deploy Successfully");

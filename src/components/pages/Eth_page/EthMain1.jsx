@@ -674,7 +674,7 @@ export const EthMain1 = (props) => {
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
-                      "Transaction Not Signed !! User Rejected The Request"
+                      "User Rejected The Request"
                     )
                   : toast.error(res.error.message);
               } else {
