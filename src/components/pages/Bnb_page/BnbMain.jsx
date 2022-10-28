@@ -22,7 +22,7 @@ import {
 export const BnbMain = () => {
   const navigate = useNavigate();
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
-  const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
+  const { deployContract,changeNetwork, connectedAccAddress, blockchainNetworks,SignInMetamask } =
     useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -628,7 +628,11 @@ export const BnbMain = () => {
         ? (Object.assign(FormData,{network:blockchainNetworks[FormData.network]}) )
         : "";
       console.log(FormData, "formdata bnbside");
-      if (FormData.network === chainId && connectedAccAddress.length !== 0) {
+      if (FormData.network === chainId ) {
+         
+        if(connectedAccAddress.length ===0){
+          await SignInMetamask()
+        }
         navigate("/generator/final");
         console.log(FormData.network, "currentNetworkID");
         //hit contract compile api
@@ -663,10 +667,8 @@ export const BnbMain = () => {
             error.response.data.message? toast.error(error.response.data.message):toast.error("Data Fetch Failed Try Again")
            
           });
-      } else if (connectedAccAddress.length === 0) {
-        toast.error("Please Connect Your Metamask Wallet First");
-      } else {
-        showToast(FormData.network);
+      }  else {
+        changeNetwork(FormData.network)
       }
     } catch (error) {
       toast.error(error.message);

@@ -16,11 +16,11 @@ export const EthHeader = (props) => {
   } = useContext(GlobalContext);
   // if()
   if(chainId === 1 || chainId === 4 || chainId === 5){
-    chainName = "ETH"
+    chainName = "  ETH  "
   }else if(chainId === 56 || chainId === 97 ){
-    chainName = "BNB"
+    chainName = "  BNB  "
   }else if(chainId === 137 ||chainId === 80001){
-    chainName = "MATIC"
+    chainName = "  MATIC  "
   }
 console.log(chainName,"chainName header side");
 console.log(chainId,"chainId header side");
@@ -75,8 +75,8 @@ console.log(chainId,"chainId header side");
                     >
                       {/* {show current acc address } */}
 
-                      <span className="inline-block">
-                        {`${accBalance} ${chainName} `} {accAddress}
+                      <span className="inline-block" >
+                      <span style={{fontWeight:"bold",paddingRight:"10px"}}>  {accBalance} { chainName } </span>  <span>{accAddress}</span> 
                       </span>
                     </button>
                   ) : (
