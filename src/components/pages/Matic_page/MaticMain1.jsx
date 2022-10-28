@@ -24,7 +24,7 @@ import {  ethers } from "ethers";
 export const MaticMain1 = (props) => {
   const navigate = useNavigate();
 
-  const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
+  const { deployContract, changeNetwork, connectedAccAddress,SignInMetamask, blockchainNetworks } =
     useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -622,7 +622,11 @@ export const MaticMain1 = (props) => {
         : "";
 
       console.log(FormData, "formdata after assign chain id bnbside");
-      if (FormData.network === chainId && connectedAccAddress.length !== 0) {
+      if (FormData.network === chainId ) {
+
+        if(connectedAccAddress.length ===0){
+          await SignInMetamask()
+        }
         // navigate("/generator/final");
         props.setShow(false)
         console.log(FormData.network, "currentNetworkID");
@@ -649,7 +653,7 @@ export const MaticMain1 = (props) => {
                   : toast.error(res.error.message);
               } else {
                 toast.success("Token Deploy Successfully");
-                navigate("/generator/final");
+                // navigate("/generator/final");
                 console.log(res, "else side deploy then return deplo succes");
               }
             });
@@ -661,10 +665,8 @@ export const MaticMain1 = (props) => {
             error.response.data.message? toast.error(error.response.data.message):toast.error("Data Fetch Failed Try Again")
             
           });
-      } else if (connectedAccAddress.length === 0) {
-        toast.error("Please Connect Your Metamask Wallet First");
-      } else {
-        showToast(FormData.network);
+      }  else {
+        changeNetwork(FormData.network);
       }
     } catch (error) {
       toast.error(error.message);

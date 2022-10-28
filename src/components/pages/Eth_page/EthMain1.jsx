@@ -24,7 +24,7 @@ export const EthMain1 = (props) => {
   // const {compileContract}  = useContext(GlobalContext)
   const navigate = useNavigate();
 
-  const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
+  const { deployContract, changeNetwork, connectedAccAddress,SignInMetamask, blockchainNetworks } =
     useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -654,8 +654,11 @@ export const EthMain1 = (props) => {
         : "";
 
       console.log(FormData, "formdata eth side");
-      if (FormData.network === chainId && connectedAccAddress.length !== 0) {
+      if (FormData.network === chainId ) {
         // navigate("/generator/final");
+        if(connectedAccAddress.length ===0){
+          await SignInMetamask()
+        }
         props.setShow(false);
         console.log(FormData.network, "currentNetworkID");
         //hit contract compile api
@@ -693,10 +696,8 @@ export const EthMain1 = (props) => {
               ? toast.error(error.response.data.message)
               : toast.error("Data Fetch Failed Try Again");
           });
-      } else if (connectedAccAddress.length === 0) {
-        toast.error("Please Connect Your Metamask Wallet First");
-      } else {
-        showToast(FormData.network);
+      }  else {
+        changeNetwork(FormData.network);
       }
     } catch (error) {
       toast.error(error.message);
