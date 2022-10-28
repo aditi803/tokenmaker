@@ -7,6 +7,8 @@ import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import axios from "axios";
 import { ContractFactory, ethers } from "ethers";
 import { toast } from "react-toastify";
+import { HiInformationCircle } from "react-icons/hi";
+import Tooltip from "../../Layots/ToolTip";
 
 //
 // import Link from "react-router-dom";
@@ -1152,7 +1154,7 @@ const BnbMain1 = (props) => {
                               <div className="Ttext">
                                 <p>
                                   Commission fee:{" "}
-                                  <i
+                                  {/* <i
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -1160,7 +1162,26 @@ const BnbMain1 = (props) => {
                                     title="The commison fee will be
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
-                                  ></i>
+                                  ></i> */}
+                                                                    <Tooltip
+                                    content={
+                                      <>
+                                        The commison fee will be
+                                        <br />
+                                        transferred automatically to us
+                                        <br /> during the contract creation.
+                                        <br />
+                                        In case of error,this
+                                        <br /> amount will not be
+                                        <br /> deducted from your <br />
+                                        wallet.Only the gas
+                                        <br /> fees will be deducted
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
                                 </p>
                               </div>
                               <div className="Tbtn">
@@ -1175,13 +1196,25 @@ const BnbMain1 = (props) => {
                               <div className="Ttext ">
                                 <p>
                                   Gas fee:{" "}
-                                  <i
+                                  {/* <i
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
                                     title="The gas fee depend on gas limit and gas price.
                                   Metamask will automatically display the best fee to use "
-                                  ></i>
+                                  ></i> */}
+                                   <Tooltip
+                                    content={
+                                      <>
+                                        The gas fee depend <br/>on gas limit and<br/> gas price.
+                                  Metamask will<br/> automatically display<br/> the best fee to use
+                                      
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
                                 </p>
                               </div>
                               <div className="Tbtn">

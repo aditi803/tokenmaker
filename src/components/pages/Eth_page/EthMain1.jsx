@@ -8,8 +8,9 @@ import axios from "axios";
 import { ContractFactory, ethers } from "ethers";
 import { toast } from "react-toastify";
 import { EthMain } from "./EthMain";
-//
+import { HiInformationCircle } from "react-icons/hi";
 // import Link from "react-router-dom";
+import Tooltip from "../../Layots/ToolTip";
 // import wallet_model from "../../Modal/Multi-WalletModal";
 // //
 
@@ -22,7 +23,6 @@ import {
 export const EthMain1 = (props) => {
   // const {compileContract}  = useContext(GlobalContext)
   const navigate = useNavigate();
-  
 
   const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
     useContext(GlobalContext);
@@ -148,7 +148,7 @@ export const EthMain1 = (props) => {
     }
 
     //
-   
+
     if (tokenType === "basic") {
       setFieldsDisabled(basicDisabled);
 
@@ -289,11 +289,7 @@ export const EthMain1 = (props) => {
         maximumSupply: initialSupply,
       }));
     }
-    
-
   }, [supplyType, initialSupply, maximumSupply]);
-
-
 
   useEffect(() => {
     if (tokenType === "custom") {
@@ -526,16 +522,18 @@ export const EthMain1 = (props) => {
       boolean = e.target?.checked;
     }
     if (e.target.name === "initialSupply") {
-      if (e.target.value === '') {
+      if (e.target.value === "") {
         setEthFormData((prev) => ({
           ...prev,
           [e.target.name]: boolean ?? 0,
         }));
       } else {
-        
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: (e.target.value).charAt(0) !== '0' ? e.target.value : (e.target.value).substring(1),
+          [e.target.name]:
+            e.target.value.charAt(0) !== "0"
+              ? e.target.value
+              : e.target.value.substring(1),
         }));
       }
 
@@ -631,18 +629,17 @@ export const EthMain1 = (props) => {
     }
   };
 
-  useEffect(()=>{
-    if(tokenType==="free"){
+  useEffect(() => {
+    if (tokenType === "free") {
       setEthFormData((prev) => ({
         ...prev,
-       initialSupply:10000
+        initialSupply: 10000,
       }));
     }
-  },[tokenType,initialSupply,maximumSupply])
+  }, [tokenType, initialSupply, maximumSupply]);
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
     try {
-
       console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const { chainId } = await provider.getNetwork();
@@ -651,13 +648,15 @@ export const EthMain1 = (props) => {
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
-        ? (Object.assign(FormData,{network:blockchainNetworks[FormData.network]}) )
+        ? Object.assign(FormData, {
+            network: blockchainNetworks[FormData.network],
+          })
         : "";
 
       console.log(FormData, "formdata eth side");
-      if (FormData.network=== chainId && connectedAccAddress.length !== 0) {
+      if (FormData.network === chainId && connectedAccAddress.length !== 0) {
         // navigate("/generator/final");
-        props.setShow(false)
+        props.setShow(false);
         console.log(FormData.network, "currentNetworkID");
         //hit contract compile api
         axios
@@ -669,27 +668,26 @@ export const EthMain1 = (props) => {
             console.log(res, "response");
             // console.log(contractSource, "contract Source api side ");
             //calling deploy function
-            deployContract(
-              res.data.result,
-              FormData
-            ).then((res) => {
+            deployContract(res.data.result, FormData).then((res) => {
               if (res.error) {
                 navigate("/generator/ethereum");
-                props.setShow(true)
+                props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
-                  ? toast.error("Transaction Not Signed !! User Rejected The Request")
+                  ? toast.error(
+                      "Transaction Not Signed !! User Rejected The Request"
+                    )
                   : toast.error(res.error.message);
               } else {
                 toast.success("Token Deploy Successfully");
                 // navigate("/generator/final");
-                props.setShow(false)
+                props.setShow(false);
                 console.log(res, "else side deploy then return deploy succes");
               }
             });
           })
           .catch((error) => {
             console.log("Api fail error", error);
-            props.setShow(true)
+            props.setShow(true);
             // navigate("/generator/ethereum");
             error.response.data.message
               ? toast.error(error.response.data.message)
@@ -1176,7 +1174,7 @@ export const EthMain1 = (props) => {
                               <div className="Ttext">
                                 <p>
                                   Commission fee:{" "}
-                                  <i
+                                  {/* <i
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -1184,9 +1182,31 @@ export const EthMain1 = (props) => {
                                     title="The commison fee will be
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
-                                  ></i>
+                                  ></i> */}
+                                  {/* <a  href="#" data-bs-toggle="tooltip" data-bs-title="Default tooltip"> */}
+                                  <Tooltip
+                                    content={
+                                      <>
+                                        The commison fee will be
+                                        <br />
+                                        transferred automatically to us
+                                        <br /> during the contract creation.
+                                        <br />
+                                        In case of error,this
+                                        <br /> amount will not be
+                                        <br /> deducted from your <br />
+                                        wallet.Only the gas
+                                        <br /> fees will be deducted
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
+                                  {/* </a> */}
                                 </p>
                               </div>
+
                               <div className="Tbtn">
                                 <span className="badge bg-success d-block p-2">
                                   {commissionFee
@@ -1199,13 +1219,25 @@ export const EthMain1 = (props) => {
                               <div className="Ttext ">
                                 <p>
                                   Gas fee:{" "}
-                                  <i
+                                  {/* <i
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
                                     title="The gas fee depend on gas limit and gas price.
                                   Metamask will automatically display the best fee to use "
-                                  ></i>
+                                  ></i> */}
+                                   <Tooltip
+                                    content={
+                                      <>
+                                        The gas fee depend <br/>on gas limit and<br/> gas price.
+                                  Metamask will<br/> automatically display<br/> the best fee to use
+                                      
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
                                 </p>
                               </div>
                               <div className="Tbtn">
@@ -1221,8 +1253,13 @@ export const EthMain1 = (props) => {
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
                             onClick={() => {
-                              if(ethFormData.tokenName && ethFormData.tokenSymbol  && ethFormData.decimals  && ethFormData.agreement === true ){
-                              compileContract(ethFormData)    
+                              if (
+                                ethFormData.tokenName &&
+                                ethFormData.tokenSymbol &&
+                                ethFormData.decimals &&
+                                ethFormData.agreement === true
+                              ) {
+                                compileContract(ethFormData);
                               }
                             }}
                           >
