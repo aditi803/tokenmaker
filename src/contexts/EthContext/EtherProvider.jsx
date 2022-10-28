@@ -7,7 +7,7 @@ import axios from "axios";
 export const GlobalContext = createContext();
 
 export const EtherProvider = ({ children }) => {
-  let provider;
+  let  provider;
   const [accAddress, setAccAddress] = useState([]);
   const [accBalance, setAccBalance] = useState();
   const [chainId, setChainId] = useState();
@@ -37,8 +37,11 @@ export const EtherProvider = ({ children }) => {
 
   const updateAccount = async () => {
     if (window.ethereum) {
+      console.log(window.ethereum,"windowEthereum");
       provider = new ethers.providers.Web3Provider(window.ethereum);
+      console.log(provider,"Provider");
       const { chainId } = await provider.getNetwork();
+      console.log(chainId,"chain id");
       setChainId(chainId);
       window.ethereum.on("accountsChanged", async function (accounts) {
         console.log(accounts, "account changed");
@@ -133,12 +136,14 @@ export const EtherProvider = ({ children }) => {
       // e.preventDefault();
       //Check if Metamask is Installed Or Not
       if (window.ethereum) {
+        console.log(window.ethereum,"ethereumadd");
         let account = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         console.log(account, "acccc");
         //set account balance
         const balance = await provider.getBalance(account[0]);
+        console.log(balance,"balance");
         const balanceInEth = parseFloat(
           ethers.utils.formatEther(balance)
         ).toFixed(5);
