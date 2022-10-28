@@ -24,6 +24,7 @@ function Footer() {
                         <a href="/#faq" className="btn footer-link py-0 btn-clr">Help</a>
                         <a  href="https://www.blocktechbrew.com/" target="_blank" rel='noopnner noreferrer' className="btn footer-link py-0 btn-clr">Blocktech Brew</a>
                     </div>
+                  
                 </div>
             </div>
         </footer>
