@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import { EthMain1 } from './EthMain1'
-
 import { FinalMain } from '../Main_page/FinalMain'
  export const EthMain = () => {
+
     const [showComponent,setShowComponent]= useState(true)
     
   return (
@@ -10,7 +10,7 @@ import { FinalMain } from '../Main_page/FinalMain'
 {
     showComponent?
     <EthMain1 setShow={setShowComponent}/>:
-    <FinalMain/>
+    <FinalMain />
 }
 
 
