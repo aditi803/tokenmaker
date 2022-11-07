@@ -199,10 +199,12 @@ export const EtherProvider = ({ children }) => {
   //ends here
 
   //change RPC network if not equal to selected network
+  
   const changeNetwork = async (networkID) => {
     try {
       console.log(networkID, "netwrk id in change netwrk");
-      const chainIdInDecimal = ethers.utils.hexlify(networkID);
+      
+      const chainIdInDecimal = ethers.utils.hexlify(networkID); 
       console.log(chainIdInDecimal, "hexadecimal chainid");
       let parseChainId = "";
       for (let i = 0; i < chainIdInDecimal.length; i++) {
@@ -211,7 +213,7 @@ export const EtherProvider = ({ children }) => {
           parseChainId += chainIdInDecimal[i];
         }
       }
-      console.log(parseChainId, "parseChainId");
+      console.log(parseChainId, "parseChainId>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
       console.log(networkID, "selectedNetworkID");
       await window.ethereum.request({
@@ -229,6 +231,7 @@ export const EtherProvider = ({ children }) => {
 
   //deploy Contract on blockchain
   const deployContract = async (contractSource, newFormData) => {
+   
     try {
       const abi = contractSource.abi;
       const bytecode = contractSource.bytecode;
@@ -239,9 +242,11 @@ export const EtherProvider = ({ children }) => {
       await window.ethereum.send("eth_requestAccounts");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
+      console.log(signer,"signerrrrrrrrrrrrrrrrrrrrs");
       const factory = new ContractFactory(abi, bytecode, signer);
       // If your contract requires constructor args, you can specify them here
       const contract = await factory.deploy();
+      console.log(contract,"contractsssssssssssssss");
       console.log(contract.address, "deployeed contract address");
       console.log(contract.deployTransaction.hash, "deployeed contract hash");
       if (contract.deployTransaction.hash) {
@@ -288,7 +293,7 @@ export const EtherProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         // compileContract : compileContract,
-        changeNetwork: changeNetwork,
+        changeNetwork,
         SignInMetamask: SignInMetamask,
         connectedAccAddress: accAddress,
         setAccAddress: setAccAddress,

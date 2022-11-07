@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export const FinalMain = (props) => {
   //  const  {deploySuccess} = props
+  
   const navigate = useNavigate();
   const percentage = 100;
   const { addToken, deploySuccess, deployData } = useContext(GlobalContext);

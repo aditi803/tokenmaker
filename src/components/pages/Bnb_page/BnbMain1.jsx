@@ -26,7 +26,7 @@ const BnbMain1 = (props) => {
 
   const navigate = useNavigate();
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
-  const { deployContract, changeNetwork, connectedAccAddress, blockchainNetworks,SignInMetamask} =
+  const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
     useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -134,6 +134,7 @@ const BnbMain1 = (props) => {
     //     commissionFee: Number(commissionFee +0.075).toFixed(3),
     //   }));
     // }
+    
     if (pausable === true) {
       setEthFormData((prev) => ({
         ...prev,
@@ -632,6 +633,7 @@ const BnbMain1 = (props) => {
     try {
       console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
+      console.log(provider,"provider");
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
       //check selected network and set chain id
@@ -640,11 +642,8 @@ const BnbMain1 = (props) => {
         ? (Object.assign(FormData,{network:blockchainNetworks[FormData.network]}) )
         : "";
       console.log(FormData, "formdata bnbside");
-      if (FormData.network === chainId ) {
+      if (FormData.network === chainId && connectedAccAddress.length !== 0) {
         // navigate("/generator/final");
-        if(connectedAccAddress.length ===0){
-          await SignInMetamask()
-        }
         console.log(props, '<><><><><><><><>')
         props.setShow(false)
 
@@ -683,8 +682,10 @@ const BnbMain1 = (props) => {
             error.response.data.message? toast.error(error.response.data.message):toast.error("Data Fetch Failed Try Again")
            
           });
+      } else if (connectedAccAddress.length === 0) {
+        toast.error("Please Connect Your Metamask Wallet First");
       } else {
-        changeNetwork(FormData.network);
+        showToast(FormData.network);
       }
     } catch (error) {
       toast.error(error.message);
@@ -861,7 +862,7 @@ const BnbMain1 = (props) => {
                                   of the contract
                                 </span>
                               </div>
-                              <div
+                              {/* <div
                                 className="form-group "
                                 style={{ display: !show ? "block" : "none" }}
                                 // style={{display: {d_displayMaximum}}}
@@ -882,7 +883,7 @@ const BnbMain1 = (props) => {
                                 <span className="form-text text-muted">
                                   The maximum number of coins ever minted
                                 </span>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>
@@ -1010,7 +1011,7 @@ const BnbMain1 = (props) => {
                                 Allow your tokens to be paused
                               </span>
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                               <label className="form-check form-switch">
                                 <input
                                   className="form-check-input"
@@ -1028,7 +1029,7 @@ const BnbMain1 = (props) => {
                                 Allow to recover any BEP20 tokens sent to your
                                 contract
                               </span>
-                            </div>
+                            </div> */}
                             <div className="form-group">
                               <label className="form-label">
                                 Access type
