@@ -24,7 +24,7 @@ import {  ethers } from "ethers";
 export const MaticMain1 = (props) => {
   const navigate = useNavigate();
 
-  const { deployContract, changeNetwork, connectedAccAddress,SignInMetamask, blockchainNetworks } =
+  const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
     useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -622,11 +622,7 @@ export const MaticMain1 = (props) => {
         : "";
 
       console.log(FormData, "formdata after assign chain id bnbside");
-      if (FormData.network === chainId ) {
-
-        if(connectedAccAddress.length ===0){
-          await SignInMetamask()
-        }
+      if (FormData.network === chainId && connectedAccAddress.length !== 0) {
         // navigate("/generator/final");
         props.setShow(false)
         console.log(FormData.network, "currentNetworkID");
@@ -653,7 +649,7 @@ export const MaticMain1 = (props) => {
                   : toast.error(res.error.message);
               } else {
                 toast.success("Token Deploy Successfully");
-                // navigate("/generator/final");
+                navigate("/generator/final");
                 console.log(res, "else side deploy then return deplo succes");
               }
             });
@@ -665,8 +661,10 @@ export const MaticMain1 = (props) => {
             error.response.data.message? toast.error(error.response.data.message):toast.error("Data Fetch Failed Try Again")
             
           });
-      }  else {
-        changeNetwork(FormData.network);
+      } else if (connectedAccAddress.length === 0) {
+        toast.error("Please Connect Your Metamask Wallet First");
+      } else {
+        showToast(FormData.network);
       }
     } catch (error) {
       toast.error(error.message);
@@ -852,7 +850,7 @@ export const MaticMain1 = (props) => {
                                   of the contract
                                 </span>
                               </div>
-                              <div
+                              {/* <div
                                 className="form-group "
                                 style={{ display: !show ? "block" : "none" }}
                                 // style={{display: {d_displayMaximum}}}
@@ -873,7 +871,7 @@ export const MaticMain1 = (props) => {
                                 <span className="form-text text-muted">
                                   The maximum number of coins ever minted
                                 </span>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>
@@ -1001,7 +999,7 @@ export const MaticMain1 = (props) => {
                                 Allow your tokens to be paused
                               </span>
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                               <label className="form-check form-switch">
                                 <input
                                   className="form-check-input"
@@ -1019,7 +1017,7 @@ export const MaticMain1 = (props) => {
                                 Allow to recover any ERC20 tokens sent to your
                                 contract
                               </span>
-                            </div>
+                            </div> */}
                             <div className="form-group">
                               <label className="form-label">
                                 Access type

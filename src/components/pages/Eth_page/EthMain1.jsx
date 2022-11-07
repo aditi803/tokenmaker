@@ -642,6 +642,7 @@ export const EthMain1 = (props) => {
     try {
       console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
+      console.log(provider,"provider");
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
 
@@ -672,6 +673,7 @@ export const EthMain1 = (props) => {
             // console.log(contractSource, "contract Source api side ");
             //calling deploy function
             deployContract(res.data.result, FormData).then((res) => {
+              
               if (res.error) {
                 navigate("/generator/ethereum");
                 props.setShow(true);
@@ -885,7 +887,7 @@ export const EthMain1 = (props) => {
                                   of the contract
                                 </span>
                               </div>
-                              <div
+                              {/* <div
                                 className="form-group "
                                 style={{ display: !show ? "block" : "none" }}
                                 // style={{display: {d_displayMaximum}}}
@@ -906,7 +908,7 @@ export const EthMain1 = (props) => {
                                 <span className="form-text text-muted">
                                   The maximum number of coins ever minted
                                 </span>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>
@@ -1034,7 +1036,7 @@ export const EthMain1 = (props) => {
                                 Allow your tokens to be paused
                               </span>
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                               <label className="form-check form-switch">
                                 <input
                                   className="form-check-input"
@@ -1052,7 +1054,7 @@ export const EthMain1 = (props) => {
                                 Allow to recover any ERC20 tokens sent to your
                                 contract
                               </span>
-                            </div>
+                            </div> */}
                             <div className="form-group">
                               <label className="form-label">
                                 Access type
