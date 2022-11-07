@@ -17,44 +17,19 @@ export const FrontMain = () => {
   const [steps, setSteps] = useState([])
   const [stepData, setStepData] = useState([])
   const [loader, setLoader] = useState(false)
-  const [headingData,setHeadingData] = useState({
-       startHeading:"",
-       endHeading:""
-  })
-
-  // console.log(headingData.length-1,"stepdataheadingdd")
+ 
   const data = stepData.heading?.split(' ')
   console.log(data,"data after split")
   let coloredData
   let startData
+
   if(data?.length!==0 && data?.length >0){
    coloredData = data[data?.length-2] + " " + data[data?.length-1]
-  console.log(coloredData,"dsdsd")
+  // console.log(coloredData,"dsdsd")
   startData = data.slice(0,data.length-2).join(" ")
-  console.log(startData,"startData")
-  
-  // setHeadingData((prev)=>({
-  //  ...prev,
-  //  startHeading:coloredData,
-  //  endHeading:startData
-  // }))
-  
-}
-
-// useMemo(()=>{
-
-//    setHeadingData((prev)=>({
-//    ...prev,
-//    startHeading:coloredData,
-//    endHeading:startData
-//   }))
-// })
-  
-  // const [stepColor, setStepColor] = useState('')
-  // setStepColor(data[data?.length-2] + ' ' + data[data?.length-1])
-  // console.log(stepColor,"colorjhegvc")
-  // const coloredData = data.slice(data.length - 2,  ) 
-  // console.log(coloredData, "colorewjbvgcfxd"); 
+  // console.log(startData,"startData")
+  }
+ 
 
   useEffect(() => {
     setLoader(true)
@@ -100,7 +75,7 @@ export const FrontMain = () => {
               </div>
               <div className="my-5">
                 <a
-                  className="btn btn-primary btn-pad btn-rounded me-3"
+                  className="btn btn-pad btn-rounded me-3"
                   href="/generator"
                   style={{ backgroundColor: `${banner.buttonBackgroundColor}`, color: `${banner.buttonTextColor}` }}
                 >
@@ -142,7 +117,7 @@ export const FrontMain = () => {
               <div className="mt-3 text-center">
                 <a
                   href="/generator"
-                  className="btn btn-action btn-rounded btn-pad"
+                  className="btn btn-rounded btn-pad"
                   style={{ backgroundColor: `${start.buttonBackgroundColor}`, color: `${start.buttonColor}` }}
                 >
                   {start.buttonText}
@@ -178,7 +153,7 @@ export const FrontMain = () => {
               <div className="mt-3 text-center">
                 <a
                   type="button" href="https://www.blocktechbrew.com/"
-                  className="btn btn-primary btn-rounded btn-pad"
+                  className="btn btn-rounded btn-pad"
                   style={{ backgroundColor: `${custom.buttonBackgroundColor}`, color: `${custom.buttonColor}` }}
                 >
                   {custom.buttonText}
