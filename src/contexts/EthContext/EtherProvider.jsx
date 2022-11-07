@@ -5,12 +5,10 @@ import axios from "axios";
 export const GlobalContext = createContext();
 
 export const EtherProvider = ({ children }) => {
-  // let provider;
   // let  provider;
   const [accAddress, setAccAddress] = useState([]);
   const [accBalance, setAccBalance] = useState();
   const [chainId, setChainId] = useState();
-  // const [provider,setProvider] = useState()
 
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
@@ -24,50 +22,52 @@ export const EtherProvider = ({ children }) => {
   // console.log(deploySuccess,"deplo success context side");
 
   useEffect(() => {
-    // isMetaMaskInstalled();
     updateAccount();
-    updateNetwork()
-  });
+    updateNetwork();
+    isLogin();
+  }, []);
 
-  // const isMetaMaskInstalled = async () => {
-  //   if (window.ethereum) {
-  //     provider = new ethers.providers.Web3Provider(window.ethereum);
-  //     setProvider(provider)
-  //     const { chainId } = await provider.getNetwork();
-  //     setChainId(chainId);
-  //   } else {
-  //     toast.error("Please Intsall Metamask Wallet");
-  //   }
-  // };
-
-  const updateAccount = async () => {
+  const isLogin = async () => {
     if (window.ethereum) {
       let provider = new ethers.providers.Web3Provider(window.ethereum);
-      const { chainId } = await provider.getNetwork();
-      console.log(chainId,"chain id");
-      setChainId(chainId);
-      window.ethereum.on("accountsChanged", async function (accounts) {
-        console.log(accounts, "account changed");
-        if (accounts[0] !== undefined) {
-          setAccAddress([accounts[0]]);
-          getBalance(accounts[0])
-          .then((balance)=>{
-            setAccBalance(balance);
+      const accounts = await provider.listAccounts();
+      if (accounts.length !== 0) {
+        console.log(accounts, "update acc side list");
+        setAccAddress([accounts[0]]);
+        const balance = await getBalance(accounts[0]);
+        setAccBalance(balance);
+      }
+    }
+  };
 
-          })
-        } else {
-          setAccAddress([]);
-        }
-      });
-    } else {
-      toast.error("Please Install Metamask Wallet");
+  const updateAccount = async () => {
+    try {
+      if (window.ethereum) {
+        let provider = new ethers.providers.Web3Provider(window.ethereum);
+        const { chainId } = await provider.getNetwork();
+        console.log(chainId, "chain id");
+        setChainId(chainId);
+        window.ethereum.on("accountsChanged", async function (accounts) {
+          console.log(accounts, "account changed");
+          if (accounts[0] !== undefined) {
+            setAccAddress([accounts[0]]);
+            getBalance(accounts[0]).then((balance) => {
+              setAccBalance(balance);
+            });
+          } else {
+            setAccAddress([]);
+          }
+        });
+      }
+    } catch (error) {
+      console.log("error update account side", error);
     }
   };
   //ends here
   const getBalance = async (account) => {
     try {
-      console.log(account,"acc pass in bal fn");
-      let  provider = new ethers.providers.Web3Provider(window.ethereum);
+      console.log(account, "acc pass in bal fn");
+      let provider = new ethers.providers.Web3Provider(window.ethereum);
       const balance = await provider.getBalance(account);
       //  console.log(balance,"ball");
       const balanceInEth = parseFloat(
@@ -75,29 +75,29 @@ export const EtherProvider = ({ children }) => {
       ).toFixed(5);
       console.log(`balance: ${balanceInEth} ETH balance fn side`);
       // setAccBalance(balanceInEth);
-      return balanceInEth
+      return balanceInEth;
     } catch (error) {
       console.log(error, "error balance get");
     }
   };
 
-  const updateNetwork = () => {
-    if (window.ethereum) {
-      window.ethereum.on("networkChanged", function (networkId) {
-        console.log("networkChanged", networkId);
-        console.log(accAddress,"acc adress update side");
-        setChainId(networkId);
-        getBalance(accAddress[0])
-        .then((balance)=>{
-          console.log(balance,"balance update network side");
-          setAccBalance(balance)
-
-        })
-      });
+  const updateNetwork = async () => {
+    try {
+      if (window.ethereum) {
+        window.ethereum.on("networkChanged", function (networkId) {
+          console.log("networkChanged", networkId);
+          console.log(accAddress, "acc adress update side");
+          console.log(typeof networkId, "typeof netwrkid");
+          setChainId(parseInt(networkId));
+          // SignInMetamask()
+          console.log(accAddress[0], "account netwrok update side");
+          isLogin();
+        });
+      }
+    } catch (error) {
+      console.log("update network side", error);
     }
   };
-
-  
 
   const blockchainNetworks = {
     mainnet: 1,
@@ -111,31 +111,34 @@ export const EtherProvider = ({ children }) => {
 
   //Hide the connected account address
   const hideAccAddress = (connectedAccAddress) => {
-    let accAddress;
-    console.log(connectedAccAddress, "hide acc side ");
-    console.log(connectedAccAddress.length, "acc hide side length");
-    console.log(connectedAccAddress[0], "acc hide  side value  ");
+    try {
+      let accAddress;
+      console.log(connectedAccAddress, "hide acc side ");
+      console.log(connectedAccAddress.length, "acc hide side length");
+      console.log(connectedAccAddress[0], "acc hide  side value  ");
 
-    if (connectedAccAddress.length !== 0) {
-      const startAdd = connectedAccAddress[0].slice(0, 6);
-      const endAdd = connectedAccAddress[0].slice(38, 42);
-      accAddress = startAdd + "...." + endAdd;
-      console.log(startAdd, "startadd if side");
-      return accAddress;
-    } else {
-      console.log("hide acc else side");
-      return connectedAccAddress;
+      if (connectedAccAddress.length !== 0) {
+        const startAdd = connectedAccAddress[0].slice(0, 6);
+        const endAdd = connectedAccAddress[0].slice(38, 42);
+        accAddress = startAdd + "...." + endAdd;
+        console.log(startAdd, "startadd if side");
+        return accAddress;
+      } else {
+        console.log("hide acc else side");
+        return connectedAccAddress;
+      }
+    } catch (error) {
+      console.log("error hide acc address side", error);
     }
   };
   //ends here
 
   //add token to wallet function by user
   const addToken = async () => {
-    const tokenAddress = deployData.tokenAddress;
-    const tokenSymbol = deployData.tokenSymbol;
-    const tokenDecimals = deployData.tokenDecimals;
-
     try {
+      const tokenAddress = deployData.tokenAddress;
+      const tokenSymbol = deployData.tokenSymbol;
+      const tokenDecimals = deployData.tokenDecimals;
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
       const wasAdded = await window.ethereum.request({
         method: "wallet_watchAsset",
@@ -168,15 +171,15 @@ export const EtherProvider = ({ children }) => {
       // e.preventDefault();
       //Check if Metamask is Installed Or Not
       if (window.ethereum) {
-        console.log(window.ethereum,"ethereumadd");
+        console.log(window.ethereum, "ethereumadd");
         let account = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         console.log(account, "acccc");
         //set account balance
-      let  provider = new ethers.providers.Web3Provider(window.ethereum);
+        let provider = new ethers.providers.Web3Provider(window.ethereum);
         const balance = await provider.getBalance(account[0]);
-        console.log(balance,"balance");
+        console.log(balance, "balance");
         const balanceInEth = parseFloat(
           ethers.utils.formatEther(balance)
         ).toFixed(5);
@@ -307,6 +310,7 @@ export const EtherProvider = ({ children }) => {
         chainId: chainId,
       }}
     >
+      {/* {console.log(titleNames, "titleNames context side")} */}
       {console.log(deploySuccess, "deplo success context side")}
       {console.log(accAddress, "acc address context side")}
       {console.log(chainId, "chainId context side")}

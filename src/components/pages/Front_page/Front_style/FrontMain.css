@@ -3,7 +3,9 @@
     background-color: #33d3d2;
     border-color: #33d3d2;
 }
-
+.page-content p{
+    width: 76%;
+}
 .btn-rounded {
     border-radius: 2rem;
     border-width: 2px;
@@ -53,9 +55,9 @@
     height: 4rem;
     background-position: 50%;
 }
-.svg-icon.icon-metamask {
+/* .svg-icon.icon-metamask {
     background-image: url("https://tokenmaker.eattheblocks.com/images/icons/metaMask.svg");
-}
+} */
 .svg-icon {
     background-repeat: no-repeat;
     background-size: contain;
@@ -100,9 +102,9 @@
     flex-shrink: 0;
 }
 
-.svg-icon.icon-compliant {
+/* .svg-icon.icon-compliant {
     background-image: url("https://tokenmaker.eattheblocks.com/images/icons/compliant.svg");
-}
+} */
 .section-features .feature-item .h4, .section-features .feature-item h4 {
     font-size: 1.25rem;
 }
