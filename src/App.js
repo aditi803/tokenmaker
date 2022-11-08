@@ -3,49 +3,55 @@ import Main from './components/pages/landing_page/Main';
 import Footer from './components/pages/landing_page/Footer';
 import 'react-toastify/dist/ReactToastify.css';
 // import EthHeader from './'
-import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css';
 import { EthHeader } from './components/pages/Eth_page/EthHeader.jsx';
 import { EthMain } from './components/pages/Eth_page/EthMain.jsx';
 import { BnbMain } from './components/pages/Bnb_page/BnbMain.jsx';
 import { MaticMain } from './components/pages/Matic_page/MaticMain.jsx';
 import { FinalMain } from './components/pages/Main_page/FinalMain.jsx';
-import {FrontMain} from './components/pages/Front_page/FrontMain.jsx'
-import {EtherProvider} from "./contexts/EthContext/EtherProvider"
+import { FrontMain } from './components/pages/Front_page/FrontMain.jsx'
+import { EtherProvider } from "./contexts/EthContext/EtherProvider"
 
 import { useHelper } from './contexts/HelperContext/HelperContext.jsx';
 
 
 import ScrollButton from './components/Layots/ScrollButton.jsx';
 import { useEffect } from 'react';
+import { useState } from 'react';
+import axios from "axios";
+import { HEADER } from './api/Api.js';
 function App() {
 
-  // useEffect
-  
-// const {showRoute, setShowRoute} = useHelper()
+  const [header, setHeader] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      const respHeader = await axios.get(HEADER)
+      setHeader(respHeader.data.msg)
+      const favicon = document.getElementById("favicon");
+      document.title = respHeader?.data?.msg?.documentTitle;
+      favicon.href = respHeader?.data?.msg?.favicon;
+    }
+    fetchData()
+  }, [])
 
   return (
 
-  <EtherProvider>
+    <EtherProvider>
 
-  <Router>
-    <Routes>
-    {/* <div className="layout-container main-layout header-fixed"></div> */}
+      <Router>
+        <Routes>
 
-      <Route path='/generator' element={[<Header/>,<Main/>,<Footer/>]} />
-      <Route path='/' element={[<Header/>,<FrontMain/>,<Footer/>,<ScrollButton/>]} />
+          <Route path='/generator' element={[<Header header={header} />, <Main />, <Footer />]} />
+          <Route path='/' element={[<Header header={header} />, <FrontMain />, <Footer />, <ScrollButton />]} />
 
-      <Route path='/generator/ethereum'element={[<EthHeader />,<EthMain />,<Footer/>]} />
-      <Route path='/generator/bsc'element={[<EthHeader  />,<BnbMain />,<Footer/>]} />
-      <Route path='/generator/polygon'element={[<EthHeader />,<MaticMain />,<Footer/>]} />
-      {/* <Route path='/generator/final'element={[<EthHeader/>,<FinalMain/>,<Footer/>]} /> */}
-    </Routes>
-  </Router>
-  {/* <Header />
-  <Main />
-  <Footer /> */}
-  </EtherProvider> 
-    );
+          <Route path='/generator/ethereum' element={[<EthHeader header={header} />, <EthMain />, <Footer />]} />
+          <Route path='/generator/bsc' element={[<EthHeader header={header} />, <BnbMain />, <Footer />]} />
+          <Route path='/generator/polygon' element={[<EthHeader header={header} />, <MaticMain />, <Footer />]} />
+        </Routes>
+      </Router>
+    </EtherProvider>
+  );
 }
 
 export default App;

@@ -3,7 +3,7 @@ import "../Eth_page/eth_styles/header.css";
 
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
-export const EthHeader = (props) => {
+export const EthHeader = ({header}) => {
   // const {chainName} = props
   let chainName
   const {
@@ -41,7 +41,7 @@ console.log(chainId,"chainId header side");
               <nav className="navbar navbar-expand-lg">
                 <a href="/" className="navbar-brand">
                   <img
-                    src="https://blocktechbrew.com/wp-content/uploads/2022/05/btb_logo.png"
+                    src={header.logoImage}
                     alt="Logo"
                     className="logoImage"
                     srcSet=""

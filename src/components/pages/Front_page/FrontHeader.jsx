@@ -1,6 +1,9 @@
-import React from 'react'
+import axios from 'axios'
+import React,{useState, useEffect} from 'react'
+import { HEADER } from '../../../api/Api'
 import './Front_style/FrontHeader.css'
 export const EthHeader = () => {
+
   return (
       <div className="page-header">
         <header className='header navbar-area'>
