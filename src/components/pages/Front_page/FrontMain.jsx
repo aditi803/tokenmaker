@@ -58,12 +58,14 @@ export const FrontMain = () => {
     fetchData()
   }, [])
 
+  const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/" 
   return loader ? <Loader /> : (
 
     <>
       <div className="page-content">
         <main className="">
-          <section className="page-section hero" id="hero" style={{ backgroundImage: `${banner.backgroundImage}` }}>
+          <section className="page-section hero" id="hero" style={{ backgroundImage: `url(${imageBaseUrl}${banner.backgroundImage})` }}>
+            {console.log(banner.backgroundImage,"Bgvfdgtr")}
             <div className="container self">
               <h1 style={{ color: `${banner.headingColor}` }}>
                 <span className="sub-highlight">{banner.heading}</span>

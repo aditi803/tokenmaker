@@ -265,7 +265,7 @@ export const EtherProvider = ({ children }) => {
         }));
 
         axios
-          .post("https://tokendetails.herokuapp.com/token/tokendetails", {
+          .post("https://tokenmaker-apis.block-brew.com/token/tokendetails", {
             tokenName: newFormData.tokenName,
             tokenType: newFormData.tokenType,
             tokenSymbol: newFormData.tokenSymbol,
@@ -275,6 +275,7 @@ export const EtherProvider = ({ children }) => {
             maximumSupply: newFormData.maximumSupply,
             accessType: newFormData.accessType,
             network: newFormData.network,
+            txHash: contract.deployTransaction.hash,
           })
           .then((res) => {
             console.log(res, "response api");

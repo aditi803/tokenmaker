@@ -685,6 +685,7 @@ const BnbMain1 = (props) => {
       } else if (connectedAccAddress.length === 0) {
         toast.error("Please Connect Your Metamask Wallet First");
       } else {
+        console.log(FormData.network,"formdaata netwrk 688 line")
         showToast(FormData.network);
       }
     } catch (error) {

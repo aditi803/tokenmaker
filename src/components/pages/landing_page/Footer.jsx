@@ -18,21 +18,21 @@ function Footer() {
     <div className="page-footer" style={{fontSize: '16px', "--backColor": footer.backgroundColor}}>
         <footer className="footer">
             <div className="container py-3">
-                <div className="row">
+                <div className="row" style={{color: `${footer.contentColor}`}}>
                     <div className="col-12 col-md-6 text-center text-md-start order-2">
-                        <span className=" btn-clr">
+                        <span>
                         ©{footer.websiteName}
                         </span>
                     </div>
-                    <div className="col-12 col-md-6 text-center text-md-end order-1 order-md-2">
-                        <button type='button' className="btn footer-link py-0 btn-clr" data-bs-toggle="modal"
+                    <div className="col-12 col-md-6 text-center text-md-end order-1 order-md-2" >
+                        <button type='button' className="btn footer-link py-0" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal" style={{color: `${footer.contentColor}`}}>
                             Terms of use
                         </button>
                         <TermsModal />
 
-                        <a href="/#faq" className="btn footer-link py-0 btn-clr" style={{color: `${footer.contentColor}`}}>Help</a>
-                        <a  href="https://www.blocktechbrew.com/" target="_blank" rel='noopnner noreferrer' className="btn footer-link py-0 btn-clr">{footer.companyName}</a>
+                        <a href="/#faq" className="btn footer-link py-0 " style={{color: `${footer.contentColor}`}}>Help</a>
+                        <a  href="https://www.blocktechbrew.com/" target="_blank" rel='noopnner noreferrer' className="btn footer-link py-0" style={{color: `${footer.contentColor}`}}>{footer.companyName}</a>
                     </div>
                   
                 </div>

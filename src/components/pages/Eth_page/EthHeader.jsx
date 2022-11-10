@@ -32,6 +32,8 @@ console.log(chainId,"chainId header side");
   //     return accAddress
   //   }else return "Connect your Wallet"
   // }
+  const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
+
   return (
     <div className="page-header">
       <header className="header navbar-area">
@@ -41,7 +43,7 @@ console.log(chainId,"chainId header side");
               <nav className="navbar navbar-expand-lg">
                 <a href="/" className="navbar-brand">
                   <img
-                    src={header.logoImage}
+                    src={imageBaseUrl+header.logoImage}
                     alt="Logo"
                     className="logoImage"
                     srcSet=""
