@@ -28,9 +28,10 @@ function App() {
     const fetchData = async () => {
       const respHeader = await axios.get(HEADER)
       setHeader(respHeader.data.msg)
+      console.log(respHeader.data.msg,"Header resp")
       const favicon = document.getElementById("favicon");
-      document.title = respHeader?.data?.msg?.documentTitle;
-      favicon.href = respHeader?.data?.msg?.favicon;
+      document.title = respHeader?.data?.msg?.investorDocumentTitle;
+      favicon.href = respHeader?.data?.msg?.investorFavicon;
     }
     fetchData()
   }, [])

@@ -43,7 +43,7 @@ console.log(chainId,"chainId header side");
               <nav className="navbar navbar-expand-lg">
                 <a href="/" className="navbar-brand">
                   <img
-                    src={imageBaseUrl+header.logoImage}
+                    src={imageBaseUrl+header.investorLogoImage}
                     alt="Logo"
                     className="logoImage"
                     srcSet=""
