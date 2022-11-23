@@ -19,6 +19,7 @@ export const EtherProvider = ({ children }) => {
   });
 
   const [deploySuccess, setDeploySuccess] = useState(false);
+  // const [explorer,setExplorer] = useState()
   // console.log(deploySuccess,"deplo success context side");
 
   useEffect(() => {
@@ -108,6 +109,19 @@ export const EtherProvider = ({ children }) => {
     binanceSmartChainTestnet: 97,
     binanceSmartChain: 56,
   };
+
+
+  const urlLinks = {
+  97:{link:"https://testnet.bscscan.com/",name:"Bsc Testnet Scan",networkName:"Bsc Testnet"},
+  56:{link:"https://bscscan.com/",name:"Bsc Mainnet Scan",networkName:"Bsc Mainnet"},
+  137:{link:"https://polygonscan.com/",name:"Polygon Mainnet Scan",networkName:"Polygon Mainnet"},
+  80001:{link:"https://mumbai.polygonscan.com/",name:"Polygon Testnet Scan",networkName:"Polygon Testnet"} ,
+  1:{link:"https://etherscan.io",name:"Ethereum Mainnet Scan",networkName:"Ethereum Mainnet"},
+  5:{link:"https://goerli.etherscan.io",name:"Goerli Testnet Scan",networkName:"Goerli Testnet"} ,
+  4:{link: "https://rinkeby.etherscan.io/",name:"RinkeyBy Testnet Scan",networkName:"RinkeyBy Testnet"},
+}
+
+
 
   //Hide the connected account address
   const hideAccAddress = (connectedAccAddress) => {
@@ -232,10 +246,12 @@ export const EtherProvider = ({ children }) => {
   };
   //ends here
 
+  
   //deploy Contract on blockchain
   const deployContract = async (contractSource, newFormData) => {
    
     try {
+      let explorer
       const abi = contractSource.abi;
       const bytecode = contractSource.bytecode;
       // console.log(abi, "abi deploy side");
@@ -264,6 +280,12 @@ export const EtherProvider = ({ children }) => {
           chainID: newFormData.network,
         }));
 
+        // eslint-disable-next-line no-unused-expressions
+        urlLinks[newFormData.network]? explorer = urlLinks[newFormData.network]:""
+         
+        // eslint-disable-next-line no-unused-expressions
+        console.log(`${explorer.link}/tx/${contract.deployTransaction.hash}`,"new tx urlllll")
+        console.log(newFormData.network,"netwrk nameee")
         axios
           .post("https://tokenmaker-apis.block-brew.com/token/tokendetails", {
             tokenName: newFormData.tokenName,
@@ -274,8 +296,9 @@ export const EtherProvider = ({ children }) => {
             initialSupply: newFormData.initialSupply,
             maximumSupply: newFormData.maximumSupply,
             accessType: newFormData.accessType,
-            network: newFormData.network,
-            txHash: contract.deployTransaction.hash,
+            network: explorer.networkName,
+            commissionFee:"0.78",
+            txHash: `${explorer.link}/tx/${contract.deployTransaction.hash}`,
           })
           .then((res) => {
             console.log(res, "response api");
@@ -309,9 +332,10 @@ export const EtherProvider = ({ children }) => {
         blockchainNetworks: blockchainNetworks,
         accBalance: accBalance,
         chainId: chainId,
+        urlLinks:urlLinks
       }}
     >
-      {/* {console.log(titleNames, "titleNames context side")} */}
+
       {console.log(deploySuccess, "deplo success context side")}
       {console.log(accAddress, "acc address context side")}
       {console.log(chainId, "chainId context side")}

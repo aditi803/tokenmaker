@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./landing_page_styles/main.css";
+import axios from 'axios'
 function Main() {
+
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    getNetworkHanlder()
+  }, [])
+
+  const getNetworkHanlder = () => {
+    // changeApiStatus(true)
+    axios
+      .get("https://tokenmaker-apis.block-brew.com/cms/networkDetails")
+      .then(res => {
+        setData(res.data.msg)
+        console.log(res, "Add data view page")
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   return (
     <>
       <div className="page-content">
@@ -14,37 +35,39 @@ function Main() {
             </div>
           </div>
           <div className="chain-select">
-            <div className="chain-item">
-              <a
-                href="/generator/ethereum"
-                className="chain-link chain-ethereum"
-              >
-                <span className="title">Ethereum</span>
-                <span className="logo"></span>
-                <span className="text-muted">
-                  Create your own token on Ethereum
-                </span>
-              </a>
-            </div>
-            <div className="chain-item">
-              <a href="/generator/bsc" className="chain-link chain-bsc">
-                <span className="title">Binance Smart Chain</span>
-                <span className="logo"></span>
-                <span className="text-muted">Create your own Token on BSC</span>
-              </a>
-            </div>
-            <div className="chain-item">
-              <a href="/generator/polygon" className="chain-link chain-polygon">
-                <div className="ribbon top-right ribbon-primary">
-                  <small>NEW</small>
+              <>
+                <div className="chain-item">
+                  <a
+                    href="/generator/ethereum"
+                    className="chain-link chain-ethereum"
+                  >
+                    <span className="title">Ethereum</span>
+                    <span className="logo"></span>
+                    <span className="text-muted">
+                      Create your own token on Ethereum
+                    </span>
+                  </a>
                 </div>
-                <span className="title">Polygon</span>
-                <span className="logo"></span>
-                <span className="text-muted">
-                  Create your own token on Polygon
-                </span>
-              </a>
-            </div>
+                <div className="chain-item">
+                  <a href="/generator/bsc" className="chain-link chain-bsc">
+                    <span className="title">Binance Smart Chain</span>
+                    <span className="logo"></span>
+                    <span className="text-muted">Create your own Token on BSC</span>
+                  </a>
+                </div>
+                <div className="chain-item">
+                  <a href="/generator/polygon" className="chain-link chain-polygon">
+                    <div className="ribbon top-right ribbon-primary">
+                      <small>NEW</small>
+                    </div>
+                    <span className="title">Polygon</span>
+                    <span className="logo"></span>
+                    <span className="text-muted">
+                      Create your own token on Polygon
+                    </span>
+                  </a>
+                </div>
+              </>
           </div>
         </main>
       </div>

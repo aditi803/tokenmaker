@@ -24,6 +24,7 @@ import { HEADER } from './api/Api.js';
 function App() {
 
   const [header, setHeader] = useState([])
+  const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
   useEffect(() => {
     const fetchData = async () => {
       const respHeader = await axios.get(HEADER)
@@ -31,7 +32,8 @@ function App() {
       console.log(respHeader.data.msg,"Header resp")
       const favicon = document.getElementById("favicon");
       document.title = respHeader?.data?.msg?.investorDocumentTitle;
-      favicon.href = respHeader?.data?.msg?.investorFavicon;
+      console.log(respHeader?.data?.msg?.investorDocumentTitle,"ttile")
+      favicon.href = `${imageBaseUrl}${respHeader.data.msg.investorFavicon}`;
     }
     fetchData()
   }, [])

@@ -1,27 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import "./Success.css"
 import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
 
 export const SuccessDeploy = (props) => {
   const navigate = useNavigate()
   const {addToken,deployData} = props
+  const { urlLinks } =useContext(GlobalContext);
 
   const createNewToken = ()=>{
     navigate("/generator")
   }
 
   let explorer
-  let urlLinks = {
-  97:{link:"https://testnet.bscscan.com/",name:"Bsc Testnet Scan"},
-  56:{link:"https://bscscan.com/",name:"Bsc Mainnet Scan"},
-  137:{link:"https://polygonscan.com/",name:"Polygon Mainnet Scan"},
-  80001:{link:"https://mumbai.polygonscan.com/",name:"Polygon Testnet Scan"} ,
-  1:{link:"https://etherscan.io",name:"Ethereum Mainnet Scan"},
-  5:{link:"https://goerli.etherscan.io",name:"Goerli Testnet Scan"} ,
-  4:{link: "https://rinkeby.etherscan.io/",name:"RinkeyBy Testnet Scan"},
-}
-//ends here
+
 // eslint-disable-next-line no-unused-expressions
 urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
 

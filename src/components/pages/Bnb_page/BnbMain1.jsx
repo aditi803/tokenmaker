@@ -26,7 +26,7 @@ const BnbMain1 = (props) => {
 
   const navigate = useNavigate();
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
-  const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
+  const { deployContract,changeNetwork,SignInMetamask, connectedAccAddress, blockchainNetworks } =
     useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -636,17 +636,22 @@ const BnbMain1 = (props) => {
       console.log(provider,"provider");
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
+
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
-        ? (Object.assign(FormData,{network:blockchainNetworks[FormData.network]}) )
+        ? Object.assign(FormData, {
+            network: blockchainNetworks[FormData.network],
+          })
         : "";
-      console.log(FormData, "formdata bnbside");
-      if (FormData.network === chainId && connectedAccAddress.length !== 0) {
-        // navigate("/generator/final");
-        console.log(props, '<><><><><><><><>')
-        props.setShow(false)
 
+      console.log(FormData, "formdata eth side");
+      if (FormData.network === chainId ) {
+        // navigate("/generator/final");
+        if(connectedAccAddress.length ===0){
+          await SignInMetamask()
+        }
+        props.setShow(false);
         console.log(FormData.network, "currentNetworkID");
         //hit contract compile api
         axios
@@ -658,35 +663,34 @@ const BnbMain1 = (props) => {
             console.log(res, "response");
             // console.log(contractSource, "contract Source api side ");
             //calling deploy function
-            deployContract(
-              res.data.result,
-              FormData,
-            ).then((res) => {
+            deployContract(res.data.result, FormData).then((res) => {
+              
               if (res.error) {
-                // navigate("/generator/bsc");
-                props.setShow(true)
+                navigate("/generator/bsc");
+                props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
-                  ? toast.error("User Rejected The Request")
+                  ? toast.error(
+                      "User Rejected The Request"
+                    )
                   : toast.error(res.error.message);
               } else {
                 toast.success("Token Deploy Successfully");
                 // navigate("/generator/final");
-                props.setShow(false)
-                console.log(res, "else side deploy then return deplo succes");
+                props.setShow(false);
+                console.log(res, "else side deploy then return deploy succes");
               }
             });
           })
           .catch((error) => {
             console.log("Api fail error", error);
-            navigate("/generator/bsc");
-            error.response.data.message? toast.error(error.response.data.message):toast.error("Data Fetch Failed Try Again")
-           
+            props.setShow(true);
+            // navigate("/generator/ethereum");
+            error.response.data.message
+              ? toast.error(error.response.data.message)
+              : toast.error("Data Fetch Failed Try Again");
           });
-      } else if (connectedAccAddress.length === 0) {
-        toast.error("Please Connect Your Metamask Wallet First");
-      } else {
-        console.log(FormData.network,"formdaata netwrk 688 line")
-        showToast(FormData.network);
+      }  else {
+        changeNetwork(FormData.network);
       }
     } catch (error) {
       toast.error(error.message);

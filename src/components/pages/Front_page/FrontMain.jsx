@@ -46,9 +46,9 @@ export const FrontMain = () => {
       setCustom(respCustom.data.msg)
       setStart(respStart.data.msg)
       // setFeature(respFeature.data.msg)
-      setFaq(respFaq.data.msg.faqDetails)
+      setFaq(respFaq.data.msg.faqDetails.items)
       setFaqData(respFaq.data.msg.faqData)
-      setFeatures(respFeatures.data.msg.featureDetails)
+      setFeatures(respFeatures.data.msg.featureDetails.items)
       setFeaturesData(respFeatures.data.msg.featureData)
       setSteps(respSteps.data.msg.stepDetails)
       setStepData(respSteps.data.msg.stepData)
@@ -147,9 +147,9 @@ export const FrontMain = () => {
               ))}
             </div>
           </section>
-          <section className="page-section section-custom-dev p-4 p-md-5 mt-4" style={{ backgroundColor: `${custom.backgroundColor}` }}>
+          <section className="page-section section-custom-dev p-4 p-md-5 mt-5" style={{ backgroundColor: `${custom.backgroundColor}` }}>
             <div className="container">
-              <h2 className="section-title-small text-center" style={{ color: `${custom.headingColor}` }}>
+              <h2 className="section-title-small text-center" style={{ color: `${custom.headingColor}`, fontSize:"31px"}}>
                 {custom.heading}
               </h2>
               <div className="mt-3 text-center">
@@ -187,6 +187,7 @@ export const FrontMain = () => {
                               data-bs-target={`#flush-collapseOne${index}`}
                               aria-expanded={index === 0 ? 'true' : 'false'}
                               aria-controls={`flush-collapseOne${index}`}
+                              style={{backgroundColor:"#f7f3f2"}}
                             >
                               <h4 className="me-3">{value.question}</h4>
                             </button>
@@ -216,6 +217,7 @@ export const FrontMain = () => {
                 <a
                   href="/generator"
                   className="btn btn-primary btn-lg btn-rounded btn-pad"
+                  style={{fontSize:"1.25rem", marginBottom:"45px"}}
                 >
                   Deploy your token
                 </a>

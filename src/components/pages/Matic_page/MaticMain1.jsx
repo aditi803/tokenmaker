@@ -24,7 +24,7 @@ import {  ethers } from "ethers";
 export const MaticMain1 = (props) => {
   const navigate = useNavigate();
 
-  const { deployContract, showToast, connectedAccAddress, blockchainNetworks } =
+  const { deployContract, changeNetwork,connectedAccAddress, SignInMetamask,blockchainNetworks } =
     useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -612,19 +612,25 @@ export const MaticMain1 = (props) => {
     try {
       console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
+      console.log(provider,"provider");
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
-      // let newFormdata;
+
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
-        ? ( Object.assign(FormData,{network:blockchainNetworks[FormData.network]}) )
+        ? Object.assign(FormData, {
+            network: blockchainNetworks[FormData.network],
+          })
         : "";
 
-      console.log(FormData, "formdata after assign chain id bnbside");
-      if (FormData.network === chainId && connectedAccAddress.length !== 0) {
+      console.log(FormData, "formdata eth side");
+      if (FormData.network === chainId ) {
         // navigate("/generator/final");
-        props.setShow(false)
+        if(connectedAccAddress.length ===0){
+          await SignInMetamask()
+        }
+        props.setShow(false);
         console.log(FormData.network, "currentNetworkID");
         //hit contract compile api
         axios
@@ -636,35 +642,34 @@ export const MaticMain1 = (props) => {
             console.log(res, "response");
             // console.log(contractSource, "contract Source api side ");
             //calling deploy function
-            deployContract(
-              res.data.result,
-              FormData,
-            ).then((res) => {
+            deployContract(res.data.result, FormData).then((res) => {
+              
               if (res.error) {
-                // navigate("/generator/polygon");
-                props.setShow(true)
-
+                navigate("/generator/polygon");
+                props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
-                  ? toast.error("User Rejected The Request")
+                  ? toast.error(
+                      "User Rejected The Request"
+                    )
                   : toast.error(res.error.message);
               } else {
                 toast.success("Token Deploy Successfully");
-                navigate("/generator/final");
-                console.log(res, "else side deploy then return deplo succes");
+                // navigate("/generator/final");
+                props.setShow(false);
+                console.log(res, "else side deploy then return deploy succes");
               }
             });
           })
           .catch((error) => {
             console.log("Api fail error", error);
-            // navigate("/generator/polygon");
-            props.setShow(false)
-            error.response.data.message? toast.error(error.response.data.message):toast.error("Data Fetch Failed Try Again")
-            
+            props.setShow(true);
+            // navigate("/generator/ethereum");
+            error.response.data.message
+              ? toast.error(error.response.data.message)
+              : toast.error("Data Fetch Failed Try Again");
           });
-      } else if (connectedAccAddress.length === 0) {
-        toast.error("Please Connect Your Metamask Wallet First");
-      } else {
-        showToast(FormData.network);
+      }  else {
+        changeNetwork(FormData.network);
       }
     } catch (error) {
       toast.error(error.message);
