@@ -217,7 +217,7 @@ export const FrontMain = () => {
                 <a
                   href="/generator"
                   className="btn btn-primary btn-lg btn-rounded btn-pad"
-                  style={{fontSize:"1.25rem", marginBottom:"171px"}}
+                  style={{fontSize:"1.25rem", marginBottom:"66px"}}
                 >
                   Deploy your token
                 </a>
