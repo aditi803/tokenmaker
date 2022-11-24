@@ -21,7 +21,7 @@ function Footer() {
                 <div className="row" style={{color: `${footer.contentColor}`}}>
                     <div className="col-12 col-md-6 text-center text-md-start order-2">
                         <span>
-                        ©{footer.websiteName}
+                        {footer.websiteName}
                         </span>
                     </div>
                     <div className="col-12 col-md-6 text-center text-md-end order-1 order-md-2" >
@@ -34,8 +34,10 @@ function Footer() {
                         <a href="/#faq" className="btn footer-link py-0 " style={{color: `${footer.contentColor}`}}>Help</a>
                         <a  href="https://www.blocktechbrew.com/" target="_blank" rel='noopnner noreferrer' className="btn footer-link py-0" style={{color: `${footer.contentColor}`}}>{footer.companyName}</a>
                     </div>
-                  
+                    <p></p>
                 </div>
+                <hr />
+                <p>{footer.investorCopyrightText}</p>
             </div>
         </footer>
     </div>
