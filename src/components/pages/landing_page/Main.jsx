@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./landing_page_styles/main.css";
 import axios from 'axios'
+import Loader from "../../../loader";
 function Main() {
 
   const [data, setData] = useState([])
+  const [loader, setLoader] = useState(false)
 
   useEffect(() => {
+    setLoader(true)
     getNetworkHanlder()
   }, [])
 
@@ -16,15 +19,17 @@ function Main() {
       .then(res => {
         setData(res.data.msg.items)
         console.log(res, "Add data view page")
+        setLoader(false)
       })
       .catch(err => {
         console.log(err)
+        setLoader(false)
       })
   }
 
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/" 
 
-  return (
+  return loader ? <Loader /> :(
     <>
       <div className="page-content">
         <main>
@@ -44,7 +49,7 @@ function Main() {
                     <a href={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
                       <span className="title">{value.networkName}</span>
                       <span className="logo" style={{backgroundImage: `url(${imageBaseUrl}${value.networkImage})`}}></span>
-                      <span className="text-muted">{value.description}</span>
+                      <span className="text-muted description">{value.description}</span>
                     </a>
                   </div>
                ))} 
