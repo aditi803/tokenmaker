@@ -37,7 +37,7 @@ function Footer() {
                     <p></p>
                 </div>
                 <hr />
-                <p>{footer.investorCopyrightText}</p>
+                <p className='text-center' style={{fontSize:"16px"}}>{footer.investorCopyrightText}</p>
             </div>
         </footer>
     </div>

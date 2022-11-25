@@ -98,7 +98,7 @@ export const FrontMain = () => {
                 {steps.map((data,index) => (
                   <div className="col-12 col-lg-6" key={index}>
                   <div className="icon-container">
-                    <span className="svg-icon icon-metamask" style={{backgroundImage:`url(${data.stepImage})`}}></span>
+                    <span className="svg-icon icon-metamask" style={{backgroundImage:`url(${imageBaseUrl}${data.stepImage})`}}></span>
                   </div>
                   <div className="title">
                     <span className="step-number">{index + 1} /</span>{data.title}
@@ -135,7 +135,7 @@ export const FrontMain = () => {
               {features.map((data, index) => (
                 <div className="feature-item" key={index}>
                   <div className="icon-container">
-                    <span className="svg-icon icon-compliant"style={{backgroundImage:`url(${data.featureImage})`}}></span>
+                    <span className="svg-icon icon-compliant"style={{backgroundImage:`url(${imageBaseUrl}${data.featureImage})`}}></span>
                   </div>
                   <div>
                     <h4>{data.title}</h4>
