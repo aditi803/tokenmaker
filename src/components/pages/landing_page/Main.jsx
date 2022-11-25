@@ -41,7 +41,7 @@ function Main() {
               
                {data.map((value) => (
                     <div className="chain-item">
-                    <a href="/generator/bsc" className="chain-link chain-bsc">
+                    <a href={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
                       <span className="title">{value.networkName}</span>
                       <span className="logo" style={{backgroundImage: `url(${imageBaseUrl}${value.networkImage})`}}></span>
                       <span className="text-muted">{value.description}</span>
