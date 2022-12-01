@@ -5,6 +5,7 @@ import Loader from "../../../loader";
 function Main() {
 
   const [data, setData] = useState([])
+  const [image, setImage] = useState([])
   const [loader, setLoader] = useState(false)
 
   useEffect(() => {
@@ -27,9 +28,9 @@ function Main() {
       })
   }
 
-  const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/" 
+  const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
 
-  return loader ? <Loader /> :(
+  return loader ? <Loader /> : (
     <>
       <div className="page-content">
         <main>
@@ -42,21 +43,24 @@ function Main() {
             </div>
           </div>
           <div className="chain-select">
-              <>
-              
-               {data.map((value) => (
-                    <div className="chain-item">
-                    <a href={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
-                      <span className="title">{value.networkName}</span>
-                      <span className="logo" style={{backgroundImage: `url(${imageBaseUrl}${value.networkImage})`}}></span>
-                      <span className="text-muted description">{value.description}</span>
-                    </a>
-                  </div>
-               ))} 
+            <>
 
-                
-                {/* <div className="chain-item">
-                  <a href="/generator/polygon" className="chain-link chain-polygon">
+              {data.map((value) => (
+                <div className="chain-item">
+                  <a href={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
+                    <span className="title">{value.categoryName}</span>
+                      <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
+                    {/* {value?.networks[0]((img) => (
+                      <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
+                    ))} */}
+                    <span className="text-muted description">Create your token on {value.categoryName}</span>
+                  </a>
+                </div>
+              ))}
+
+
+              {/* <div className="chain-item">
+                  <a href="/generator/polygon" className="chain-link chain-polygon">y
                     <div className="ribbon top-right ribbon-primary">
                       <small>NEW</small>
                     </div>
@@ -67,7 +71,7 @@ function Main() {
                     </span>
                   </a>
                 </div> */}
-              </>
+            </>
           </div>
         </main>
       </div>
