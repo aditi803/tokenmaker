@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "../Eth_page/eth_styles/header.css";
 
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
+import { Link } from "react-router-dom";
 
 export const EthHeader = ({header}) => {
   // const {chainName} = props
@@ -41,7 +42,7 @@ console.log(chainId,"chainId header side");
           <div className="row align-items-center">
             <div className="col">
               <nav className="navbar navbar-expand-lg">
-                <a href="/" className="navbar-brand">
+                <Link to="/" className="navbar-brand">
                   <img
                     src={imageBaseUrl+header.investorLogoImage}
                     alt="Logo"
@@ -65,7 +66,7 @@ console.log(chainId,"chainId header side");
                           loading="lazy"/>
                        </noscript>
                     </span> */}
-                </a>
+                </Link>
                 <div className="ms-auto d-none d-lg-block">
                   {connectedAccAddress.length !== 0 ? (
                     <button

@@ -231,7 +231,7 @@ export const EtherProvider = ({ children }) => {
         }
       }
       console.log(parseChainId, "parseChainId>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
+console.log(`0x${parseChainId}`,"hexa id after")
       console.log(networkID, "selectedNetworkID");
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",

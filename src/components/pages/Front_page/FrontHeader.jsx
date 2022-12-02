@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React,{useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import { HEADER } from '../../../api/Api'
 import './Front_style/FrontHeader.css'
 export const EthHeader = () => {
@@ -11,7 +12,7 @@ export const EthHeader = () => {
             <div className="row align-items-center">
               <div className="col">
                 <nav className="navbar navbar-expand-lg">
-                  <a href="/" className="navbar-brand">
+                  <Link to="/" className="navbar-brand">
                     <img src="https://blocktechbrew.com/wp-content/uploads/2022/05/btb_logo.png" alt="Logo"  className='logoImage' srcSet="" />
                     {/* <span className="span-1">
                       <span className="span-2">
@@ -30,7 +31,7 @@ export const EthHeader = () => {
                           loading="lazy"/>
                        </noscript>
                     </span> */}
-                  </a>
+                  </Link>
                   <div className="ms-auto d-none d-lg-block">
                     <button type='button' className='btn uppercase btn btn-action btn-rounded btn-pad'>
                       <span className="inline-block">Connect your Wallet</span>

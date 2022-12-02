@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../Eth_page/eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import { toast } from "react-toastify";
@@ -19,13 +19,36 @@ import {
   customDisabled,
 } from "../../../disabledUtils";
 import axios from "axios";
-import {  ethers } from "ethers";
+import { ethers } from "ethers";
+import Loader from "../../../loader";
 
 export const MaticMain1 = (props) => {
   const navigate = useNavigate();
 
-  const { deployContract, changeNetwork,connectedAccAddress, SignInMetamask,blockchainNetworks } =
+  const { deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks } =
     useContext(GlobalContext);
+
+    const networkFee = []
+
+  const [data, setData] = useState([])
+  const getNetworks = () => {
+    axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
+      .then((res) => {
+        setData(res.data.msg.items)
+        console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
+      })
+      .catch((err) => {
+        console.log(err, "Error")
+      })
+  }
+
+  console.log(data, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+
+  
+
+  useEffect(() => {
+    getNetworks()
+  }, [setData])
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -173,15 +196,20 @@ export const MaticMain1 = (props) => {
         recoverable: false,
       }));
       if (network === "polygonMumbai") {
+        console.log(data.networkCommissionFeem, "Network inside commisssion feee")
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: null,
+          commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          
+          // commissionFee: null,
         }));
       }
       if (network === "polygonMainnet") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 150,
+          // commissionFee: data.networkCommissionFee,
+          // commissionFee: 150,
+          commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
         }));
       }
     } else if (tokenType === "free") {
@@ -252,6 +280,7 @@ export const MaticMain1 = (props) => {
       if (network === "polygonMumbai") {
         setEthFormData((prev) => ({
           ...prev,
+          // commissionFee: data.commissionFee
           commissionFee: null,
         }));
       }
@@ -262,7 +291,7 @@ export const MaticMain1 = (props) => {
         }));
       }
     }
-  }, [tokenType, supplyType, network]);
+  }, [tokenType, supplyType, network, data]);
 
   useEffect(() => {
     if (tokenType === "custom") {
@@ -501,7 +530,7 @@ export const MaticMain1 = (props) => {
           [e.target.name]: boolean ?? 0,
         }));
       } else {
-        
+
         setEthFormData((prev) => ({
           ...prev,
           [e.target.name]: (e.target.value).charAt(0) !== '0' ? e.target.value : (e.target.value).substring(1),
@@ -510,8 +539,8 @@ export const MaticMain1 = (props) => {
 
       return;
     }
-    if(e.target.name === "tokenSymbol"){
-      return  setEthFormData((prev) => ({
+    if (e.target.name === "tokenSymbol") {
+      return setEthFormData((prev) => ({
         ...prev,
         [e.target.name]: boolean ?? e.target.value.toUpperCase(),
       }));
@@ -574,13 +603,13 @@ export const MaticMain1 = (props) => {
           "Please confirm that you have read and understood our terms of use",
       }));
     }
-      if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
-        setErr((prev) => ({
-          ...prev,
-          decimalsErr: "The number of decimals must be between 6 and 21",
-        }));
-      }
-    
+    if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
+      setErr((prev) => ({
+        ...prev,
+        decimalsErr: "The number of decimals must be between 6 and 21",
+      }));
+    }
+
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
       // do what u want to do with data
@@ -599,20 +628,20 @@ export const MaticMain1 = (props) => {
       // navigate("/generator/final");
     }
   };
-  useEffect(()=>{
-    if(tokenType==="free"){
+  useEffect(() => {
+    if (tokenType === "free") {
       setEthFormData((prev) => ({
         ...prev,
-       initialSupply:10000
+        initialSupply: 10000
       }));
     }
-  },[tokenType,initialSupply,maximumSupply])
+  }, [tokenType, initialSupply, maximumSupply])
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
     try {
       console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      console.log(provider,"provider");
+      console.log(provider, "provider");
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
 
@@ -620,14 +649,14 @@ export const MaticMain1 = (props) => {
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
         ? Object.assign(FormData, {
-            network: blockchainNetworks[FormData.network],
-          })
+          network: blockchainNetworks[FormData.network],
+        })
         : "";
 
       console.log(FormData, "formdata eth side");
-      if (FormData.network === chainId ) {
+      if (FormData.network === chainId) {
         // navigate("/generator/final");
-        if(connectedAccAddress.length ===0){
+        if (connectedAccAddress.length === 0) {
           await SignInMetamask()
         }
         props.setShow(false);
@@ -643,14 +672,14 @@ export const MaticMain1 = (props) => {
             // console.log(contractSource, "contract Source api side ");
             //calling deploy function
             deployContract(res.data.result, FormData).then((res) => {
-              
+
               if (res.error) {
                 navigate("/generator/polygon");
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
-                      "User Rejected The Request"
-                    )
+                    "User Rejected The Request"
+                  )
                   : toast.error(res.error.message);
               } else {
                 toast.success("Token Deploy Successfully");
@@ -668,7 +697,7 @@ export const MaticMain1 = (props) => {
               ? toast.error(error.response.data.message)
               : toast.error("Data Fetch Failed Try Again");
           });
-      }  else {
+      } else {
         changeNetwork(FormData.network);
       }
     } catch (error) {
@@ -1079,12 +1108,20 @@ export const MaticMain1 = (props) => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                <option value="polygonMainnet">
-                                  Polygon Mainnet
-                                </option>
-                                <option value="polygonMumbai">
+                                {data.map((item) =>   {
+                                  if (item.parentNetworkName === "Polygon") {
+                                    return (
+                                      <option value={item.value}>
+                                        {item.subNetworkName}
+                                        {/* {console.log(item.networkCommissionFee, "OPtion wli network commisision fee jan lkjhgcfghjkm")} */}
+                                      </option>
+                                    )
+                                  }
+                                })}
+
+                                {/* <option value="polygonMumbai">
                                   Polygon Mumbai
-                                </option>
+                                </option> */}
                               </select>
                               <span className="form-text text-muted">
                                 Select the network on wich you want to deploy
@@ -1116,13 +1153,13 @@ export const MaticMain1 = (props) => {
                                   I have read, understood and agreed to the{" "}
                                   {/* <span className="text-underline"> */}
                                   {/*  modal*/}
-                                  <a
+                                  <Link
                                     href="/"
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
                                   >
                                     <u> term of use </u>
-                                  </a>
+                                  </Link>
                                   <TermsModal />
                                   {/* modal */}
                                   {/* </span> */}
@@ -1157,7 +1194,7 @@ export const MaticMain1 = (props) => {
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
                                   ></i> */}
-                                                            <Tooltip
+                                  <Tooltip
                                     content={
                                       <>
                                         The commison fee will be
@@ -1181,8 +1218,9 @@ export const MaticMain1 = (props) => {
                               <div className="Tbtn">
                                 <span className="badge bg-success d-block p-2">
                                   {commissionFee
-                                    ? `${commissionFee} MATIC`
-                                    : "FREE"}
+                                    ? commissionFee === "Free" ? "Free" : `${commissionFee} MATIC `
+                                    // ? `${commissionFee} MATIC`
+                                    : "Free"}
                                 </span>
                               </div>
                             </div>
@@ -1197,12 +1235,12 @@ export const MaticMain1 = (props) => {
                                     title="The gas fee depend on gas limit and gas price.
                                   Metamask will automatically display the best fee to use "
                                   ></i> */}
-                                   <Tooltip
+                                  <Tooltip
                                     content={
                                       <>
-                                        The gas fee depend <br/>on gas limit and<br/> gas price.
-                                  Metamask will<br/> automatically display<br/> the best fee to use
-                                      
+                                        The gas fee depend <br />on gas limit and<br /> gas price.
+                                        Metamask will<br /> automatically display<br /> the best fee to use
+
                                       </>
                                     }
                                     direction="top"
@@ -1224,8 +1262,8 @@ export const MaticMain1 = (props) => {
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
                             onClick={() => {
-                              if(ethFormData.tokenName && ethFormData.tokenSymbol  && ethFormData.decimals  && ethFormData.agreement === true ){
-                              compileContract(ethFormData)    
+                              if (ethFormData.tokenName && ethFormData.tokenSymbol && ethFormData.decimals && ethFormData.agreement === true) {
+                                compileContract(ethFormData)
                               }
                             }}
                           >

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import axios from "axios";
@@ -26,6 +26,22 @@ export const EthMain1 = (props) => {
 
   const { deployContract, changeNetwork, connectedAccAddress,SignInMetamask, blockchainNetworks } =
     useContext(GlobalContext);
+
+    const [data, setData] = useState([])
+  const getNetworks = () => {
+    axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
+      .then((res) => {
+        setData(res.data.msg.items)
+        console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
+      })
+      .catch((err) => {
+        console.log(err, "Error")
+      })
+  }
+
+  useEffect(() => {
+    getNetworks()
+  }, [setData])
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -167,19 +183,23 @@ export const EthMain1 = (props) => {
       if (network === "rinkeby") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: null,
+          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee 
+          // commissionFee: null,
         }));
       }
       if (network === "mainnet") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.075,
+          // commissionFee: 0.075,
+          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+
         }));
       }
       if (network === "gorli") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: null,
+          // commissionFee: null,
+          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
         }));
       }
     } else if (tokenType === "free") {
@@ -267,7 +287,7 @@ export const EthMain1 = (props) => {
         }));
       }
     }
-  }, [tokenType, supplyType, network]);
+  }, [tokenType, supplyType, network, data]);
   useEffect(() => {
     // if(initialSupply.length===0){
     //   setEthFormData((prev) => ({
@@ -1111,9 +1131,16 @@ export const EthMain1 = (props) => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                <option value="mainnet">Mainnet</option>
-                                <option value="gorli">Görli</option>
-                                <option value="rinkeby">Rinkeby</option>
+                                {data.map((item) => {
+                                  if(item.parentNetworkName === "Ethereum"){
+                                    return (
+                                      <option value={item.value}>{item.subNetworkName}</option>
+                                    )
+                                  }
+                                })}
+                                
+                                {/* <option value="gorli">Görli</option>
+                                <option value="rinkeby">Rinkeby</option> */}
                               </select>
                               <span className="form-text text-muted">
                                 Select the network on wich you want to deploy
@@ -1145,13 +1172,13 @@ export const EthMain1 = (props) => {
                                   I have read, understood and agreed to the{" "}
                                   {/* <span className="text-underline"> */}
                                   {/*  modal*/}
-                                  <a
-                                    href="/"
+                                  <Link
+                                    to="/"
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
                                   >
                                     <u> term of use </u>
-                                  </a>
+                                  </Link>
                                   <TermsModal />
                                   {/* modal */}
                                   {/* </span> */}
@@ -1213,7 +1240,7 @@ export const EthMain1 = (props) => {
                               <div className="Tbtn">
                                 <span className="badge bg-success d-block p-2">
                                   {commissionFee
-                                    ? `${commissionFee} ETH`
+                                    ? commissionFee ==="Free" ? "Free" : `${commissionFee} ETH`
                                     : "FREE"}
                                 </span>
                               </div>

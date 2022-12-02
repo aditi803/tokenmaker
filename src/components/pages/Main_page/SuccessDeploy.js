@@ -1,6 +1,6 @@
 import React, { useEffect,useContext } from "react";
 import "./Success.css"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
 
@@ -60,7 +60,7 @@ urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
             <div>
               Your token address is:{" "}
               <div className="token-addr d-inline-block ms-2">
-                <a
+                <Link
                   href={`${explorer.link}/token/${deployData.tokenAddress}`}
                   target="_blank"
                   rel="noreferrer"
@@ -68,7 +68,7 @@ urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
                 >
                 
                   {deployData.tokenAddress}
-                </a>
+                </Link>
                 <div
                   className="text-light-gray ms-2 pointer d-inline-block"
                   title="copy address"
@@ -136,14 +136,14 @@ urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
               <button type="button" onClick = {addToken} className="btn btn-success">
                 Add your token to your wallet
               </button>
-              <a
-                href={`${explorer.link}/tx/${deployData.txHash}`}
+              <Link
+                to={`${explorer.link}/tx/${deployData.txHash}`}
                 className="btn btn-secondary ms-2"
                 target="_blank"
                 rel="noreferrer"
               >
                { `View the transaction on ${explorer.name}`}
-              </a>
+              </Link>
             </div>
           </div>
           <button type="button"  onClick={createNewToken} className="btn btn-link btn-sm p-0 mt-4 text-body">

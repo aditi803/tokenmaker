@@ -3,6 +3,7 @@ import { FOOTER } from '../../../api/Api'
 import { TermsModal } from '../../Layots/TermsModal'
 import "./landing_page_styles/footer.css"
 import axios from "axios";
+import { Link } from 'react-router-dom';
 function Footer() {
  
     const [footer, setFooter] = useState([])
@@ -31,8 +32,8 @@ function Footer() {
                         </button>
                         <TermsModal />
 
-                        <a href="/#faq" className="btn footer-link py-0 " style={{color: `${footer.contentColor}`}}>Help</a>
-                        <a  href="https://www.blocktechbrew.com/" target="_blank" rel='noopnner noreferrer' className="btn footer-link py-0" style={{color: `${footer.contentColor}`}}>{footer.companyName}</a>
+                        <Link to="/#faq" className="btn footer-link py-0 " style={{color: `${footer.contentColor}`}}>Help</Link>
+                        <Link  to="https://www.blocktechbrew.com/" target="_blank" rel='noopnner noreferrer' className="btn footer-link py-0" style={{color: `${footer.contentColor}`}}>{footer.companyName}</Link>
                     </div>
                     <p></p>
                 </div>

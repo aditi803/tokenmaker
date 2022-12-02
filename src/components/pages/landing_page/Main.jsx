@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./landing_page_styles/main.css";
 import axios from 'axios'
 import Loader from "../../../loader";
+import { Link } from "react-router-dom";
 function Main() {
 
   const [data, setData] = useState([])
@@ -47,14 +48,15 @@ function Main() {
 
               {data.map((value) => (
                 <div className="chain-item">
-                  <a href={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
+                  {console.log(value.hrefPath,"jjjjjjj")}
+                  <Link to={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
                     <span className="title">{value.categoryName}</span>
                       <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
                     {/* {value?.networks[0]((img) => (
                       <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
                     ))} */}
                     <span className="text-muted description">Create your token on {value.categoryName}</span>
-                  </a>
+                  </Link>
                 </div>
               ))}
 

@@ -3,6 +3,7 @@ import "./Front_style/FrontMain.css";
 import axios from 'axios';
 import { BANNER_DETAILS, CUSTOM_DETAILS, FAQS, FEATURES, START_SECTION_DETAILS, STEPS } from "../../../api/Api";
 import Loader from "../../../loader";
+import { Link } from "react-router-dom";
 
 export const FrontMain = () => {
 
@@ -76,13 +77,13 @@ export const FrontMain = () => {
                 </p>
               </div>
               <div className="my-5">
-                <a
+                <Link
                   className="btn btn-pad btn-rounded me-3"
-                  href="/generator"
+                  to="/generator"
                   style={{ backgroundColor: `${banner.buttonBackgroundColor}`, color: `${banner.buttonTextColor}` }}
                 >
                   {banner.buttonText}
-                </a>
+                </Link>
               </div>
             </div>
           </section>
@@ -117,13 +118,13 @@ export const FrontMain = () => {
                 {start.heading}
               </h2>
               <div className="mt-3 text-center">
-                <a
-                  href="/generator"
+                <Link
+                  to="/generator"
                   className="btn btn-rounded btn-pad"
                   style={{ backgroundColor: `${start.buttonBackgroundColor}`, color: `${start.buttonColor}` }}
                 >
                   {start.buttonText}
-                </a>
+                </Link>
               </div>
             </div>
           </section>
@@ -153,13 +154,13 @@ export const FrontMain = () => {
                 {custom.heading}
               </h2>
               <div className="mt-3 text-center">
-                <a
-                  type="button" href="https://www.blocktechbrew.com/"
+                <Link
+                  type="button" to="https://www.blocktechbrew.com/"
                   className="btn btn-rounded btn-pad"
                   style={{ backgroundColor: `${custom.buttonBackgroundColor}`, color: `${custom.buttonColor}` }}
                 >
                   {custom.buttonText}
-                </a>
+                </Link>
               </div>
             </div>
           </section>
@@ -214,13 +215,13 @@ export const FrontMain = () => {
           <section className="page-section section-ready-i">
             <div className="container">
               <div className="mt-3 text-center">
-                <a
+                <Link
                   href="/generator"
                   className="btn btn-primary btn-lg btn-rounded btn-pad"
                   style={{fontSize:"1.25rem", marginBottom:"66px"}}
                 >
                   Deploy your token
-                </a>
+                </Link>
               </div>
             </div>
           </section>
