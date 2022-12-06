@@ -16,7 +16,7 @@ export const SuccessDeploy = (props) => {
   let explorer
 
 // eslint-disable-next-line no-unused-expressions
-urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
+  urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
 
   return (
     <div>
@@ -136,14 +136,14 @@ urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
               <button type="button" onClick = {addToken} className="btn btn-success">
                 Add your token to your wallet
               </button>
-              <Link
-                to={`${explorer.link}/tx/${deployData.txHash}`}
+              <a
+                href={`${explorer.link}/tx/${deployData.txHash}`}
                 className="btn btn-secondary ms-2"
                 target="_blank"
                 rel="noreferrer"
               >
                { `View the transaction on ${explorer.name}`}
-              </Link>
+              </a>
             </div>
           </div>
           <button type="button"  onClick={createNewToken} className="btn btn-link btn-sm p-0 mt-4 text-body">

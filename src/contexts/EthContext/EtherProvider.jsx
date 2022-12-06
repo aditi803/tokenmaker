@@ -112,14 +112,14 @@ export const EtherProvider = ({ children }) => {
 
 
   const urlLinks = {
-  97:{link:"https://testnet.bscscan.com/",name:"Bsc Testnet Scan",networkName:"Bsc Testnet"},
-  56:{link:"https://bscscan.com/",name:"Bsc Mainnet Scan",networkName:"Bsc Mainnet"},
-  137:{link:"https://polygonscan.com/",name:"Polygon Mainnet Scan",networkName:"Polygon Mainnet"},
-  80001:{link:"https://mumbai.polygonscan.com/",name:"Polygon Testnet Scan",networkName:"Polygon Testnet"} ,
-  1:{link:"https://etherscan.io",name:"Ethereum Mainnet Scan",networkName:"Ethereum Mainnet"},
-  5:{link:"https://goerli.etherscan.io",name:"Goerli Testnet Scan",networkName:"Goerli Testnet"} ,
-  4:{link: "https://rinkeby.etherscan.io/",name:"RinkeyBy Testnet Scan",networkName:"RinkeyBy Testnet"},
-}
+    97: { link: "https://testnet.bscscan.com/", name: "Bsc Testnet Scan", networkName: "Bsc Testnet" },
+    56: { link: "https://bscscan.com/", name: "Bsc Mainnet Scan", networkName: "Bsc Mainnet" },
+    137: { link: "https://polygonscan.com/", name: "Polygon Mainnet Scan", networkName: "Polygon Mainnet" },
+    80001: { link: "https://mumbai.polygonscan.com/", name: "Polygon Testnet Scan", networkName: "Polygon Testnet" },
+    1: { link: "https://etherscan.io", name: "Ethereum Mainnet Scan", networkName: "Ethereum Mainnet" },
+    5: { link: "https://goerli.etherscan.io", name: "Goerli Testnet Scan", networkName: "Goerli Testnet" },
+    4: { link: "https://rinkeby.etherscan.io/", name: "RinkeyBy Testnet Scan", networkName: "RinkeyBy Testnet" },
+  }
 
 
 
@@ -216,12 +216,12 @@ export const EtherProvider = ({ children }) => {
   //ends here
 
   //change RPC network if not equal to selected network
-  
+
   const changeNetwork = async (networkID) => {
     try {
       console.log(networkID, "netwrk id in change netwrk");
-      
-      const chainIdInDecimal = ethers.utils.hexlify(networkID); 
+
+      const chainIdInDecimal = ethers.utils.hexlify(networkID);
       console.log(chainIdInDecimal, "hexadecimal chainid");
       let parseChainId = "";
       for (let i = 0; i < chainIdInDecimal.length; i++) {
@@ -231,7 +231,7 @@ export const EtherProvider = ({ children }) => {
         }
       }
       console.log(parseChainId, "parseChainId>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-console.log(`0x${parseChainId}`,"hexa id after")
+      console.log(`0x${parseChainId}`, "hexa id after")
       console.log(networkID, "selectedNetworkID");
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
@@ -246,10 +246,39 @@ console.log(`0x${parseChainId}`,"hexa id after")
   };
   //ends here
 
-  
+
+  const sendCommision = async (_commissionFee) => {
+    try {
+      console.log(typeof _commissionFee,"type of com")
+      console.log(_commissionFee,"_commissionFee  com")
+
+      if(window.ethereum){
+        await window.ethereum.send("eth_requestAccounts");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        // ethers.utils.getAddress(addr);
+        const tx = await signer.sendTransaction({
+          to: "0xda3d2907e30a9df4d6f3054870caee9374ff5775",
+          value: ethers.utils.parseEther(_commissionFee)
+        });
+        console.log("tx", tx);
+        if(tx.hash){
+          return true
+        }else{
+          return  false
+        }
+      }else{
+        toast.error("install metamask")
+      }
+      
+    } catch (error) {
+      console.log(error, "error send commision side")
+    }
+  }
+
   //deploy Contract on blockchain
   const deployContract = async (contractSource, newFormData) => {
-   
+
     try {
       let explorer
       const abi = contractSource.abi;
@@ -261,11 +290,11 @@ console.log(`0x${parseChainId}`,"hexa id after")
       await window.ethereum.send("eth_requestAccounts");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      console.log(signer,"signerrrrrrrrrrrrrrrrrrrrs");
+      console.log(signer, "signerrrrrrrrrrrrrrrrrrrrs");
       const factory = new ContractFactory(abi, bytecode, signer);
       // If your contract requires constructor args, you can specify them here
       const contract = await factory.deploy();
-      console.log(contract,"contractsssssssssssssss");
+      console.log(contract, "contractsssssssssssssss");
       console.log(contract.address, "deployeed contract address");
       console.log(contract.deployTransaction.hash, "deployeed contract hash");
       if (contract.deployTransaction.hash) {
@@ -281,11 +310,11 @@ console.log(`0x${parseChainId}`,"hexa id after")
         }));
 
         // eslint-disable-next-line no-unused-expressions
-        urlLinks[newFormData.network]? explorer = urlLinks[newFormData.network]:""
-         
+        urlLinks[newFormData.network] ? explorer = urlLinks[newFormData.network] : ""
+
         // eslint-disable-next-line no-unused-expressions
-        console.log(`${explorer.link}/tx/${contract.deployTransaction.hash}`,"new tx urlllll")
-        console.log(newFormData.network,"netwrk nameee")
+        console.log(`${explorer.link}/tx/${contract.deployTransaction.hash}`, "new tx urlllll")
+        console.log(newFormData.network, "netwrk nameee")
         axios
           .post("https://tokenmaker-apis.block-brew.com/token/tokendetails", {
             tokenName: newFormData.tokenName,
@@ -297,7 +326,8 @@ console.log(`0x${parseChainId}`,"hexa id after")
             maximumSupply: newFormData.maximumSupply,
             accessType: newFormData.accessType,
             network: explorer.networkName,
-            commissionFee:"0.78",
+            commissionFee: "0.78",
+            // txHash: `${explorer.link}/tx/${contract.deployTransaction.hash}`,
             txHash: `${explorer.link}/tx/${contract.deployTransaction.hash}`,
           })
           .then((res) => {
@@ -332,7 +362,8 @@ console.log(`0x${parseChainId}`,"hexa id after")
         blockchainNetworks: blockchainNetworks,
         accBalance: accBalance,
         chainId: chainId,
-        urlLinks:urlLinks
+        urlLinks: urlLinks,
+        sendCommision:sendCommision
       }}
     >
 

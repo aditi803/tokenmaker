@@ -25,7 +25,7 @@ import Loader from "../../../loader";
 export const MaticMain1 = (props) => {
   const navigate = useNavigate();
 
-  const { deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks } =
+  const { deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks ,sendCommision} =
     useContext(GlobalContext);
 
     const networkFee = []
@@ -551,6 +551,26 @@ export const MaticMain1 = (props) => {
     }));
   };
 
+  const [gasFee, setGasFee] = useState();
+
+
+  useEffect(() => {
+    const selectedCommissionFee = data?.find(({value,parentNetworkName, subNetworkName, tokenType}) => {
+      if(parentNetworkName === 'Polygon' && value === ethFormData.network && tokenType === ethFormData.tokenType){
+        return true;
+      }
+    } )
+    // setGasFee(selectedCommissionFee)
+    setEthFormData(prev => ({
+      ...prev,
+      commissionFee: selectedCommissionFee?.networkCommissionFee
+    }))
+    console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+
+
+
+  }, [ethFormData.tokenType, ethFormData.network, data])
+
   useEffect(() => {
     if (agreement !== false) {
       setErr((prev) => ({
@@ -664,7 +684,7 @@ export const MaticMain1 = (props) => {
         //hit contract compile api
         axios
           .post(
-            "https://tokenmaker-block-tech.herokuapp.com/api/v1/compile/contract",
+            "https://tokenmaker-apis.block-brew.com/contract/contract",
             FormData
           )
           .then((res) => {
@@ -1108,14 +1128,17 @@ export const MaticMain1 = (props) => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                {data.map((item) =>   {
-                                  if (item.parentNetworkName === "Polygon") {
+                                {data.map((item) => {
+                                  if(item.parentNetworkName === "Polygon" && item.tokenType === 'free'){
                                     return (
-                                      <option value={item.value}>
-                                        {item.subNetworkName}
-                                        {/* {console.log(item.networkCommissionFee, "OPtion wli network commisision fee jan lkjhgcfghjkm")} */}
-                                      </option>
+                                      <option value={item.value}>{item.subNetworkName}</option>
                                     )
+                                  }
+                                  else if(item.parentNetworkName === "Polygon" && item.tokenType === 'basic'){
+                                    <option value={item.value}>{item.subNetworkName}</option>
+                                  }
+                                  else if(item.parentNetworkName === "Polygon" && item.tokenType === 'custom'){
+                                    <option value={item.value}>{item.subNetworkName}</option>
                                   }
                                 })}
 
@@ -1261,9 +1284,12 @@ export const MaticMain1 = (props) => {
                           <button
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
-                            onClick={() => {
+                            onClick={async () => {
                               if (ethFormData.tokenName && ethFormData.tokenSymbol && ethFormData.decimals && ethFormData.agreement === true) {
-                                compileContract(ethFormData)
+                                let res = await sendCommision(commissionFee)
+                                if(res===true){
+                                compileContract(ethFormData);
+                                }
                               }
                             }}
                           >

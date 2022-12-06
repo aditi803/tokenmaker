@@ -24,7 +24,7 @@ export const EthMain1 = (props) => {
   // const {compileContract}  = useContext(GlobalContext)
   const navigate = useNavigate();
 
-  const { deployContract, changeNetwork, connectedAccAddress,SignInMetamask, blockchainNetworks } =
+  const { deployContract, changeNetwork, connectedAccAddress,SignInMetamask, blockchainNetworks ,sendCommision} =
     useContext(GlobalContext);
 
     const [data, setData] = useState([])
@@ -32,7 +32,7 @@ export const EthMain1 = (props) => {
     axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
       .then((res) => {
         setData(res.data.msg.items)
-        console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
+        console.log(res.data.msg.items, "Aditii ddata jo ni aata>>>>>>>>>>>>>>> ");
       })
       .catch((err) => {
         console.log(err, "Error")
@@ -183,23 +183,22 @@ export const EthMain1 = (props) => {
       if (network === "rinkeby") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee 
-          // commissionFee: null,
+          // commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
+          commissionFee: null,
         }));
       }
       if (network === "mainnet") {
         setEthFormData((prev) => ({
           ...prev,
-          // commissionFee: 0.075,
-          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
-
+          commissionFee: 0.075,
+          // commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
         }));
       }
       if (network === "gorli") {
         setEthFormData((prev) => ({
           ...prev,
-          // commissionFee: null,
-          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
+          commissionFee: null,
+          // commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
         }));
       }
     } else if (tokenType === "free") {
@@ -536,6 +535,35 @@ export const EthMain1 = (props) => {
     }
   }, [pausable, recoverable, burnable, tokenType, accessType]);
 
+  // function commissionFeeCheck () {
+
+  // }
+
+  const [gasFee, setGasFee] = useState();
+
+
+  useEffect(() => {
+    const selectedCommissionFee = data?.find(({value,parentNetworkName, subNetworkName, tokenType}) => {
+      if(parentNetworkName === 'Ethereum' && value === ethFormData.network && tokenType === ethFormData.tokenType){
+        return true;
+      }
+    } )
+    // setGasFee(selectedCommissionFee)
+    setEthFormData(prev => ({
+      ...prev,
+      commissionFee: selectedCommissionFee?.networkCommissionFee
+    }))
+    console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+
+
+
+  }, [ethFormData.tokenType, ethFormData.network, data])
+
+
+
+
+
+
   const ethMainFormHandler = (e) => {
     let boolean = null;
     if (e.target.type === "checkbox") {
@@ -685,7 +713,7 @@ export const EthMain1 = (props) => {
         //hit contract compile api
         axios
           .post(
-            "https://tokenmaker-block-tech.herokuapp.com/api/v1/compile/contract",
+            "https://tokenmaker-apis.block-brew.com/contract/contract",
             FormData
           )
           .then((res) => {
@@ -1132,10 +1160,17 @@ export const EthMain1 = (props) => {
                                 onChange={ethMainFormHandler}
                               >
                                 {data.map((item) => {
-                                  if(item.parentNetworkName === "Ethereum"){
+                                  if(item.parentNetworkName === "Ethereum" && item.tokenType === 'free'){
                                     return (
                                       <option value={item.value}>{item.subNetworkName}</option>
                                     )
+                                  }
+                                  else if(item.parentNetworkName === "Ethereum" && item.tokenType === 'basic'){
+                                    <option value={item.value}>{item.subNetworkName}</option>
+                                  }
+                                  else if(item.parentNetworkName === "Ethereum" && item.tokenType === 'custom'){
+                                    <option value={item.value}>{item.subNetworkName}</option>
+                                    
                                   }
                                 })}
                                 
@@ -1242,6 +1277,10 @@ export const EthMain1 = (props) => {
                                   {commissionFee
                                     ? commissionFee ==="Free" ? "Free" : `${commissionFee} ETH`
                                     : "FREE"}
+                                    {/* {
+                                      // gasFee?.networkCommissionFee
+                                      commissionFee
+                                    } */}
                                 </span>
                               </div>
                             </div>
@@ -1282,14 +1321,18 @@ export const EthMain1 = (props) => {
                           <button
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
-                            onClick={() => {
+                            onClick={async() => {
                               if (
                                 ethFormData.tokenName &&
                                 ethFormData.tokenSymbol &&
                                 ethFormData.decimals &&
                                 ethFormData.agreement === true
                               ) {
+                                let res = await sendCommision(commissionFee)
+                                if(res===true){
                                 compileContract(ethFormData);
+
+                                }
                               }
                             }}
                           >
