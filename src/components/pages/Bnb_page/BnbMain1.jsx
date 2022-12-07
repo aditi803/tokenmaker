@@ -188,14 +188,14 @@ const BnbMain1 = (props) => {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: null,
-          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          // commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
         }));
       }
       if (network === "binanceSmartChain") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: 0.5,
-          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
+          // commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
         }));
       }
     } else if (tokenType === "free") {
@@ -216,7 +216,7 @@ const BnbMain1 = (props) => {
       setEthFormData((prev) => ({
         ...prev,
         noCopyrightLink: true,
-        commissionFee: 1,
+        // commissionFee: 1,
       }));
       // added
       if (supplyType === "unlimited") {
@@ -230,7 +230,7 @@ const BnbMain1 = (props) => {
         setEthFormData((prev) => ({
           ...prev,
           noCopyrightLink: true,
-          commissionFee: 0.225,
+          // commissionFee: 0.225,
           mintable: true,
         }));
         setFieldsDisabled({
@@ -248,6 +248,12 @@ const BnbMain1 = (props) => {
           }));
         }
       } else if (supplyType === "fixed") {
+        setEthFormData((prev) => ({
+          ...prev,
+          mintable:false,
+        }));
+
+
         // if(recoverable===true){
         //   setEthFormData((prev) => ({
         //     ...prev,
@@ -266,13 +272,14 @@ const BnbMain1 = (props) => {
       if (network === "binanceSmartChainTestnet") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: null,
+          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
         }));
       }
       if (network === "binanceSmartChain") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: 0.15,
+          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
         }));
       }
       if (supplyType === "fixed" || supplyType === "capped") {
@@ -299,19 +306,19 @@ const BnbMain1 = (props) => {
       if (burnable === true && pausable === true && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2.3,
+          // commissionFee: 2.3,
         }));
       }
       if (pausable === true && burnable === true && recoverable === false) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.8,
+          // commissionFee: 1.8,
         }));
       }
       if (pausable === true && burnable === false && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.8,
+          // commissionFee: 1.8,
         }));
       }
       if (
@@ -320,25 +327,25 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.5,
+          // commissionFee: 1.5,
         }));
       }
       if (burnable === false && pausable === true && recoverable === false) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.3,
+          // commissionFee: 1.3,
         }));
       }
       if (pausable === false && burnable === true && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2,
+          // commissionFee: 2,
         }));
       }
       if (pausable === false && recoverable === false && burnable === false) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1,
+          // commissionFee: 1,
         }));
       }
       // Roles and fixed
@@ -350,7 +357,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2.6,
+          // commissionFee: 2.6,
         }));
       }
       if (
@@ -361,7 +368,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2.1,
+          // commissionFee: 2.1,
         }));
       }
       if (
@@ -372,7 +379,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2.1,
+          // commissionFee: 2.1,
         }));
       }
       if (
@@ -382,7 +389,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.8,
+          // commissionFee: 1.8,
         }));
       }
       if (
@@ -393,7 +400,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.6,
+          // commissionFee: 1.6,
         }));
       }
       if (
@@ -404,7 +411,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2.3,
+          // commissionFee: 2.3,
         }));
       }
       if (
@@ -415,7 +422,8 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.3,
+          // commissionFee: 1.3,
+          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
         }));
       }
 
@@ -428,7 +436,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.5,
+          // commissionFee: 1.5,
         }));
       }
 
@@ -440,7 +448,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.8,
+          // commissionFee: 1.8,
         }));
       }
       if (
@@ -451,7 +459,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2,
+          // commissionFee: 2,
         }));
       }
       // double
@@ -464,7 +472,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2.3,
+          // commissionFee: 2.3,
         }));
       }
 
@@ -477,7 +485,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 1.8,
+          // commissionFee: 1.8,
         }));
       }
       if (
@@ -488,7 +496,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2.1,
+          // commissionFee: 2.1,
         }));
       }
       if (
@@ -499,7 +507,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2.3,
+          // commissionFee: 2.3,
         }));
       }
       // double
@@ -512,7 +520,7 @@ const BnbMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 2.6,
+          // commissionFee: 2.6,
         }));
       }
     }
@@ -637,9 +645,15 @@ const BnbMain1 = (props) => {
     }
   }, [tokenType, initialSupply, maximumSupply])
 
+  const customVampire = (network) => {
+    const blockArray = Object.entries(blockchainNetworks);
+    const selctedItem = blockArray.find((item) => item[1] === network)
+    return selctedItem?.[0]
+  }
+
   useEffect(() => {
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Binance Smart Chain' && value === ethFormData.network && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName === 'Binance Smart Chain' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })

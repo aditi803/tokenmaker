@@ -9,6 +9,7 @@ export const EtherProvider = ({ children }) => {
   const [accAddress, setAccAddress] = useState([]);
   const [accBalance, setAccBalance] = useState();
   const [chainId, setChainId] = useState();
+  const [toggler, setToggler] = useState(false)
 
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
@@ -237,6 +238,7 @@ export const EtherProvider = ({ children }) => {
         method: "wallet_switchEthereumChain",
         params: [{ chainId: `0x${parseChainId}` }],
       });
+      setToggler(!toggler);
     } catch (error) {
       error.code === 4001
         ? toast.error("Please Allow To Change Network To Continue!!")
@@ -369,6 +371,7 @@ export const EtherProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         // compileContract : compileContract,
+        toggler,
         changeNetwork,
         SignInMetamask: SignInMetamask,
         connectedAccAddress: accAddress,

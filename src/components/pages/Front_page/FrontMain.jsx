@@ -4,6 +4,8 @@ import axios from 'axios';
 import { BANNER_DETAILS, CUSTOM_DETAILS, FAQS, FEATURES, START_SECTION_DETAILS, STEPS } from "../../../api/Api";
 import Loader from "../../../loader";
 import { Link } from "react-router-dom";
+import { EthHeader } from "./FrontHeader";
+import Header from "../landing_page/Header";
 
 export const FrontMain = () => {
 
@@ -62,7 +64,9 @@ export const FrontMain = () => {
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/" 
   return loader ? <Loader /> : (
 
-    <>
+    <>  
+      {/* <EthHeader /> */}
+      <Header />
       <div className="page-content">
         <main className="">
           <section className="page-section hero" id="hero" style={{ backgroundImage: `url(${imageBaseUrl}${banner.backgroundImage})` }}>
@@ -218,7 +222,7 @@ export const FrontMain = () => {
                 <Link
                   href="/generator"
                   className="btn btn-primary btn-lg btn-rounded btn-pad"
-                  style={{fontSize:"1.25rem", marginBottom:"66px"}}
+                  style={{fontSize:"1.25rem", marginBottom:"125px"}}
                 >
                   Deploy your token
                 </Link>

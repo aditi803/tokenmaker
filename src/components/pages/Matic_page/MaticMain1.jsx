@@ -262,6 +262,10 @@ export const MaticMain1 = (props) => {
           }));
         }
       } else if (supplyType === "fixed") {
+        setEthFormData((prev) => ({
+          ...prev,
+          mintable:false,
+        }));
         // if(recoverable===true){
         //   setEthFormData((prev) => ({
         //     ...prev,
@@ -551,12 +555,17 @@ export const MaticMain1 = (props) => {
     }));
   };
 
-  const [gasFee, setGasFee] = useState();
 
+  const customVampire = (network) => {
+    const blockArray = Object.entries(blockchainNetworks);
+    const selctedItem = blockArray.find((item) => item[1] === network)
+    return selctedItem?.[0]
+  }
 
   useEffect(() => {
+    //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Polygon' && value === ethFormData.network && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName === 'Polygon' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -568,7 +577,7 @@ export const MaticMain1 = (props) => {
     console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
 
 
-
+    //eslint-disable-next-line
   }, [ethFormData.tokenType, ethFormData.network, data])
 
   useEffect(() => {

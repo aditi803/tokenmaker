@@ -24,7 +24,7 @@ export const EthMain1 = (props) => {
   // const {compileContract}  = useContext(GlobalContext)
   const navigate = useNavigate();
 
-  const { deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
+  const { toggler, deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
     useContext(GlobalContext);
 
   const [data, setData] = useState([])
@@ -184,7 +184,7 @@ export const EthMain1 = (props) => {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
-          commissionFee: null,
+          // commissionFee: null,
         }));
       }
       if (network === "mainnet") {
@@ -197,7 +197,7 @@ export const EthMain1 = (props) => {
       if (network === "gorli") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: null,
+          // commissionFee: null,
           // commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
         }));
       }
@@ -206,7 +206,7 @@ export const EthMain1 = (props) => {
       setEthFormData((prev) => ({
         ...prev,
         noCopyrightLink: false,
-        commissionFee: null,
+        // commissionFee: null,
         accessType: "owner",
         supplyType: "fixed",
         mintable: false,
@@ -251,6 +251,10 @@ export const EthMain1 = (props) => {
           }));
         }
       } else if (supplyType === "fixed") {
+        setEthFormData((prev) => ({
+          ...prev,
+          mintable:false,
+        }));
         // if(recoverable===true){
         //   setEthFormData((prev) => ({
         //     ...prev,
@@ -269,7 +273,7 @@ export const EthMain1 = (props) => {
       if (network === "rinkeby") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: null,
+          // commissionFee: null,
         }));
       }
       if (network === "mainnet") {
@@ -282,7 +286,7 @@ export const EthMain1 = (props) => {
       if (network === "gorli") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: null,
+          // commissionFee: null,
         }));
       }
     }
@@ -539,12 +543,27 @@ export const EthMain1 = (props) => {
 
   // }
 
-  const [gasFee, setGasFee] = useState();
+  // const blockchainNetworks = {
+  //   mainnet: 1,
+  //   gorli: 5,
+  //   rinkeby: 4,
+  //   polygonMainnet: 137,
+  //   polygonMumbai: 80001,
+  //   binanceSmartChainTestnet: 97,
+  //   binanceSmartChain: 56,
+  // };
+
+
+  const customVampire = (network) => {
+    const blockArray = Object.entries(blockchainNetworks);
+    const selctedItem = blockArray.find((item) => item[1] === network)
+    return selctedItem?.[0]
+  }
 
 
   useEffect(() => {
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Ethereum' && value === ethFormData.network && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName === 'Ethereum' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -554,10 +573,13 @@ export const EthMain1 = (props) => {
       commissionFee: selectedCommissionFee?.networkCommissionFee
     }))
     console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    console.log(ethFormData, '2>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
 
 
 
-  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee])
+  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler ])
 
 
 
@@ -628,6 +650,8 @@ export const EthMain1 = (props) => {
       }));
     }
   }, [agreement, tokenName, tokenSymbol, decimals]);
+
+  const [manipulate, setManipulate] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
