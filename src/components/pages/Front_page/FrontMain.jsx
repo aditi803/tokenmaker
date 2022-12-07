@@ -6,6 +6,7 @@ import Loader from "../../../loader";
 import { Link } from "react-router-dom";
 import { EthHeader } from "./FrontHeader";
 import Header from "../landing_page/Header";
+import Footer from "../landing_page/Footer";
 
 export const FrontMain = () => {
 
@@ -231,6 +232,7 @@ export const FrontMain = () => {
           </section>
         </main>
       </div>
+      <Footer />
     </>
   );
 };

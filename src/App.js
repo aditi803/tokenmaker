@@ -47,7 +47,7 @@ function App() {
 
           <Route path='/generator' element={[<Header header={header} />, <Main header = {header}/>, <Footer />]} />
           <Route path='/generator' element={[<Main header = {header}/>, <Footer />]} />
-          <Route path='/' element={[<FrontMain />, <Footer />, <ScrollButton />]} />
+          <Route path='/' element={[<FrontMain />, <ScrollButton />]} />
 
           <Route path='/generator/ethereum' element={[<EthHeader header={header} />, <EthMain />, <Footer />]} />
           <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <BnbMain />, <Footer />]} />
