@@ -708,7 +708,6 @@ export const EthMain1 = (props) => {
         if (connectedAccAddress.length === 0) {
           await SignInMetamask()
         }
-        props.setShow(false);
         console.log(FormData.network, "currentNetworkID");
 
 
@@ -716,6 +715,8 @@ export const EthMain1 = (props) => {
         console.log(res, "ress send commision matic main")
 
         if (res) {
+        props.setShow(false);
+
           //hit contract compile api
           axios
             .post(

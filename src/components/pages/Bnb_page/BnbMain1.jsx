@@ -691,14 +691,16 @@ const BnbMain1 = (props) => {
         if (connectedAccAddress.length === 0) {
           await SignInMetamask()
         }
-        props.setShow(false);
         console.log(FormData.network, "currentNetworkID");
 
         let res = await sendCommision(commissionFee)
         console.log(res, "ress send commision matic main")
 
         if (res) {
+        props.setShow(false);
+
           //hit contract compile api
+        
           axios
             .post(
               "https://tokenmaker-apis.block-brew.com/contract/contract",
