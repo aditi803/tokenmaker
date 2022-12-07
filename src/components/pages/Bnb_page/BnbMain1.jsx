@@ -43,7 +43,7 @@ const BnbMain1 = (props) => {
 
   const navigate = useNavigate();
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
-  const { deployContract, changeNetwork, SignInMetamask, connectedAccAddress, blockchainNetworks,sendCommision } =
+  const { deployContract, changeNetwork, SignInMetamask, connectedAccAddress, blockchainNetworks, sendCommision } =
     useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -282,7 +282,7 @@ const BnbMain1 = (props) => {
         }));
       }
     }
-  }, [tokenType, supplyType, network,data]);
+  }, [tokenType, supplyType, network, data]);
 
   useEffect(() => {
     if (supplyType === "fixed" || supplyType === "capped") {
@@ -638,11 +638,11 @@ const BnbMain1 = (props) => {
   }, [tokenType, initialSupply, maximumSupply])
 
   useEffect(() => {
-    const selectedCommissionFee = data?.find(({value,parentNetworkName, subNetworkName, tokenType}) => {
-      if(parentNetworkName === 'Binance Smart Chain' && value === ethFormData.network && tokenType === ethFormData.tokenType){
+    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
+      if (parentNetworkName === 'Binance Smart Chain' && value === ethFormData.network && tokenType === ethFormData.tokenType) {
         return true;
       }
-    } )
+    })
     // setGasFee(selectedCommissionFee)
     setEthFormData(prev => ({
       ...prev,
@@ -682,7 +682,10 @@ const BnbMain1 = (props) => {
         : "";
 
       console.log(FormData.network, "formdata bnb main1 side");
+
+
       console.log(chainId, "chainId bnb main1 side ")
+
       if (FormData.network === chainId) {
         // navigate("/generator/final");
         if (connectedAccAddress.length === 0) {
@@ -690,42 +693,49 @@ const BnbMain1 = (props) => {
         }
         props.setShow(false);
         console.log(FormData.network, "currentNetworkID");
-        //hit contract compile api
-        axios
-          .post(
-            "https://tokenmaker-apis.block-brew.com/contract/contract",
-            FormData
-          )
-          .then((res) => {
-            console.log(res, "response");
-            // console.log(contractSource, "contract Source api side ");
-            //calling deploy function
-            deployContract(res.data.result, FormData).then((res) => {
 
-              if (res.error) {
-                navigate("/generator/binancesmartchain");
-                props.setShow(true);
-                res.error.code === "ACTION_REJECTED"
-                  ? toast.error(
-                    "User Rejected The Request"
-                  )
-                  : toast.error(res.error.message);
-              } else {
-                toast.success("Token Deploy Successfully");
-                // navigate("/generator/final");
-                props.setShow(false);
-                console.log(res, "else side deploy then return deploy succes");
-              }
+        let res = await sendCommision(commissionFee)
+        console.log(res, "ress send commision matic main")
+
+        if (res) {
+          //hit contract compile api
+          axios
+            .post(
+              "https://tokenmaker-apis.block-brew.com/contract/contract",
+              FormData
+            )
+            .then((res) => {
+              console.log(res, "response");
+              // console.log(contractSource, "contract Source api side ");
+              //calling deploy function
+              deployContract(res.data.result, FormData).then((res) => {
+
+                if (res.error) {
+                  navigate("/generator/binancesmartchain");
+                  props.setShow(true);
+                  res.error.code === "ACTION_REJECTED"
+                    ? toast.error(
+                      "User Rejected The Request"
+                    )
+                    : toast.error(res.error.message);
+                } else {
+                  toast.success("Token Deploy Successfully");
+                  // navigate("/generator/final");
+                  props.setShow(false);
+                  console.log(res, "else side deploy then return deploy succes");
+                }
+              });
+            })
+            .catch((error) => {
+              console.log("Api fail error", error);
+              props.setShow(true);
+              // navigate("/generator/ethereum");
+              error.response?.data?.message
+                ? toast.error(error.response?.data?.message)
+                : toast.error("Data Fetch Failed Try Again");
             });
-          })
-          .catch((error) => {
-            console.log("Api fail error", error);
-            props.setShow(true);
-            // navigate("/generator/ethereum");
-            error.response?.data?.message
-              ? toast.error(error.response?.data?.message)
-              : toast.error("Data Fetch Failed Try Again");
-          });
+        }
+
       } else {
         changeNetwork(FormData.network);
       }
@@ -1129,17 +1139,17 @@ const BnbMain1 = (props) => {
                                 onChange={ethMainFormHandler}
                               >
                                 {data.map((item) => {
-                                  if(item.parentNetworkName === "Binance Smart Chain" && item.tokenType === 'free'){
+                                  if (item.parentNetworkName === "Binance Smart Chain" && item.tokenType === 'free') {
                                     return (
                                       <option value={item.value}>{item.subNetworkName}</option>
                                     )
                                   }
-                                  else if(item.parentNetworkName === "Binance Smart Chain" && item.tokenType === 'basic'){
+                                  else if (item.parentNetworkName === "Binance Smart Chain" && item.tokenType === 'basic') {
                                     <option value={item.value}>{item.subNetworkName}</option>
                                   }
-                                  else if(item.parentNetworkName === "Binance Smart Chain" && item.tokenType === 'custom'){
+                                  else if (item.parentNetworkName === "Binance Smart Chain" && item.tokenType === 'custom') {
                                     <option value={item.value}>{item.subNetworkName}</option>
-                                    
+
                                   }
                                 })}
                               </select>
@@ -1238,7 +1248,7 @@ const BnbMain1 = (props) => {
                               <div className="Tbtn">
                                 <span className="badge bg-success d-block p-2">
                                   {commissionFee
-                                    ? commissionFee === "Free" ? "Free" :`${commissionFee} BNB`
+                                    ? commissionFee === "Free" ? "Free" : `${commissionFee} BNB`
                                     : "Free"}
                                 </span>
                               </div>
@@ -1280,13 +1290,13 @@ const BnbMain1 = (props) => {
                           <button
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
-                            onClick={async() => {
+                            onClick={async () => {
                               if (ethFormData.tokenName && ethFormData.tokenSymbol && ethFormData.decimals && ethFormData.agreement === true) {
-                                let res = await sendCommision(commissionFee)
-                                if(res===true){
+                                // let res = await sendCommision(commissionFee)
+                                // if(res===true){
                                 compileContract(ethFormData);
 
-                                }
+                                // }
                                 // compileContract(ethFormData)
                               }
                             }}

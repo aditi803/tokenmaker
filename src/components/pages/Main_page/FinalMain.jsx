@@ -37,7 +37,7 @@ export const FinalMain = (props) => {
             </div>
           </div>
           <section style={{ height: "100vh",maxHeight:"350px" ,bottom:0 }}>
-            <div className="container pt-5">
+            <div className="container pt-2">
               <div className="configurator-container">
                 <div className="configurator-pending-install">
                   <div className="card">
@@ -48,7 +48,7 @@ export const FinalMain = (props) => {
                         deployData={deployData}
                       />
                     ) : (
-                      <div>
+                      <div className="pt-5">
                         <div className="card-header d-flex align-items-center">
                           <div className="mr-3" style={{ zoom: 1.5 }}></div>
                           <i className="fa-solid fa-arrow-right me-3"></i>

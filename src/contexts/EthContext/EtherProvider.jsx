@@ -246,19 +246,38 @@ export const EtherProvider = ({ children }) => {
   };
   //ends here
 
+  const [payment, setPayment] = useState("")
+  useEffect(() => {
+    // setLoader(false)
+    fetchData()
+  }, [setPayment])
+
+  const fetchData = async () => {
+    await axios
+      .get("https://tokenmaker-apis.block-brew.com/payment/paymentaddress")
+      .then(res => {
+        setPayment(res.data.msg)
+        console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>PAYMENT ADDRESS MSG>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
   const sendCommision = async (_commissionFee) => {
     try {
       console.log(typeof _commissionFee,"type of com")
       console.log(_commissionFee,"_commissionFee  com")
-
+      console.log(payment,"Payment value hai y ")
+      console.log(payment.paymentAddress,"Payment Addresss --------value hai y ")
       if(window.ethereum){
         await window.ethereum.send("eth_requestAccounts");
+
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         // ethers.utils.getAddress(addr);
         const tx = await signer.sendTransaction({
-          to: "0xda3d2907e30a9df4d6f3054870caee9374ff5775",
+          to: payment.paymentAddress,
           value: ethers.utils.parseEther(_commissionFee)
         });
         console.log("tx", tx);
@@ -326,7 +345,7 @@ export const EtherProvider = ({ children }) => {
             maximumSupply: newFormData.maximumSupply,
             accessType: newFormData.accessType,
             network: explorer.networkName,
-            commissionFee: "0.78",
+            commissionFee: newFormData.commissionFee,
             // txHash: `${explorer.link}/tx/${contract.deployTransaction.hash}`,
             txHash: `${explorer.link}/tx/${contract.deployTransaction.hash}`,
           })
@@ -366,7 +385,7 @@ export const EtherProvider = ({ children }) => {
         sendCommision:sendCommision
       }}
     >
-
+      {console.log(payment,"Payment value context side ")}
       {console.log(deploySuccess, "deplo success context side")}
       {console.log(accAddress, "acc address context side")}
       {console.log(chainId, "chainId context side")}

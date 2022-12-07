@@ -25,10 +25,10 @@ import Loader from "../../../loader";
 export const MaticMain1 = (props) => {
   const navigate = useNavigate();
 
-  const { deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks ,sendCommision} =
+  const { deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
     useContext(GlobalContext);
 
-    const networkFee = []
+  const networkFee = []
 
   const [data, setData] = useState([])
   const getNetworks = () => {
@@ -44,7 +44,7 @@ export const MaticMain1 = (props) => {
 
   console.log(data, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
-  
+
 
   useEffect(() => {
     getNetworks()
@@ -200,7 +200,7 @@ export const MaticMain1 = (props) => {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
-          
+
           // commissionFee: null,
         }));
       }
@@ -555,11 +555,11 @@ export const MaticMain1 = (props) => {
 
 
   useEffect(() => {
-    const selectedCommissionFee = data?.find(({value,parentNetworkName, subNetworkName, tokenType}) => {
-      if(parentNetworkName === 'Polygon' && value === ethFormData.network && tokenType === ethFormData.tokenType){
+    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
+      if (parentNetworkName === 'Polygon' && value === ethFormData.network && tokenType === ethFormData.tokenType) {
         return true;
       }
-    } )
+    })
     // setGasFee(selectedCommissionFee)
     setEthFormData(prev => ({
       ...prev,
@@ -679,44 +679,52 @@ export const MaticMain1 = (props) => {
         if (connectedAccAddress.length === 0) {
           await SignInMetamask()
         }
-        props.setShow(false);
         console.log(FormData.network, "currentNetworkID");
-        //hit contract compile api
-        axios
-          .post(
-            "https://tokenmaker-apis.block-brew.com/contract/contract",
-            FormData
-          )
-          .then((res) => {
-            console.log(res, "response");
-            // console.log(contractSource, "contract Source api side ");
-            //calling deploy function
-            deployContract(res.data.result, FormData).then((res) => {
 
-              if (res.error) {
-                navigate("/generator/polygon");
-                props.setShow(true);
-                res.error.code === "ACTION_REJECTED"
-                  ? toast.error(
-                    "User Rejected The Request"
-                  )
-                  : toast.error(res.error.message);
-              } else {
-                toast.success("Token Deploy Successfully");
-                // navigate("/generator/final");
-                props.setShow(false);
-                console.log(res, "else side deploy then return deploy succes");
-              }
+        let res = await sendCommision(commissionFee)
+        console.log(res, "ress send commision matic main")
+
+        if (res) {
+          //hit contract compile api
+        props.setShow(false);
+
+          axios
+            .post(
+              "https://tokenmaker-apis.block-brew.com/contract/contract",
+              FormData
+            )
+            .then((res) => {
+              console.log(res, "response");
+              // console.log(contractSource, "contract Source api side ");
+              //calling deploy function
+              deployContract(res.data.result, FormData).then((res) => {
+
+                if (res.error) {
+                  navigate("/generator/polygon");
+                  props.setShow(true);
+                  res.error.code === "ACTION_REJECTED"
+                    ? toast.error(
+                      "User Rejected The Request"
+                    )
+                    : toast.error(res.error.message);
+                } else {
+                  toast.success("Token Deploy Successfully");
+                  // navigate("/generator/final");
+                  props.setShow(false);
+                  console.log(res, "else side deploy then return deploy succes");
+                }
+              });
+            })
+            .catch((error) => {
+              console.log("Api fail error", error);
+              props.setShow(true);
+              // navigate("/generator/ethereum");
+              error.response.data.message
+                ? toast.error(error.response.data.message)
+                : toast.error("Data Fetch Failed Try Again");
             });
-          })
-          .catch((error) => {
-            console.log("Api fail error", error);
-            props.setShow(true);
-            // navigate("/generator/ethereum");
-            error.response.data.message
-              ? toast.error(error.response.data.message)
-              : toast.error("Data Fetch Failed Try Again");
-          });
+        }
+
       } else {
         changeNetwork(FormData.network);
       }
@@ -1129,15 +1137,15 @@ export const MaticMain1 = (props) => {
                                 onChange={ethMainFormHandler}
                               >
                                 {data.map((item) => {
-                                  if(item.parentNetworkName === "Polygon" && item.tokenType === 'free'){
+                                  if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
                                     return (
                                       <option value={item.value}>{item.subNetworkName}</option>
                                     )
                                   }
-                                  else if(item.parentNetworkName === "Polygon" && item.tokenType === 'basic'){
+                                  else if (item.parentNetworkName === "Polygon" && item.tokenType === 'basic') {
                                     <option value={item.value}>{item.subNetworkName}</option>
                                   }
-                                  else if(item.parentNetworkName === "Polygon" && item.tokenType === 'custom'){
+                                  else if (item.parentNetworkName === "Polygon" && item.tokenType === 'custom') {
                                     <option value={item.value}>{item.subNetworkName}</option>
                                   }
                                 })}
@@ -1286,10 +1294,10 @@ export const MaticMain1 = (props) => {
                             className="btn-lg btn-success1 w-100 botn-clr"
                             onClick={async () => {
                               if (ethFormData.tokenName && ethFormData.tokenSymbol && ethFormData.decimals && ethFormData.agreement === true) {
-                                let res = await sendCommision(commissionFee)
-                                if(res===true){
+                                // let res = await sendCommision(commissionFee)
+                                // if(res===true){
                                 compileContract(ethFormData);
-                                }
+                                // }
                               }
                             }}
                           >
