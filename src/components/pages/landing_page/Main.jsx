@@ -3,6 +3,8 @@ import "./landing_page_styles/main.css";
 import axios from 'axios'
 import Loader from "../../../loader";
 import { Link } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
 function Main() {
 
   const [data, setData] = useState([])
@@ -33,6 +35,7 @@ function Main() {
 
   return loader ? <Loader /> : (
     <>
+    <Header />
       <div className="page-content">
         <main>
           <div className="hero mb-3 mt-5">
@@ -77,6 +80,7 @@ function Main() {
           </div>
         </main>
       </div>
+      <Footer />
     </>
   );
 }
