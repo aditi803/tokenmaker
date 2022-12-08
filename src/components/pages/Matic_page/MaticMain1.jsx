@@ -230,7 +230,7 @@ export const MaticMain1 = (props) => {
       setEthFormData((prev) => ({
         ...prev,
         noCopyrightLink: true,
-        commissionFee: 0.15,
+        // commissionFee: 0.15,
       }));
       // added
       if (supplyType === "unlimited") {
@@ -244,7 +244,7 @@ export const MaticMain1 = (props) => {
         setEthFormData((prev) => ({
           ...prev,
           noCopyrightLink: true,
-          commissionFee: 0.225,
+          // commissionFee: 0.225,
           mintable: true,
         }));
         setFieldsDisabled({
@@ -285,12 +285,14 @@ export const MaticMain1 = (props) => {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.commissionFee
-          commissionFee: null,
+          commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          // commissionFee: null,
         }));
       }
       if (network === "polygonMainnet") {
         setEthFormData((prev) => ({
           ...prev,
+          commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
           // commissionFee: 0.15,
         }));
       }
@@ -303,19 +305,19 @@ export const MaticMain1 = (props) => {
       if (burnable === true && pausable === true && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 700,
+          // commissionFee: 700,
         }));
       }
       if (pausable === true && burnable === true && recoverable === false) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 550,
+          // commissionFee: 550,
         }));
       }
       if (pausable === true && burnable === false && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 550,
+          // commissionFee: 550,
         }));
       }
       if (
@@ -324,25 +326,25 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 450,
+          // commissionFee: 450,
         }));
       }
       if (burnable === false && pausable === true && recoverable === false) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 400,
+          // commissionFee: 400,
         }));
       }
       if (pausable === false && burnable === true && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 600,
+          // commissionFee: 600,
         }));
       }
       if (pausable === false && recoverable === false && burnable === false) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 300,
+          // commissionFee: 300,
         }));
       }
       // Roles and fixed
@@ -354,7 +356,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 800,
+          // commissionFee: 800,
         }));
       }
       if (
@@ -365,7 +367,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 650,
+          // commissionFee: 650,
         }));
       }
       if (
@@ -376,7 +378,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 650,
+          // commissionFee: 650,
         }));
       }
       if (
@@ -386,7 +388,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 550,
+          // commissionFee: 550,
         }));
       }
       if (
@@ -397,7 +399,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 500,
+          // commissionFee: 500,
         }));
       }
       if (
@@ -408,7 +410,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 700,
+          // commissionFee: 700,
         }));
       }
       if (
@@ -419,7 +421,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 400,
+          // commissionFee: 400,
         }));
       }
 
@@ -432,7 +434,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 450,
+          // commissionFee: 450,
         }));
       }
 
@@ -444,7 +446,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 550,
+          // commissionFee: 550,
         }));
       }
       if (
@@ -455,7 +457,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 600,
+          // commissionFee: 600,
         }));
       }
       // double
@@ -468,7 +470,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 700,
+          // commissionFee: 700,
         }));
       }
 
@@ -481,7 +483,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 550,
+          // commissionFee: 550,
         }));
       }
       if (
@@ -492,7 +494,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 650,
+          // commissionFee: 650,
         }));
       }
       if (
@@ -503,7 +505,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 700,
+          // commissionFee: 700,
         }));
       }
       // double
@@ -516,7 +518,7 @@ export const MaticMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 800,
+          // commissionFee: 800,
         }));
       }
     }
