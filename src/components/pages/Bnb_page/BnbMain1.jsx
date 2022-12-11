@@ -64,8 +64,11 @@ const BnbMain1 = (props) => {
     accessType: "owner",
     network: "binanceSmartChain",
     agreement: false,
-    commissionFee: 0.5,
+    commissionFee: "0.5" ,
   });
+
+  // error dika
+  //api hit to k
 
   //
   const [show, setShow] = useState(false);
@@ -718,6 +721,8 @@ const BnbMain1 = (props) => {
           axios
             .post(
               "https://tokenmaker-apis.block-brew.com/contract/contract",
+              // https://tokenmaker-apis.block-brew.com/token/tokendetails
+   
               FormData
             )
             .then((res) => {

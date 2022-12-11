@@ -113,13 +113,13 @@ export const EtherProvider = ({ children }) => {
 
 
   const urlLinks = {
-    97: { link: "https://testnet.bscscan.com/", name: "Bsc Testnet Scan", networkName: "Bsc Testnet" },
-    56: { link: "https://bscscan.com/", name: "Bsc Mainnet Scan", networkName: "Bsc Mainnet" },
+    97: { link: "https://testnet.bscscan.com/", name: "Bsc Testnet Scan", networkName: "Binance Smart Chain Testnet" },
+    56: { link: "https://bscscan.com/", name: "Bsc Mainnet Scan", networkName: "Binance Smart Chain" },
     137: { link: "https://polygonscan.com/", name: "Polygon Mainnet Scan", networkName: "Polygon Mainnet" },
-    80001: { link: "https://mumbai.polygonscan.com/", name: "Polygon Testnet Scan", networkName: "Polygon Testnet" },
-    1: { link: "https://etherscan.io", name: "Ethereum Mainnet Scan", networkName: "Ethereum Mainnet" },
-    5: { link: "https://goerli.etherscan.io", name: "Goerli Testnet Scan", networkName: "Goerli Testnet" },
-    4: { link: "https://rinkeby.etherscan.io/", name: "RinkeyBy Testnet Scan", networkName: "RinkeyBy Testnet" },
+    80001: { link: "https://mumbai.polygonscan.com/", name: "Polygon Testnet Scan", networkName: "Polygon Mumbai" },
+    1: { link: "https://etherscan.io", name: "Ethereum Mainnet Scan", networkName: "Ethereum" },
+    5: { link: "https://goerli.etherscan.io", name: "Goerli Testnet Scan", networkName: "Gorli" },
+    4: { link: "https://rinkeby.etherscan.io/", name: "RinkeyBy Testnet Scan", networkName: "RinkeyBy" },
   }
 
 
