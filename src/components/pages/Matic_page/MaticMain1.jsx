@@ -769,7 +769,7 @@ export const MaticMain1 = (props) => {
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable ERC20 Token.
                 <br />
-                No login.No setup.No Coding required.
+                No login. No setup. No Coding required.
               </p>
             </div>
           </div>
@@ -1112,13 +1112,13 @@ export const MaticMain1 = (props) => {
                               <div className="form-info">
                                 <div className="form-text text-muted">
                                   <p>
-                                    <span className="strong">Owner:</span> Your
+                                    <span><strong>Owner:</strong></span> Your
                                     wallet address will be set as the owner of
                                     your token to perform administratives tasks
                                     (ie, mint new tokens).
                                   </p>
                                   <p>
-                                    <span className="strong">Roles:</span> All
+                                    <span> <strong>Roles:</strong></span> All
                                     admin tasks (mint, burn, etc...) will be
                                     available to different users, based on their
                                     roles. By default, your wallet's address
@@ -1200,7 +1200,7 @@ export const MaticMain1 = (props) => {
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
                                   >
-                                    <u> term of use </u>
+                                    <u> Terms of Use. </u>
                                   </Link>
                                   <TermsModal />
                                   {/* modal */}
@@ -1257,7 +1257,7 @@ export const MaticMain1 = (props) => {
                                   </Tooltip>
                                 </p>
                               </div>
-                              <div className="Tbtn">
+                              <div className="Tbtn" style={{width:"120px"}}>
                                 <span className="badge bg-success d-block p-2">
                                   {commissionFee
                                     ? commissionFee === "Free" ? "Free" : `${commissionFee} MATIC `
@@ -1291,7 +1291,7 @@ export const MaticMain1 = (props) => {
                                   </Tooltip>
                                 </p>
                               </div>
-                              <div className="Tbtn">
+                              <div className="Tbtn" style={{width:"120px"}}>
                                 <span className="badge bg-secondary d-block p-2">
                                   Variable
                                 </span>
@@ -1303,6 +1303,11 @@ export const MaticMain1 = (props) => {
                           <button
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
+                            style={{
+                              color:"#fff",
+                              backgroundColor:"#198754",
+                              borderColor:"#198754"
+                            }}
                             onClick={async () => {
                               if (ethFormData.tokenName && ethFormData.tokenSymbol && ethFormData.decimals && ethFormData.agreement === true) {
                                 // let res = await sendCommision(commissionFee)
