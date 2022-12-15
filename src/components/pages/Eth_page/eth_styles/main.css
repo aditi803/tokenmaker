@@ -12,7 +12,6 @@
 .hero {
     color: #fff;
     background-color: #383838;
-    padding-bottom: 4rem;
     position: relative;
 }
 .hero {
@@ -26,35 +25,12 @@
 .mb-3 {
     margin-bottom: 1rem!important;
 }
-/* @media (min-width: 1400px){
-.container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    max-width: 1320px;
-}}
-@media (min-width: 1200px){
-.container, .container-lg, .container-md, .container-sm, .container-xl {
-    max-width: 1140px;
-}}
-@media (min-width: 992px){
-.container, .container-lg, .container-md, .container-sm {
-    max-width: 960px;
-}}
-@media (min-width: 768px){
-.container, .container-md, .container-sm {
-    max-width: 720px;
-}}
-@media (min-width: 576px){
-.container, .container-sm {
-    max-width: 540px;
-}} */
+
 
 .hero .h1, .hero h1 {
     font-size: 3.25rem;
 }
-/* @media (min-width: 1200px){}
-.h1, h1 {
-    font-size: 2.5rem;
 
-} */
 .h1, h1 {
     font-size: calc(1.375rem + 1.5vw);
 }
@@ -65,9 +41,7 @@
     font-weight: 600;
     line-height: 1.2;
 }
-/* h2{
-    font-size: 27px !important;
-} */
+
 .sub-highlight {
     display: inline-block;
     position: relative;
@@ -75,41 +49,12 @@
     margin-top: 25px;
     color: black;
 }
-/* .sub-highlight:before {
-    background-image: linear-gradient(120deg,rgba(243,221,29,.4),rgba(243,221,29,.4));
-    content: " ";
-    position: absolute;
-    top: 60%;
-    bottom: 0.25rem;
-    left: -0.25rem;
-    right: -0.25rem;
-    z-index: -1;
-} */
+
 p {
     margin-top: 0;
     margin-bottom: 1rem;
 }
-/* .hero:after {
-    content: " ";
-    background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='96px' fill='white' viewBox='0 0 100 100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' preserveAspectRatio='none'%3E%3Cpath className='elementor-shape-fill' d='M0,0 C16.6666667,66 33.3333333,99 50,99 C66.6666667,99 83.3333333,66 100,0 L100,100 L0,100 L0,0 Z'%3E%3C/path%3E%3C/svg%3E");
-    height: 64px;
-    background-repeat: no-repeat;
-    z-index: 2;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-} */
-/* @media (min-width: 1200px){
-.col-xl-4 {
-    flex: 0 0 auto;
-    width: 33.33333333%;
-}} */
-/* @media (min-width: 992px){
-.col-lg-6 {
-    flex: 0 0 auto;
-    width: 50%;
-}} */
+
 .card {
     position: relative;
     display: flex;
@@ -133,10 +78,7 @@ rem
 img, svg {
     vertical-align: middle;
 }
-/* @media (min-width: 1200px){
-.h4, h4 {
-    font-size: 1.5rem;
-}} */
+
 .h4, h4 {
     font-size: calc(1.275rem + .3vw);
 }
@@ -245,10 +187,7 @@ button, input, optgroup, select, textarea {
     background-color: #fff;
     border-bottom: 1px solid rgba(0,0,0,.055);
 }
-/* @media (min-width: 1200px){
-.h4, h4 {
-    font-size: 1.5rem;
-}} */
+
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 0.5rem;
@@ -263,20 +202,7 @@ button, input, optgroup, select, textarea {
 .form-select:disabled {
     background-color: #e9ecef;
 }
-/* @media (min-width: 992px){
-.mt-lg-0 {
-    margin-top: 0!important;
-}}
-@media (min-width: 1200px){
-.col-xl-4 {
-    flex: 0 0 auto;
-    width: 33.33333333%;
-}}
-@media (min-width: 992px){
-.col-lg-6 {
-    flex: 0 0 auto;
-    width: 50%;
-}} */
+
 
 .card-header:first-child {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
@@ -406,23 +332,7 @@ em
     -webkit-print-color-adjust: exact;
     color-adjust: exact;
 }
-/* @media (min-width: 1200px){
-.mt-xl-0 {
-    margin-top: 0!important;
-}}
-@media (min-width: 1200px){
-.col-xl-4 {
-    flex: 0 0 auto;
-    width: 33.33333333%;
-}}
-@media (min-width: 992px){
-.col-lg-6 {
-    flex: 0 0 auto;
-    width: 50%;
-}} */
 
-/* 
- */
  .popup-panel {
     background-color: rgba(0,0,0,.45);
 }
@@ -457,29 +367,7 @@ i[title]:hover::after {
     color: white;
     border-radius: 5px;
 }
-/* .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-  } */
-  
-  /* .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-  
-    
-    position: absolute;
-    z-index: 1;
-  } */
-  
-  /* .tooltip:hover .tooltiptext {
-    visibility: visible;
-  } */
+
   .tooltip {
     position: relative;
     display: inline-block;

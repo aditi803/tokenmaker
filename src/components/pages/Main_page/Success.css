@@ -32,6 +32,7 @@ img, svg {
 }
 svg:not(:root) {
     overflow: hidden;
+    color: #6010B1 !important;
 }
 .m-0 {
     margin: 0!important;

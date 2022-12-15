@@ -70,6 +70,7 @@
     margin-bottom: 2rem;
     margin: auto;
     max-width: 40%;
+    line-height: 40px;
 
 }
 .banner-side-image{
@@ -101,9 +102,30 @@
     font-size: 3rem;
     color: #33d3d2;
     width: 4rem;
-    margin-right: 1.5rem;
-    flex-shrink: 0;
+    margin: 5px auto;
+    /* margin-right: 1.5rem; */
+    /* flex-shrink: 0; */
 }
+.feature-box{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 100%;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    max-width: 270px;
+    margin: auto;
+}
+.feature-box img{
+    /* height: 4rem; */
+    width: 35%;
+    margin: 2px auto;
+}
+.feature-box p{
+    font-size: 14px;
+}
+
 
 /* .svg-icon.icon-compliant {
     background-image: url("https://tokenmaker.eattheblocks.com/images/icons/compliant.svg");
@@ -114,9 +136,9 @@
 }
 .section-features .feature-item {
     margin-top: 3rem;
-    display: flex;
+    /* display: flex;
     align-content: flex-start;
-    justify-content: flex-start;
+    justify-content: flex-start; */
 }
 .svg-icon.icon-burnable {
     background-image: url("https://tokenmaker.eattheblocks.com/images/icons/burnable.svg");
