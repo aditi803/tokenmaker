@@ -315,7 +315,7 @@
     height: 7px;
     width: 103px;
     /* background-color: #3b7f74; */
-    background-color: #6010B1;
+    background-color: #6010b1c0;
     bottom: 0;
     left: 0;
 }
@@ -332,7 +332,7 @@
 }
 @media screen and (min-width:1684.98px){
     .section-faq {
-        margin-bottom: 225px;
+        margin-bottom: 255px;
     }
 }
 @media screen and (max-width: 1199.98px) {
@@ -398,11 +398,11 @@
   
   .accordion .accordion-button:not(.collapsed) {
     color: #fff;
-    background-color: #6010b1a9;
+    background-color: #6010b1c0;
     box-shadow: none;
   }
   .accordion-body {
-    background-color: #6010b1a9;
+    background-color: #6010b1c0;
     color: #fff;
   }
   .accordion-button:focus{

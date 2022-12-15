@@ -70,6 +70,27 @@ a {
 .icons i:hover{
     transform: translateY(-1px);
 }
+.numberinput{
+    width: 60%;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    margin-right: 10px;
+}
+.contact {
+    gap: 40px;
+}
+.sbbutton{
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: rgb(96, 16, 177);
+}
+.numberinput::placeholder{
+    color: white;
+}
 @media screen and (min-width: 1685px) {
     div#root {
         position: relative;
@@ -83,7 +104,7 @@ a {
         bottom: 0;
     }
 }
-@media screen and (max-width: 1199.98px) {
+@media screen and (max-width: 1399.98px) {
     footer {
         background-image: none;
         background-color: rgba(0, 0, 0, 0.911);

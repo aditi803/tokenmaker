@@ -54,7 +54,18 @@ function Footer() {
               <p>Wallet</p>
               <p>Resourses</p>
               </div>
-              <div className="col-4"></div>
+              <div className="col-4">
+                <h5 className="mb-4">whatsApp Updates</h5>
+                <div className="d-flex mb-4">
+                <input type='number' className="numberinput" placeholder="Enter Phone Number"/>
+<button className="sbbutton">Subscribe</button>
+                </div>
+                <h5 className="mb-4">Contact Us</h5>
+                <div className="d-flex contact">
+                  <p >example@gmail.com</p>
+                  <p>+1 62786 58968</p>
+                </div>
+              </div>
 
               {/* <div className="col-12 col-md-6 text-center text-md-end order-1 order-md-2">
                 <button
