@@ -773,7 +773,7 @@ export const MaticMain1 = (props) => {
               </p>
             </div>
           </div>
-          <section>
+          <section style={{marginBottom:'340px'}}>
             <div className="container">
               <div className="configurator-container">
                 <div className="configurator">

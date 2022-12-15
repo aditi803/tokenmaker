@@ -785,7 +785,7 @@ const BnbMain1 = (props) => {
               </p>
             </div>
           </div>
-          <section>
+          <section style={{marginBottom:'340px'}}>
             <div className="container">
               <div className="configurator-container">
                 <div className="configurator">
