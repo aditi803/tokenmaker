@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { EthHeader } from "./FrontHeader";
 import Header from "../landing_page/Header";
 import Footer from "../landing_page/Footer";
+import sideimage from '../../../assets/banner-side-image.png'
 
 export const FrontMain = () => {
 
@@ -71,25 +72,36 @@ export const FrontMain = () => {
       <div className="page-content">
         <main className="">
           <section className="page-section hero" id="hero" style={{ backgroundImage: `url(${imageBaseUrl}${banner.backgroundImage})` }}>
-            {console.log(banner.backgroundImage,"Bgvfdgtr")}
+            {/* {console.log(banner.backgroundImage,"Bgvfdgtr")} */}
             <div className="container self">
+              <div className="row">
+
+             
+              <div className="col-lg-6 d-flex flex-column justify-content-center">
               <h1 style={{ color: `${banner.headingColor}` }}>
                 <span className="sub-highlight">{banner.heading}</span>
               </h1>
-              <div className="my-5">
+              <div className="my-2">
                 <p className="m-0" style={{ color: `${banner.contentColor}` }}>
                   {banner.content}
                 </p>
               </div>
-              <div className="my-5">
+              <div className="my-2">
                 <Link
-                  className="btn btn-pad btn-rounded me-3"
+                  className="btn btn-pad  me-2"
                   to="/generator"
                   style={{ backgroundColor: `${banner.buttonBackgroundColor}`, color: `${banner.buttonTextColor}` }}
                 >
                   {banner.buttonText}
                 </Link>
               </div>
+            
+              
+              </div>
+                <div className="col-lg-6">
+               <img className="banner-side-image" src={sideimage} alt='' />
+              </div>
+            </div>
             </div>
           </section>
 
@@ -117,15 +129,15 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-          <section className="page-section section-ready my-4 py-4" style={{ backgroundColor: `${start.backgroundColor}` }}>
+          <section className="page-section section-ready my-4 py-5" style={{ backgroundColor: `${start.backgroundColor}` }}>
             <div className="container">
               <h2 className="section-title-small text-center" style={{ color: `${start.headingColor}` }}>
                 {start.heading}
               </h2>
-              <div className="mt-3 text-center">
+              <div className="mt-4 text-center">
                 <Link
                   to="/generator"
-                  className="btn btn-rounded btn-pad"
+                  className="btn btn-pad"
                   style={{ backgroundColor: `${start.buttonBackgroundColor}`, color: `${start.buttonColor}` }}
                 >
                   {start.buttonText}
