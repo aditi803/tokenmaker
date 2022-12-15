@@ -309,7 +309,10 @@ export const FrontMain = () => {
           </section>
         </main>
       </div>
+      <div className="footer-in-mainpage">
       <Footer />
+
+      </div>
     </>
   );
 };

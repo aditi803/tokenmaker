@@ -172,17 +172,18 @@
     background-color: #383838;
     color: #fff;
 }
+.footer-in-mainpage{
+    margin-top: 100px;
+}
 .faq-container {
     max-width: 820px;
     margin: 0 auto;
 }
-/* .faq-list-container .faq-item {
-    
-    padding: 1rem;
-} */
+
 .section-faq {
-    background-color: #f7f3f2;
     padding-top: 110px;
+    background-image: url('../../../../assets/faqbackground.png');
+    background-size: cover;
 }
 .section-faq .container{
     margin-bottom: 102px !important;
@@ -317,6 +318,22 @@
     background-color: #6010B1;
     bottom: 0;
     left: 0;
+}
+@media screen and (max-width:1684.98px){
+    .section-faq .container {
+        margin-bottom: 0px;
+    }
+    .footer{
+        margin-top: 0px;
+    }
+    .page-footer {
+        padding-top: 0px;
+    }
+}
+@media screen and (min-width:1684.98px){
+    .section-faq {
+        margin-bottom: 225px;
+    }
 }
 @media screen and (max-width: 1199.98px) {
     .faq{

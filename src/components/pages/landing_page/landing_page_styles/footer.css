@@ -9,12 +9,20 @@
     justify-content: center;
     padding-top: 66px;
     color: #fff;
-    background-color: #383838;
-    position: relative;
     font-size: .875rem;
+  
 }
 footer {
     display: block;
+    background-image: url('../../../../assets/footerbg.png');
+    background-size: cover;
+    padding-top: 175px;
+margin-top: 100px;
+
+}
+.footer-logo{
+    width: 175px;
+    margin-bottom: 10px;
 }
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     cursor: pointer;
@@ -55,17 +63,12 @@ a {
     border: none;
     background: none;
 }
-.page-footer:after {
-    content: " ";
-    background-color: #fff;
-    background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='50px' fill='%23383838' viewBox='0 0 100 100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' preserveAspectRatio='none'%3E%3Cpath className='footer-shape-fill' d='M0,0 C16.6666667,66 33.3333333,99 50,99 C66.6666667,99 83.3333333,66 100,0 L100,100 L0,100 L0,0 Z'%3E%3C/path%3E%3C/svg%3E");
-    height: 50px;
-    background-repeat: no-repeat;
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+.icons{
+    gap: 36px;
+    cursor: pointer;
+}
+.icons i:hover{
+    transform: translateY(-1px);
 }
 @media screen and (min-width: 1685px) {
     div#root {
@@ -80,4 +83,9 @@ a {
         bottom: 0;
     }
 }
- 
+@media screen and (max-width: 1199.98px) {
+    footer {
+        background-image: none;
+        background-color: rgba(0, 0, 0, 0.911);
+    }
+}
