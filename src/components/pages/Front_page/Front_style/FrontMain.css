@@ -160,6 +160,7 @@
 } */
 .section-faq {
     background-color: #f7f3f2;
+    padding-top: 110px;
 }
 .section-faq .container{
     margin-bottom: 102px !important;
@@ -194,3 +195,187 @@
 .svg-icon.icon-token {
     background-image: url("https://tokenmaker.eattheblocks.com/images/icons/compliant.svg");
 }
+
+
+/* new faq style
+ */
+
+
+ .faq{
+    /* background: #f2f7f6 url('../../../../../../public/esgImages/top1.png'); */
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding: 110px 0 250px;
+    font-family: 'Gilroy';
+    scroll-behavior: smooth;
+}
+.faq_wrap .heading{
+    font-size: 30px;
+    position: relative;
+    font-weight: 700;
+    line-height: 90px;
+    color: black;
+    opacity: 0.7;
+}
+
+.faq_wrap .text{
+    font-size: 16px;
+    margin-top: 30px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.85);
+    opacity: 0.6;
+    font-weight: 400; 
+    max-width: 461px;
+}
+
+.faq .accordionitem{
+    margin-bottom: 20px;
+}
+.accordionbutton{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+    padding: 17px 30px;
+}
+.faq .accordionbody{
+    /* background: #3b7f74; */
+    background-color: #6010B1;
+}
+.faq .accordionbody .p{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+}
+.faq .accordionitem{
+    overflow: hidden;
+    margin-top: 20px;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 2px 1px 0 rgba(255, 245, 245, 0.15), 0 0px 11px 0 rgb(0 0 0 / 10%);  
+}
+/* .faq .accordionbutton{
+    background-color: white;
+} */
+.faq .accordionbutton:focus{
+    box-shadow: none;
+}
+.faq .accordion .accordionbutton:not(.collapsed) {
+    color: white;
+    /* background-color:#3b7f74; */
+    background-color: #6010B1;
+}
+
+.faq .faq_bottom .h3{
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 75px;
+    margin-bottom: 40px;
+    color: rgb(39, 38, 38);
+}
+.faq .faq_bottom .a{
+    background: #6010B1;
+    padding: 15px 35px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    border-radius: 7px;
+    color:#000;
+    font-weight: 600;
+}
+.faq .faq_bottom .a:hover{
+    background-color:#6010B1;
+    color: #000;
+}
+.faq_wrap .heading::after {
+    position: absolute;
+    content: "";
+    height: 7px;
+    width: 103px;
+    /* background-color: #3b7f74; */
+    background-color: #6010B1;
+    bottom: 0;
+    left: 0;
+}
+@media screen and (max-width: 1199.98px) {
+    .faq{
+        padding: 80px 0  280px ;
+    }
+}
+@media screen and (max-width: 992px) {
+.faq{
+    padding: 65px 0  280px ;
+}
+}
+@media screen and (max-width: 768px) {
+    .faq .faq_bottom .h3 {
+        font-weight: 600;
+        font-size: 35px;
+        line-height: 55px;
+    }
+.faq_wrap .heading{
+    font-size: 35px;
+}
+}
+@media screen and (max-width: 567.98px){
+    .accordionbutton{
+        font-size: 16px;
+        line-height: 25px;
+    }
+    .faq .heading {
+        font-size: 24px;
+        line-height: 30px;
+    padding: 0 0 10px 0;
+        }
+    .faq_wrap .text {
+        font-size: 15px;
+    }
+    .faq .accordion-header button {
+        font-size: 14px;
+        line-height: 25px;
+    }
+    .faq .accordionbody .p {
+        font-size: 15px;
+        line-height: 22px;
+    }
+    .faq .faq_bottom .h3 {
+        font-size: 22px;
+        line-height: 30px;
+    }
+    .faq .faq_bottom a {
+        padding: 8px 27px;
+    }
+    .faq{
+        padding: 35px 0  280px ;
+    }
+}
+
+
+.accordion-button:not(.collapsed)::after {
+    /* background-image: url("../../../public/esgImages/minus.png") !important; */
+    filter: invert(95%) sepia(95%) saturate(1%) hue-rotate(96deg) brightness(104%)
+      contrast(100%);
+  }
+  
+  
+  .accordion .accordion-button:not(.collapsed) {
+    color: #fff;
+    background-color: #6010b1a9;
+    box-shadow: none;
+  }
+  .accordion-body {
+    background-color: #6010b1a9;
+    color: #fff;
+  }
+  .accordion-button:focus{
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .faq-bottom-text{
+    font-weight: 600;
+    font-size: 31px;
+  }
+  .btn-pad{
+    min-width: 150px;
+  }
+ 
+

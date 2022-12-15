@@ -10,6 +10,7 @@ import Footer from "../landing_page/Footer";
 import sideimage from '../../../assets/banner-side-image.png'
 
 export const FrontMain = () => {
+  const [showindex, setShowindex] = useState(0);
 
   const [banner, setBanner] = useState([])
   const [start, setStart] = useState([])
@@ -170,10 +171,10 @@ export const FrontMain = () => {
               <h2 className="section-title-small text-center" style={{ color: `${custom.headingColor}`, fontSize:"31px"}}>
                 {custom.heading}
               </h2>
-              <div className="mt-3 text-center">
+              <div className="mt-4 text-center">
                 <Link
                   type="button" to="https://www.blocktechbrew.com/"
-                  className="btn btn-rounded btn-pad"
+                  className="btn btn-pad"
                   style={{ backgroundColor: `${custom.buttonBackgroundColor}`, color: `${custom.buttonColor}` }}
                 >
                   {custom.buttonText}
@@ -182,51 +183,86 @@ export const FrontMain = () => {
             </div>
           </section>
           <section className="page-section section-faq" id="faq">
-            <div className="container">
-              <div className="faq-container">
-                <h2 className="section-title text-center mt-4">{faqData.heading}</h2>
-                <p className="section-subtitle mt-3 mb-5" style={{color: `${faqData.contentColor}`}}>
-                  {faqData.content}
-                </p>
 
-                <div className="faq-list-container">
-                  <div
-                    className="accordion accordion-flush"
-                    id="accordionFlushExample"
-                  >
-                    {faq.map((value, index) => (
-                      <div className="faq-header" key={index}>
-                        <div className="accordion-item faq-item" >
-                          <h2 className="accordion-header" id="flush-headingOne">
+<div className="container">
+          <div className='faq_wrap'>
+            <div className="row">
+              <div className="col-12 col-lg-6 faq_left">
+                <h2 className='heading'
+                // style={{color:props.data.data.homeData.homeFaqSection.headingColor}}
+                >{faqData.heading}</h2>
+                <p className='text'
+                 style={{color: `${faqData.contentColor}`}}
+                >
+                {faqData.content}
+                </p>
+              </div>
+              <div className="col-12 col-lg-6 faq_right">
+                {faq.map((item, i) => (
+                    <>
+                      <div
+                         
+                        className="accordion mb-4"
+                        id="accordionExample"
+                        key={item._id}
+                      >
+                        <div
+                          className={`accordionitem accordion-item`}
+                        >
+                          <h2 className="accordion-header" id="headingOne2">
                             <button
-                              className={`accordion-button collapsed`}
+                              className={`accordionbutton accordion-button
+                              ${
+                                i === showindex ? " " : "collapsed"
+                              }
+                              `}
                               type="button"
                               data-bs-toggle="collapse"
-                              data-bs-target={`#flush-collapseOne${index}`}
-                              aria-expanded={index === 0 ? 'true' : 'false'}
-                              aria-controls={`flush-collapseOne${index}`}
-                              style={{backgroundColor:"#f7f3f2"}}
+                              data-bs-target={`#collapseOne2${i}`}
+                              aria-expanded="true"
+                              aria-controls="collapseOne2"
+                              onClick={() => setShowindex(i)}
                             >
-                              <h4 className="me-3">{value.question}</h4>
+                             {item.question}
                             </button>
                           </h2>
                           <div
-                            id={`flush-collapseOne${index}`}
-                            className={`accordion-collapse collapse `}
-                            aria-labelledby="flush-headingOne"
-                            data-bs-parent="#accordionFlushExample"
+                            id={`collapseOne2${i}`}
+                            className={`accordion-collapse collapse ${
+                              i === showindex ? "show" : null
+                            }`}
+                            aria-labelledby="headingOne2"
+                            data-bs-parent="#accordionExample"
                           >
-                            <div className="accordion-body ">
-                              {value.answer}
+                            <div
+                              className={`accordionbody accordion-body`}
+                            >
+                              <p className='p'>
+                               {item.answer}
+                              </p>
                             </div>
                           </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </>
+                  )
+                )}
               </div>
             </div>
+          </div>
+          <div className={`faq_bottom text-center my-3 my-md-5`}>
+            <h3
+            // style={{color:props.data.data.homeData.homeFaqSection.headingColor}}
+            className='faq-bottom-text'>What are you waiting for?</h3>
+            <a
+            className='btn btn-pad'
+            style={{ backgroundColor: `${custom.buttonBackgroundColor}`, color: `${custom.buttonColor}` }}
+            >
+              Get Started
+            </a>
+          </div>
+        </div>
+
           </section>
 
           <section className="page-section section-ready-i">
@@ -234,7 +270,7 @@ export const FrontMain = () => {
               <div className="mt-3 text-center">
                 <Link
                   href="/generator"
-                  className="btn btn-primary btn-lg btn-rounded btn-pad"
+                  className="btn btn-primary btn-lg  btn-pad"
                   style={{fontSize:"1.25rem", marginBottom:"125px"}}
                 >
                   Deploy your token
