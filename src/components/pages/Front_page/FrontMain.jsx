@@ -120,7 +120,7 @@ export const FrontMain = () => {
             </div>
           </section>
 
-          <section className="page-section section-how" id="how-it-works">
+          {/* <section className="page-section section-how" id="how-it-works">
             <div className="container">
               <h2
                 className="section-title mt-4"
@@ -149,7 +149,88 @@ export const FrontMain = () => {
                 ))}
               </div>
             </div>
-          </section>
+          </section> */}
+
+          {/* test */}
+
+          <section class="timeline" id="timeline">
+      <div class="container">
+        <div class="timeline_wrap text-center">
+        <h2
+                className="section-title mt-4"
+                style={{ color: `${stepData.headingColor}` }}
+              >
+                <span>{startData}</span> {""}
+                <span className="sub-highlight">{coloredData}</span>
+              </h2>
+          <div class="row mt-5 pt-0 pt-md-5 gx-0">
+          {steps.map((data, i) => {
+            if (i % 2 === 0) {
+              return (
+            <>
+            <div class="col-12 timeline_left timeline_main">
+              <div class="row justify-content-center align-items-center">
+                <div class="col-10 col-lg-5 d-none d-lg-block timeline-date">
+                  <div className="feature-box mb-5" style={{maxWidth:'300px',minHeight:'320px'}}>
+                  <img  src={imageBaseUrl+data.stepImage}/>
+                    <h5> {data.title}</h5>
+                    <p>{data.content}</p>
+                </div>
+                </div>
+                <div class="col-2 timeline_dot"><span>{i+1}</span></div>
+                <div class="col-10 col-lg-5 timeline-text">
+                  <div class="d-block d-lg-none timeline-date">
+                    <div className="feature-box mb-5" style={{maxWidth:'300px',minHeight:'320px'}}>
+                  <img  src={imageBaseUrl+data.stepImage}/>
+                  <h5> {data.title}</h5>
+                    <p>{data.content}</p>
+                </div>
+                    <div>
+
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+            </>
+            );
+                  } else {
+                    return (
+                      <>
+            <div class={`col-12 ${i=== steps.length-1 ? '' :'timeline_right'} timeline_main`}>
+              <div class="row justify-content-center align-items-center">
+                <div class="col-10 col-lg-5 order-2 order-lg-1 timeline-text">
+                  <div class="d-block d-lg-none timeline-date">
+                    <div className="feature-box mb-5" style={{maxWidth:'300px',minHeight:'320px'}}>
+                  <img  src={imageBaseUrl+data.stepImage}/>
+                  <h5> {data.title}</h5>
+                    <p>{data.content}</p>
+                </div>
+                  </div>
+                 
+                </div>
+                <div class="col-2 timeline_dot order-1 order-lg-2"><span>{i+1}</span></div>
+                <div class="col-10 col-lg-5 d-none d-lg-block order-3  timeline-date">
+                  <div className="feature-box mb-5" style={{maxWidth:'300px',minHeight:'320px'}}>
+                  <img  src={imageBaseUrl+data.stepImage}/>
+                  <h5> {data.title}</h5>
+                    <p>{data.content}</p>
+                </div>
+                </div>
+              </div>
+            </div>
+            </>
+                    )}
+
+})}
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+          {/* end  */}
 
           <section
             className="page-section section-ready my-4 py-5"

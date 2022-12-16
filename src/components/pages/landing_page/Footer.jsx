@@ -23,7 +23,7 @@ function Footer() {
         <footer className="footer">
           <div className="container py-3">
             <div className="row" style={{ color: `${footer.contentColor}` }}>
-              <div className="col-4 ">
+              <div className="col-lg-4 ">
                 <span>
                   <img className="footer-logo" src={Logo} alt="" />
                 </span>
@@ -40,21 +40,21 @@ function Footer() {
                   <i class="fa-brands fa-instagram"></i>
                 </div>
               </div>
-              <div className="col-2">
+              <div className="col-lg-2">
                 <h5 className="mb-4">Our Services</h5>
                 <p>Metaverse</p>
                 <p>Defi</p>
                 <p>NFT Marketplace</p>
                 <p>Crypto Exchange</p>
               </div>
-              <div className="col-2">
+              <div className="col-lg-2">
               <h5 className="mb-5"></h5>
               <p>Crypto Banking Solution</p>
               <p>ICO</p>
               <p>Wallet</p>
               <p>Resourses</p>
               </div>
-              <div className="col-4">
+              <div className="col-lg-4">
                 <h5 className="mb-4">whatsApp Updates</h5>
                 <div className="d-flex mb-4">
                 <input type='number' className="numberinput" placeholder="Enter Phone Number"/>

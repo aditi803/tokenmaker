@@ -37,6 +37,7 @@ export const EthHeader = () => {
                       <span className="inline-block">Connect your Wallet</span>
                     </button>
                   </div>
+                 
                 </nav>
               </div>
             </div>

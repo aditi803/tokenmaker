@@ -14,7 +14,13 @@
         justify-content: center;
         background-color: #fff;
     }
-
+.nav-btn-div{
+    margin-left: auto;
+}
+.nav-btn-div .btn-pad{
+    background-color: rgb(96, 16, 177);
+    color: #fff !important;
+}
 .navbar-brand {
     color: #383838;
     font-size: 1.5rem;

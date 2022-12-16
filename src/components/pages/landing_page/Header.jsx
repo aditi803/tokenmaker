@@ -47,6 +47,12 @@ const Header = () => {
                                     alt="Logo" className="img-2" /> */}
                                 {/* </span> */}
                             </Link>
+                            <div className='nav-btn-div'>
+                            <Link
+                      to="/generator">
+                    <button className='btn btn-pad'>Get Started</button>
+                    </Link>
+                  </div>
                         </nav>
                     </div>
                 </div>
