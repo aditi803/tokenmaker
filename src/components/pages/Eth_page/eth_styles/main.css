@@ -11,16 +11,26 @@
 }
 .hero {
     color: #fff;
-    background-color: #383838;
+    /* background-color: #383838; */
     position: relative;
 }
 .hero {
     font-size: 1.125rem;
     padding-top: 100px;
-    background-image: url(../eth_assets/Background-V1.1-1.png);
+    background-image: url('../../../../assets/crtoken-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
+    padding-bottom: 100px;
+}
+.hero-form{
+    font-size: 1.125rem;
+    padding-top: 100px;
+    background-image: url('../../../../assets/newformbg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    padding-bottom: 100px;
 }
 .mb-3 {
     margin-bottom: 1rem!important;
@@ -46,7 +56,7 @@
     display: inline-block;
     position: relative;
     z-index: 1;
-    margin-top: 25px;
+    margin-top: 20px;
     color: black;
 }
 

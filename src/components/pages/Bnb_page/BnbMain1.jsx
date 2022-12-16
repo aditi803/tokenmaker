@@ -10,6 +10,11 @@ import { toast } from "react-toastify";
 import { HiInformationCircle } from "react-icons/hi";
 import Tooltip from "../../Layots/ToolTip";
 
+
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 //
 // import Link from "react-router-dom";
 // import wallet_model from "../../Modal/Multi-WalletModal";
@@ -22,6 +27,19 @@ import {
 } from "../../../disabledUtils";
 
 const BnbMain1 = (props) => {
+
+// test
+const steps = [
+  ' ',
+  ' ',
+  ' ',
+  ' '
+];
+
+
+
+// end
+
   console.log(props, 'PEOPS AT BNB')
 
   const [data, setData] = useState([])
@@ -770,7 +788,7 @@ const BnbMain1 = (props) => {
     <>
       <div className="page-content">
         <main>
-          <div className="hero mb-3">
+          <div className="hero-form mb-3">
             <div className="container">
               <h1>
                 <span className="sub-highlight">
@@ -1336,9 +1354,34 @@ const BnbMain1 = (props) => {
                 </div>
               </div>
             </div>
+
+            {/* test */}
+            {/* <div className="row">
+            <div className="col-lg-3">
+
+</div>
+<div className="col-lg-6">
+<Box sx={{ width: '100%' }}>
+      <Stepper activeStep={1} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+    </Box>
+</div>
+<div className="col-lg-3">
+
+</div>
+            
+    </div> */}
+
+    {/* end */}
           </section>
         </main>
       </div>
+     
     </>
   );
 };

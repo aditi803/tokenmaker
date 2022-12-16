@@ -92,6 +92,11 @@ a {
 .numberinput::placeholder{
     color: white;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 @media screen and (min-width: 1685px) {
     div#root {
         position: relative;
