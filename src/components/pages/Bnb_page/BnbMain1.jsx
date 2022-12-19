@@ -10,11 +10,10 @@ import { toast } from "react-toastify";
 import { HiInformationCircle } from "react-icons/hi";
 import Tooltip from "../../Layots/ToolTip";
 
-
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 //
 // import Link from "react-router-dom";
 // import wallet_model from "../../Modal/Multi-WalletModal";
@@ -26,43 +25,65 @@ import {
   customDisabled,
 } from "../../../disabledUtils";
 
+import FirstStep from "./FirstStep";
+import SecondStep from "./SecondStep";
+import ThirdStep from "./ThirdStep";
+import FouthStep from "./FouthStep";
+import { multiStepContext, StepContext } from "./StepContext";
+
 const BnbMain1 = (props) => {
+  // test
+  const steps = [" ", " ", " ", " "];
 
-// test
-const steps = [
-  ' ',
-  ' ',
-  ' ',
-  ' '
-];
+  const { currentStep, submitted } = useContext(multiStepContext);
 
+  const showStep = (step) => {
+    console.log(step);
+    switch (step) {
+      case 1:
+        return <FirstStep />;
+      case 2:
+        return <SecondStep />;
+      case 3:
+        return <ThirdStep />;
+      case 4:
+        return <FouthStep />;
+    }
+  };
 
+  // end
 
-// end
+  console.log(props, "PEOPS AT BNB");
 
-  console.log(props, 'PEOPS AT BNB')
-
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const getNetworks = () => {
-    axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
+    axios
+      .get(
+        "https://tokenmaker-apis.block-brew.com/commission/commissiondetails"
+      )
       .then((res) => {
-        setData(res.data.msg.items)
+        setData(res.data.msg.items);
         console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
       })
       .catch((err) => {
-        console.log(err, "Error")
-      })
-  }
+        console.log(err, "Error");
+      });
+  };
 
   useEffect(() => {
-    getNetworks()
-  }, [setData])
-
+    getNetworks();
+  }, [setData]);
 
   const navigate = useNavigate();
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
-  const { deployContract, changeNetwork, SignInMetamask, connectedAccAddress, blockchainNetworks, sendCommision } =
-    useContext(GlobalContext);
+  const {
+    deployContract,
+    changeNetwork,
+    SignInMetamask,
+    connectedAccAddress,
+    blockchainNetworks,
+    sendCommision,
+  } = useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -82,7 +103,7 @@ const steps = [
     accessType: "owner",
     network: "binanceSmartChain",
     agreement: false,
-    commissionFee: "0.5" ,
+    commissionFee: "0.5",
   });
 
   // error dika
@@ -271,9 +292,8 @@ const steps = [
       } else if (supplyType === "fixed") {
         setEthFormData((prev) => ({
           ...prev,
-          mintable:false,
+          mintable: false,
         }));
-
 
         // if(recoverable===true){
         //   setEthFormData((prev) => ({
@@ -293,14 +313,16 @@ const steps = [
       if (network === "binanceSmartChainTestnet") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          commissionFee: data.find((item) => item.value === ethFormData.network)
+            ?.networkCommissionFee,
         }));
       }
       if (network === "binanceSmartChain") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: 0.15,
-          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          commissionFee: data.find((item) => item.value === ethFormData.network)
+            ?.networkCommissionFee,
         }));
       }
       if (supplyType === "fixed" || supplyType === "capped") {
@@ -444,7 +466,8 @@ const steps = [
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: 1.3,
-          commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          commissionFee: data.find((item) => item.value === ethFormData.network)
+            ?.networkCommissionFee,
         }));
       }
 
@@ -553,16 +576,18 @@ const steps = [
       boolean = e.target?.checked;
     }
     if (e.target.name === "initialSupply") {
-      if (e.target.value === '') {
+      if (e.target.value === "") {
         setEthFormData((prev) => ({
           ...prev,
           [e.target.name]: boolean ?? 0,
         }));
       } else {
-
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: (e.target.value).charAt(0) !== '0' ? e.target.value : (e.target.value).substring(1),
+          [e.target.name]:
+            e.target.value.charAt(0) !== "0"
+              ? e.target.value
+              : e.target.value.substring(1),
         }));
       }
 
@@ -637,7 +662,6 @@ const steps = [
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
       }));
-
     }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
@@ -661,33 +685,40 @@ const steps = [
     if (tokenType === "free") {
       setEthFormData((prev) => ({
         ...prev,
-        initialSupply: 10000
+        initialSupply: 10000,
       }));
     }
-  }, [tokenType, initialSupply, maximumSupply])
+  }, [tokenType, initialSupply, maximumSupply]);
 
   const customVampire = (network) => {
     const blockArray = Object.entries(blockchainNetworks);
-    const selctedItem = blockArray.find((item) => item[1] === network)
-    return selctedItem?.[0]
-  }
+    const selctedItem = blockArray.find((item) => item[1] === network);
+    return selctedItem?.[0];
+  };
 
   useEffect(() => {
-    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Binance Smart Chain' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
-        return true;
+    const selectedCommissionFee = data?.find(
+      ({ value, parentNetworkName, subNetworkName, tokenType }) => {
+        if (
+          parentNetworkName === "Binance Smart Chain" &&
+          (value === ethFormData.network ||
+            value === customVampire(ethFormData.network)) &&
+          tokenType === ethFormData.tokenType
+        ) {
+          return true;
+        }
       }
-    })
+    );
     // setGasFee(selectedCommissionFee)
-    setEthFormData(prev => ({
+    setEthFormData((prev) => ({
       ...prev,
-      commissionFee: selectedCommissionFee?.networkCommissionFee
-    }))
-    console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-
-
-
-  }, [ethFormData.tokenType, ethFormData.network, data])
+      commissionFee: selectedCommissionFee?.networkCommissionFee,
+    }));
+    console.log(
+      selectedCommissionFee,
+      ">>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH"
+    );
+  }, [ethFormData.tokenType, ethFormData.network, data]);
 
   // {web3Loading ? (
   //   <button className=" btn-inner - text " disabled>
@@ -712,35 +743,34 @@ const steps = [
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
         ? Object.assign(FormData, {
-          network: blockchainNetworks[FormData.network],
-        })
+            network: blockchainNetworks[FormData.network],
+          })
         : "";
 
       console.log(FormData.network, "formdata bnb main1 side");
 
-
-      console.log(chainId, "chainId bnb main1 side ")
+      console.log(chainId, "chainId bnb main1 side ");
 
       if (FormData.network === chainId) {
         // navigate("/generator/final");
         if (connectedAccAddress.length === 0) {
-          await SignInMetamask()
+          await SignInMetamask();
         }
         console.log(FormData.network, "currentNetworkID");
 
-        let res = await sendCommision(commissionFee)
-        console.log(res, "ress send commision matic main")
+        let res = await sendCommision(commissionFee);
+        console.log(res, "ress send commision matic main");
 
         if (res) {
-        props.setShow(false);
+          props.setShow(false);
 
           //hit contract compile api
-        
+
           axios
             .post(
               "https://tokenmaker-apis.block-brew.com/contract/contract",
               // https://tokenmaker-apis.block-brew.com/token/tokendetails
-   
+
               FormData
             )
             .then((res) => {
@@ -748,20 +778,20 @@ const steps = [
               // console.log(contractSource, "contract Source api side ");
               //calling deploy function
               deployContract(res.data.result, FormData).then((res) => {
-
                 if (res.error) {
                   navigate("/generator/binancesmartchain");
                   props.setShow(true);
                   res.error.code === "ACTION_REJECTED"
-                    ? toast.error(
-                      "User Rejected The Request"
-                    )
+                    ? toast.error("User Rejected The Request")
                     : toast.error(res.error.message);
                 } else {
                   toast.success("Token Deploy Successfully");
                   // navigate("/generator/final");
                   props.setShow(false);
-                  console.log(res, "else side deploy then return deploy succes");
+                  console.log(
+                    res,
+                    "else side deploy then return deploy succes"
+                  );
                 }
               });
             })
@@ -774,7 +804,6 @@ const steps = [
                 : toast.error("Data Fetch Failed Try Again");
             });
         }
-
       } else {
         changeNetwork(FormData.network);
       }
@@ -803,588 +832,43 @@ const steps = [
               </p>
             </div>
           </div>
-          <section style={{marginBottom:'340px'}}>
-            <div className="container">
-              <div className="configurator-container">
-                <div className="configurator">
-                  <form onSubmit={handleSubmit}>
-                    <div className="row">
-                      <div className="col mt-3 mt-lg-0">
-                        <div className="card">
-                          <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
-                            <h4 className="m-0">
-                              <i className="fa-solid fa-arrow-right me-3"></i>
-                              Informations
-                            </h4>
-                          </div>
-                          <div className="card-body">
-                            <div className="form-group">
-                              <label className="form-label">
-                                Token type
-                                <span className="val-required">*</span>
-                              </label>
-                              <select
-                                className="form-select"
-                                name="tokenType"
-                                onChange={ethMainFormHandler}
-                                value={tokenType}
-                              >
-                                <option value="free">Free</option>
-                                <option value="basic">Basic</option>
-                                <option value="custom">Custom</option>
-                              </select>
-                              <span className="form-text text-muted">
-                                Select the base configuration of your token
-                                (Free and Basic have limited configurations)
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-label">
-                                Token Name
-                                <span className="val-required">*</span>
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="My new token"
-                                name="tokenName"
-                                value={tokenName}
-                                onChange={ethMainFormHandler}
-                              />
-                              <span className="form-text text-muted">
-                                The name of your token
-                              </span>
-                              <br />
-                              <span className="text-danger">
-                                {err.tokenNameErr}
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-label">
-                                Token Symbol
-                                <span className="val-required">*</span>
-                              </label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="TKN"
-                                maxLength="8"
-                                name="tokenSymbol"
-                                value={tokenSymbol}
-                                onChange={ethMainFormHandler}
-                              />
-                              <span className="form-text text-muted">
-                                You token's symbol (ie BNB)
-                              </span>
-                              <br />
-                              <span className="text-danger">
-                                {err.tokenSymbolErr}
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-label">
-                                Decimals<span className="val-required">*</span>
-                              </label>
-                              <input
-                                type="number"
-                                className="form-control"
-                                placeholder="18"
-                                maxLength="2"
-                                disabled={f_decimals}
-                                value={decimals}
-                                name="decimals"
-                                onChange={ethMainFormHandler}
-                              />
-                              <span className="form-text text-muted">
-                                The number of decimal of your token (default 18)
-                              </span>
-                              <br />
-                              <span className="text-danger">
-                                {err.decimalsErr}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="card mt-3">
-                            <div className="card-header d-flex align-items-center">
-                              <div className="mr-3" style={{ zoom: 1.5 }}></div>
-                              <h4 className="m-0">
-                                <i className="fa-solid fa-arrow-right me-3"></i>
-                                Supply
-                              </h4>
-                            </div>
-                            <div className="card-body">
-                              <div className="form-group">
-                                <label className="form-label">
-                                  Supply type
-                                  <span className="val-required">*</span>
-                                </label>
-                                <select
-                                  className="form-select"
-                                  name="supplyType"
-                                  disabled={f_supplyType}
-                                  onChange={ethMainFormHandler}
-                                  value={supplyType}
-                                >
-                                  <option value="fixed">Fixed</option>
-                                  <option value="capped">Capped</option>
-                                  <option value="unlimited">Unlimited</option>
-                                </select>
-                                <span className="form-text text-muted">
-                                  Fixed / Capped / Unlimited
-                                </span>
-                              </div>
-                              <div className="form-group">
-                                <label className="form-label">
-                                  Initial supply
-                                  <span className="val-required">*</span>
-                                </label>
-                                <input
-                                  type="number"
-                                  className="form-control"
-                                  placeholder="1000000"
-                                  name="initialSupply"
-                                  disabled={f_initialSupply}
-                                  value={initialSupply}
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-text text-muted">
-                                  The number of coins minted during the creation
-                                  of the contract
-                                </span>
-                              </div>
-                              {/* <div
-                                className="form-group "
-                                style={{ display: !show ? "block" : "none" }}
-                                // style={{display: {d_displayMaximum}}}
-                              >
-                                <label className="form-label">
-                                  Maximum supply
-                                  <span className="val-required">*</span>
-                                </label>
-                                <input
-                                  type="number"
-                                  className="form-control"
-                                  placeholder="1000000"
-                                  value={maximumSupply}
-                                  name="maximumSupply"
-                                  disabled={f_maximumSupply}
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-text text-muted">
-                                  The maximum number of coins ever minted
-                                </span>
-                              </div> */}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col mt-3 mt-lg-0">
-                        <div className="card">
-                          <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
-                            <h4 className="m-0">
-                              <i className="fa-solid fa-arrow-right me-3"></i>
-                              Options
-                            </h4>
-                          </div>
-                          <div className="card-body">
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  name="conforms"
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  disabled={f_conforms}
-                                  onChange={ethMainFormHandler}
-                                  defaultChecked={conforms}
-                                />
-                                <span className="form-check-label">
-                                  Conforms to BEP20 protocol
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Your token will const all the functionalities,
-                                and conforms to BEP20 protocol
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  name="verified"
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  onChange={ethMainFormHandler}
-                                  disabled={f_verified}
-                                  defaultChecked={verified}
-                                />
-                                <span className="form-check-label">
-                                  Verified on Bscscan
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                The source code of your contract is
-                                automatically published and verified
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="noCopyrightLink"
-                                  onChange={ethMainFormHandler}
-                                  checked={noCopyrightLink}
-                                  disabled={f_noCopyrightLink}
-                                />
-                                <span className="form-check-label">
-                                  No copyright link
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                A link pointing to this page will be added in
-                                the description of your contract (Free and Basic
-                                contracts only)
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  checked={mintable}
-                                  disabled={f_mintable}
-                                  name="mintable"
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label">
-                                  {" "}
-                                  Mintable{" "}
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow the creation of new tokens in the future
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="burnable"
-                                  checked={burnable}
-                                  disabled={f_burnable}
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label ">
-                                  Burnable
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow your tokens to be burned
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="pausable"
-                                  checked={pausable}
-                                  disabled={f_pausable}
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label">
-                                  Pausable
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow your tokens to be paused
-                              </span>
-                            </div>
-                            {/* <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="recoverable"
-                                  checked={recoverable}
-                                  disabled={f_recoverable}
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label">
-                                  Recoverable
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow to recover any BEP20 tokens sent to your
-                                contract
-                              </span>
-                            </div> */}
-                            <div className="form-group">
-                              <label className="form-label">
-                                Access type
-                                <span className="val-required">*</span>
-                              </label>
-                              <select
-                                className="form-select"
-                                name="accessType"
-                                disabled={f_accessType}
-                                value={accessType}
-                                onChange={ethMainFormHandler}
-                              >
-                                <option value="owner"></option>
-                                <option value="roles">Roles</option>
-                              </select>
-                              <span className="form-text text-muted">
-                                Who can administer your contract
-                              </span>
-                              <div className="form-info">
-                                <div className="form-text text-muted">
-                                  <p>
-                                    <span> <strong>Owner:</strong></span> Your
-                                    wallet address will be set as the owner of
-                                    your token to perform administratives tasks
-                                    (ie, mint new tokens).
-                                  </p>
-                                  <p>
-                                    <span><strong>Roles:</strong></span> All
-                                    admin tasks (mint, burn, etc...) will be
-                                    available to different users, based on their
-                                    roles. By default, your wallet's address
-                                    will be given all the roles.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col mt-3 mt-xl-0">
-                        <div className="card">
-                          <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
-                            <h4 className="m-0">
-                              <i className="fa-solid fa-arrow-right me-3"></i>
-                              Network
-                            </h4>
-                          </div>
-                          <div className="card-body">
-                            <div className="form-group">
-                              <select
-                                className="form-select"
-                                name="network"
-                                value={network}
-                                onChange={ethMainFormHandler}
-                              >
-                                {data.map((item) => {
-                                  if (item.parentNetworkName === "Binance Smart Chain" && item.tokenType === 'free') {
-                                    return (
-                                      <option value={item.value}>{item.subNetworkName}</option>
-                                    )
-                                  }
-                                  else if (item.parentNetworkName === "Binance Smart Chain" && item.tokenType === 'basic') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
-                                  }
-                                  else if (item.parentNetworkName === "Binance Smart Chain" && item.tokenType === 'custom') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
-
-                                  }
-                                })}
-                              </select>
-                              <span className="form-text text-muted">
-                                Select the network on wich you want to deploy
-                                your token
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="card mt-3">
-                          <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
-                            <h4 className="m-0">
-                              <i className="fa-solid fa-arrow-right me-3"></i>
-                              Agreement
-                            </h4>
-                          </div>
-                          <div className="card-body">
-                            <div className="form-group">
-                              <label className="form-check">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="agreement"
-                                  value={agreement}
-                                  onChange={ethMainFormHandler}
-                                />
-
-                                <span className="form-check-label">
-                                  I have read, understood and agreed to the{" "}
-                                  {/* <span className="text-underline"> */}
-                                  {/*  modal*/}
-                                  <Link
-                                    to="/"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
-                                  >
-                                    <u> Terms of Use. </u>
-                                  </Link>
-                                  <TermsModal />
-                                  {/* modal */}
-                                  {/* </span> */}
-                                </span>
-                                <br />
-                                <span className="text-danger">
-                                  {err.agreementErr}
-                                </span>
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="card mt-3">
-                          <div className="card-header d-flex align-items-center">
-                            <div className="mr-3" style={{ zoom: 1.5 }}></div>
-                            <h4 className="m-0">
-                              <i className="fa-solid fa-arrow-right me-3"></i>
-                              Transaction
-                            </h4>
-                          </div>
-                          <div className="card-body">
-                            <div className="transactionWrap">
-                              <div className="Ttext">
-                                <p>
-                                  Commission fee:{" "}
-                                  {/* <i
-                                    className="fa-solid fa-circle-info tip"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    // data-bs-custom-class="custom-tooltip"
-                                    title="The commison fee will be
-                                  transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
-                                  from your wallet.Only the gas fees will be deducted "
-                                  ></i> */}
-                                  <Tooltip
-                                    content={
-                                      <>
-                                        The commison fee will be
-                                        <br />
-                                        transferred automatically to us
-                                        <br /> during the contract creation.
-                                        <br />
-                                        In case of error,this
-                                        <br /> amount will not be
-                                        <br /> deducted from your <br />
-                                        wallet.Only the gas
-                                        <br /> fees will be deducted
-                                      </>
-                                    }
-                                    direction="top"
-                                  >
-                                    <HiInformationCircle size={22} />
-                                  </Tooltip>
-                                </p>
-                              </div>
-                              <div className="Tbtn" style={{width:"120px"}}>
-                                <span className="badge bg-success d-block p-2">
-                                  {commissionFee
-                                    ? commissionFee === "Free" ? "Free" : `${commissionFee} BNB`
-                                    : "Free"}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="transactionWrap">
-                              <div className="Ttext ">
-                                <p>
-                                  Gas fee:{" "}
-                                  {/* <i
-                                    className="fa-solid fa-circle-info tip"
-                                    data-toggle="tooltip"
-                                    data-placement="top"
-                                    title="The gas fee depend on gas limit and gas price.
-                                  Metamask will automatically display the best fee to use "
-                                  ></i> */}
-                                  <Tooltip
-                                    content={
-                                      <>
-                                        The gas fee depend <br />on gas limit and<br /> gas price.
-                                        Metamask will<br /> automatically display<br /> the best fee to use
-
-                                      </>
-                                    }
-                                    direction="top"
-                                  >
-                                    <HiInformationCircle size={22} />
-                                  </Tooltip>
-                                </p>
-                              </div>
-                              <div className="Tbtn" style={{width:"120px"}}>
-                                <span className="badge bg-secondary d-block p-2">
-                                  Variable
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="mt-3">
-                          <button
-                            type="submit"
-                            className="btn-lg btn-success1 w-100 botn-clr"
-                            style={{
-                              color:"#fff",
-                              backgroundColor:"#198754",
-                              borderColor:"#198754"
-                            }}
-                            onClick={async () => {
-                              if (ethFormData.tokenName && ethFormData.tokenSymbol && ethFormData.decimals && ethFormData.agreement === true) {
-                                // let res = await sendCommision(commissionFee)
-                                // if(res===true){
-                                compileContract(ethFormData);
-
-                                // }
-                                // compileContract(ethFormData)
-                              }
-                            }}
-                          >
-                            Confirm
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
+          <section style={{ marginBottom: "340px" }}>
+            {/* test */}
+            <div className="row">
+              <div className="col-12">
+                <div className="steper-div">
+                  <Box sx={{ width: "100%" }}>
+                    <Stepper
+                      activeStep={currentStep - 1}
+                      alternativeLabel
+                      orientation="horizontal"
+                    >
+                      {steps.map((label) => (
+                        <Step key={label}>
+                          <StepLabel>{label}</StepLabel>
+                        </Step>
+                      ))}
+                    </Stepper>
+                  </Box>
                 </div>
               </div>
             </div>
-
-            {/* test */}
-            {/* <div className="row">
-            <div className="col-lg-3">
-
-</div>
-<div className="col-lg-6">
-<Box sx={{ width: '100%' }}>
-      <Stepper activeStep={1} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </Box>
-</div>
-<div className="col-lg-3">
-
-</div>
-            
-    </div> */}
-
-    {/* end */}
+            {/* <div>{showStep(currentStep)}</div> */}
+            {/* end */}
+            {currentStep === 1 ? (
+              <FirstStep />
+            ) : currentStep === 2 ? (
+              <SecondStep />
+            ) : currentStep === 3 ? (
+              <ThirdStep />
+            ) : (
+              <FouthStep />
+            )}
           </section>
         </main>
       </div>
-     
     </>
   );
 };
 
-
-export default BnbMain1
+export default BnbMain1;

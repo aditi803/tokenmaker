@@ -197,7 +197,18 @@ button, input, optgroup, select, textarea {
     background-color: #fff;
     border-bottom: 1px solid rgba(0,0,0,.055);
 }
-
+.steper-div{
+    max-width: 600px;
+    margin: auto;
+    margin-top: 25px;
+}
+.MuiSvgIcon-root{
+    height: 66px  !important;
+    width: 59px !important;
+    top: -20px !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 0.5rem;

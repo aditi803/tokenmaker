@@ -17,8 +17,8 @@ footer {
     background-image: url('../../../../assets/footerbg.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    padding-top: 175px;
-    margin-top: 100px;
+    padding-top: 125px;
+    /* margin-top: 100px; */
 
 }
 .footer-logo{
