@@ -62,7 +62,7 @@ const FouthStep = () => {
                               <div className="Ttext">
                                 <p>
                                   Commission fee:{" "}
-                                  {/* <i
+                                  <i
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -70,7 +70,7 @@ const FouthStep = () => {
                                     title="The commison fee will be
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
-                                  ></i> */}
+                                  ></i>
                                   <Tooltip
                                     content={
                                       <>
@@ -92,8 +92,8 @@ const FouthStep = () => {
                                   </Tooltip>
                                 </p>
                               </div>
-                              <div className="Tbtn" style={{ width: "120px" }}>
-                                <span className="badge bg-success d-block p-2">
+                              <div className="Tbtn mt-auto mb-auto" style={{ width: "120px" }}>
+                                <span className="badge bg-success d-block p-2 ">
                                   {/* {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
@@ -106,13 +106,13 @@ const FouthStep = () => {
                               <div className="Ttext ">
                                 <p>
                                   Gas fee:{" "}
-                                  {/* <i
+                                  <i
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
                                     title="The gas fee depend on gas limit and gas price.
                                   Metamask will automatically display the best fee to use "
-                                  ></i> */}
+                                  ></i>
                                   <Tooltip
                                     content={
                                       <>
@@ -129,7 +129,7 @@ const FouthStep = () => {
                                   </Tooltip>
                                 </p>
                               </div>
-                              <div className="Tbtn" style={{ width: "120px" }}>
+                              <div className="Tbtn mt-auto mb-auto" style={{ width: "120px" }}>
                                 <span className="badge bg-secondary d-block p-2">
                                   Variable
                                 </span>
@@ -172,7 +172,7 @@ const FouthStep = () => {
                           </div>
                           <div className='d-flex'>
 
-                        <button type="button" className="btn form-btn" onClick={()=>setStep(3)}>
+                        <button type="button" className="btn form-btn" onClick={()=>setStep(1)}>
                             Back
                         </button>
                         <button type="button" className="btn form-btn" >

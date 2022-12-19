@@ -33,23 +33,12 @@ import { multiStepContext, StepContext } from "./StepContext";
 
 const BnbMain1 = (props) => {
   // test
-  const steps = [" ", " ", " ", " "];
+  const steps = [" ", " ", ];
 
   const { currentStep, submitted } = useContext(multiStepContext);
+  const { setStep, userData, setUserData } = useContext(multiStepContext)
 
-  const showStep = (step) => {
-    console.log(step);
-    switch (step) {
-      case 1:
-        return <FirstStep />;
-      case 2:
-        return <SecondStep />;
-      case 3:
-        return <ThirdStep />;
-      case 4:
-        return <FouthStep />;
-    }
-  };
+ 
 
   // end
 
@@ -675,10 +664,11 @@ const BnbMain1 = (props) => {
     }
     if (
       ethFormData.tokenName !== "" &&
-      ethFormData.tokenSymbol !== "" &&
-      ethFormData.agreement !== false
+      ethFormData.tokenSymbol !== "" 
+    
     ) {
       // navigate("/generator/final");
+      setStep(2);
     }
   };
   useEffect(() => {
@@ -855,7 +845,7 @@ const BnbMain1 = (props) => {
               </div>
             </div>
             </div>
-            {currentStep === 1 ? (
+            {/* {currentStep === 1 ? (
               <FirstStep />
             ) : currentStep === 2 ? (
               <SecondStep />
@@ -863,7 +853,340 @@ const BnbMain1 = (props) => {
               <ThirdStep />
             ) : (
               <FouthStep />
-            )}
+            )} */}
+             {currentStep === 1 ? (
+              // <FirstStep />
+
+              <section>
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="firstForm">
+                      <h2 className="heading">Informations</h2>
+                      <form >
+                        <div className="form-group">
+                          <label className="form-label">
+                            Token type
+                            <span className="val-required">*</span>
+                          </label>
+                          <select
+                            className="form-select"
+                            name="tokenType"
+                            onChange={ethMainFormHandler}
+                            value={tokenType}
+                          >
+                            <option value="free">Free</option>
+                            <option value="basic">Basic</option>
+                            <option value="custom">Custom</option>
+                          </select>
+                          <span className="form-text text-muted">
+                            Select the base configuration of your token (Free and
+                            Basic have limited configurations)
+                          </span>
+                        </div>
+                        <div className="form-group">
+                          <label className="form-label">
+                            Token Name
+                            <span className="val-required">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="My new token"
+                            name="tokenName"
+                            value={tokenName}
+                            onChange={ethMainFormHandler}
+                          />
+                          <span className="form-text text-muted">
+                            The name of your token
+                          </span>
+                          <br />
+                          <span className="text-danger">
+                                      {err.tokenNameErr}
+                                    </span>
+                        </div>
+                        <div className="form-group">
+                          <label className="form-label">
+                            Token Symbol
+                            <span className="val-required">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="TKN"
+                            maxLength="8"
+                            name="tokenSymbol"
+                            value={tokenSymbol}
+                            onChange={ethMainFormHandler}
+                          />
+                          <span className="form-text text-muted">
+                            You token's symbol (ie BNB)
+                          </span>
+                          <br />
+                          <span className="text-danger">
+                                      {err.tokenSymbolErr}
+                                    </span>
+                        </div>
+                        <div className="form-group">
+                          <label className="form-label">
+                            Decimals<span className="val-required">*</span>
+                          </label>
+                          <input
+                            type="number"
+                            className="form-control"
+                            placeholder="18"
+                            maxLength="2"
+                          //   disabled={f_decimals}
+                            value={decimals}
+                            name="decimals"
+                            onChange={ethMainFormHandler}
+                          />
+                          <span className="form-text text-muted">
+                            The number of decimal of your token (default 18)
+                          </span>
+                          <br />
+                          <span className="text-danger">
+                                      {err.decimalsErr}
+                                    </span>
+                        </div>
+                        {/* <div className="form-group">
+                                      <label className="form-label">
+                                        Supply type
+                                        <span className="val-required">*</span>
+                                      </label>
+                                      <select
+                                        className="form-select"
+                                        name="supplyType"
+                                      //   disabled={f_supplyType}
+                                      //   onChange={ethMainFormHandler}
+                                      //   value={supplyType}
+                                      >
+                                        <option value="fixed">Fixed</option>
+                                        <option value="capped">Capped</option>
+                                        <option value="unlimited">Unlimited</option>
+                                      </select>
+                                      <span className="form-text text-muted">
+                                        Fixed / Capped / Unlimited
+                                      </span>
+                                    </div> */}
+                                    <div className="form-group">
+                                      <label className="form-label">
+                                        Initial supply
+                                        <span className="val-required">*</span>
+                                      </label>
+                                      <input
+                                        type="number"
+                                        className="form-control"
+                                        placeholder="1000000"
+                                        name="initialSupply"
+                                      //   disabled={f_initialSupply}
+                                        value={initialSupply}
+                                        onChange={ethMainFormHandler}
+                                      />
+                                      <span className="form-text text-muted">
+                                        The number of coins minted during the creation
+                                        of the contract
+                                      </span>
+                                      <br />
+                                      <span className="text-danger">
+                                      {err.initialSupplyErr}
+                                    </span>
+                                    </div>
+                        <button
+                          type="submit"
+                          className="btn form-btn"
+                          onClick={handleSubmit}
+                          
+                        >
+                          Next
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            ) :  
+              // <FouthStep />
+
+              <section>
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg-12">
+                      <div className="firstForm">
+                          <h2 className="heading">Network</h2>
+                          <form>
+                          <div className="form-group">
+                                        <select
+                                          className="form-select"
+                                          name="network"
+                                          value={network}
+                                          onChange={ethMainFormHandler}
+                                        >
+                                          {data.map((item) => {
+                                            if (
+                                              item.parentNetworkName ===
+                                                "Binance Smart Chain" &&
+                                              item.tokenType === "free"
+                                            ) {
+                                              return (
+                                                <option value={item.value}>
+                                                  {item.subNetworkName}
+                                                </option>
+                                              );
+                                            } else if (
+                                              item.parentNetworkName ===
+                                                "Binance Smart Chain" &&
+                                              item.tokenType === "basic"
+                                            ) {
+                                              <option value={item.value}>
+                                                {item.subNetworkName}
+                                              </option>;
+                                            } else if (
+                                              item.parentNetworkName ===
+                                                "Binance Smart Chain" &&
+                                              item.tokenType === "custom"
+                                            ) {
+                                              <option value={item.value}>
+                                                {item.subNetworkName}
+                                              </option>;
+                                            }
+                                          })}
+                                        </select>
+                                        <span className="form-text text-muted">
+                                          Select the network on wich you want to deploy
+                                          your token
+                                        </span>
+                                      </div>
+                                      <h2 className="heading">Transaction</h2>
+                                      <div className="card-body">
+                                      <div className="transactionWrap">
+                                        <div className="Ttext">
+                                          <p>
+                                            Commission fee:{" "}
+                                          
+                                            <Tooltip
+                                              content={
+                                                <>
+                                                  The commison fee will be
+                                                  <br />
+                                                  transferred automatically to us
+                                                  <br /> during the contract creation.
+                                                  <br />
+                                                  In case of error,this
+                                                  <br /> amount will not be
+                                                  <br /> deducted from your <br />
+                                                  wallet.Only the gas
+                                                  <br /> fees will be deducted
+                                                </>
+                                              }
+                                              direction="top"
+                                            >
+                                              <HiInformationCircle size={22} />
+                                            </Tooltip>
+                                          </p>
+                                        </div>
+                                        <div className="Tbtn mt-auto mb-auto" style={{ width: "120px" }}>
+                                          <span className="badge bg-success d-block p-2 ">
+                                            {commissionFee
+                                              ? commissionFee === "Free"
+                                                ? "Free"
+                                                : `${commissionFee} BNB`
+                                              : "Free"}
+                                          </span>
+                                        </div>
+                                      </div>
+                                      <div className="transactionWrap">
+                                        <div className="Ttext ">
+                                          <p>
+                                            Gas fee:{" "}
+                                          
+                                            <Tooltip
+                                              content={
+                                                <>
+                                                  The gas fee depend <br />
+                                                  on gas limit and
+                                                  <br /> gas price. Metamask will
+                                                  <br /> automatically display
+                                                  <br /> the best fee to use
+                                                </>
+                                              }
+                                              direction="top"
+                                            >
+                                              <HiInformationCircle size={22} />
+                                            </Tooltip>
+                                          </p>
+                                        </div>
+                                        <div className="Tbtn mt-auto mb-auto" style={{ width: "120px" }}>
+                                          <span className="badge bg-secondary d-block p-2">
+                                            Variable
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <h2 className="heading">Agreement</h2>
+                                    <div className="card-body">
+                                      <div className="form-group">
+                                        <label className="form-check">
+                                          <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            name="agreement"
+                                            value={agreement}
+                                            onChange={ethMainFormHandler}
+                                          />
+          
+                                          <span className="form-check-label">
+                                            I have read, understood and agreed to the{" "}
+                                            {/* <span className="text-underline"> */}
+                                            {/*  modal*/}
+                                            <Link
+                                              to="/"
+                                              data-bs-toggle="modal"
+                                              data-bs-target="#exampleModal"
+                                            >
+                                              <u> Terms of Use. </u>
+                                            </Link>
+                                            <TermsModal />
+                                            {/* modal */}
+                                            {/* </span> */}
+                                          </span>
+                                          <br />
+                                          <span className="text-danger">
+                                            {err.agreementErr}
+                                          </span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div className='d-flex'>
+          
+                                  <button type="button" className="btn form-btn" onClick={()=>setStep(1)}>
+                                      Back
+                                  </button>
+                                  <button type="button" className="btn form-btn"  onClick={async () => {
+
+                              if (
+                                ethFormData.agreement === true
+                              ) {
+                                compileContract(ethFormData);
+                              }
+                           
+                            }}>
+                                      Submit
+                                  </button>
+                                  </div>
+          
+                          </form>
+          
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+             
+            }
           </section>
         </main>
       </div>
