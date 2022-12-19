@@ -834,6 +834,7 @@ const BnbMain1 = (props) => {
           </div>
           <section style={{ marginBottom: "340px" }}>
             {/* test */}
+            <div className="container">
             <div className="row">
               <div className="col-lg-12">
                 <div className="steper-div">
@@ -853,7 +854,7 @@ const BnbMain1 = (props) => {
                 </div>
               </div>
             </div>
-     
+            </div>
             {currentStep === 1 ? (
               <FirstStep />
             ) : currentStep === 2 ? (
