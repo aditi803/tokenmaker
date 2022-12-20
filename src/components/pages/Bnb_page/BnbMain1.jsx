@@ -1266,7 +1266,7 @@ const BnbMain1 = (props) => {
                               )
                             }}
                           >
-                            Deploye
+                            Deploy
                           </button>
                         </div>
                       </form>
