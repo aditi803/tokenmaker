@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
-import Index from './BnbMain1.jsx'
-import EthMain1 from '../Eth_page/EthMain1.jsx';
+import MaticMain1 from './MaticMain1.jsx';
 
 const multiStepContext = React.createContext();
 
@@ -33,8 +32,7 @@ const StepContext = (props) => {
                 finalData, setFinalData, submitData,
                 submitted,setSubmitted
             }}>
-            <Index setShow={props.setShow}/>
-            <EthMain1 setShow={props.setShow}/>
+            <MaticMain1 setShow={props.setShow}/>
         </multiStepContext.Provider>
     </div>
   )
