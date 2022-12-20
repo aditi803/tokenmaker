@@ -421,6 +421,10 @@
 .btn-pad {
   min-width: 150px;
 }
+.progress-bar {
+  
+  background-color: #b165fd;
+}
 
 /* token maker steps{roadmap} */
 
@@ -441,17 +445,15 @@
   font-weight: 700;
   font-size: 36px;
   line-height: 80px;
-  background: #c5c5c5;
-  color: white;
-  padding: 12px 28px;
+  background: url(../../../../assets/shadow.svg) no-repeat center center;
+  background-size: contain;
+  color: #fff;
+  padding: 50px;
   border-radius: 50%;
   position: relative;
   z-index: 1;
-  box-shadow: 0px 0px 2px 14px #afafaf27;
 }
 .timeline_main .timeline_dot span {
-  background: #6010b1;
-  box-shadow: 0px 0px 2px 14px #bc7cfb;
   position: relative;
 }
 .timeline_main .timeline_dot span:after {

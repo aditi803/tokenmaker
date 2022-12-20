@@ -807,7 +807,7 @@ const BnbMain1 = (props) => {
               </p>
             </div>
           </div>
-          <section style={{ marginBottom: "340px" }}>
+          <section style={{ marginBottom: "40px" }}>
             <div className="container">
               <div className="configurator-container">
                 <div className="configurator">
@@ -1389,7 +1389,6 @@ const BnbMain1 = (props) => {
             </div>
 
           </section>
-          <section style={{ marginBottom: "340px" }}></section>
         </main>
       </div>
     </>

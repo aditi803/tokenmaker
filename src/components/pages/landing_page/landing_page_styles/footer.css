@@ -7,7 +7,6 @@
 
 .page-footer {
     justify-content: center;
-    padding-top: 66px;
     color: #fff;
     font-size: .875rem;
   
@@ -104,11 +103,12 @@ input::-webkit-inner-spin-button {
         padding-bottom: 130px;
     }
     .page-footer{
-        position: absolute !important;
         left: 0;
         width: 100% ;
         bottom: 0;
     }
+  
+
 }
 @media screen and (max-width: 1399.98px) {
     footer {

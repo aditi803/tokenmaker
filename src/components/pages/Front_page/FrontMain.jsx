@@ -89,7 +89,7 @@ export const FrontMain = () => {
             <div className="container self">
               <div className="row">
                 <div className="col-lg-6 d-flex flex-column justify-content-center">
-                  <h1 style={{ color: `${banner.headingColor}` }}>
+                  <h1 style={{ color: `${banner.headingColor}`}}>
                     <span className="sub-highlight">{banner.heading}</span>
                   </h1>
                   <div className="my-2">
@@ -119,40 +119,7 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-
-          {/* <section className="page-section section-how" id="how-it-works">
-            <div className="container">
-              <h2
-                className="section-title mt-4"
-                style={{ color: `${stepData.headingColor}` }}
-              >
-                <span>{startData}</span> {""}
-                <span className="sub-highlight">{coloredData}</span>
-              </h2>
-              <div className="row mt-5">
-                {steps.map((data, index) => (
-                  <div className="col-12 col-lg-6" key={index}>
-                    <div className="icon-container">
-                      <span
-                        className="svg-icon icon-metamask"
-                        style={{
-                          backgroundImage: `url(${imageBaseUrl}${data.stepImage})`,
-                        }}
-                      ></span>
-                    </div>
-                    <div className="title">
-                      <span className="step-number">{index + 1} /</span>
-                      {data.title}
-                    </div>
-                    <p className="mb-0">{data.content}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section> */}
-
-          {/* test */}
-
+        
           <section class="timeline" id="timeline">
             <div class="container">
               <div class="timeline_wrap text-center">
@@ -168,7 +135,7 @@ export const FrontMain = () => {
                     if (i % 2 === 0) {
                       return (
                         <>
-                          <div class={`col-12 timeline_left timeline_main`}>
+                          <div class={`col-lg-10 offset-lg-1 timeline_left timeline_main`}>
                             <div class="row justify-content-center align-items-center">
                               <div class="col-10 col-lg-5 d-none d-lg-block timeline-date">
                                 <div
@@ -179,7 +146,7 @@ export const FrontMain = () => {
                                   }}
                                 >
                                   <img src={imageBaseUrl + data.stepImage} />
-                                  <h5> {data.title}</h5>
+                                  <h5 className="my-3"> {data.title}</h5>
                                   <p>{data.content}</p>
                                 </div>
                               </div>
@@ -197,7 +164,7 @@ export const FrontMain = () => {
                                     }}
                                   >
                                     <img src={imageBaseUrl + data.stepImage} />
-                                    <h5> {data.title}</h5>
+                                    <h5 className="my-3"> {data.title}</h5>
                                     <p>{data.content}</p>
                                   </div>
                                   <div></div>
@@ -211,7 +178,7 @@ export const FrontMain = () => {
                       return (
                         <>
                           <div
-                            class={`col-12 ${
+                            class={`col-lg-10 offset-lg-1 ${
                               i === steps.length - 1 ? "" : "timeline_right"
                             } timeline_main`}
                           >
@@ -226,7 +193,7 @@ export const FrontMain = () => {
                                     }}
                                   >
                                     <img src={imageBaseUrl + data.stepImage} />
-                                    <h5> {data.title}</h5>
+                                    <h5 className="my-3"> {data.title}</h5>
                                     <p>{data.content}</p>
                                   </div>
                                 </div>
@@ -243,7 +210,7 @@ export const FrontMain = () => {
                                   }}
                                 >
                                   <img src={imageBaseUrl + data.stepImage} />
-                                  <h5> {data.title}</h5>
+                                  <h5 className="my-3"> {data.title}</h5>
                                   <p>{data.content}</p>
                                 </div>
                               </div>
@@ -257,8 +224,6 @@ export const FrontMain = () => {
               </div>
             </div>
           </section>
-
-          {/* end  */}
 
           <section
             className="page-section section-ready my-4 py-5"
@@ -404,7 +369,7 @@ export const FrontMain = () => {
                   What are you waiting for?
                 </h3>
                 <Link
-                  href="/generator"
+                   to="/generator"
                   className="btn btn-pad mt-2"
                   style={{
                     backgroundColor: `${custom.buttonBackgroundColor}`,
