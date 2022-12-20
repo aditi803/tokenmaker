@@ -100,7 +100,6 @@ input::-webkit-inner-spin-button {
     div#root {
         position: relative;
         min-height: 100vh;
-        padding-bottom: 130px;
     }
     .page-footer{
         left: 0;
