@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { EthHeader } from "./FrontHeader";
 import Header from "../landing_page/Header";
 import Footer from "../landing_page/Footer";
-import sideimage from "../../../assets/banner-side-image.png";
+import sideimage from "../../../assets/newsideimg.png";
 
 export const FrontMain = () => {
   const [showindex, setShowindex] = useState(0);
