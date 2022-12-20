@@ -11,12 +11,11 @@
 }
 .hero {
     color: #fff;
-    /* background-color: #383838; */
     position: relative;
 }
 .hero {
     font-size: 1.125rem;
-    padding-top: 100px !important;
+    /* padding-top: 100px !important; */
     background-image: url('../../../../assets/crtoken-bg.png');
     background-repeat: no-repeat;
     background-size: cover;

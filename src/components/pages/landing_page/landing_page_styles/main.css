@@ -15,7 +15,7 @@ a{
 }
 .hero {
     color: #fff;
-    background-color: #383838;
+    /* background-color: #383838; */
     /* padding-bottom: 2rem; */
     position: relative;
 }

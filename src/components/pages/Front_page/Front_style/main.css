@@ -397,3 +397,8 @@ i[title]:hover::after {
     transition: all 0.1s ease 0.5s;
     visibility: visible;
 }
+@media (max-width:998.98px){
+    .sub-highlight {
+        margin-top: 40px;
+    }
+}
