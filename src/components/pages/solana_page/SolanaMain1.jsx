@@ -1304,7 +1304,7 @@ const SolanaMain1 = (props) => {
                               <button
                                 type="button"
                                 className="btn form-btn"
-                                onClick={() => setStep(2)}
+                                onClick={() => setStep(1)}
                               >
                                 Back
                               </button>
