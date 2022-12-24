@@ -1187,7 +1187,9 @@ const SolanaMain1 = (props) => {
 
                                   }
                                 })} */}
-                                <option value="devnet">Devnet </option>
+                                <option value="devnet">Solana Devnet </option>
+                                <option value="devnet" disabled style={{backgroundColor:"#dedede"}}>Solana Mainnet </option>
+                                <option value="devnet" disabled style={{backgroundColor:"#dedede"}}>Solana Testnet </option>
                               </select>
                               <span className="form-text text-muted">
                                 Select the network on wich you want to deploy your
