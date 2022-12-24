@@ -1,5 +1,37 @@
-import {useState} from "react"
-const Solana = () => {
+// import * as mpl from "@metaplex-foundation/mpl-token-metadata"
+
+
+// import {useState} from "react"
+// import { createMint } from '@solana/spl-token';
+// import { clusterApiUrl, Connection, Keypair, LAMPORTS_PER_SOL } from '@solana/web3.js';
+
+// const payer = Keypair.generate();
+// const mintAuthority = Keypair.generate();
+// const freezeAuthority = Keypair.generate();
+
+// const connection = new Connection(
+//   clusterApiUrl('devnet'),
+//   'confirmed'
+// );
+
+// const mint = await createMint(
+//   connection,
+//   payer,
+//   mintAuthority.publicKey,
+//   freezeAuthority.publicKey,
+//   9 // We are using 9 to match the CLI decimal default exactly
+// );
+
+// console.log(mint.toBase58());
+// // AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
+
+import { FC, useCallback, useState } from 'react';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { Keypair, SystemProgram, Transaction } from '@solana/web3.js';
+import { MINT_SIZE, TOKEN_PROGRAM_ID, createInitializeMintInstruction, getMinimumBalanceForRentExemptMint, getAssociatedTokenAddress, createAssociatedTokenAccountInstruction, createMintToInstruction } from '@solana/spl-token';
+// import { DataV2, createCreateMetadataAccountV2Instruction } from '@metaplex-foundation/mpl-token-metadata';
+// import { findMetadataPda } from '@metaplex-foundation/js';
+const Solana = () => {  
 
 
     // const onClick = useCallback(async (form) => {
@@ -75,6 +107,7 @@ const Solana = () => {
     //     await sendTransaction(createNewTokenTransaction, connection, { signers: [mintKeypair] });
     // }, [publicKey, connection, sendTransaction]);
 
+    
 
     return (
         <>
