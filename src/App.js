@@ -21,7 +21,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from "axios";
 import { HEADER } from './api/Api.js';
-import Solana from './components/pages/solana_page/index.js';
+import { SolanaMain } from './components/pages/solana_page/SolanaMain.jsx';
 function App() {
 
   const [header, setHeader] = useState([])
@@ -52,7 +52,7 @@ function App() {
           <Route path='/generator/ethereum' element={ <EthMain />} />
           <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <BnbMain />, <Footer />]} />
           <Route path='/generator/polygon' element={[<EthHeader header={header} />, <MaticMain />, <Footer />]} />
-          <Route path='/generator/solana' element={[<EthHeader header={header} />, <Solana />, <Footer />]} />
+          <Route path='/generator/solana' element={[<SolanaMain />]} />
         </Routes>
       </Router>
     </EtherProvider>

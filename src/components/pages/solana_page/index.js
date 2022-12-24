@@ -180,5 +180,3 @@ const Solana = () => {
         </>
     )
 }
-
-export default Solana

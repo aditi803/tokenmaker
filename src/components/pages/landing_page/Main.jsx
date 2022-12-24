@@ -41,7 +41,7 @@ function Main() {
           <div className="hero mb-3 mt-5">
             <div className="container">
               <h1 style={{ paddingTop: '80px', marginBottom: '10px' }}>
-                <span className="sub-highlight">Select your network</span>
+                <span className="sub-highlight">Select your network's</span>
               </h1>
               <p style={{ color: 'black' }}>Your token will be deployed on the selected blockchain</p>
             </div>
