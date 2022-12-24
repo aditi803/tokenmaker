@@ -814,6 +814,8 @@ const SolanaMain1 = (props) => {
   //   </button>
   // )}
 
+  console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Solana ,,,,,,,,,,,,,,,,,,,,,,")
+
   return (
     <>
       <div className="page-content">
@@ -1195,6 +1197,7 @@ const SolanaMain1 = (props) => {
                                 Select the network on wich you want to deploy your
                                 token
                               </span>
+
                             </div>
 
                             <h2 className="heading">Transaction</h2>
