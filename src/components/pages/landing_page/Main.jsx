@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { FC, useCallback,useState, useEffect } from "react";
 import "./landing_page_styles/main.css";
 import axios from 'axios'
 import Loader from "../../../loader";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+
+
+
 function Main() {
 
+  
+
+  
   const [data, setData] = useState([])
   const [image, setImage] = useState([])
   const [loader, setLoader] = useState(false)
