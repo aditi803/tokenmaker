@@ -23,7 +23,11 @@ import axios from "axios";
 import { HEADER } from './api/Api.js';
 import { SolanaMain } from './components/pages/solana_page/SolanaMain.jsx';
 import  WalletAdapter  from './contexts/solanaContext/SolanaContext.jsx';
-function App() {
+function App(props) {
+  // console.log(props,"props appjs")
+  const {net,setNet}  = props;
+  console.log(net,setNet,"net,setNet")
+
 
   const [header, setHeader] = useState([])
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
@@ -54,7 +58,7 @@ function App() {
           <Route path='/generator/ethereum' element={ <EthMain />} />
           <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <BnbMain />, <Footer />]} />
           <Route path='/generator/polygon' element={[<EthHeader header={header} />, <MaticMain />, <Footer />]} />
-          <Route path='/generator/solana' element={[<SolanaMain />]} />
+          <Route path='/generator/solana' element={[<SolanaMain  net ={net} setNet = {setNet}/>]} />
         </Routes>
       </Router>
           {/* </WalletAdapter> */}

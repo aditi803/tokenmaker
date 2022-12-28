@@ -43,8 +43,12 @@ import { multiStepContext } from "./StepContext";
 import { SolanaHeader } from "./SolanaHeader";
 
 const SolanaMain1 = (props) => {
+  const {setNet,net} = props;
   const steps = [" ", " "];
-
+  const {
+    solNetworkName,
+    setSolNetworkName
+  } = useContext(GlobalContext);
   const { currentStep, submitted } = useContext(multiStepContext);
   const { setStep, userData, setUserData } = useContext(multiStepContext);
 
@@ -76,6 +80,9 @@ const SolanaMain1 = (props) => {
   console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
   const [agreement, setAgreement] = useState(false)
+
+  console.log(agreement, 'aditi agre')
+
   const [err, setErr] = useState({
     tokenNameErr: "",
     tokenSymbolErr: "",
@@ -174,6 +181,21 @@ const SolanaMain1 = (props) => {
   //   setStep(2)
 
   // };
+  const [data, setData] = useState([])
+  const getNetworks = () => {
+    axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
+      .then((res) => {
+        setData(res.data.msg.items)
+        console.log(res.data.msg.items, "Aditii ddata jo ni aata solana>>>>>>>>>>>>>>> ");
+      })
+      .catch((err) => {
+        console.log(err, "Error")
+      })
+  }
+
+  useEffect(() => {
+    getNetworks()
+  }, [setData])
 
 
   const onClick = useCallback(
@@ -181,6 +203,14 @@ const SolanaMain1 = (props) => {
       // console.log(tokenName,"tokennane");
       // console.log("aagya");
       // e.preventDefault();
+
+      // if(!agreement){
+      //   setErr((prev) => ({...prev,
+      //     agreementErr: "Please confirm that you have read and understood our terms of ushhhhhhe"
+      //   }))
+      //   return;
+      // }
+
       if(!publicKey){
         console.log("public key nhi h");
         toast.error("Please Connect Your wallet ")
@@ -270,6 +300,12 @@ const SolanaMain1 = (props) => {
     ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Solana ,,,,,,,,,,,,,,,,,,,,,,"
   );
 
+  const networkName = (name) => {
+    setNet(name.target.value)
+    console.log(name.target.value, "Network Name solana")
+  }
+
+  
   return (
     <>
         
@@ -284,11 +320,11 @@ const SolanaMain1 = (props) => {
             {/* <SolanaHeader /> */}
       <div className="page-content">
         <main>
-          <div className="hero mb-3 ">
+          <div className="hero-form mb-3 ">
             <div className="container">
               <h1>
                 <span className="sub-highlight">
-                  Create Your Ethereum Token
+                  Create Your Solana Token
                 </span>
               </h1>
               <p>
@@ -501,23 +537,25 @@ const SolanaMain1 = (props) => {
                               className="form-select"
                               name="network"
                             // value={network}
-                            // onChange={ethMainFormHandler}
+                            onChange={networkName}
                             >
-                              {/* {data.map((item) => {
-                                  if (item.parentNetworkName === "Ethereum" && item.tokenType === 'free') {
+                              {data.map((item) => {
+                                  if (item.parentNetworkName === "Solana" && item.tokenType === 'free') {
                                     return (
                                       <option value={item.value}>{item.subNetworkName}</option>
                                     )
                                   }
-                                  else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'basic') {
+                                  else if (item.parentNetworkName === "Solana" && item.tokenType === 'basic') {
                                     <option value={item.value}>{item.subNetworkName}</option>
                                   }
-                                  else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'custom') {
+                                  else if (item.parentNetworkName === "Solana" && item.tokenType === 'custom') {
                                     <option value={item.value}>{item.subNetworkName}</option>
 
                                   }
-                                })} */}
-                              <option value="devnet">Solana Devnet </option>
+                                })}
+                                
+                                
+                              {/* <option value="devnet">Solana Devnet </option>
                               <option
                                 value="devnet"
                                 disabled
@@ -531,7 +569,7 @@ const SolanaMain1 = (props) => {
                                 style={{ backgroundColor: "#dedede" }}
                               >
                                 Solana Testnet{" "}
-                              </option>
+                              </option> */}
                             </select>
                             <span className="form-text text-muted">
                               Select the network on wich you want to deploy your
@@ -620,6 +658,12 @@ const SolanaMain1 = (props) => {
                                   name="agreement"
                                   value={agreement}
                                 // onChange={ethMainFormHandler}
+                                  onChange={(e) => {
+                                    // setErr((prev) => ({
+                                    //     ...prev,
+                                    //   agreementErr : ""
+                                    // } ))
+                                    setAgreement(e.target.checked)}}
                                 />
 
                                 <span className="form-check-label">
@@ -654,20 +698,21 @@ const SolanaMain1 = (props) => {
                             </button>
                             <button
                               type="button"
+                              // disabled={!agreement}
                               className="btn form-btn"
-                              //   onClick={async () => {
-                              //     if (ethFormData.agreement === false) {
-                              //       setErr((prev) => ({
-                              //         ...prev,
-                              //         agreementErr:
-                              //           "Please confirm that you have read and understood our terms of use",
-                              //       }))
+                                // onClick={async () => {
+                                //   if (agreement === false) {
+                                //     setErr((prev) => ({
+                                //       ...prev,
+                                //       agreementErr:
+                                //         "Please confirm that you have read and understood our terms of use",
+                                //     }))
 
-                              //     }
-                              //     else (
-                              //       compileContract(ethFormData)
-                              //     )
-                              //   }}
+                                //   }
+                                //   else (
+                                //     onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
+                                //   )
+                                // }}
                               // onClick={(e) => onClick(e, form)}
                               onClick={() => onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })}
                             // onClick={() => onClick(form)}

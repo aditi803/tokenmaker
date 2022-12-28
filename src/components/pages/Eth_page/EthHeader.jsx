@@ -88,7 +88,7 @@ export const EthHeader = () => {
                       <img src="https://tokenmaker.eattheblocks.com/_next/image?url=%2Fimages%2Flogo-token-maker.png&w=384&q=75"
                       decoding='async' data-nimg='intrinsic'className='img-2' srcSet='https://tokenmaker.eattheblocks.com/_next/image?url=%2Fimages%2Flogo-token-maker.png&w=384&q=75 1x, /_next/image?url=%2Fimages%2Flogo-token-maker.png&w=640&q=75 2x'
                        alt="Logo" />
-                       <noscript>
+                       <noscript> `
                        <img alt="Logo" srcSet="/_next/image?url=%2Fimages%2Flogo-token-maker.png&amp;w=384&amp;q=75 1x, /_next/image?url=%2Fimages%2Flogo-token-maker.png&amp;w=640&amp;q=75 2x"
                         src="/_next/image?url=%2Fimages%2Flogo-token-maker.png&amp;w=640&amp;q=75"
                          decoding="async" data-nimg="intrinsic"
@@ -98,6 +98,7 @@ export const EthHeader = () => {
                     </span> */}
                 </Link>
                 <div className="ms-auto d-none d-lg-block">
+                  
                   {connectedAccAddress.length !== 0 ? (
                     <button
                       type="button"

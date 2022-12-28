@@ -4,7 +4,8 @@ import { FinalMain } from '../Main_page/FinalMain'
 import { SolanaHeader } from './SolanaHeader'
 import Footer from '../landing_page/Footer'
 import { StepContext } from "./StepContext"
-export const SolanaMain = () => {
+export const SolanaMain = (props) => {
+    const {setNet,net} = props;
 
     const [showComponent, setShowComponent] = useState(true)
 
@@ -12,7 +13,7 @@ export const SolanaMain = () => {
         <>
             <SolanaHeader />
             {showComponent ? (
-                <StepContext setShow={setShowComponent}></StepContext>
+                <StepContext setNet = {setNet} net={net} setShow={setShowComponent}></StepContext>
             ) : (
                 <FinalMain />
             )}
