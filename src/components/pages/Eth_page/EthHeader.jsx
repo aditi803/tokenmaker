@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "../Eth_page/eth_styles/header.css";
 
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { HEADER } from "../../../api/Api";
@@ -60,6 +60,8 @@ export const EthHeader = () => {
   // }
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
 
+
+  const navigate = useNavigate()
   return (
     <div className="page-header">
       <header className="header navbar-area">
@@ -111,6 +113,7 @@ export const EthHeader = () => {
                       </span>
                     </button>
                   ) : (
+                    
                     <button
                       type="button"
                       onClick={SignInMetamask}

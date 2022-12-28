@@ -4,12 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import HelperProvider from "./contexts/HelperContext/HelperContext";
+import WalletAdapter from "./contexts/solanaContext/SolanaContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <HelperProvider> */}
-      <App />
+      {/* <App /> */}
+      <WalletAdapter />
     {/* </HelperProvider> */}
   </React.StrictMode>
 );

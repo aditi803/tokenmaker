@@ -22,6 +22,7 @@ import { useState } from 'react';
 import axios from "axios";
 import { HEADER } from './api/Api.js';
 import { SolanaMain } from './components/pages/solana_page/SolanaMain.jsx';
+import  WalletAdapter  from './contexts/solanaContext/SolanaContext.jsx';
 function App() {
 
   const [header, setHeader] = useState([])
@@ -43,6 +44,7 @@ function App() {
 
     <EtherProvider>
 
+          {/* <WalletAdapter> */}
       <Router>
         <Routes>
 
@@ -55,6 +57,7 @@ function App() {
           <Route path='/generator/solana' element={[<SolanaMain />]} />
         </Routes>
       </Router>
+          {/* </WalletAdapter> */}
     </EtherProvider>
   )
 }
