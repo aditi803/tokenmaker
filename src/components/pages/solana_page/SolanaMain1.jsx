@@ -40,6 +40,7 @@ import StepLabel from "@mui/material/StepLabel";
 
 
 import { multiStepContext } from "./StepContext";
+import { SolanaHeader } from "./SolanaHeader";
 
 const SolanaMain1 = (props) => {
   const steps = [" ", " "];
@@ -50,7 +51,7 @@ const SolanaMain1 = (props) => {
   //
   const { connection } = useConnection();
   // console.log(connection,"connection");
-  const { publicKey, sendTransaction,signMessage, connected } = useWallet();
+  const { publicKey, sendTransaction, signMessage, connected } = useWallet();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [signature, setSignature] = useState("");
@@ -66,7 +67,7 @@ const SolanaMain1 = (props) => {
     }
   }, [connected]);
   // 
-  console.log(publicKey,"public kaye");
+  console.log(publicKey, "public kaye");
   const [tokenName, setTokenName] = useState("");
   const [symbol, setSymbol] = useState("");
   const [uri, setUri] = useState("safhfsa");
@@ -74,19 +75,105 @@ const SolanaMain1 = (props) => {
   const [decimals, setDecimals] = useState(1);
   console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
-  // const [form, setForm] = useState({
-  //   tokenName: tokenName,
-  //   symbol: symbol,
-  //   uri: metadata,
-  //   decimals: decimals,
-  //   amount: amount,
-  // });
+  const [agreement, setAgreement] = useState(false)
+  const [err, setErr] = useState({
+    tokenNameErr: "",
+    tokenSymbolErr: "",
+    agreementErr: "",
+    decimalsErr: "",
+    amountErr: ""
+  });
+
+  useEffect(() => {
+    if (agreement !== false) {
+      setErr((prev) => ({
+        ...prev,
+        agreementErr: "",
+      }));
+    }
+
+    if (tokenName !== "") {
+      setErr((prev) => ({
+        ...prev,
+        tokenNameErr: "",
+      }));
+    }
+
+    if (symbol !== "") {
+      setErr((prev) => ({
+        ...prev,
+        tokenSymbolErr: "",
+      }));
+    }
+    if (decimals !== null) {
+      setErr((prev) => ({
+        ...prev,
+        decimalsErr: "",
+      }));
+    }
+    if (amount !== null) {
+      setErr((prev) => ({
+        ...prev,
+        amountErr: "",
+      }));
+    }
+  }, [agreement, tokenName, symbol, decimals]);
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-      // navigate("/generator/final");
-      setStep(2)
+    if (tokenName === "") {
+      setErr((prev) => ({
+        ...prev,
+        tokenNameErr: "Please fill your token name",
+      }));
+    }
 
+    if (symbol === "") {
+      setErr((prev) => ({
+        ...prev,
+        tokenSymbolErr: "Please fill your token symbol",
+      }));
+    }
+
+    if (agreement === false) {
+      setErr((prev) => ({
+        ...prev,
+        agreementErr:
+          "Please confirm that you have read and understood our terms of use",
+      }));
+    }
+    if (decimals > 21 || decimals < 6) {
+      setErr((prev) => ({
+        ...prev,
+        decimalsErr: "The number of decimals must be between 6 and 21",
+      }));
+    }
+    if (amount === "") {
+      setErr((prev) => ({
+        ...prev,
+        amountErr: "Please Enter how many token you want to deploy "
+      }))
+    }
+
+    if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
+      // do what u want to do with data
+      // console.log("data");
+      console.log(err, "da");
+
+      // < Navigate to= "/generator/final" />
+      // navigate("/generator/final")
+    }
+    if (tokenName !== "" && symbol !== "" && amount !== "" && decimals !== null) {
+      // navigate("/generator/final");
+      setStep(2);
+    }
   };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setStep(2)
+
+  // };
 
 
   const onClick = useCallback(
@@ -96,17 +183,22 @@ const SolanaMain1 = (props) => {
       // e.preventDefault();
       // const test = await connection.getSupply();
       console.log(connection,"connection")
-      const solbalance = await connection.getBalance(publicKey)
-      console.log(solbalance,"balalal")
+      // const solbalance = await connection.getBalance(publicKey)
+      // console.log(solbalance,"balalal")
     
-      console.log(`Switched to account ${publicKey.toBase58()}`);
+      // console.log(`Switched to account ${publicKey.toBase58()}`);
       // console.log(test,"connection>>>");
+      if(!publicKey){
+        console.log("public key nhi h");
+        toast.error("Please Connect Your wallet ")
+      }
+      console.log(connection, "connection");
       const lamports = await getMinimumBalanceForRentExemptMint(connection);
-      console.log(lamports,"lamports");
+      console.log(lamports, "lamports");
       const mintKeypair = Keypair.generate();
-      console.log(mintKeypair,"mintKeypair");
+      console.log(mintKeypair, "mintKeypair");
       const metadataPDA = await findMetadataPda(mintKeypair.publicKey);
-      console.log(metadataPDA,"metadataPDA");
+      console.log(metadataPDA, "metadataPDA");
       const tokenATA = await getAssociatedTokenAddress(
         mintKeypair.publicKey,
         publicKey
@@ -127,9 +219,9 @@ const SolanaMain1 = (props) => {
         collection: null,
         uses: null,
       };
-      console.log(tokenMetadata,"token meta datat");
-      console.log(form.decimals,"decimL");
-      console.log(form.amount,"amount");
+      console.log(tokenMetadata, "token meta datat");
+      console.log(form.decimals, "decimL");
+      console.log(form.amount, "amount");
       const createNewTokenTransaction = new Transaction().add(
         SystemProgram.createAccount({
           fromPubkey: publicKey,
@@ -151,14 +243,14 @@ const SolanaMain1 = (props) => {
           publicKey,
           mintKeypair.publicKey
         ),
-        
+
         createMintToInstruction(
           mintKeypair.publicKey,
           tokenATA,
           publicKey,
           // form.amount
           // (form.amount* 1000000000000000000)
-          form.amount * Math.pow(10,form.decimals)
+          form.amount * Math.pow(10, form.decimals)
           // form.amount
         ),
         createCreateMetadataAccountV2Instruction(
@@ -210,10 +302,19 @@ const SolanaMain1 = (props) => {
   console.log(
     ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Solana ,,,,,,,,,,,,,,,,,,,,,,"
   );
-    
+
   return (
     <>
-
+        
+          {/* <WalletMultiButton className="btn btn-ghost mr-4" 
+          style={{
+            backgroundColor:"#f50058",
+            borderColor:"#f50058",
+            color:"#fff", 
+            borderRadius:"40px", 
+            justifyContent:"center", 
+            padding:"30px 60px"}}/> */}
+            {/* <SolanaHeader /> */}
       <div className="page-content">
         <main>
           <div className="hero mb-3 ">
@@ -265,10 +366,9 @@ const SolanaMain1 = (props) => {
             )} */}
             {currentStep === 1 ? (
               // <FirstStep />
-              
+
               <section>
-                                              <WalletMultiButton style={{color:"green"}} className="btn btn-ghost mr-4" />
-                                              {props.children}
+
 
                 <div className="container">
                   <div className="row">
@@ -284,8 +384,8 @@ const SolanaMain1 = (props) => {
                             <select
                               className="form-select"
                               name="tokenType"
-                              // onChange={ethMainFormHandler}
-                              // value={tokenType}
+                            // onChange={ethMainFormHandler}
+                            // value={tokenType}
                             >
                               <option value="free">Free</option>
                               <option value="basic">Basic</option>
@@ -304,9 +404,9 @@ const SolanaMain1 = (props) => {
                             <select
                               className="form-select"
                               name="supplyType"
-                              // disabled={f_supplyType}
-                              // onChange={ethMainFormHandler}
-                              // value={supplyType}
+                            // disabled={f_supplyType}
+                            // onChange={ethMainFormHandler}
+                            // value={supplyType}
                             >
                               <option value="fixed">Fixed</option>
                               <option value="capped">Capped</option>
@@ -328,14 +428,14 @@ const SolanaMain1 = (props) => {
                               name="tokenName"
                               value={tokenName}
                               onChange={(e) => setTokenName(e.target.value)}
-                              // onChange={ethMainFormHandler}
+                            // onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
                               The name of your token
                             </span>
                             <br />
                             <span className="text-danger">
-                              {/* {err.tokenNameErr} */}
+                              {err.tokenNameErr}
                             </span>
                           </div>
                           <div className="form-group">
@@ -348,8 +448,8 @@ const SolanaMain1 = (props) => {
                               className="form-control"
                               placeholder="TKN"
                               maxLength="8"
-                              name="tokenSymbol"
-                              value={symbol}
+                              name="symbol"
+                              value={symbol.toUpperCase()}
                               onChange={(e) => setSymbol(e.target.value)}
                             />
                             <span className="form-text text-muted">
@@ -357,7 +457,7 @@ const SolanaMain1 = (props) => {
                             </span>
                             <br />
                             <span className="text-danger">
-                              {/* {err.tokenSymbolErr} */}
+                              {err.tokenSymbolErr}
                             </span>
                           </div>
                           <div className="form-group">
@@ -372,17 +472,17 @@ const SolanaMain1 = (props) => {
                               //   disabled={f_decimals}
                               // value={}
                               name="decimals"
-                              // onChange={(e) => setDecimals(e.target.value)}
+                            // onChange={(e) => setDecimals(e.target.value)}
                             />
                             <span className="form-text text-muted">
                               The number of decimal of your token (default 18)
                             </span>
                             <br />
                             <span className="text-danger">
-                              {/* {err.decimalsErr} */}
+                              {err.decimalsErr}
                             </span>
                           </div>
-                              
+
                           <div className="form-group">
                             <label className="form-label">
                               Initial supply
@@ -392,12 +492,12 @@ const SolanaMain1 = (props) => {
                               type="number"
                               className="form-control"
                               placeholder="1000000"
-                              name="initialSupply"
+                              name="amount"
                               onChange={(e) => setAmount(e.target.value)}
                               value={amount}
-                              //   disabled={f_initialSupply}
-                              // value={initialSupply}
-                              // onChange={ethMainFormHandler}
+                            //   disabled={f_initialSupply}
+                            // value={initialSupply}
+                            // onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
                               The number of coins minted during the creation of
@@ -405,7 +505,7 @@ const SolanaMain1 = (props) => {
                             </span>
                             <br />
                             <span className="text-danger">
-                              {/* {err.initialSupplyErr} */}
+                              {err.amountErr}
                             </span>
                           </div>
                           <button
@@ -422,145 +522,6 @@ const SolanaMain1 = (props) => {
                 </div>
               </section>
             ) : (
-              //             currentStep === 2 ? (
-              // <section>
-              //     <div className="container">
-              //       <div className="row">
-              //         <div className="col-lg-12">
-              //             <div className="firstForm">
-              //                 <h2 className="heading">Options</h2>
-              //                 <form>
-              //                 <div className="form-group">
-              //                               <label className="form-check form-switch">
-              //                                 <input
-              //                                   name="conforms"
-              //                                   className="form-check-input"
-              //                                   type="checkbox"
-              //                                   disabled={f_conforms}
-              //                                   onChange={ethMainFormHandler}
-              //                                   defaultChecked={conforms}
-              //                                 />
-              //                                 <span className="form-check-label">
-              //                                   Conforms to BEP20 protocol
-              //                                 </span>
-              //                               </label>
-              //                               <span className="form-text text-muted">
-              //                                 Your token will const all the functionalities,
-              //                                 and conforms to BEP20 protocol
-              //                               </span>
-              //                             </div>
-              //                             <div className="form-group">
-              //                               <label className="form-check form-switch">
-              //                                 <input
-              //                                   name="verified"
-              //                                   className="form-check-input"
-              //                                   type="checkbox"
-              //                                   onChange={ethMainFormHandler}
-              //                                   disabled={f_verified}
-              //                                   defaultChecked={verified}
-              //                                 />
-              //                                 <span className="form-check-label">
-              //                                   Verified on Bscscan
-              //                                 </span>
-              //                               </label>
-              //                               <span className="form-text text-muted">
-              //                                 The source code of your contract is
-              //                                 automatically published and verified
-              //                               </span>
-              //                             </div>
-              //                             <div className="form-group">
-              //                               <label className="form-check form-switch">
-              //                                 <input
-              //                                   className="form-check-input"
-              //                                   type="checkbox"
-              //                                   name="noCopyrightLink"
-              //                                   onChange={ethMainFormHandler}
-              //                                   checked={noCopyrightLink}
-              //                                   disabled={f_noCopyrightLink}
-              //                                 />
-              //                                 <span className="form-check-label">
-              //                                   No copyright link
-              //                                 </span>
-              //                               </label>
-              //                               <span className="form-text text-muted">
-              //                                 A link pointing to this page will be added in
-              //                                 the description of your contract (Free and Basic
-              //                                 contracts only)
-              //                               </span>
-              //                             </div>
-              //                             <div className="form-group">
-              //                               <label className="form-check form-switch">
-              //                                 <input
-              //                                   className="form-check-input"
-              //                                   type="checkbox"
-              //                                   checked={mintable}
-              //                                   disabled={f_mintable}
-              //                                   name="mintable"
-              //                                   onChange={ethMainFormHandler}
-              //                                 />
-              //                                 <span className="form-check-label">
-              //                                   {" "}
-              //                                   Mintable{" "}
-              //                                 </span>
-              //                               </label>
-              //                               <span className="form-text text-muted">
-              //                                 Allow the creation of new tokens in the future
-              //                               </span>
-              //                             </div>
-              //                             <div className="form-group">
-              //                               <label className="form-check form-switch">
-              //                                 <input
-              //                                   className="form-check-input"
-              //                                   type="checkbox"
-              //                                   name="burnable"
-              //                                   checked={burnable}
-              //                                   disabled={f_burnable}
-              //                                   onChange={ethMainFormHandler}
-              //                                 />
-              //                                 <span className="form-check-label ">
-              //                                   Burnable
-              //                                 </span>
-              //                               </label>
-              //                               <span className="form-text text-muted">
-              //                                 Allow your tokens to be burned
-              //                               </span>
-              //                             </div>
-              //                             <div className="form-group">
-              //                               <label className="form-check form-switch">
-              //                                 <input
-              //                                   className="form-check-input"
-              //                                   type="checkbox"
-              //                                   name="pausable"
-              //                                   checked={pausable}
-              //                                   disabled={f_pausable}
-              //                                   onChange={ethMainFormHandler}
-              //                                 />
-              //                                 <span className="form-check-label">
-              //                                   Pausable
-              //                                 </span>
-              //                               </label>
-              //                               <span className="form-text text-muted">
-              //                                 Allow your tokens to be paused
-              //                               </span>
-              //                             </div>
-              //                             <div className='d-flex'>
-              //                             <button type="button" className="btn form-btn" onClick={()=>setStep(1)}>
-              //                             Back
-              //                         </button>
-              //                             <button type="button" className="btn form-btn" onClick={()=>setStep(3)}>
-              //                             Next
-              //                         </button>
-              //                             </div>
-
-              //                 </form>
-
-              //             </div>
-              //         </div>
-              //       </div>
-              //     </div>
-              //   </section>
-
-              //             ):
               <section>
                 <div className="container">
                   <div className="row">
@@ -572,8 +533,8 @@ const SolanaMain1 = (props) => {
                             <select
                               className="form-select"
                               name="network"
-                              // value={network}
-                              // onChange={ethMainFormHandler}
+                            // value={network}
+                            // onChange={ethMainFormHandler}
                             >
                               {/* {data.map((item) => {
                                   if (item.parentNetworkName === "Ethereum" && item.tokenType === 'free') {
@@ -690,8 +651,8 @@ const SolanaMain1 = (props) => {
                                   className="form-check-input"
                                   type="checkbox"
                                   name="agreement"
-                                  // value={agreement}
-                                  // onChange={ethMainFormHandler}
+                                  value={agreement}
+                                // onChange={ethMainFormHandler}
                                 />
 
                                 <span className="form-check-label">
@@ -711,7 +672,7 @@ const SolanaMain1 = (props) => {
                                 </span>
                                 <br />
                                 <span className="text-danger">
-                                  {/* {err.agreementErr} */}
+                                  {err.agreementErr}
                                 </span>
                               </label>
                             </div>
@@ -741,8 +702,8 @@ const SolanaMain1 = (props) => {
                               //     )
                               //   }}
                               // onClick={(e) => onClick(e, form)}
-                              onClick={() => onClick({tokenName: tokenName,symbol: symbol,decimals: Number(decimals), amount: Number(amount),uri:uri  })}
-                              // onClick={() => onClick(form)}
+                              onClick={() => onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })}
+                            // onClick={() => onClick(form)}
                             >
                               Deploy
                             </button>

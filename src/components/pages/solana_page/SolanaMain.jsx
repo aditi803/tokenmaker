@@ -15,13 +15,8 @@ export const SolanaMain = () => {
                 <StepContext setShow={setShowComponent}></StepContext>
             ) : (
                 <FinalMain />
-
-            )
-            }
-
+            )}
             <Footer />
-
-
         </>
     )
 }

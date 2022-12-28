@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { HEADER } from "../../../api/Api";
 import axios from "axios"
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+
 
 export const SolanaHeader = () => {
 
@@ -95,36 +97,25 @@ export const SolanaHeader = () => {
                        </noscript>
                     </span> */}
                 </Link>
-                <div className="ms-auto d-none d-lg-block">
-                  {connectedAccAddress.length !== 0 ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setAccAddress([]);
-                      }}
-                      className="btn uppercase btn btn-action btn-rounded btn-pad"
-                    >
-                      {/* {show current acc address } */}
 
-                      <span className="inline-block" >
-                        <span style={{ fontWeight: "bold", paddingRight: "10px" }}>  {accBalance} {chainName} </span>  <span>{accAddress}</span>
-                      </span>
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={SignInMetamask}
-                      className="btn uppercase btn btn-action btn-rounded btn-pad"
-                    >
-                      <span className="inline-block">Connect your Wallet</span>
-                    </button>
-                  )}
+                <div className="ms-auto d-none d-lg-block">
+
+                  <WalletMultiButton className="btn btn-ghost mr-4"
+                    style={{
+                      backgroundColor: "#f50058",
+                      borderColor: "#f50058",
+                      color: "#fff",
+                      borderRadius: "40px",
+                      justifyContent: "center",
+                      padding: "30px 60px"
+                    }} />
                 </div>
+
               </nav>
             </div>
           </div>
-        </div>
-      </header>
-    </div>
+        </div >
+      </header >
+    </div >
   );
 };

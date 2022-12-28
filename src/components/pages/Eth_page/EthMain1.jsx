@@ -28,7 +28,7 @@ import {
 } from "../../../disabledUtils";
 import { multiStepContext } from "./StepContext";
 
- const EthMain1 = (props) => {
+const EthMain1 = (props) => {
   const steps = [" ", " ", " "];
 
   const { currentStep, submitted } = useContext(multiStepContext);
@@ -266,7 +266,7 @@ import { multiStepContext } from "./StepContext";
       } else if (supplyType === "fixed") {
         setEthFormData((prev) => ({
           ...prev,
-          mintable:false,
+          mintable: false,
         }));
         // if(recoverable===true){
         //   setEthFormData((prev) => ({
@@ -592,7 +592,7 @@ import { multiStepContext } from "./StepContext";
 
 
 
-  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler ])
+  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler])
 
 
 
@@ -707,8 +707,8 @@ import { multiStepContext } from "./StepContext";
     }
     if (
       ethFormData.tokenName !== "" &&
-      ethFormData.tokenSymbol !== "" 
-     
+      ethFormData.tokenSymbol !== ""
+
     ) {
       // navigate("/generator/final");
       setStep(2)
@@ -753,7 +753,7 @@ import { multiStepContext } from "./StepContext";
         console.log(res, "ress send commision matic main")
 
         if (res) {
-        props.setShow(false);
+          props.setShow(false);
 
           //hit contract compile api
           axios
@@ -896,25 +896,25 @@ import { multiStepContext } from "./StepContext";
                             </span>
                           </div>
                           <div className="form-group">
-                                <label className="form-label">
-                                  Supply type
-                                  <span className="val-required">*</span>
-                                </label>
-                                <select
-                                  className="form-select"
-                                  name="supplyType"
-                                  disabled={f_supplyType}
-                                  onChange={ethMainFormHandler}
-                                  value={supplyType}
-                                >
-                                  <option value="fixed">Fixed</option>
-                                  <option value="capped">Capped</option>
-                                  <option value="unlimited">Unlimited</option>
-                                </select>
-                                <span className="form-text text-muted">
-                                  Fixed / Capped / Unlimited
-                                </span>
-                              </div>
+                            <label className="form-label">
+                              Supply type
+                              <span className="val-required">*</span>
+                            </label>
+                            <select
+                              className="form-select"
+                              name="supplyType"
+                              disabled={f_supplyType}
+                              onChange={ethMainFormHandler}
+                              value={supplyType}
+                            >
+                              <option value="fixed">Fixed</option>
+                              <option value="capped">Capped</option>
+                              <option value="unlimited">Unlimited</option>
+                            </select>
+                            <span className="form-text text-muted">
+                              Fixed / Capped / Unlimited
+                            </span>
+                          </div>
                           <div className="form-group">
                             <label className="form-label">
                               Token Name
@@ -1018,318 +1018,318 @@ import { multiStepContext } from "./StepContext";
                 </div>
               </section>
             ) : currentStep === 2 ? (
-<section>
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
-            <div className="firstForm">
-                <h2 className="heading">Options</h2>
-                <form>
-                <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  name="conforms"
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  disabled={f_conforms}
-                                  onChange={ethMainFormHandler}
-                                  defaultChecked={conforms}
-                                />
-                                <span className="form-check-label">
-                                  Conforms to BEP20 protocol
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Your token will const all the functionalities,
-                                and conforms to BEP20 protocol
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  name="verified"
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  onChange={ethMainFormHandler}
-                                  disabled={f_verified}
-                                  defaultChecked={verified}
-                                />
-                                <span className="form-check-label">
-                                  Verified on Bscscan
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                The source code of your contract is
-                                automatically published and verified
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="noCopyrightLink"
-                                  onChange={ethMainFormHandler}
-                                  checked={noCopyrightLink}
-                                  disabled={f_noCopyrightLink}
-                                />
-                                <span className="form-check-label">
-                                  No copyright link
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                A link pointing to this page will be added in
-                                the description of your contract (Free and Basic
-                                contracts only)
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  checked={mintable}
-                                  disabled={f_mintable}
-                                  name="mintable"
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label">
-                                  {" "}
-                                  Mintable{" "}
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow the creation of new tokens in the future
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="burnable"
-                                  checked={burnable}
-                                  disabled={f_burnable}
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label ">
-                                  Burnable
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow your tokens to be burned
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="pausable"
-                                  checked={pausable}
-                                  disabled={f_pausable}
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label">
-                                  Pausable
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow your tokens to be paused
-                              </span>
-                            </div>
-                            <div className='d-flex'>
-                            <button type="button" className="btn form-btn" onClick={()=>setStep(1)}>
-                            Back
-                        </button>
-                            <button type="button" className="btn form-btn" onClick={()=>setStep(3)}>
-                            Next
-                        </button>
-                            </div>
-                       
-                </form>
-
-            </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-             
-            ) : (
               <section>
-              <div className="container">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="firstForm">
-                      <h2 className="heading">Network</h2>
-                      <form>
-                        <div className="form-group">
-                          <select
-                            className="form-select"
-                            name="network"
-                            value={network}
-                            onChange={ethMainFormHandler}
-                          >
-                            {data.map((item) => {
-                                  if (item.parentNetworkName === "Ethereum" && item.tokenType === 'free') {
-                                    return (
-                                      <option value={item.value}>{item.subNetworkName}</option>
-                                    )
-                                  }
-                                  else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'basic') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
-                                  }
-                                  else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'custom') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
-
-                                  }
-                                })}
-                          </select>
-                          <span className="form-text text-muted">
-                            Select the network on wich you want to deploy your
-                            token
-                          </span>
-                        </div>
-                       
-                        <h2 className="heading">Transaction</h2>
-                        <div className="card-body">
-                          <div className="transactionWrap">
-                            <div className="Ttext">
-                              <p>
-                                Commission fee:{" "}
-                                <Tooltip
-                                  content={
-                                    <>
-                                      The commison fee will be
-                                      <br />
-                                      transferred automatically to us
-                                      <br /> during the contract creation.
-                                      <br />
-                                      In case of error,this
-                                      <br /> amount will not be
-                                      <br /> deducted from your <br />
-                                      wallet.Only the gas
-                                      <br /> fees will be deducted
-                                    </>
-                                  }
-                                  direction="top"
-                                >
-                                  <HiInformationCircle size={22} />
-                                </Tooltip>
-                              </p>
-                            </div>
-                            <div
-                              className="Tbtn mt-auto mb-auto"
-                              style={{ width: "120px" }}
-                            >
-                              <span className="badge bg-success d-block p-2 ">
-                                {commissionFee
-                                  ? commissionFee === "Free"
-                                    ? "Free"
-                                    : `${commissionFee} ETH`
-                                  : "Free"}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="transactionWrap">
-                            <div className="Ttext ">
-                              <p>
-                                Gas fee:{" "}
-                                <Tooltip
-                                  content={
-                                    <>
-                                      The gas fee depend <br />
-                                      on gas limit and
-                                      <br /> gas price. Metamask will
-                                      <br /> automatically display
-                                      <br /> the best fee to use
-                                    </>
-                                  }
-                                  direction="top"
-                                >
-                                  <HiInformationCircle size={22} />
-                                </Tooltip>
-                              </p>
-                            </div>
-                            <div
-                              className="Tbtn mt-auto mb-auto"
-                              style={{ width: "120px" }}
-                            >
-                              <span className="badge bg-secondary d-block p-2">
-                                Variable
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <h2 className="heading">Agreement</h2>
-                        <div className="card-body">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="firstForm">
+                        <h2 className="heading">Options</h2>
+                        <form>
                           <div className="form-group">
-                            <label className="form-check">
+                            <label className="form-check form-switch">
+                              <input
+                                name="conforms"
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled={f_conforms}
+                                onChange={ethMainFormHandler}
+                                defaultChecked={conforms}
+                              />
+                              <span className="form-check-label">
+                                Conforms to BEP20 protocol
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              Your token will const all the functionalities,
+                              and conforms to BEP20 protocol
+                            </span>
+                          </div>
+                          <div className="form-group">
+                            <label className="form-check form-switch">
+                              <input
+                                name="verified"
+                                className="form-check-input"
+                                type="checkbox"
+                                onChange={ethMainFormHandler}
+                                disabled={f_verified}
+                                defaultChecked={verified}
+                              />
+                              <span className="form-check-label">
+                                Verified on Bscscan
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              The source code of your contract is
+                              automatically published and verified
+                            </span>
+                          </div>
+                          <div className="form-group">
+                            <label className="form-check form-switch">
                               <input
                                 className="form-check-input"
                                 type="checkbox"
-                                name="agreement"
-                                value={agreement}
+                                name="noCopyrightLink"
                                 onChange={ethMainFormHandler}
+                                checked={noCopyrightLink}
+                                disabled={f_noCopyrightLink}
                               />
-
                               <span className="form-check-label">
-                                I have read, understood and agreed to the{" "}
-                                {/* <span className="text-underline"> */}
-                                {/*  modal*/}
-                                <Link
-                                  to="/"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#exampleModal"
-                                >
-                                  <u> Terms of Use. </u>
-                                </Link>
-                                <TermsModal />
-                                {/* modal */}
-                                {/* </span> */}
-                              </span>
-                              <br />
-                              <span className="text-danger">
-                                {err.agreementErr}
+                                No copyright link
                               </span>
                             </label>
+                            <span className="form-text text-muted">
+                              A link pointing to this page will be added in
+                              the description of your contract (Free and Basic
+                              contracts only)
+                            </span>
                           </div>
-                        </div>
-                        <div className="d-flex">
-                          <button
-                            type="button"
-                            className="btn form-btn"
-                            onClick={() => setStep(2)}
-                          >
-                            Back
-                          </button>
-                          <button
-                            type="button"
-                            className="btn form-btn"
-                            onClick={async () => {
+                          <div className="form-group">
+                            <label className="form-check form-switch">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                checked={mintable}
+                                disabled={f_mintable}
+                                name="mintable"
+                                onChange={ethMainFormHandler}
+                              />
+                              <span className="form-check-label">
+                                {" "}
+                                Mintable{" "}
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              Allow the creation of new tokens in the future
+                            </span>
+                          </div>
+                          <div className="form-group">
+                            <label className="form-check form-switch">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                name="burnable"
+                                checked={burnable}
+                                disabled={f_burnable}
+                                onChange={ethMainFormHandler}
+                              />
+                              <span className="form-check-label ">
+                                Burnable
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              Allow your tokens to be burned
+                            </span>
+                          </div>
+                          <div className="form-group">
+                            <label className="form-check form-switch">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                name="pausable"
+                                checked={pausable}
+                                disabled={f_pausable}
+                                onChange={ethMainFormHandler}
+                              />
+                              <span className="form-check-label">
+                                Pausable
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              Allow your tokens to be paused
+                            </span>
+                          </div>
+                          <div className='d-flex'>
+                            <button type="button" className="btn form-btn" onClick={() => setStep(1)}>
+                              Back
+                            </button>
+                            <button type="button" className="btn form-btn" onClick={() => setStep(3)}>
+                              Next
+                            </button>
+                          </div>
+
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+
+            ) : (
+              <section>
+                <div className="container">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="firstForm">
+                        <h2 className="heading">Network</h2>
+                        <form>
+                          <div className="form-group">
+                            <select
+                              className="form-select"
+                              name="network"
+                              value={network}
+                              onChange={ethMainFormHandler}
+                            >
+                              {data.map((item) => {
+                                if (item.parentNetworkName === "Ethereum" && item.tokenType === 'free') {
+                                  return (
+                                    <option value={item.value}>{item.subNetworkName}</option>
+                                  )
+                                }
+                                else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'basic') {
+                                  <option value={item.value}>{item.subNetworkName}</option>
+                                }
+                                else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'custom') {
+                                  <option value={item.value}>{item.subNetworkName}</option>
+
+                                }
+                              })}
+                            </select>
+                            <span className="form-text text-muted">
+                              Select the network on wich you want to deploy your
+                              token
+                            </span>
+                          </div>
+
+                          <h2 className="heading">Transaction</h2>
+                          <div className="card-body">
+                            <div className="transactionWrap">
+                              <div className="Ttext">
+                                <p>
+                                  Commission fee:{" "}
+                                  <Tooltip
+                                    content={
+                                      <>
+                                        The commison fee will be
+                                        <br />
+                                        transferred automatically to us
+                                        <br /> during the contract creation.
+                                        <br />
+                                        In case of error,this
+                                        <br /> amount will not be
+                                        <br /> deducted from your <br />
+                                        wallet.Only the gas
+                                        <br /> fees will be deducted
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
+                                </p>
+                              </div>
+                              <div
+                                className="Tbtn mt-auto mb-auto"
+                                style={{ width: "120px" }}
+                              >
+                                <span className="badge bg-success d-block p-2 ">
+                                  {commissionFee
+                                    ? commissionFee === "Free"
+                                      ? "Free"
+                                      : `${commissionFee} ETH`
+                                    : "Free"}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="transactionWrap">
+                              <div className="Ttext ">
+                                <p>
+                                  Gas fee:{" "}
+                                  <Tooltip
+                                    content={
+                                      <>
+                                        The gas fee depend <br />
+                                        on gas limit and
+                                        <br /> gas price. Metamask will
+                                        <br /> automatically display
+                                        <br /> the best fee to use
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
+                                </p>
+                              </div>
+                              <div
+                                className="Tbtn mt-auto mb-auto"
+                                style={{ width: "120px" }}
+                              >
+                                <span className="badge bg-secondary d-block p-2">
+                                  Variable
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <h2 className="heading">Agreement</h2>
+                          <div className="card-body">
+                            <div className="form-group">
+                              <label className="form-check">
+                                <input
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  name="agreement"
+                                  value={agreement}
+                                  onChange={ethMainFormHandler}
+                                />
+
+                                <span className="form-check-label">
+                                  I have read, understood and agreed to the{" "}
+                                  {/* <span className="text-underline"> */}
+                                  {/*  modal*/}
+                                  <Link
+                                    to="/"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                  >
+                                    <u> Terms of Use. </u>
+                                  </Link>
+                                  <TermsModal />
+                                  {/* modal */}
+                                  {/* </span> */}
+                                </span>
+                                <br />
+                                <span className="text-danger">
+                                  {err.agreementErr}
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+                          <div className="d-flex">
+                            <button
+                              type="button"
+                              className="btn form-btn"
+                              onClick={() => setStep(2)}
+                            >
+                              Back
+                            </button>
+                            <button
+                              type="button"
+                              className="btn form-btn"
+                              onClick={async () => {
                                 if (ethFormData.agreement === false) {
                                   setErr((prev) => ({
                                     ...prev,
                                     agreementErr:
                                       "Please confirm that you have read and understood our terms of use",
                                   }))
-                                 
-                              }
-                              else(
-                                compileContract(ethFormData)
-                              )
-                            }}
-                          >
-                            Deploy
-                          </button>
-                        </div>
-                      </form>
+
+                                }
+                                else (
+                                  compileContract(ethFormData)
+                                )
+                              }}
+                            >
+                              Deploy
+                            </button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
             )}
           </section>
         </main>

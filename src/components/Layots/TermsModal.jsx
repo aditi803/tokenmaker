@@ -16,7 +16,7 @@ export const TermsModal = () => {
       .get(TERMS)
       .then(res => {
         setTerms(res.data.msg)
-        console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>terms msg")
+        // console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>terms msg")
       })
       .catch(err => {
         console.log(err);
@@ -24,7 +24,7 @@ export const TermsModal = () => {
   }
 
 
-  console.log(terms, '>>>>>>>>>>>>>>>>>>')
+  // console.log(terms, '>>>>>>>>>>>>>>>>>>')
 
   return (
     <>
