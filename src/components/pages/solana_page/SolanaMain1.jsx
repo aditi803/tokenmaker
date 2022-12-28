@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, { useState,useEffect, useCallback, useContext } from "react";
 import "./eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,6 +26,7 @@ import {
   createAssociatedTokenAccountInstruction,
   createMintToInstruction,
 } from "@solana/spl-token";
+
 import {
   DataV2,
   createCreateMetadataAccountV2Instruction,
@@ -44,6 +45,7 @@ import { SolanaHeader } from "./SolanaHeader";
 
 const SolanaMain1 = (props) => {
   const steps = [" ", " "];
+  const { solDeploy,setSolDeploy,setDeployData } = useContext(GlobalContext);
 
   const { currentStep, submitted } = useContext(multiStepContext);
   const { setStep, userData, setUserData } = useContext(multiStepContext);
@@ -74,6 +76,7 @@ const SolanaMain1 = (props) => {
   const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(1);
   console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+  const navigate = useNavigate();
 
   const [agreement, setAgreement] = useState(false)
   const [err, setErr] = useState({
@@ -174,6 +177,18 @@ const SolanaMain1 = (props) => {
   //   setStep(2)
 
   // };
+  useEffect(() => {
+    (async () => {
+      const solbalance = await connection.getBalance(publicKey)
+    console.log(solbalance,"balalal")
+    })();
+  
+    // return () => {
+    //   // this now gets called when the component unmounts
+    // };
+    
+  })
+
 
 
   const onClick = useCallback(
@@ -183,9 +198,8 @@ const SolanaMain1 = (props) => {
       // e.preventDefault();
       // const test = await connection.getSupply();
       console.log(connection,"connection")
-      // const solbalance = await connection.getBalance(publicKey)
-      // console.log(solbalance,"balalal")
-    
+      
+
       // console.log(`Switched to account ${publicKey.toBase58()}`);
       // console.log(test,"connection>>>");
       if(!publicKey){
@@ -203,6 +217,7 @@ const SolanaMain1 = (props) => {
         mintKeypair.publicKey,
         publicKey
       );
+
     //   const associatedAccount = await getAssociatedTokenAddress(
     //     mintPubkey,
     //     wallet.publicKey,
@@ -269,26 +284,39 @@ const SolanaMain1 = (props) => {
           }
         )
       );
-      try {
-        await sendTransaction(createNewTokenTransaction, connection, {
+      
+      props.setShow(false)
+        // props.setshow(false)
+        console.log("transaction ke ooperss");
+        const myTransaction = await sendTransaction(createNewTokenTransaction, connection, {
           signers: [mintKeypair],
         });  
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your Token has been Created',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      } catch (error) {
-        // console.log(error,"rejectionerror");
-        Swal.fire({
+        if(myTransaction){
+          setDeployData((prev) => ({
+            ...prev,
+            tokenAddress: myTransaction
+          }));
+          setSolDeploy(true)
+        console.log(myTransaction,"myTransaction");
+        }else{
+            Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'User Decline the request!',
           // footer: '<a href="">Why do I have this issue?</a>'
         })
-      }
+        navigate("/generator/solana");
+        }
+        
+
+        // Swal.fire({
+        //   position: 'center',
+        //   icon: 'success',
+        //   title: 'Your Token has been Created',
+        //   showConfirmButton: false,
+        //   timer: 1500
+        // })
+      
       
       // console.log(form.amount * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
 

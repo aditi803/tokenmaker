@@ -12,7 +12,7 @@ export const FinalMain = (props) => {
   
   const navigate = useNavigate();
   const percentage = 100;
-  const { addToken, deploySuccess, deployData } = useContext(GlobalContext);
+  const { addToken, deploySuccess, deployData,solDeploy } = useContext(GlobalContext);
 
   console.log(deploySuccess, "deploy Success final side");
   console.log("final main");
@@ -42,7 +42,7 @@ export const FinalMain = (props) => {
                 <div className="configurator-pending-install">
                   <div className="card">
                     {/* start */}
-                    {deploySuccess ? (
+                    {deploySuccess || solDeploy? (
                       <SuccessDeploy
                         addToken={addToken}
                         deployData={deployData}

@@ -10,6 +10,7 @@ export const EtherProvider = ({ children }) => {
   const [accBalance, setAccBalance] = useState();
   const [chainId, setChainId] = useState();
   const [toggler, setToggler] = useState(false)
+  const [solDeploy,setSolDeploy]=useState(false)
 
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
@@ -378,8 +379,12 @@ export const EtherProvider = ({ children }) => {
         setAccAddress: setAccAddress,
         hideAccAddress: hideAccAddress,
         addToken: addToken,
+        solDeploy,
+        setSolDeploy,
         deploySuccess: deploySuccess,
+
         deployData: deployData,
+        setDeployData,
         deployContract: deployContract,
         blockchainNetworks: blockchainNetworks,
         accBalance: accBalance,
