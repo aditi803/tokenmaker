@@ -52,9 +52,7 @@ const { connection } = useConnection();
     symbol:"vkh",
     uri:"uri",
     decimals:18,
-    amount:5
-
-    
+    amount:5 
   })
 
 
@@ -1021,7 +1019,7 @@ e.preventDefault();
                               placeholder="My new token"
                               name="tokenName"
                               value={tokenName}
-                              // onChange={ethMainFormHandler}
+                              onChange={(e) => setTokenName(e.target.value)}
                             />
                             <span className="form-text text-muted">
                               The name of your token
@@ -1043,7 +1041,7 @@ e.preventDefault();
                               maxLength="8"
                               name="tokenSymbol"
                               // value={tokenSymbol}
-                              // onChange={ethMainFormHandler}
+                              onChange={(e) =>setSymbol(e.target.value)}
                             />
                             <span className="form-text text-muted">
                               You token's symbol (ie ETH)
