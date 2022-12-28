@@ -10,9 +10,6 @@ import Footer from "./Footer";
 
 function Main() {
 
-  
-
-  
   const [data, setData] = useState([])
   const [image, setImage] = useState([])
   const [loader, setLoader] = useState(false)

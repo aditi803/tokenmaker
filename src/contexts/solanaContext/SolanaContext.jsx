@@ -14,7 +14,6 @@ import {
   TorusWalletAdapter
 } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import SolanaMain1 from "../../components/pages/solana_page/SolanaMain1";
 import App from "../../App";
 
 

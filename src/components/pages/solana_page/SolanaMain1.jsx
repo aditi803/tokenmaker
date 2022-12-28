@@ -32,7 +32,7 @@ import {
 } from "@metaplex-foundation/mpl-token-metadata";
 import { findMetadataPda } from "@metaplex-foundation/js";
 //
-
+import Swal from "sweetalert2"
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -211,6 +211,13 @@ const SolanaMain1 = (props) => {
       //   return;
       // }
 
+      // const test = await connection.getSupply();
+      console.log(connection,"connection")
+      // const solbalance = await connection.getBalance(publicKey)
+      // console.log(solbalance,"balalal")
+    
+      // console.log(`Switched to account ${publicKey.toBase58()}`);
+      // console.log(test,"connection>>>");
       if(!publicKey){
         console.log("public key nhi h");
         toast.error("Please Connect Your wallet ")
@@ -226,7 +233,13 @@ const SolanaMain1 = (props) => {
         mintKeypair.publicKey,
         publicKey
       );
-      console.log(tokenATA, "tokenATA");
+    //   const associatedAccount = await getAssociatedTokenAddress(
+    //     mintPubkey,
+    //     wallet.publicKey,
+    //     false,
+    //     TOKEN_2022_PROGRAM_ID,
+    //  );
+      console.log(tokenATA,"tokenATA");
       const tokenMetadata = {
         name: form.tokenName,
         symbol: form.symbol,
@@ -286,16 +299,36 @@ const SolanaMain1 = (props) => {
           }
         )
       );
-      await sendTransaction(createNewTokenTransaction, connection, {
-        signers: [mintKeypair],
-      });
-      console.log(form.amount * Math.pow(100, form.decimals), "Aditi data jo nhi atat")
+      try {
+        await sendTransaction(createNewTokenTransaction, connection, {
+          signers: [mintKeypair],
+        });  
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your Token has been Created',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      } catch (error) {
+        // console.log(error,"rejectionerror");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'User Decline the request!',
+          // footer: '<a href="">Why do I have this issue?</a>'
+        })
+      }
+      
+      // console.log(form.amount * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
 
     },
     [publicKey, connection, sendTransaction]
-  );
+  
+    );
 
-
+    console.log(sendTransaction,"connected",connected,"sendTransaction");
+    
   console.log(
     ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Solana ,,,,,,,,,,,,,,,,,,,,,,"
   );
