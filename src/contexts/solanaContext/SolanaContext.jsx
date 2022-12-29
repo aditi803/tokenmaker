@@ -1,4 +1,4 @@
-import { useMemo,useState } from "react";
+import { useEffect, useMemo } from "react";
 import { clusterApiUrl } from "@solana/web3.js";
 import {
   ConnectionProvider,
@@ -16,14 +16,12 @@ import {
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import App from "../../App";
 
-
 require("@solana/wallet-adapter-react-ui/styles.css");
 
+
+
 export default function WalletAdapter() {
-
-const [net,setNet] = useState("")
-
-console.log(net,"net--after put")
+    
   const network = WalletAdapterNetwork.Testnet;
 
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
@@ -44,7 +42,7 @@ console.log(net,"net--after put")
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
-          <App setNet = {setNet} net = {net} />
+          <App />
         </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
