@@ -26,6 +26,7 @@ import {
   createAssociatedTokenAccountInstruction,
   createMintToInstruction,
 } from "@solana/spl-token";
+
 import {
   DataV2,
   createCreateMetadataAccountV2Instruction,
@@ -43,8 +44,14 @@ import { multiStepContext } from "./StepContext";
 import { SolanaHeader } from "./SolanaHeader";
 
 const SolanaMain1 = (props) => {
+
+
+  console.log(props, "ADITI SET NET")
+
   const { setNet, net } = props;
   const steps = [" ", " "];
+  const { solDeploy, setSolDeploy, setDeployData } = useContext(GlobalContext);
+
   const {
     solNetworkName,
     setSolNetworkName
@@ -78,6 +85,7 @@ const SolanaMain1 = (props) => {
   const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(1);
   console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+  const navigate = useNavigate();
 
   const [agreement, setAgreement] = useState(false)
 
@@ -97,13 +105,7 @@ const SolanaMain1 = (props) => {
         ...prev,
         agreementErr: "",
       }));
-    } else if (agreement === false) {
-      setErr((prev) => ({
-        ...prev,
-        agreementErr: "Please confirm that you have read and understood our terms of use",
-      }));
     }
-
     if (tokenName !== "") {
       setErr((prev) => ({
         ...prev,
@@ -129,7 +131,7 @@ const SolanaMain1 = (props) => {
         amountErr: "",
       }));
     }
-  }, [agreement, tokenName, symbol, decimals]);
+  }, [agreement, tokenName, symbol, decimals, amount]);
 
 
   const handleSubmit = (e) => {
@@ -153,11 +155,11 @@ const SolanaMain1 = (props) => {
       setErr((prev) => ({
         ...prev,
         agreementErr:
-          "Please confirm that you have read and understood our terms of use",
+          "Please confirm that you have read and understood our terms of use.",
       }));
 
     }
-    if (decimals > 21 || decimals < 6) {
+    if (decimals >= 21 || decimals <= 6) {
       setErr((prev) => ({
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
@@ -171,18 +173,38 @@ const SolanaMain1 = (props) => {
     }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
-      // do what u want to do with data
-      // console.log("data");
-      console.log(err, "da");
 
-      // < Navigate to= "/generator/final" />
-      // navigate("/generator/final")
+      console.log(err, "da");
     }
     if (tokenName !== "" && symbol !== "" && amount !== "" && decimals !== null) {
       // navigate("/generator/final");
       setStep(2);
     }
   };
+
+  // };
+  const [walletBalance, setWalletBalance] = useState()
+  useEffect(() => {
+    (async () => {
+      let solbalance
+      if (!publicKey) {
+        solbalance = 'd'
+
+      } else {
+
+        solbalance = await connection.getBalance(publicKey)
+        const solbalanceAmount = solbalance
+        setWalletBalance(solbalanceAmount)
+      }
+      console.log(solbalance, "balalal")
+      console.log(walletBalance, " blanceWallet")
+    })();
+
+    // return () => {
+    //   // this now gets called when the component unmounts
+    // };
+
+  })
 
   const [data, setData] = useState([])
   const getNetworks = () => {
@@ -201,12 +223,14 @@ const SolanaMain1 = (props) => {
   }, [setData])
 
 
+  console.log(agreement, "DITI")
+
   const onClick = useCallback(
     async (form) => {
       if (agreement === false) {
-        return;
+        // return;
       }
-      console.log(connection, "connection")
+      console.log(connection, "DITI")
       // const solbalance = await connection.getBalance(publicKey)
       // console.log(solbalance,"balalal")
 
@@ -287,18 +311,20 @@ const SolanaMain1 = (props) => {
           }
         )
       );
-      try {
-        await sendTransaction(createNewTokenTransaction, connection, {
-          signers: [mintKeypair],
-        });
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your Token has been Created',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      } catch (error) {
+
+      props.setShow(false)
+      // props.setshow(false)
+      console.log("transaction ke ooperss");
+      const myTransaction = await sendTransaction(createNewTokenTransaction, connection, {
+        signers: [mintKeypair],
+      });
+      if (myTransaction) {
+        setDeployData((prev) => ({
+          ...prev,
+          tokenAddress: myTransaction
+        }))
+        setSolDeploy(true)
+      } else {
         // console.log(error,"rejectionerror");
         Swal.fire({
           icon: 'error',
@@ -306,6 +332,7 @@ const SolanaMain1 = (props) => {
           text: 'User Decline the request!',
           // footer: '<a href="">Why do I have this issue?</a>'
         })
+        navigate("/generator/solana")
       }
 
       // console.log(form.amount * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
@@ -329,16 +356,7 @@ const SolanaMain1 = (props) => {
 
   return (
     <>
-
-      {/* <WalletMultiButton className="btn btn-ghost mr-4" 
-          style={{
-            backgroundColor:"#f50058",
-            borderColor:"#f50058",
-            color:"#fff", 
-            borderRadius:"40px", 
-            justifyContent:"center", 
-            padding:"30px 60px"}}/> */}
-      {/* <SolanaHeader /> */}
+      <SolanaHeader walletBalance={walletBalance} />
       <div className="page-content">
         <main>
           <div className="hero-form mb-3 ">
@@ -357,7 +375,6 @@ const SolanaMain1 = (props) => {
             </div>
           </div>
           <section style={{ marginBottom: "40px" }}>
-            {/* test */}
             <div className="container">
               <div className="row">
                 <div className="col-lg-12">
@@ -379,21 +396,9 @@ const SolanaMain1 = (props) => {
                 </div>
               </div>
             </div>
-            {/* {currentStep === 1 ? (
-              <FirstStep />
-            ) : currentStep === 2 ? (
-              <SecondStep />
-            ) : currentStep === 3 ? (
-              <ThirdStep />
-            ) : (
-              <FouthStep />
-            )} */}
+
             {currentStep === 1 ? (
-              // <FirstStep />
-
               <section>
-
-
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
@@ -492,7 +497,7 @@ const SolanaMain1 = (props) => {
                               type="number"
                               className="form-control"
                               placeholder="18"
-                                min='6'
+                              min='6'
                               max='21'
                               //   disabled={f_decimals}
                               // value={}
@@ -575,23 +580,6 @@ const SolanaMain1 = (props) => {
 
                                 }
                               })}
-
-
-                              {/* <option value="devnet">Solana Devnet </option>
-                              <option
-                                value="devnet"
-                                disabled
-                                style={{ backgroundColor: "#dedede" }}
-                              >
-                                Solana Mainnet{" "}
-                              </option>
-                              <option
-                                value="devnet"
-                                disabled
-                                style={{ backgroundColor: "#dedede" }}
-                              >
-                                Solana Testnet{" "}
-                              </option> */}
                             </select>
                             <span className="form-text text-muted">
                               Select the network on wich you want to deploy your
@@ -681,18 +669,16 @@ const SolanaMain1 = (props) => {
                                   value={agreement}
                                   // onChange={ethMainFormHandler}
                                   onChange={(e) => {
-                                    // setErr((prev) => ({
-                                    //     ...prev,
-                                    //   agreementErr : ""
-                                    // } ))
+                                    setErr((prev) => ({
+                                        ...prev,
+                                      agreementErr : ""
+                                    } ))
                                     setAgreement(e.target.checked)
                                   }}
                                 />
 
                                 <span className="form-check-label">
                                   I have read, understood and agreed to the{" "}
-                                  {/* <span className="text-underline"> */}
-                                  {/*  modal*/}
                                   <Link
                                     to="/"
                                     data-bs-toggle="modal"
@@ -721,24 +707,8 @@ const SolanaMain1 = (props) => {
                             </button>
                             <button
                               type="button"
-                              // disabled={!agreement}
                               className="btn form-btn"
-                              // onClick={async () => {
-                              //   if (agreement === false) {
-                              //     setErr((prev) => ({
-                              //       ...prev,
-                              //       agreementErr:
-                              //         "Please confirm that you have read and understood our terms of use",
-                              //     }))
-
-                              //   }
-                              //   else (
-                              //     onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
-                              //   )
-                              // }}
-                              // onClick={(e) => onClick(e, form)}
                               onClick={() => onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })}
-                            // onClick={() => onClick(form)}
                             >
                               Deploy
                             </button>

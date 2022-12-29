@@ -74,6 +74,7 @@ function Main() {
                       {/* {value?.networks[0]((img) => (
                         <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
                       ))} */}
+                      
                       <span className="text-muted description">Create your token on {value.categoryName}</span>
                     </Link>
                   </div>

@@ -7,14 +7,14 @@ import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 export const SuccessDeploy = (props) => {
   const navigate = useNavigate()
   const {addToken,deployData} = props
-  const { urlLinks } =useContext(GlobalContext);
+  const { urlLinks, Deploy,solDeploy } =useContext(GlobalContext);
 
   const createNewToken = ()=>{
     navigate("/generator")
   }
+  
 
   let explorer
-
 // eslint-disable-next-line no-unused-expressions
   urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
 
@@ -60,15 +60,16 @@ export const SuccessDeploy = (props) => {
             <div>
               Your token address is:{" "}
               <div className="token-addr d-inline-block ms-2">
-                <Link
+                
+                {/* <Link
                   href={`${explorer.link}/token/${deployData.tokenAddress}`}
                   target="_blank"
                   rel="noreferrer"
                   title={`View your token on ${explorer.name}`}
-                >
-                
+                > */}
+                {console.log(deployData.tokenAddress,"tokkkkk")}
                   {deployData.tokenAddress}
-                </Link>
+                {/* </Link> */}
                 <div
                   className="text-light-gray ms-2 pointer d-inline-block"
                   title="copy address"
@@ -133,9 +134,25 @@ export const SuccessDeploy = (props) => {
               Source code validated!
             </div>
             <div className="mt-3">
+              {
+                solDeploy? <>
+                {/* <button type="button" onClick = {addToken} className="btn btn-success">
+                Add your token to your wallet
+              </button> */}
+
+              <a
+                href={`https://solscan.io/tx/${deployData.tokenAddress}?cluster=devnet`}
+                className="btn btn-secondary ms-2"
+                target="_blank"
+                rel="noreferrer"
+              >
+               { `View the transaction on Devnet`}
+              </a></>:
+              <>
               <button type="button" onClick = {addToken} className="btn btn-success">
                 Add your token to your wallet
               </button>
+
               <a
                 href={`${explorer.link}/tx/${deployData.txHash}`}
                 className="btn btn-secondary ms-2"
@@ -144,6 +161,7 @@ export const SuccessDeploy = (props) => {
               >
                { `View the transaction on ${explorer.name}`}
               </a>
+              </>}
             </div>
           </div>
           <button type="button"  onClick={createNewToken} className="btn btn-link btn-sm p-0 mt-4 text-body">

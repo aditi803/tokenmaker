@@ -11,7 +11,7 @@ export const SolanaMain = (props) => {
 
     return (
         <>
-            <SolanaHeader />
+            {/* <SolanaHeader /> */}
             {showComponent ? (
                 <StepContext setNet = {setNet} net={net} setShow={setShowComponent}></StepContext>
             ) : (

@@ -5,10 +5,10 @@ export const HelperContext = createContext();
 const HelperProvider = () => {
     
     const [showRoute, setShowRoute ] = useState(false)
-    
+
     const providerValue = {
         showRoute,
-        setShowRoute
+        setShowRoute,
     }
     return <HelperContext.Provider value={providerValue}></HelperContext.Provider>
 
