@@ -43,7 +43,7 @@ import { multiStepContext } from "./StepContext";
 import { SolanaHeader } from "./SolanaHeader";
 
 const SolanaMain1 = (props) => {
-  const {setNet,net} = props;
+  const { setNet, net } = props;
   const steps = [" ", " "];
   const {
     solNetworkName,
@@ -97,6 +97,11 @@ const SolanaMain1 = (props) => {
         ...prev,
         agreementErr: "",
       }));
+    } else if (agreement === false) {
+      setErr((prev) => ({
+        ...prev,
+        agreementErr: "Please confirm that you have read and understood our terms of use",
+      }));
     }
 
     if (tokenName !== "") {
@@ -144,11 +149,13 @@ const SolanaMain1 = (props) => {
     }
 
     if (agreement === false) {
+
       setErr((prev) => ({
         ...prev,
         agreementErr:
           "Please confirm that you have read and understood our terms of use",
       }));
+
     }
     if (decimals > 21 || decimals < 6) {
       setErr((prev) => ({
@@ -176,11 +183,7 @@ const SolanaMain1 = (props) => {
       setStep(2);
     }
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setStep(2)
 
-  // };
   const [data, setData] = useState([])
   const getNetworks = () => {
     axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
@@ -200,25 +203,16 @@ const SolanaMain1 = (props) => {
 
   const onClick = useCallback(
     async (form) => {
-      // console.log(tokenName,"tokennane");
-      // console.log("aagya");
-      // e.preventDefault();
-
-      // if(!agreement){
-      //   setErr((prev) => ({...prev,
-      //     agreementErr: "Please confirm that you have read and understood our terms of ushhhhhhe"
-      //   }))
-      //   return;
-      // }
-
-      // const test = await connection.getSupply();
-      console.log(connection,"connection")
+      if (agreement === false) {
+        return;
+      }
+      console.log(connection, "connection")
       // const solbalance = await connection.getBalance(publicKey)
       // console.log(solbalance,"balalal")
-    
+
       // console.log(`Switched to account ${publicKey.toBase58()}`);
       // console.log(test,"connection>>>");
-      if(!publicKey){
+      if (!publicKey) {
         console.log("public key nhi h");
         toast.error("Please Connect Your wallet ")
       }
@@ -233,13 +227,7 @@ const SolanaMain1 = (props) => {
         mintKeypair.publicKey,
         publicKey
       );
-    //   const associatedAccount = await getAssociatedTokenAddress(
-    //     mintPubkey,
-    //     wallet.publicKey,
-    //     false,
-    //     TOKEN_2022_PROGRAM_ID,
-    //  );
-      console.log(tokenATA,"tokenATA");
+      console.log(tokenATA, "tokenATA");
       const tokenMetadata = {
         name: form.tokenName,
         symbol: form.symbol,
@@ -302,7 +290,7 @@ const SolanaMain1 = (props) => {
       try {
         await sendTransaction(createNewTokenTransaction, connection, {
           signers: [mintKeypair],
-        });  
+        });
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -319,16 +307,16 @@ const SolanaMain1 = (props) => {
           // footer: '<a href="">Why do I have this issue?</a>'
         })
       }
-      
+
       // console.log(form.amount * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
 
     },
     [publicKey, connection, sendTransaction]
-  
-    );
 
-    console.log(sendTransaction,"connected",connected,"sendTransaction");
-    
+  );
+
+  console.log(sendTransaction, "connected", connected, "sendTransaction");
+
   console.log(
     ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Solana ,,,,,,,,,,,,,,,,,,,,,,"
   );
@@ -338,11 +326,11 @@ const SolanaMain1 = (props) => {
     console.log(name.target.value, "Network Name solana")
   }
 
-  
+
   return (
     <>
-        
-          {/* <WalletMultiButton className="btn btn-ghost mr-4" 
+
+      {/* <WalletMultiButton className="btn btn-ghost mr-4" 
           style={{
             backgroundColor:"#f50058",
             borderColor:"#f50058",
@@ -350,7 +338,7 @@ const SolanaMain1 = (props) => {
             borderRadius:"40px", 
             justifyContent:"center", 
             padding:"30px 60px"}}/> */}
-            {/* <SolanaHeader /> */}
+      {/* <SolanaHeader /> */}
       <div className="page-content">
         <main>
           <div className="hero-form mb-3 ">
@@ -504,7 +492,8 @@ const SolanaMain1 = (props) => {
                               type="number"
                               className="form-control"
                               placeholder="18"
-                              maxLength="2"
+                                min='6'
+                              max='21'
                               //   disabled={f_decimals}
                               // value={}
                               name="decimals"
@@ -569,25 +558,25 @@ const SolanaMain1 = (props) => {
                             <select
                               className="form-select"
                               name="network"
-                            // value={network}
-                            onChange={networkName}
+                              // value={network}
+                              onChange={networkName}
                             >
                               {data.map((item) => {
-                                  if (item.parentNetworkName === "Solana" && item.tokenType === 'free') {
-                                    return (
-                                      <option value={item.value}>{item.subNetworkName}</option>
-                                    )
-                                  }
-                                  else if (item.parentNetworkName === "Solana" && item.tokenType === 'basic') {
+                                if (item.parentNetworkName === "Solana" && item.tokenType === 'free') {
+                                  return (
                                     <option value={item.value}>{item.subNetworkName}</option>
-                                  }
-                                  else if (item.parentNetworkName === "Solana" && item.tokenType === 'custom') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
+                                  )
+                                }
+                                else if (item.parentNetworkName === "Solana" && item.tokenType === 'basic') {
+                                  <option value={item.value}>{item.subNetworkName}</option>
+                                }
+                                else if (item.parentNetworkName === "Solana" && item.tokenType === 'custom') {
+                                  <option value={item.value}>{item.subNetworkName}</option>
 
-                                  }
-                                })}
-                                
-                                
+                                }
+                              })}
+
+
                               {/* <option value="devnet">Solana Devnet </option>
                               <option
                                 value="devnet"
@@ -690,13 +679,14 @@ const SolanaMain1 = (props) => {
                                   type="checkbox"
                                   name="agreement"
                                   value={agreement}
-                                // onChange={ethMainFormHandler}
+                                  // onChange={ethMainFormHandler}
                                   onChange={(e) => {
                                     // setErr((prev) => ({
                                     //     ...prev,
                                     //   agreementErr : ""
                                     // } ))
-                                    setAgreement(e.target.checked)}}
+                                    setAgreement(e.target.checked)
+                                  }}
                                 />
 
                                 <span className="form-check-label">
@@ -733,19 +723,19 @@ const SolanaMain1 = (props) => {
                               type="button"
                               // disabled={!agreement}
                               className="btn form-btn"
-                                // onClick={async () => {
-                                //   if (agreement === false) {
-                                //     setErr((prev) => ({
-                                //       ...prev,
-                                //       agreementErr:
-                                //         "Please confirm that you have read and understood our terms of use",
-                                //     }))
+                              // onClick={async () => {
+                              //   if (agreement === false) {
+                              //     setErr((prev) => ({
+                              //       ...prev,
+                              //       agreementErr:
+                              //         "Please confirm that you have read and understood our terms of use",
+                              //     }))
 
-                                //   }
-                                //   else (
-                                //     onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
-                                //   )
-                                // }}
+                              //   }
+                              //   else (
+                              //     onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
+                              //   )
+                              // }}
                               // onClick={(e) => onClick(e, form)}
                               onClick={() => onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })}
                             // onClick={() => onClick(form)}
