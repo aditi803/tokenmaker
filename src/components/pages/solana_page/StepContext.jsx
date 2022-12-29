@@ -5,6 +5,8 @@ const multiStepContext = React.createContext();
 
 const StepContext = (props) => {
 
+    const {setNet,net} = props;
+
     const [currentStep, setStep] = useState(1);
     const [userData, setUserData] = useState({
         tokenType: '',
@@ -32,7 +34,7 @@ const StepContext = (props) => {
                 finalData, setFinalData, submitData,
                 submitted,setSubmitted
             }}>
-            <SolanaMain1 setShow={props.setShow}/>
+            <SolanaMain1 setNet = {setNet} net ={net} setShow={props.setShow}/>
         </multiStepContext.Provider>
     </div>
   )

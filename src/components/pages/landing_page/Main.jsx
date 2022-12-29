@@ -25,7 +25,7 @@ function Main() {
       .get("https://tokenmaker-apis.block-brew.com/network/networkdetails")
       .then(res => {
         setData(res.data.msg.items)
-        console.log(res, "Add data view page")
+        console.log(res, ">>>>>>>>>>>>>>>>>>>>>Add data view page>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         setLoader(false)
       })
       .catch(err => {
@@ -44,7 +44,7 @@ function Main() {
           <div className="hero mb-3 mt-5">
             <div className="container">
               <h1 style={{ paddingTop: '80px', marginBottom: '10px' }}>
-                <span className="sub-highlight">Select your network's</span>
+                <span className="sub-highlight">Select your network</span>
               </h1>
               <p style={{ color: 'black' }}>Your token will be deployed on the selected blockchain</p>
             </div>
@@ -53,19 +53,19 @@ function Main() {
             <>
 
               {data.map((value, index) => {
-                if (index === 0) {
-                  return <div className="chain-item">
-                    {console.log(value.hrefPath, "jjjjjjj")}
-                    <Link to={`/generator/solana`} className="chain-link chain-bsc">
-                      <span className="title">{value.categoryName}</span>
-                      <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
-                      {/* {value?.networks[0]((img) => (
-                        <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
-                      ))} */}
-                      <span className="text-muted description">Create your token on {value.categoryName}</span>
-                    </Link>
-                  </div>
-                }else {
+                // if (index === 0) {
+                //   return <div className="chain-item">
+                //     {console.log(value.hrefPath, "jjjjjjj")}
+                //     <Link to={`/generator/solana`} className="chain-link chain-bsc">
+                //       <span className="title">{value.categoryName}</span>
+                //       <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
+                //       {/* {value?.networks[0]((img) => (
+                //         <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
+                //       ))} */}
+                //       <span className="text-muted description">Create your token on {value.categoryName}</span>
+                //     </Link>
+                //   </div>
+                // }else {
                   return<div className="chain-item">
                     {console.log(value.hrefPath, "jjjjjjj")}
                     <Link to={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
@@ -78,7 +78,7 @@ function Main() {
                       <span className="text-muted description">Create your token on {value.categoryName}</span>
                     </Link>
                   </div>
-                }
+                // }
               })}
             </>
           </div>
