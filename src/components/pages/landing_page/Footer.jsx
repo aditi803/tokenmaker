@@ -27,7 +27,7 @@ function Footer() {
                 <span>
                   <img className="footer-logo" src={Logo} alt="" />
                 </span>
-                <p style={{ fontSize: "12px", marginBottom: "20px",maxWidth:'330px' }}>
+                <p style={{ fontSize: "12px", marginBottom: "20px", maxWidth: '330px' }}>
                   Build business ecosystems laced with decentralization,
                   enhanced security and transparency with our custom blockchain
                   app development
@@ -48,17 +48,24 @@ function Footer() {
                 <p>Crypto Exchange</p>
               </div>
               <div className="col-lg-2">
-              <h5 className="mb-5"></h5>
-              <p>Crypto Banking Solution</p>
-              <p>ICO</p>
-              <p>Wallet</p>
-              <p>Resourses</p>
+                <h5 className="mb-5"></h5>
+                {/* <Link
+                  to="/"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                > */}
+                  <p> Terms of Use. </p>
+                {/* </Link> */}
+                <TermsModal />
+                <p>Privacy Policy</p>
+                {/* <p>Wallet</p>
+              <p>Resourses</p> */}
               </div>
               <div className="col-lg-4">
                 <h5 className="mb-4">whatsApp Updates</h5>
                 <div className="d-flex mb-4">
-                <input type='number' className="numberinput" placeholder="Enter Phone Number"/>
-<button className="sbbutton">Subscribe</button>
+                  <input type='number' className="numberinput" placeholder="Enter Phone Number" />
+                  <button className="sbbutton">Subscribe</button>
                 </div>
                 <h5 className="mb-4">Contact Us</h5>
                 <div className="d-flex contact">

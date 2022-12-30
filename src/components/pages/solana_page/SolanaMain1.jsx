@@ -708,7 +708,21 @@ const SolanaMain1 = (props) => {
                             <button
                               type="button"
                               className="btn form-btn"
-                              onClick={() => onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })}
+                              onClick={() => {
+                                if (agreement === false) {
+                                  setErr((prev) => ({
+                                    ...prev,
+                                    agreementErr:
+                                      "Please confirm that you have read and understood our terms of use",
+                                  }))
+
+                                }else{
+                                onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
+
+                                }
+                              
+                              }}
+
                             >
                               Deploy
                             </button>
