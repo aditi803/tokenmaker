@@ -23,6 +23,9 @@
     padding-bottom: 100px;
     color: black;
 }
+.wallet-adapter-button:not([disabled]):hover {
+    background-color: transparent !important;
+}
 .hero-form{
     font-size: 1.125rem;
     padding-top: 100px;

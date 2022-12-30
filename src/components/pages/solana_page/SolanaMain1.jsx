@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useCallback, useContext } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import "./eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { Metadata } from '@metaplex-foundation/mpl-token-metadata';
 import { WebBundlr } from '@bundlr-network/client';
 import { sign } from 'tweetnacl';
-
+import { SolanaHeader } from "./SolanaHeader";
 import { PublicKey, PublicKeyInitData } from '@solana/web3.js';
 import { Buffer } from 'buffer';
 
@@ -51,9 +51,13 @@ import StepLabel from "@mui/material/StepLabel";
 import { multiStepContext } from "./StepContext";
 
 const SolanaMain1 = (props) => {
-  const {setNet,net} = props;
+
+
+  console.log(props, "ADITI SET NET")
+
+  const { setNet, net } = props;
   const steps = [" ", " "];
-  const { solDeploy,setSolDeploy,setDeployData } = useContext(GlobalContext);
+  const { solDeploy, setSolDeploy, setDeployData } = useContext(GlobalContext);
 
   const {
     solNetworkName,
@@ -128,7 +132,6 @@ const SolanaMain1 = (props) => {
         agreementErr: "",
       }));
     }
-
     if (tokenName !== "") {
       setErr((prev) => ({
         ...prev,
@@ -154,7 +157,7 @@ const SolanaMain1 = (props) => {
         amountErr: "",
       }));
     }
-  }, [agreement, tokenName, symbol, decimals]);
+  }, [agreement, tokenName, symbol, decimals, amount]);
 
 
   const handleSubmit = (e) => {
@@ -174,13 +177,15 @@ const SolanaMain1 = (props) => {
     }
 
     if (agreement === false) {
+
       setErr((prev) => ({
         ...prev,
         agreementErr:
-          "Please confirm that you have read and understood our terms of use",
+          "Please confirm that you have read and understood our terms of use.",
       }));
+
     }
-    if (decimals > 21 || decimals < 6) {
+    if (decimals >= 21 || decimals <= 6) {
       setErr((prev) => ({
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
@@ -194,23 +199,17 @@ const SolanaMain1 = (props) => {
     }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
-      // do what u want to do with data
-      // console.log("data");
-      console.log(err, "da");
 
-      // < Navigate to= "/generator/final" />
-      // navigate("/generator/final")
+      console.log(err, "da");
     }
     if (tokenName !== "" && symbol !== "" && amount !== "" && decimals !== null) {
       // navigate("/generator/final");
       setStep(2);
     }
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setStep(2)
 
   // };
+  const [walletBalance, setWalletBalance] = useState()
   useEffect(() => {
     (async () => {
       // const message = new TextEncoder().encode('Hello, world!');
@@ -224,17 +223,22 @@ const SolanaMain1 = (props) => {
       // var stringview = bufView.toBytes()
       // console.log(bufView,"vicky");
       // console.log(stringview,"stringview");
-
-      const solbalance = await connection.getBalance(publicKey)
+      let solbalance 
+      if(!publicKey){
+        solbalance= 'd'
+      }else{
+        solbalance = await connection.getBalance(publicKey)
+        setWalletBalance(solbalance)
+      }
       
       console.log(solbalance,"soolbala");
     console.log(solbalance/LAMPORTS_PER_SOL,"balalal")
     })();
-  
+
     // return () => {
     //   // this now gets called when the component unmounts
     // };
-    
+
   })
 
   const [data, setData] = useState([])
@@ -254,26 +258,20 @@ const SolanaMain1 = (props) => {
   }, [setData])
 
 
+  console.log(agreement, "DITI")
+
   const onClick = useCallback(
     async (form) => {
-      // console.log(tokenName,"tokennane");
-      // console.log("aagya");
-      // e.preventDefault();
-
-      // if(!agreement){
-      //   setErr((prev) => ({...prev,
-      //     agreementErr: "Please confirm that you have read and understood our terms of ushhhhhhe"
-      //   }))
-      //   return;
-      // }
-
-      // const test = await connection.getSupply();
-      console.log(connection,"connection")
-      
+      if (agreement === false) {
+        // return;
+      }
+      console.log(connection, "DITI")
+      // const solbalance = await connection.getBalance(publicKey)
+      // console.log(solbalance,"balalal")
 
       // console.log(`Switched to account ${publicKey.toBase58()}`);
       // console.log(test,"connection>>>");
-      if(!publicKey){
+      if (!publicKey) {
         console.log("public key nhi h");
         toast.error("Please Connect Your wallet ")
       }
@@ -288,14 +286,7 @@ const SolanaMain1 = (props) => {
         mintKeypair.publicKey,
         publicKey
       );
-
-    //   const associatedAccount = await getAssociatedTokenAddress(
-    //     mintPubkey,
-    //     wallet.publicKey,
-    //     false,
-    //     TOKEN_2022_PROGRAM_ID,
-    //  );
-      console.log(tokenATA,"tokenATA");
+      console.log(tokenATA, "tokenATA");
       const tokenMetadata = {
         name: form.tokenName,
         symbol: form.symbol,
@@ -364,15 +355,16 @@ const SolanaMain1 = (props) => {
         lamports: 1912900,
       })
     );
-
-    const signature = await sendTransaction(transaction, connection);
-    console.log(signature,"signature");
-
-    await connection.confirmTransaction(signature, "processed");
-      // props.setshow(false)
-      props.setShow(false)
-      console.log("transaction ke ooperss");
-      try{
+      
+    try{
+        const signature = await sendTransaction(transaction, connection);
+        console.log(signature,"signature");
+        props.setShow(false)
+    
+        const signpay = await connection.confirmTransaction(signature, "processed");
+        console.log(signpay,"signpay");
+          // props.setshow(false)
+          console.log("transaction ke ooperss");
 
         const myTransaction = await sendTransaction(createNewTokenTransaction, connection, {
           signers: [mintKeypair],
@@ -404,24 +396,15 @@ const SolanaMain1 = (props) => {
        
         
 
-        // Swal.fire({
-        //   position: 'center',
-        //   icon: 'success',
-        //   title: 'Your Token has been Created',
-        //   showConfirmButton: false,
-        //   timer: 1500
-        // })
-      
-      
       // console.log(form.amount * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
 
     },
     [publicKey, connection, sendTransaction]
-  
-    );
 
-    console.log(sendTransaction,"connected",connected,"sendTransaction");
-    
+  );
+
+  console.log(sendTransaction, "connected", connected, "sendTransaction");
+
   console.log(
     ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Solana ,,,,,,,,,,,,,,,,,,,,,,"
   );
@@ -431,19 +414,11 @@ const SolanaMain1 = (props) => {
     console.log(name.target.value, "Network Name solana")
   }
 
-  
+
   return (
     <>
-        
-          {/* <WalletMultiButton className="btn btn-ghost mr-4" 
-          style={{
-            backgroundColor:"#f50058",
-            borderColor:"#f50058",
-            color:"#fff", 
-            borderRadius:"40px", 
-            justifyContent:"center", 
-            padding:"30px 60px"}}/> */}
-            {/* <SolanaHeader /> */}
+
+      <SolanaHeader walletBalance={walletBalance} publicKey={publicKey} />
       <div className="page-content">
         <main>
           <div className="hero-form mb-3 ">
@@ -462,7 +437,6 @@ const SolanaMain1 = (props) => {
             </div>
           </div>
           <section style={{ marginBottom: "40px" }}>
-            {/* test */}
             <div className="container">
               <div className="row">
                 <div className="col-lg-12">
@@ -484,21 +458,9 @@ const SolanaMain1 = (props) => {
                 </div>
               </div>
             </div>
-            {/* {currentStep === 1 ? (
-              <FirstStep />
-            ) : currentStep === 2 ? (
-              <SecondStep />
-            ) : currentStep === 3 ? (
-              <ThirdStep />
-            ) : (
-              <FouthStep />
-            )} */}
+
             {currentStep === 1 ? (
-              // <FirstStep />
-
               <section>
-
-
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
@@ -597,7 +559,8 @@ const SolanaMain1 = (props) => {
                               type="number"
                               className="form-control"
                               placeholder="18"
-                              maxLength="2"
+                              min='6'
+                              max='21'
                               //   disabled={f_decimals}
                               // value={}
                               name="decimals"
@@ -662,40 +625,23 @@ const SolanaMain1 = (props) => {
                             <select
                               className="form-select"
                               name="network"
-                            // value={network}
-                            onChange={networkName}
+                              // value={network}
+                              onChange={networkName}
                             >
                               {data.map((item) => {
-                                  if (item.parentNetworkName === "Solana" && item.tokenType === 'free') {
-                                    return (
-                                      <option value={item.value}>{item.subNetworkName}</option>
-                                    )
-                                  }
-                                  else if (item.parentNetworkName === "Solana" && item.tokenType === 'basic') {
+                                if (item.parentNetworkName === "Solana" && item.tokenType === 'free') {
+                                  return (
                                     <option value={item.value}>{item.subNetworkName}</option>
-                                  }
-                                  else if (item.parentNetworkName === "Solana" && item.tokenType === 'custom') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
+                                  )
+                                }
+                                else if (item.parentNetworkName === "Solana" && item.tokenType === 'basic') {
+                                  <option value={item.value}>{item.subNetworkName}</option>
+                                }
+                                else if (item.parentNetworkName === "Solana" && item.tokenType === 'custom') {
+                                  <option value={item.value}>{item.subNetworkName}</option>
 
-                                  }
-                                })}
-                                
-                                
-                              {/* <option value="devnet">Solana Devnet </option>
-                              <option
-                                value="devnet"
-                                disabled
-                                style={{ backgroundColor: "#dedede" }}
-                              >
-                                Solana Mainnet{" "}
-                              </option>
-                              <option
-                                value="devnet"
-                                disabled
-                                style={{ backgroundColor: "#dedede" }}
-                              >
-                                Solana Testnet{" "}
-                              </option> */}
+                                }
+                              })}
                             </select>
                             <span className="form-text text-muted">
                               Select the network on wich you want to deploy your
@@ -783,19 +729,18 @@ const SolanaMain1 = (props) => {
                                   type="checkbox"
                                   name="agreement"
                                   value={agreement}
-                                // onChange={ethMainFormHandler}
+                                  // onChange={ethMainFormHandler}
                                   onChange={(e) => {
-                                    // setErr((prev) => ({
-                                    //     ...prev,
-                                    //   agreementErr : ""
-                                    // } ))
-                                    setAgreement(e.target.checked)}}
+                                    setErr((prev) => ({
+                                        ...prev,
+                                      agreementErr : ""
+                                    } ))
+                                    setAgreement(e.target.checked)
+                                  }}
                                 />
 
                                 <span className="form-check-label">
                                   I have read, understood and agreed to the{" "}
-                                  {/* <span className="text-underline"> */}
-                                  {/*  modal*/}
                                   <Link
                                     to="/"
                                     data-bs-toggle="modal"
@@ -824,24 +769,22 @@ const SolanaMain1 = (props) => {
                             </button>
                             <button
                               type="button"
-                              // disabled={!agreement}
                               className="btn form-btn"
-                                // onClick={async () => {
-                                //   if (agreement === false) {
-                                //     setErr((prev) => ({
-                                //       ...prev,
-                                //       agreementErr:
-                                //         "Please confirm that you have read and understood our terms of use",
-                                //     }))
+                              onClick={() => {
+                                if (agreement === false) {
+                                  setErr((prev) => ({
+                                    ...prev,
+                                    agreementErr:
+                                      "Please confirm that you have read and understood our terms of use",
+                                  }))
 
-                                //   }
-                                //   else (
-                                //     onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
-                                //   )
-                                // }}
-                              // onClick={(e) => onClick(e, form)}
-                              onClick={() => onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })}
-                            // onClick={() => onClick(form)}
+                                }else{
+                                onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
+
+                                }
+                              
+                              }}
+
                             >
                               Deploy
                             </button>

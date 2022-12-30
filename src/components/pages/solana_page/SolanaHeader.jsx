@@ -8,15 +8,24 @@ import { useEffect } from "react";
 import { HEADER } from "../../../api/Api";
 import axios from "axios"
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+// import { PublicKey } from "@solana/web3.js";
 
 
-export const SolanaHeader = () => {
+export const SolanaHeader = (props) => {
+
+  const walletBalnceAmount = props.walletBalance
+  const PublicKey = props.publicKey
+  console.log(walletBalnceAmount, "Wallet Balance Amount")
+  const finalAmount = walletBalnceAmount * 0.000000001
+  console.log(finalAmount, "finalAmount")
+  console.log(PublicKey,"ooblic")
+
 
   const [header, setHeader] = useState([])
   const [loader, setLoader] = useState(true)
   // lo
   useEffect(() => {
-
+    console.log(finalAmount,"Ada")
     fetchData()
 
   }, [])
@@ -98,17 +107,20 @@ export const SolanaHeader = () => {
                     </span> */}
                 </Link>
 
-                <div className="ms-auto d-none d-lg-block">
-
-                  <WalletMultiButton className="btn btn-ghost mr-4"
-                    style={{
-                      backgroundColor: "#f50058",
-                      borderColor: "#f50058",
-                      color: "#fff",
-                      borderRadius: "40px",
-                      justifyContent: "center",
-                      padding: "30px 60px"
-                    }} />
+                <div className="ms-auto" style={{
+                  backgroundColor: "#f50058",
+                  borderColor: "#f50058",
+                  color: "#fff",
+                  borderRadius: "40px",
+                  justifyContent: "center",
+                  padding: "4px 20px",
+                  display:"flex",
+                  alignItems:"center"
+                }}>
+                  
+                  <>{PublicKey && <p className="m-0" style={{fontSize:"17px", fontWeight:"600"}}>{finalAmount.toFixed(5)}{" "}SOL</p>}</>
+                  <WalletMultiButton className="btn btn-ghost" />
+                
                 </div>
 
               </nav>
