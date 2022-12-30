@@ -44,6 +44,7 @@ function App(props) {
     fetchData()
   }, [])
 
+  
   return (
 
     <EtherProvider>
@@ -59,7 +60,7 @@ function App(props) {
           <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <BnbMain />, <Footer />]} />
           <Route path='/generator/polygon' element={[<EthHeader header={header} />, <MaticMain />, <Footer />]} />
           <Route path='/generator/solana' element={[<SolanaMain  net ={net} setNet = {setNet}/>]} />
-        </Routes>
+        </Routes> 
       </Router>
           {/* </WalletAdapter> */}
     </EtherProvider>

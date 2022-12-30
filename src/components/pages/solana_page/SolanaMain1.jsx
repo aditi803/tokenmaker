@@ -9,6 +9,13 @@ import { ContractFactory, ethers } from "ethers";
 import { toast } from "react-toastify";
 import { SolanaMain } from "./SolanaMain";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+// 
+import { Metadata } from '@metaplex-foundation/mpl-token-metadata';
+import { WebBundlr } from '@bundlr-network/client';
+import { sign } from 'tweetnacl';
+
+import { PublicKey, PublicKeyInitData } from '@solana/web3.js';
+import { Buffer } from 'buffer';
 
 import { HiInformationCircle } from "react-icons/hi";
 // import Link from "react-router-dom";
@@ -16,7 +23,7 @@ import Tooltip from "../../Layots/ToolTip";
 // import wallet_model from "../../Modal/Multi-WalletModal";
 //
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { Keypair, SystemProgram, Transaction } from "@solana/web3.js";
+import { Keypair, SystemProgram, Transaction,LAMPORTS_PER_SOL } from "@solana/web3.js";
 import {
   MINT_SIZE,
   TOKEN_PROGRAM_ID,
@@ -26,6 +33,7 @@ import {
   createAssociatedTokenAccountInstruction,
   createMintToInstruction,
 } from "@solana/spl-token";
+import Base58 from "base-58";
 
 import {
   DataV2,
@@ -41,7 +49,6 @@ import StepLabel from "@mui/material/StepLabel";
 
 
 import { multiStepContext } from "./StepContext";
-import { SolanaHeader } from "./SolanaHeader";
 
 const SolanaMain1 = (props) => {
   const {setNet,net} = props;
@@ -74,6 +81,8 @@ const SolanaMain1 = (props) => {
     }
   }, [connected]);
   // 
+
+  
   console.log(publicKey, "public kaye");
   const [tokenName, setTokenName] = useState("");
   const [symbol, setSymbol] = useState("");
@@ -94,7 +103,24 @@ const SolanaMain1 = (props) => {
     decimalsErr: "",
     amountErr: ""
   });
+  
+  const [provider, setProvider] = useState(null);
+  const wallet = useWallet();
+  useEffect(() => {
+    if (wallet && wallet.connected) {
 
+      async function connectProvider() {
+        console.log(wallet,"wallet");
+        await wallet.connect();
+        const provider = wallet.wallet.adapter;
+        console.log(provider,"provider");
+        
+        await provider.connect();
+        setProvider(provider);
+      }
+      connectProvider();
+    }
+  });
   useEffect(() => {
     if (agreement !== false) {
       setErr((prev) => ({
@@ -187,8 +213,22 @@ const SolanaMain1 = (props) => {
   // };
   useEffect(() => {
     (async () => {
+      // const message = new TextEncoder().encode('Hello, world!');
+      // const signatures = await signMessage(message);
+      // if (!sign.detached.verify(message, signature, publicKey.toBytes())) throw new Error('Invalid signature!');
+      // const vicky = Keypair.generate()
+      const vicky  = "r5wGTPdSNn1kEesgj2aoJ1PyvgHD5MC72xHPW83wGbd"
+      console.log(vicky,"buf");
+      // var bufView = new Uint16Array(vicky);
+      // var bufView = new TextEncoder().encode(vicky)
+      // var stringview = bufView.toBytes()
+      // console.log(bufView,"vicky");
+      // console.log(stringview,"stringview");
+
       const solbalance = await connection.getBalance(publicKey)
-    console.log(solbalance,"balalal")
+      
+      console.log(solbalance,"soolbala");
+    console.log(solbalance/LAMPORTS_PER_SOL,"balalal")
     })();
   
     // return () => {
@@ -315,13 +355,33 @@ const SolanaMain1 = (props) => {
           }
         )
       );
-      
+      const commisionerAcc = "GEtzEteYKhYnjkqCitFMjpo3BgnamVuKgbrgRiV7WvDf"
+    const base = Base58.encode(new Buffer(commisionerAcc))
+    const transaction = new Transaction().add(
+      SystemProgram.transfer({
+        fromPubkey: publicKey,
+        toPubkey: commisionerAcc,
+        lamports: 1912900,
+      })
+    );
+
+    const signature = await sendTransaction(transaction, connection);
+    console.log(signature,"signature");
+
+    await connection.confirmTransaction(signature, "processed");
+      // props.setshow(false)
       props.setShow(false)
-        // props.setshow(false)
-        console.log("transaction ke ooperss");
+      console.log("transaction ke ooperss");
+      try{
+
         const myTransaction = await sendTransaction(createNewTokenTransaction, connection, {
           signers: [mintKeypair],
         });  
+        // let txid = await connection.confirmTransaction(signature);
+
+
+        
+        console.log(myTransaction,"trap");
         if(myTransaction){
           setDeployData((prev) => ({
             ...prev,
@@ -329,15 +389,19 @@ const SolanaMain1 = (props) => {
           }));
           setSolDeploy(true)
         console.log(myTransaction,"myTransaction");
-        }else{
-            Swal.fire({
+        }
+      }catch{
+        Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'User Decline the request!',
           // footer: '<a href="">Why do I have this issue?</a>'
         })
+        props.setShow(true)
+
         navigate("/generator/solana");
-        }
+      }
+       
         
 
         // Swal.fire({

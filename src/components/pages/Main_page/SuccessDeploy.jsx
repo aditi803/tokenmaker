@@ -1,4 +1,4 @@
-import React, { useEffect,useContext } from "react";
+import React, { useEffect,useContext, useState } from "react";
 import "./Success.css"
 import { Link, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
@@ -7,13 +7,29 @@ import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 export const SuccessDeploy = (props) => {
   const navigate = useNavigate()
   const {addToken,deployData} = props
-  const { urlLinks, Deploy,solDeploy } =useContext(GlobalContext);
-
+  const { urlLinks, setSolDeploy,Deploy,solDeploy } =useContext(GlobalContext);
+  const [test, setTest] = useState(false)
   const createNewToken = ()=>{
     navigate("/generator")
   }
   
+  useEffect(() => {
+    if(!test){
+      setTest(true)
+      return ;
+    }
 
+    return () => {
+      console.log(test, 'vicky')
+      // setTest(true)
+      if(test){
+        console.log('vicky test')
+      }
+
+      // setSolDeploy(false)
+    }
+
+  }, [])
   let explorer
 // eslint-disable-next-line no-unused-expressions
   urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
