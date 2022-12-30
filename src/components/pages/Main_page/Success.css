@@ -30,8 +30,14 @@
 img, svg {
     vertical-align: middle;
 }
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+    color: #A365F7 !important;
+}
 svg:not(:root) {
     overflow: hidden;
+    color: #cfcfcf;
+}
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
     color: #A365F7 !important;
 }
 .m-0 {

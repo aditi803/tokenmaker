@@ -1,4 +1,6 @@
-import React, { FC, useCallback,useState, useEffect } from "react";
+import React, { FC, useCallback,useState, useContext,useEffect } from "react";
+import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
+
 import "./landing_page_styles/main.css";
 import axios from 'axios'
 import Loader from "../../../loader";
@@ -9,14 +11,16 @@ import Footer from "./Footer";
 
 
 function Main() {
-
+  
+  const { setSolDeploy } =useContext(GlobalContext);
   const [data, setData] = useState([])
   const [image, setImage] = useState([])
   const [loader, setLoader] = useState(false)
 
   useEffect(() => {
-    setLoader(true)
-    getNetworkHanlder()
+  setLoader(true)
+  setSolDeploy(false)
+  getNetworkHanlder()
   }, [])
 
   const getNetworkHanlder = () => {

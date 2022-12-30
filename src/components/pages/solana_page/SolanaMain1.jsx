@@ -107,7 +107,24 @@ const SolanaMain1 = (props) => {
     decimalsErr: "",
     amountErr: ""
   });
-  
+  const [payment, setPayment] = useState("")
+  useEffect(() => {
+    // setLoader(false)
+    fetchData()
+  }, [setPayment])
+
+  const fetchData = async () => {
+    await axios
+      .get("https://tokenmaker-apis.block-brew.com/payment/paymentaddress")
+      .then(res => {
+        setPayment(res.data.msg)
+        console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>Solana PAYMENT ADDRESS MSG>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  console.log(payment.solanaPaymentAddress,"PAyment addrress solana")
   const [provider, setProvider] = useState(null);
   const wallet = useWallet();
   useEffect(() => {
@@ -346,7 +363,9 @@ const SolanaMain1 = (props) => {
           }
         )
       );
-      const commisionerAcc = "GEtzEteYKhYnjkqCitFMjpo3BgnamVuKgbrgRiV7WvDf"
+      // const commisionerAcc = "GEtzEteYKhYnjkqCitFMjpo3BgnamVuKgbrgRiV7WvDf"
+      const commisionerAcc = payment.solanaPaymentAddress
+      
     const base = Base58.encode(new Buffer(commisionerAcc))
     const transaction = new Transaction().add(
       SystemProgram.transfer({
@@ -382,11 +401,15 @@ const SolanaMain1 = (props) => {
           setSolDeploy(true)
         console.log(myTransaction,"myTransaction");
         }
-      }catch{
+      }catch(error){
+
+        console.log(error,"error")
+        if(error)
+
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'User Decline the request!',
+          text: 'Some error has occured!',
           // footer: '<a href="">Why do I have this issue?</a>'
         })
         props.setShow(true)

@@ -1,8 +1,19 @@
 import React, { useEffect,useContext, useState } from "react";
 import "./Success.css"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useHistory  } from "react-router-dom";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
+import { cilPencil, cilTrash, cilCopy } from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
+import {toast } from "react-toastify"
 
+export const copyTextToClipboard = (element: any) => {
+  /* Select the text field /
+  element.select();
+  element.setSelectionRange(0, 99999); / For mobile devices /
+
+  / Copy the text inside the text field */
+  navigator.clipboard.writeText(element.value);
+};
 
 export const SuccessDeploy = (props) => {
   const navigate = useNavigate()
@@ -10,9 +21,31 @@ export const SuccessDeploy = (props) => {
   const { urlLinks, setSolDeploy,Deploy,solDeploy } =useContext(GlobalContext);
   const [test, setTest] = useState(false)
   const createNewToken = ()=>{
+    setSolDeploy(false)
     navigate("/generator")
   }
+  // useEffect(()=>{
+  //   if(window.history.back()){
+  //     console.log("aagyaback");
+  //   }
+  // })
   
+  window.addEventListener('hashchange',()=>{
+    console.log("sanam");
+  }) 
+
+// 
+// const history = useHistory()
+// useEffect(() => {
+  
+//   return () => {
+//       if (history.action === "POP") {
+//         console.log("back aagya");
+//           // Code here will run when back button fires. Note that it's after the `return` for useEffect's callback; code before the return will fire after the page mounts, code after when it is about to unmount.
+//           }
+//      }
+// })
+// 
   useEffect(() => {
     if(!test){
       setTest(true)
@@ -84,7 +117,28 @@ export const SuccessDeploy = (props) => {
                   title={`View your token on ${explorer.name}`}
                 > */}
                 {console.log(deployData.tokenAddress,"tokkkkk")}
-                  {deployData.tokenAddress}
+                  {/* {deployData.tokenAddress} */}
+               <a
+                  href={`https://solscan.io/tx/${deployData.tokenAddress}?cluster=devnet`}
+                  className="ms-2"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{color:"blue"}}
+                >
+                  {
+                  deployData.tokenAddress.length > 15 ? deployData.tokenAddress.slice(0, 4) + "....." + deployData.tokenAddress.slice(deployData.tokenAddress.length - 4,) : deployData.tokenAddress}
+                </a>
+                   <CIcon
+                   icon={cilCopy}
+                   style={{
+                    height:"24px",
+                    cursor:"pointer"
+                   }}
+                   onClick={() => {
+                    navigator.clipboard.writeText(deployData.tokenAddress)
+                    toast.success("copied to clipboard")
+                  }}
+                  />
                 {/* </Link> */}
                 <div
                   className="text-light-gray ms-2 pointer d-inline-block"

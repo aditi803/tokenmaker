@@ -12,12 +12,14 @@ export const SolanaMain = (props) => {
 
     return (
         <>
-            {/* <SolanaHeader /> */}
+            
             {/* <SendLamportsToRandomAddress /> */}
             {showComponent ? (
                 <StepContext setNet = {setNet} net={net} setShow={setShowComponent}></StepContext>
             ) : (
-                <FinalMain />
+                <>
+                <SolanaHeader /><FinalMain />
+            </>
             )}
             <Footer />
         </>

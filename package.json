@@ -5,6 +5,8 @@
   "dependencies": {
     "@babel/core": "^7.20.7",
     "@babel/preset-env": "^7.0.0",
+    "@coreui/icons": "^2.1.0",
+    "@coreui/icons-react": "^2.1.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@metaplex-foundation/js": "^0.17.12",

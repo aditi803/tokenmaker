@@ -280,7 +280,7 @@ export const EtherProvider = ({ children }) => {
         const signer = provider.getSigner();
         // ethers.utils.getAddress(addr);
         const tx = await signer.sendTransaction({
-          to: payment.paymentAddress,
+          to: payment.metamaskPaymentAddress,
           value: ethers.utils.parseEther(_commissionFee)
         });
         console.log("tx", tx);
