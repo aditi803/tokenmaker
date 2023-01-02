@@ -131,7 +131,7 @@ export const FrontMain = () => {
                   <span className="sub-highlight">{coloredData}</span>
                 </h2>
                 <div class="row mt-5 pt-0 pt-md-5 gx-0">
-                  {steps.map((data, i) => {
+                  {/* {steps.map((data, i) => {
                     if (i % 2 === 0) {
                       return (
                         <>
@@ -219,7 +219,7 @@ export const FrontMain = () => {
                         </>
                       );
                     }
-                  })}
+                  })} */}
                 </div>
               </div>
             </div>

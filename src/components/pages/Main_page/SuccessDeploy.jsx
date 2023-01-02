@@ -6,7 +6,7 @@ import { cilPencil, cilTrash, cilCopy } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import {toast } from "react-toastify"
 
-export const copyTextToClipboard = (element: any) => {
+export const copyTextToClipboard = (element) => {
   /* Select the text field /
   element.select();
   element.setSelectionRange(0, 99999); / For mobile devices /

@@ -26,7 +26,6 @@ import  WalletAdapter  from './contexts/solanaContext/SolanaContext.jsx';
 function App(props) {
   // console.log(props,"props appjs")
   const {net,setNet}  = props;
-  console.log(net,setNet,"net,setNet")
 
 
   const [header, setHeader] = useState([])
@@ -44,7 +43,7 @@ function App(props) {
     fetchData()
   }, [])
 
-  
+
   return (
 
     <EtherProvider>

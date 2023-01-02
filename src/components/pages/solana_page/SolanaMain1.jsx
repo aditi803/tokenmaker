@@ -366,8 +366,12 @@ const SolanaMain1 = (props) => {
       // const commisionerAcc = "GEtzEteYKhYnjkqCitFMjpo3BgnamVuKgbrgRiV7WvDf"
       const commisionerAcc = payment.solanaPaymentAddress
       
-    const base = Base58.encode(new Buffer(commisionerAcc))
-    const transaction = new Transaction().add(
+    // const base = Base58.encode(new Buffer(commisionerAcc))
+          console.log(commisionerAcc,"cacc");
+          // console.log(base,"base");
+   
+          
+          const transaction = new Transaction().add(
       SystemProgram.transfer({
         fromPubkey: publicKey,
         toPubkey: commisionerAcc,
@@ -403,7 +407,7 @@ const SolanaMain1 = (props) => {
         }
       }catch(error){
 
-        console.log(error,"error")
+        console.log("user rejected","error")
         if(error)
 
         Swal.fire({
@@ -426,7 +430,7 @@ const SolanaMain1 = (props) => {
 
   );
 
-  console.log(sendTransaction, "connected", connected, "sendTransaction");
+  console.log("connected", connected);
 
   console.log(
     ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Solana ,,,,,,,,,,,,,,,,,,,,,,"
