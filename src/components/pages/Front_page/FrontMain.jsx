@@ -15,6 +15,7 @@ import { EthHeader } from "./FrontHeader";
 import Header from "../landing_page/Header";
 import Footer from "../landing_page/Footer";
 import sideimage from "../../../assets/newsideimg.png";
+import HeroSkeleton from "../../../skeleton/HeroSkeleton";
 
 export const FrontMain = () => {
   const [showindex, setShowindex] = useState(0);
@@ -62,7 +63,7 @@ export const FrontMain = () => {
       setFaqData(respFaq.data.msg.faqData);
       setFeatures(respFeatures.data.msg.featureDetails.items);
       setFeaturesData(respFeatures.data.msg.featureData);
-      setSteps(respSteps.data.msg.stepDetails);
+      setSteps(respSteps.data.msg.stepDetails.items);
       setStepData(respSteps.data.msg.stepData);
       // setHeadingData([respSteps.data.msg.stepData.heading])
       setLoader(false);
@@ -71,55 +72,56 @@ export const FrontMain = () => {
   }, []);
 
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/";
-  return loader ? (
-    <Loader />
-  ) : (
+  return (
     <>
       {/* <EthHeader /> */}
       <Header />
       <div className="page-content">
         <main className="">
-          <section
-            className="page-section hero"
-            id="hero"
-            style={{
-              backgroundImage: `url(${imageBaseUrl}${banner.backgroundImage})`,
-            }}
-          >
-            <div className="container self">
-              <div className="row">
-                <div className="col-lg-6 d-flex flex-column justify-content-center">
-                  <h1 style={{ color: `${banner.headingColor}`}}>
-                    <span className="sub-highlight">{banner.heading}</span>
-                  </h1>
-                  <div className="my-2">
-                    <p
-                      className="m-0"
-                      style={{ color: `${banner.contentColor}` }}
-                    >
-                      {banner.content}
-                    </p>
+          { loader ? <HeroSkeleton /> :
+            <section
+              className="page-section hero"
+              id="hero"
+              style={{
+                backgroundImage: `url(${imageBaseUrl}${banner.backgroundImage})`,
+              }}
+            >
+              <div className="container self">
+                <div className="row">
+                  <div className="col-lg-6 d-flex flex-column justify-content-center">
+                    <h1 style={{ color: `${banner.headingColor}` }}>
+                      <span className="sub-highlight">{banner.heading}</span>
+                    </h1>
+                    <div className="my-2">
+                      <p
+                        className="m-0"
+                        style={{ color: `${banner.contentColor}` }}
+                      >
+                        {banner.content}
+                      </p>
+                    </div>
+                    <div className="my-2">
+                      <Link
+                        className="btn btn-pad  me-2"
+                        to="/generator"
+                        style={{
+                          backgroundColor: `${banner.buttonBackgroundColor}`,
+                          color: `${banner.buttonTextColor}`,
+                        }}
+                      >
+                        {banner.buttonText}
+                      </Link>
+                    </div>
                   </div>
-                  <div className="my-2">
-                    <Link
-                      className="btn btn-pad  me-2"
-                      to="/generator"
-                      style={{
-                        backgroundColor: `${banner.buttonBackgroundColor}`,
-                        color: `${banner.buttonTextColor}`,
-                      }}
-                    >
-                      {banner.buttonText}
-                    </Link>
+                  <div className="col-lg-6">
+                    <img className="banner-side-image" src={sideimage} alt="" />
                   </div>
-                </div>
-                <div className="col-lg-6">
-                  <img className="banner-side-image" src={sideimage} alt="" />
                 </div>
               </div>
-            </div>
-          </section>
-        
+            </section>
+          }
+
+
           <section class="timeline" id="timeline">
             <div class="container">
               <div class="timeline_wrap text-center">
@@ -131,7 +133,7 @@ export const FrontMain = () => {
                   <span className="sub-highlight">{coloredData}</span>
                 </h2>
                 <div class="row mt-5 pt-0 pt-md-5 gx-0">
-                  {/* {steps.map((data, i) => {
+                  {steps.map((data, i) => {
                     if (i % 2 === 0) {
                       return (
                         <>
@@ -145,7 +147,7 @@ export const FrontMain = () => {
                                     minHeight: "320px",
                                   }}
                                 >
-                                  <img src={imageBaseUrl + data.stepImage} />
+                                  <img src={imageBaseUrl + data.stepImage} alt='steps'/>
                                   <h5 className="my-3"> {data.title}</h5>
                                   <p>{data.content}</p>
                                 </div>
@@ -163,7 +165,7 @@ export const FrontMain = () => {
                                       minHeight: "320px",
                                     }}
                                   >
-                                    <img src={imageBaseUrl + data.stepImage} />
+                                    <img src={imageBaseUrl + data.stepImage} alt='steps'/>
                                     <h5 className="my-3"> {data.title}</h5>
                                     <p>{data.content}</p>
                                   </div>
@@ -192,7 +194,7 @@ export const FrontMain = () => {
                                       minHeight: "320px",
                                     }}
                                   >
-                                    <img src={imageBaseUrl + data.stepImage} />
+                                    <img src={imageBaseUrl + data.stepImage} alt='steps'/>
                                     <h5 className="my-3"> {data.title}</h5>
                                     <p>{data.content}</p>
                                   </div>
@@ -209,7 +211,7 @@ export const FrontMain = () => {
                                     minHeight: "320px",
                                   }}
                                 >
-                                  <img src={imageBaseUrl + data.stepImage} />
+                                  <img src={imageBaseUrl + data.stepImage} alt='steps'/>
                                   <h5 className="my-3"> {data.title}</h5>
                                   <p>{data.content}</p>
                                 </div>
@@ -219,7 +221,7 @@ export const FrontMain = () => {
                         </>
                       );
                     }
-                  })} */}
+                  })}
                 </div>
               </div>
             </div>
@@ -344,9 +346,8 @@ export const FrontMain = () => {
                             </h2>
                             <div
                               id={`collapseOne2${i}`}
-                              className={`accordion-collapse collapse ${
-                                i === showindex ? "show" : null
-                              }`}
+                              className={`accordion-collapse collapse ${i === showindex ? "show" : null
+                                }`}
                               aria-labelledby="headingOne2"
                               data-bs-parent="#accordionExample"
                             >
@@ -369,7 +370,7 @@ export const FrontMain = () => {
                   What are you waiting for?
                 </h3>
                 <Link
-                   to="/generator"
+                  to="/generator"
                   className="btn btn-pad mt-2"
                   style={{
                     backgroundColor: `${custom.buttonBackgroundColor}`,

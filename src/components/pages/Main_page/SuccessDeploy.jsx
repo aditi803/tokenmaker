@@ -1,10 +1,11 @@
-import React, { useEffect,useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import "./Success.css"
-import { Link, useNavigate,useHistory  } from "react-router-dom";
+import { Link, useNavigate, useHistory } from "react-router-dom";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import { cilPencil, cilTrash, cilCopy } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
-import {toast } from "react-toastify"
+import { toast } from "react-toastify"
+import { Tooltip } from "react-bootstrap"
 
 export const copyTextToClipboard = (element) => {
   /* Select the text field /
@@ -17,10 +18,11 @@ export const copyTextToClipboard = (element) => {
 
 export const SuccessDeploy = (props) => {
   const navigate = useNavigate()
-  const {addToken,deployData} = props
-  const { urlLinks, setSolDeploy,Deploy,solDeploy } =useContext(GlobalContext);
+  const { addToken, deployData } = props
+  const [tooltip, setTooltip] = useState(false)
+  const { urlLinks, setSolDeploy, Deploy, solDeploy } = useContext(GlobalContext);
   const [test, setTest] = useState(false)
-  const createNewToken = ()=>{
+  const createNewToken = () => {
     setSolDeploy(false)
     navigate("/generator")
   }
@@ -29,33 +31,33 @@ export const SuccessDeploy = (props) => {
   //     console.log("aagyaback");
   //   }
   // })
-  
-  window.addEventListener('hashchange',()=>{
-    console.log("sanam");
-  }) 
 
-// 
-// const history = useHistory()
-// useEffect(() => {
-  
-//   return () => {
-//       if (history.action === "POP") {
-//         console.log("back aagya");
-//           // Code here will run when back button fires. Note that it's after the `return` for useEffect's callback; code before the return will fire after the page mounts, code after when it is about to unmount.
-//           }
-//      }
-// })
-// 
+  window.addEventListener('hashchange', () => {
+    console.log("sanam");
+  })
+
+  // 
+  // const history = useHistory()
+  // useEffect(() => {
+
+  //   return () => {
+  //       if (history.action === "POP") {
+  //         console.log("back aagya");
+  //           // Code here will run when back button fires. Note that it's after the `return` for useEffect's callback; code before the return will fire after the page mounts, code after when it is about to unmount.
+  //           }
+  //      }
+  // })
+  // 
   useEffect(() => {
-    if(!test){
+    if (!test) {
       setTest(true)
-      return ;
+      return;
     }
 
     return () => {
       console.log(test, 'vicky')
       // setTest(true)
-      if(test){
+      if (test) {
         console.log('vicky test')
       }
 
@@ -64,14 +66,14 @@ export const SuccessDeploy = (props) => {
 
   }, [])
   let explorer
-// eslint-disable-next-line no-unused-expressions
-  urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
+  // eslint-disable-next-line no-unused-expressions
+  urlLinks[deployData.chainID] ? explorer = urlLinks[deployData.chainID] : ""
 
   return (
     <div>
       <div className="card w-100">
         <div className="card-header d-flex align-items-center">
-          <div className="mr-3" style={{"zoom": "1.5"}}>
+          <div className="mr-3" style={{ "zoom": "1.5" }}>
             {/* <svg
               className="icon-arrow"
               width="24px"
@@ -109,37 +111,68 @@ export const SuccessDeploy = (props) => {
             <div>
               Your token address is:{" "}
               <div className="token-addr d-inline-block ms-2">
-                
+
                 {/* <Link
                   href={`${explorer.link}/token/${deployData.tokenAddress}`}
                   target="_blank"
                   rel="noreferrer"
                   title={`View your token on ${explorer.name}`}
                 > */}
-                {console.log(deployData.tokenAddress,"tokkkkk")}
-                  {/* {deployData.tokenAddress} */}
-               <a
+                {console.log(deployData.tokenAddress, "tokkkkk")}
+                {/* {deployData.tokenAddress} */}
+                {
+                  solDeploy ?
+                    <a
+                      href={`https://solscan.io/tx/${deployData.tokenAddress}?cluster=devnet`}
+                      className="ms-2"
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ color: "blue" }}
+                    >
+                      {
+                        deployData.tokenAddress.length > 15 ? deployData.tokenAddress.slice(0, 4) + "....." + deployData.tokenAddress.slice(deployData.tokenAddress.length - 4,) : deployData.tokenAddress}
+                    </a> :
+                    <a
+                      href={`${explorer.link}/tx/${deployData.txHash}`}
+                      className="ms-2"
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ color: "blue" }}
+                    >
+                      {
+                        deployData.tokenAddress.length > 15 ? deployData.tokenAddress.slice(0, 4) + "....." + deployData.tokenAddress.slice(deployData.tokenAddress.length - 4,) : deployData.tokenAddress}
+                    </a>
+                }
+                {/* <a
                   href={`https://solscan.io/tx/${deployData.tokenAddress}?cluster=devnet`}
                   className="ms-2"
                   target="_blank"
                   rel="noreferrer"
-                  style={{color:"blue"}}
+                  style={{ color: "blue" }}
                 >
                   {
-                  deployData.tokenAddress.length > 15 ? deployData.tokenAddress.slice(0, 4) + "....." + deployData.tokenAddress.slice(deployData.tokenAddress.length - 4,) : deployData.tokenAddress}
-                </a>
-                   <CIcon
-                   icon={cilCopy}
-                   style={{
-                    height:"24px",
-                    cursor:"pointer"
-                   }}
-                   onClick={() => {
-                    navigator.clipboard.writeText(deployData.tokenAddress)
-                    toast.success("copied to clipboard")
+                    deployData.tokenAddress.length > 15 ? deployData.tokenAddress.slice(0, 4) + "....." + deployData.tokenAddress.slice(deployData.tokenAddress.length - 4,) : deployData.tokenAddress}
+                </a> */}
+                <CIcon
+                  icon={cilCopy}
+                  style={{
+                    height: "24px",
+                    cursor: "pointer"
                   }}
-                  />
-                {/* </Link> */}
+                  onClick={() => {
+                    navigator.clipboard.writeText(deployData.tokenAddress)
+                    setTooltip(true)
+
+                    setTimeout(() => {
+                      setTooltip(false)
+                    }, 1200)
+                  }}
+                />
+                {tooltip ? (
+                  <Tooltip placement="right" className="in" id="tooltip-right">
+                    Copied to Clipboard.
+                  </Tooltip>
+                ) : " "}
                 <div
                   className="text-light-gray ms-2 pointer d-inline-block"
                   title="copy address"
@@ -205,36 +238,36 @@ export const SuccessDeploy = (props) => {
             </div>
             <div className="mt-3">
               {
-                solDeploy? <>
-                {/* <button type="button" onClick = {addToken} className="btn btn-success">
+                solDeploy ? <>
+                  {/* <button type="button" onClick = {addToken} className="btn btn-success">
                 Add your token to your wallet
               </button> */}
 
-              <a
-                href={`https://solscan.io/tx/${deployData.tokenAddress}?cluster=devnet`}
-                className="btn btn-secondary ms-2"
-                target="_blank"
-                rel="noreferrer"
-              >
-               { `View the transaction on Devnet`}
-              </a></>:
-              <>
-              <button type="button" onClick = {addToken} className="btn btn-success">
-                Add your token to your wallet
-              </button>
+                  <a
+                    href={`https://solscan.io/tx/${deployData.tokenAddress}?cluster=devnet`}
+                    className="btn btn-secondary ms-2"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {`View the transaction on Devnet`}
+                  </a></> :
+                  <>
+                    <button type="button" onClick={addToken} className="btn btn-success">
+                      Add your token to your wallet
+                    </button>
 
-              <a
-                href={`${explorer.link}/tx/${deployData.txHash}`}
-                className="btn btn-secondary ms-2"
-                target="_blank"
-                rel="noreferrer"
-              >
-               { `View the transaction on ${explorer.name}`}
-              </a>
-              </>}
+                    <a
+                      href={`${explorer.link}/tx/${deployData.txHash}`}
+                      className="btn btn-secondary ms-2"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {`View the transaction on ${explorer.name}`}
+                    </a>
+                  </>}
             </div>
           </div>
-          <button type="button"  onClick={createNewToken} className="btn btn-link btn-sm p-0 mt-4 text-body">
+          <button type="button" onClick={createNewToken} className="btn btn-link btn-sm p-0 mt-4 text-body">
             Create a new token
           </button>
         </div>

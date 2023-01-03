@@ -79,8 +79,20 @@ a {
     color: white;
     margin-right: 10px;
 }
+.social-links a{
+    min-width: 29px !important;
+    color: #fff !important;
+}
+.footer-icon{
+    color: #fff;
+    font-size: 20px;
+    flex: 0 0 3rem;
+}
 .contact {
     gap: 40px;
+}
+.services p{
+    color: #fff;
 }
 .sbbutton{
     border: none;

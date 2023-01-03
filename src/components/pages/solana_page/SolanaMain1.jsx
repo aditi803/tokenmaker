@@ -23,7 +23,7 @@ import Tooltip from "../../Layots/ToolTip";
 // import wallet_model from "../../Modal/Multi-WalletModal";
 //
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { Keypair, SystemProgram, Transaction,LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { Keypair, SystemProgram, Transaction, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import {
   MINT_SIZE,
   TOKEN_PROGRAM_ID,
@@ -86,13 +86,16 @@ const SolanaMain1 = (props) => {
   }, [connected]);
   // 
 
-  
+
   console.log(publicKey, "public kaye");
   const [tokenName, setTokenName] = useState("");
   const [symbol, setSymbol] = useState("");
   const [uri, setUri] = useState("safhfsa");
   const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(1);
+  const [commissionFee, setCommissionFee] = useState("Free")
+  const [network, setNetwork] = useState("devnet")
+  const [tokenTypeGet, settokenTypeGet] = useState("basic")
   console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
 
@@ -124,18 +127,18 @@ const SolanaMain1 = (props) => {
         console.log(err);
       })
   }
-  console.log(payment.solanaPaymentAddress,"PAyment addrress solana")
+  console.log(payment.solanaPaymentAddress, "PAyment addrress solana")
   const [provider, setProvider] = useState(null);
   const wallet = useWallet();
   useEffect(() => {
     if (wallet && wallet.connected) {
 
       async function connectProvider() {
-        console.log(wallet,"wallet");
+        console.log(wallet, "wallet");
         await wallet.connect();
         const provider = wallet.wallet.adapter;
-        console.log(provider,"provider");
-        
+        console.log(provider, "provider");
+
         await provider.connect();
         setProvider(provider);
       }
@@ -233,23 +236,23 @@ const SolanaMain1 = (props) => {
       // const signatures = await signMessage(message);
       // if (!sign.detached.verify(message, signature, publicKey.toBytes())) throw new Error('Invalid signature!');
       // const vicky = Keypair.generate()
-      const vicky  = "r5wGTPdSNn1kEesgj2aoJ1PyvgHD5MC72xHPW83wGbd"
-      console.log(vicky,"buf");
+      const vicky = "r5wGTPdSNn1kEesgj2aoJ1PyvgHD5MC72xHPW83wGbd"
+      console.log(vicky, "buf");
       // var bufView = new Uint16Array(vicky);
       // var bufView = new TextEncoder().encode(vicky)
       // var stringview = bufView.toBytes()
       // console.log(bufView,"vicky");
       // console.log(stringview,"stringview");
-      let solbalance 
-      if(!publicKey){
-        solbalance= 'd'
-      }else{
+      let solbalance
+      if (!publicKey) {
+        solbalance = 'd'
+      } else {
         solbalance = await connection.getBalance(publicKey)
         setWalletBalance(solbalance)
       }
-      
-      console.log(solbalance,"soolbala");
-    console.log(solbalance/LAMPORTS_PER_SOL,"balalal")
+
+      console.log(solbalance, "soolbala");
+      console.log(solbalance / LAMPORTS_PER_SOL, "balalal")
     })();
 
     // return () => {
@@ -263,6 +266,7 @@ const SolanaMain1 = (props) => {
     axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
       .then((res) => {
         setData(res.data.msg.items)
+        
         console.log(res.data.msg.items, "Aditii ddata jo ni aata solana>>>>>>>>>>>>>>> ");
       })
       .catch((err) => {
@@ -273,6 +277,27 @@ const SolanaMain1 = (props) => {
   useEffect(() => {
     getNetworks()
   }, [setData])
+
+  useEffect(() => {
+    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
+      if (parentNetworkName === 'Solana' && value === network && (tokenType === tokenTypeGet)) {
+        return true;
+      }
+    })
+
+    // setGasFee(selectedCommissionFee)
+    setCommissionFee(prev => ({
+      ...prev,
+      commissionFee: selectedCommissionFee?.networkCommissionFee
+    }))
+    console.log(selectedCommissionFee, 'selectedCommissionFee--')
+    console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+
+
+
+  }, [data, commissionFee ])
+
 
 
   console.log(agreement, "DITI")
@@ -365,63 +390,63 @@ const SolanaMain1 = (props) => {
       );
       // const commisionerAcc = "GEtzEteYKhYnjkqCitFMjpo3BgnamVuKgbrgRiV7WvDf"
       const commisionerAcc = payment.solanaPaymentAddress
-      
-    // const base = Base58.encode(new Buffer(commisionerAcc))
-          console.log(commisionerAcc,"cacc");
-          // console.log(base,"base");
-   
-          
-          const transaction = new Transaction().add(
-      SystemProgram.transfer({
-        fromPubkey: publicKey,
-        toPubkey: commisionerAcc,
-        lamports: 1912900,
-      })
-    );
-      
-    try{
+
+      // const base = Base58.encode(new Buffer(commisionerAcc))
+      console.log(commisionerAcc, "cacc");
+      // console.log(base,"base");
+
+
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: commisionerAcc,
+          lamports: 1912900,
+        })
+      );
+
+      try {
         const signature = await sendTransaction(transaction, connection);
-        console.log(signature,"signature");
+        console.log(signature, "signature");
         props.setShow(false)
-    
+
         const signpay = await connection.confirmTransaction(signature, "processed");
-        console.log(signpay,"signpay");
-          // props.setshow(false)
-          console.log("transaction ke ooperss");
+        console.log(signpay, "signpay");
+        // props.setshow(false)
+        console.log("transaction ke ooperss");
 
         const myTransaction = await sendTransaction(createNewTokenTransaction, connection, {
           signers: [mintKeypair],
-        });  
+        });
         // let txid = await connection.confirmTransaction(signature);
 
 
-        
-        console.log(myTransaction,"trap");
-        if(myTransaction){
+
+        console.log(myTransaction, "trap");
+        if (myTransaction) {
           setDeployData((prev) => ({
             ...prev,
             tokenAddress: myTransaction
           }));
           setSolDeploy(true)
-        console.log(myTransaction,"myTransaction");
+          console.log(myTransaction, "myTransaction");
         }
-      }catch(error){
+      } catch (error) {
 
-        console.log("user rejected","error")
-        if(error)
+        console.log("user rejected", "error")
+        if (error)
 
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Some error has occured!',
-          // footer: '<a href="">Why do I have this issue?</a>'
-        })
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Some error has occured!',
+            // footer: '<a href="">Why do I have this issue?</a>'
+          })
         props.setShow(true)
 
         navigate("/generator/solana");
       }
-       
-        
+
+
 
       // console.log(form.amount * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
 
@@ -501,9 +526,9 @@ const SolanaMain1 = (props) => {
                             </label>
                             <select
                               className="form-select"
-                              name="tokenType"
+                              name="tokenTypeGet"
                             // onChange={ethMainFormHandler}
-                            // value={tokenType}
+                            value={tokenTypeGet}
                             >
                               <option value="free">Free</option>
                               <option value="basic">Basic</option>
@@ -655,7 +680,8 @@ const SolanaMain1 = (props) => {
                               // value={network}
                               onChange={networkName}
                             >
-                              {data.map((item) => {
+                              {console.log(data,"data hai")}
+                              {data?.map((item) => {
                                 if (item.parentNetworkName === "Solana" && item.tokenType === 'free') {
                                   return (
                                     <option value={item.value}>{item.subNetworkName}</option>
@@ -666,7 +692,6 @@ const SolanaMain1 = (props) => {
                                 }
                                 else if (item.parentNetworkName === "Solana" && item.tokenType === 'custom') {
                                   <option value={item.value}>{item.subNetworkName}</option>
-
                                 }
                               })}
                             </select>
@@ -711,7 +736,7 @@ const SolanaMain1 = (props) => {
                                   {/* {commissionFee
                                       ? commissionFee === "Free"
                                         ? "Free"
-                                        : `${commissionFee} ETH`
+                                        : `${commissionFee} SOL`
                                       : "Free"} */}
                                   0.01 SOL
                                 </span>
@@ -759,9 +784,9 @@ const SolanaMain1 = (props) => {
                                   // onChange={ethMainFormHandler}
                                   onChange={(e) => {
                                     setErr((prev) => ({
-                                        ...prev,
-                                      agreementErr : ""
-                                    } ))
+                                      ...prev,
+                                      agreementErr: ""
+                                    }))
                                     setAgreement(e.target.checked)
                                   }}
                                 />
@@ -805,11 +830,11 @@ const SolanaMain1 = (props) => {
                                       "Please confirm that you have read and understood our terms of use",
                                   }))
 
-                                }else{
-                                onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
+                                } else {
+                                  onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
 
                                 }
-                              
+
                               }}
 
                             >
