@@ -5,6 +5,7 @@ import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import { cilPencil, cilTrash, cilCopy } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import {toast } from "react-toastify"
+import { Tooltip } from "react-bootstrap";
 
 export const copyTextToClipboard = (element) => {
   /* Select the text field /
@@ -67,6 +68,7 @@ export const SuccessDeploy = (props) => {
 // eslint-disable-next-line no-unused-expressions
   urlLinks[deployData.chainID]? explorer = urlLinks[deployData.chainID]:""
 
+  const [tooltip, setTooltip] = useState(false)
   return (
     <div>
       <div className="card w-100">
@@ -136,9 +138,18 @@ export const SuccessDeploy = (props) => {
                    }}
                    onClick={() => {
                     navigator.clipboard.writeText(deployData.tokenAddress)
-                    toast.success("copied to clipboard")
+                    setTooltip(true)
+
+                    setTimeout(() => {
+                      setTooltip(false)
+                    }, 1200)
                   }}
                   />
+                  {tooltip ? (
+                  <Tooltip placement="right" className="in" id="tooltip-right">
+                    Copied to Clipboard.
+                  </Tooltip>
+                ) : " "}
                 {/* </Link> */}
                 <div
                   className="text-light-gray ms-2 pointer d-inline-block"
