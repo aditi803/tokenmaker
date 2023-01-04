@@ -18,6 +18,9 @@
     border-color: #f50058;
     color: #fff;
 }
+.disabled{
+    background-color: #dedede;
+}
 .hero {
     font-size: 1.125rem;
     /* padding-top: 100px !important; */
