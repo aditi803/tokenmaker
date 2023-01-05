@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
-
+import moonRiverImage from "../../../assets/monBeams.png"
 
 function Main() {
   
@@ -84,6 +84,28 @@ function Main() {
                   </div>
                 // }
               })}
+              <div className="chain-item">
+              <Link to={`/generator/moonriver`} className="chain-link chain-bsc">
+                      <span className="title">{"MoonRiver"}</span>
+                      <span className="logo" style={{ backgroundImage: `url(${moonRiverImage})`,backgroundSize: "cover",height: "211px",width: "155px" }}></span>
+                      {/* {value?.networks[0]((img) => (
+                        <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
+                      ))} */}
+                      
+                      <span className="text-muted description">Create your token on MoonRiver</span>
+                    </Link>
+              </div>
+              <div className="chain-item">
+              <Link to={`/generator/avax`} className="chain-link chain-moonRiver">
+                      <span className="title">{"avax"}</span>
+                      <span className="logo" style={{ backgroundImage: moonRiverImage }}></span>
+                      {/* {value?.networks[0]((img) => (
+                        <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
+                      ))} */}
+                      
+                      <span className="text-muted description">Create your token on Avalanche </span>
+                    </Link>
+              </div>
             </>
           </div>
           {/* <div className="chain-select">

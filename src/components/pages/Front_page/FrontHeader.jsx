@@ -33,13 +33,13 @@ export const EthHeader = () => {
                        </noscript>
                     </span> */}
                 </Link>
-                <div className="ms-auto d-none d-lg-block">
+                <div className="ms-auto ">
                   <button type='button' className='btn uppercase btn btn-action btn-rounded btn-pad'>
                     <span className="inline-block">Connect your Wallet</span>
                   </button>
                 </div>
 
-                <div className="ms-auto d-none d-lg-block">
+                <div className="ms-auto ">
                   <WalletMultiButton className="btn btn-ghost mr-4"
                     style={{
                       backgroundColor: "#f50058",

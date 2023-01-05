@@ -13,10 +13,16 @@
     color: #fff;
     position: relative;
 }
+.disabled{
+    background-color: #ced4da;
+}
 .btn-ghost{
     background-color: #f50058;
     border-color: #f50058;
     color: #fff;
+}
+.disabled{
+    background-color: #dedede;
 }
 .hero {
     font-size: 1.125rem;

@@ -12,4 +12,6 @@ const STEPS = getApiUrl('step/steps');
 const FOOTER = getApiUrl('cms/footerdetails')
 const HEADER = getApiUrl('cms/headerdetails')
 const TERMS = getApiUrl('cms/termsdetails')
-export {FOOTER,BANNER_DETAILS, CUSTOM_DETAILS, START_SECTION_DETAILS,FAQS,FEATURES,STEPS,HEADER,TERMS}
+const PRIVACY = getApiUrl('cms/privacydetails')
+
+export {FOOTER,BANNER_DETAILS, CUSTOM_DETAILS, START_SECTION_DETAILS,FAQS,FEATURES,STEPS,HEADER,TERMS,PRIVACY}

@@ -97,7 +97,7 @@ export const EthHeader = () => {
                        </noscript>
                     </span> */}
                 </Link>
-                <div className="ms-auto d-none d-lg-block">
+                <div className="ms-md-auto mt-2 mt-md-0 ">
                   
                   {connectedAccAddress.length !== 0 ? (
                     <button

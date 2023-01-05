@@ -48,10 +48,10 @@ import Base58 from "base-58";
 //
 
 const SolanaMain1 = (props) => {
-
-
+  // const [tokenType, setTokenType] = useState()
+  const [errNet, setErrNet] = useState(false)
   console.log(props, "ADITI SET NET")
-
+  const [commissonFee, setCommissonFee] = useState("free")
   const { setNet, net } = props;
   const steps = [" ", " "];
   const { solDeploy, setSolDeploy, setDeployData } = useContext(GlobalContext);
@@ -67,20 +67,21 @@ const SolanaMain1 = (props) => {
   const { connection } = useConnection();
   // console.log(connection,"connection");
   const { publicKey, sendTransaction, signMessage, connected } = useWallet();
-  // const [error, setError] = useState("");
-  // const [message, setMessage] = useState("");
-  // const [signature, setSignature] = useState("");
-  // const [signedMessage, setSignedMessage] = useState("");
-  // const [verified, setVerified] = useState();
-  // useEffect(() => {
-  //   if (!connected) {
-  //     setError("");
-  //     setMessage("");
-  //     setSignature("");
-  //     setSignedMessage("");
-  //   }
-  //   setVerified();
-  // }, [connected]);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [signature, setSignature] = useState("");
+  const [signedMessage, setSignedMessage] = useState("");
+  const [verified, setVerified] = useState();
+  const [data, setData] = useState([])
+  useEffect(() => {
+    if (!connected) {
+      setError("");
+      setMessage("");
+      setSignature("");
+      setSignedMessage("");
+      setVerified();
+    }
+  }, [connected]);
   // 
 
   
@@ -113,6 +114,26 @@ const SolanaMain1 = (props) => {
     
     fetchData()
   }, [setPayment])
+
+  useEffect(() => {
+    if(net){
+      setErrNet(false)
+    }
+
+    console.log(data, "VAMPIRE")
+    data.forEach((item) => {
+      if(item.parentNetworkName === "Solana" && item.value === net && item.tokenType === tokenType ){
+        setCommissonFee(item.networkCommissionFee)
+        console.log(item , "VAMPIRE 1")
+      }
+    })
+
+
+
+
+
+  }, [net, data])
+
 
   const fetchData = async () => {
     await axios
@@ -261,7 +282,7 @@ const SolanaMain1 = (props) => {
 
   })
 
-  const [data, setData] = useState([])
+  
   const getNetworks = () => {
     axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
       .then((res) => {
@@ -293,6 +314,12 @@ const SolanaMain1 = (props) => {
 
   const onClick = useCallback(
     async (form) => {
+
+      if(!net){
+        setErrNet(true)
+        return
+      }
+
       if (agreement === false) {
         // return;
       }
@@ -306,6 +333,9 @@ const SolanaMain1 = (props) => {
         console.log("public key nhi h");
         toast.error("Please Connect Your wallet ")
       }
+
+      
+
       console.log(connection, "connection");
       const lamports = await getMinimumBalanceForRentExemptMint(connection);
       console.log(lamports, "lamports");
@@ -421,9 +451,9 @@ const SolanaMain1 = (props) => {
         }
       }catch(error){
 
-        console.log("user rejected","error")
+        console.log(error, "user rejected","error123")
         if(error)
-
+          console.log("Executing1");
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -444,31 +474,11 @@ const SolanaMain1 = (props) => {
 
   );
 
+  // console.log("connected", connected);
 
-  useEffect(() => {
-    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Solana' && (value === network)) {
-        return true;
-      }
-    })
-    // setGasFee(selectedCommissionFee)
-    setCommissionFee(prev => ({
-      ...prev,
-      commissionFee: selectedCommissionFee?.networkCommissionFee
-    }))
-    console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-    console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-    // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-
-  }, [data, commissionFee])
-
-
-
-  console.log("connected", connected);
-
-  console.log(
-    ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Solana ,,,,,,,,,,,,,,,,,,,,,,"
-  );
+  // console.log(
+  //   ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Solana ,,,,,,,,,,,,,,,,,,,,,,"
+  // );
 
   const networkName = (name) => {
     setNet(name.target.value)
@@ -541,6 +551,7 @@ const SolanaMain1 = (props) => {
                             <select
                               className="form-select"
                               name="tokenType"
+                              onChange={(e) => setTokenType(e.target.value)}
                             // onChange={ethMainFormHandler}
                             value={tokenType}
                             >
@@ -694,21 +705,23 @@ const SolanaMain1 = (props) => {
                               value={network}
                               onChange={networkName}
                             >
+                              <option>Select your netowrk</option>
                               {data.map((item) => {
                                 if (item.parentNetworkName === "Solana" && item.tokenType === 'free') {
                                   return (
-                                    <option value={item.value}>{item.subNetworkName}</option>
+                                    <option className={(item.value === "solanaMainnet" || item.value === "solanaTestnet")  ? 'disabled' : ''} value={item.value} disabled={item.value === "solanaMainnet" || item.value === "solanaTestnet" }>{item.subNetworkName}</option>
                                   )
                                 }
                                 else if (item.parentNetworkName === "Solana" && item.tokenType === 'basic') {
-                                  <option value={item.value}>{item.subNetworkName}</option>
+                                  <option className={(item.value === "solanaMainnet" || item.value === "solanaTestnet")  ? 'disabled' : ''} value={item.value} disabled={item.value === "solanaMainnet" || item.value === "solanaTestnet" }>{item.subNetworkName}</option>
                                 }
                                 else if (item.parentNetworkName === "Solana" && item.tokenType === 'custom') {
-                                  <option value={item.value}>{item.subNetworkName}</option>
+                                  <option className={(item.value === "solanaMainnet" || item.value === "solanaTestnet")  ? 'disabled' : ''} value={item.value} disabled={item.value === "solanaMainnet" || item.value === "solanaTestnet" }>{item.subNetworkName}</option>
 
                                 }
                               })}
                             </select>
+                            {errNet && <p style={{color:"red"}}>Please select network.</p>}
                             <span className="form-text text-muted">
                               Select the network on wich you want to deploy your
                               token
@@ -747,12 +760,13 @@ const SolanaMain1 = (props) => {
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-success d-block p-2 ">
-                                  {/* {commissionFee
-                                      ? commissionFee === "Free"
+                                  {commissonFee
+                                      ? commissonFee === "free"
                                         ? "Free"
-                                        : `${commissionFee} ETH`
-                                      : "Free"} */}
-                                  0.01 SOL
+                                        : `${commissonFee} SOL`
+                                      : "Free"}
+                                  {/* 0.01 SOL
+                                  {/* {commissonFee} */}
                                 </span>
                               </div>
                             </div>

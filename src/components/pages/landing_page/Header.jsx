@@ -3,16 +3,14 @@ import { Link } from 'react-router-dom'
 import { HEADER } from '../../../api/Api'
 import './landing_page_styles/header.css'
 import axios from "axios"
+import HeaderSkeleton from '../../../skeleton/HeaderSkeleton'
 const Header = () => {
     const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
 
     const [header, setHeader] = useState([])
     const [loader, setLoader] = useState(true)
-    // lo
-    useEffect(() => {
-    
+    useEffect(() => {    
     fetchData()
-
   }, [])
   const fetchData = async () => {
     
@@ -27,7 +25,7 @@ const Header = () => {
     favicon.href = `${imageBaseUrl}${respHeader.data.msg.investorFavicon}`;
   }
 
-  return (
+  return loader ? <HeaderSkeleton /> :(
     <div className="layout-container main-layout header-fixed">
     <div className='page-header'>
         <header className="header navbar-area">
@@ -41,7 +39,7 @@ const Header = () => {
                                         <img className='img-1' aria-hidden='true' src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27257%27%20height=%2725%27/%3e"
                                          alt="" />
                                     </span> */}
-                                        {!loader &&<img src={imageBaseUrl+header.investorLogoImage} alt="Logo" className='logoImage' srcSet="" />}
+                                         <img src={imageBaseUrl+header.investorLogoImage} alt="Logo" className='logoImage' srcSet="" />
                                     {/* <img srcSet="https://tokenmaker.eattheblocks.com/_next/image?url=%2Fimages%2Flogo-token-maker.png&w=384&q=75 1x,https://tokenmaker.eattheblocks.com/_next/image?url=%2Fimages%2Flogo-token-maker.png&w=384&q=75 2x"
                                     src='https://tokenmaker.eattheblocks.com/_next/image?url=%2Fimages%2Flogo-token-maker.png&w=384&q=75' decoding='async' data-nimg='intrinsic' 
                                     alt="Logo" className="img-2" /> */}
