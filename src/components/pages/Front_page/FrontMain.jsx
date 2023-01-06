@@ -103,7 +103,7 @@ export const FrontMain = () => {
                       </div>
                       <div className="my-2">
                         <Link
-                          className="btn me-2"
+                          className="blue-btn btn"
                           to="/generator"
                           style={{
                             backgroundColor: `${banner.buttonBackgroundColor}`,
@@ -220,7 +220,7 @@ export const FrontMain = () => {
                   <div className="mt-4 text-center">
                     <Link
                       to="/generator"
-                      className="btn btn-pad"
+                      className="blue-btn btn"
                       style={{
                         backgroundColor: `${start.buttonBackgroundColor}`,
                         color: `${start.buttonColor}`,
@@ -271,7 +271,7 @@ export const FrontMain = () => {
                     <Link
                       type="button"
                       to="https://www.blocktechbrew.com/"
-                      className="btn btn-pad"
+                      className="blue-btn btn"
                       style={{
                         backgroundColor: `${custom.buttonBackgroundColor}`,
                         color: `${custom.buttonColor}`,
@@ -353,7 +353,7 @@ export const FrontMain = () => {
                     </h3>
                     <Link
                       to="/generator"
-                      className="btn btn-pad mt-2"
+                      className="blue-btn btn mt-2"
                       style={{
                         backgroundColor: `${custom.buttonBackgroundColor}`,
                         color: `${custom.buttonColor}`,
