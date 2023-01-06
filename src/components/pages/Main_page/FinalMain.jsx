@@ -25,7 +25,7 @@ export const FinalMain = (props) => {
             <div className="container">
               <h1>
                 <span style={{ marginTop: "-60px" }} className="sub-highlight">
-                  Create Your Ethereum Token
+                  Create Your Token
                 </span>
               </h1>
               <p>
