@@ -23,6 +23,10 @@ import axios from "axios";
 import { HEADER } from './api/Api.js';
 import { SolanaMain } from './components/pages/solana_page/SolanaMain.jsx';
 import  WalletAdapter  from './contexts/solanaContext/SolanaContext.jsx';
+import {MoonRiverMain} from './components/pages/MoonRiver_page/MoonRiverMain';
+import { AvaxMain } from './components/pages/Avax_page/AvaxMain.jsx';
+// import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
+
 function App(props) {
   // console.log(props,"props appjs")
   const {net,setNet}  = props;
@@ -47,7 +51,7 @@ function App(props) {
   return (
 
     <EtherProvider>
-
+      {/* <StepContext> */}
           {/* <WalletAdapter> */}
       <Router>
         <Routes>
@@ -59,9 +63,12 @@ function App(props) {
           <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <BnbMain />, <Footer />]} />
           <Route path='/generator/polygon' element={[<EthHeader header={header} />, <MaticMain />, <Footer />]} />
           <Route path='/generator/solana' element={[<SolanaMain  net ={net} setNet = {setNet}/>]} />
+          <Route path='/generator/moonriver' element={[<MoonRiverMain />]} />
+          <Route path='/generator/avax' element={[<AvaxMain />]} />
         </Routes> 
       </Router>
           {/* </WalletAdapter> */}
+          {/* </StepContext> */}
     </EtherProvider>
   )
 }

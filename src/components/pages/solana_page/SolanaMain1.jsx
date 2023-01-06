@@ -5,25 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import axios from "axios";
-import { ContractFactory, ethers } from "ethers";
 import { toast } from "react-toastify";
-import { SolanaMain } from "./SolanaMain";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-// 
-import { Metadata } from '@metaplex-foundation/mpl-token-metadata';
-import { WebBundlr } from '@bundlr-network/client';
-import { sign } from 'tweetnacl';
-import { SolanaHeader } from "./SolanaHeader";
-import { PublicKey, PublicKeyInitData } from '@solana/web3.js';
-import { Buffer } from 'buffer';
-
 import { HiInformationCircle } from "react-icons/hi";
-// import Link from "react-router-dom";
+import { SolanaHeader } from "./SolanaHeader";
 import Tooltip from "../../Layots/ToolTip";
-// import wallet_model from "../../Modal/Multi-WalletModal";
-//
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { Keypair, SystemProgram, Transaction,LAMPORTS_PER_SOL } from "@solana/web3.js";
 import {
   MINT_SIZE,
   TOKEN_PROGRAM_ID,
@@ -33,25 +18,37 @@ import {
   createAssociatedTokenAccountInstruction,
   createMintToInstruction,
 } from "@solana/spl-token";
-import Base58 from "base-58";
-
+import { Keypair, SystemProgram, Transaction,LAMPORTS_PER_SOL } from "@solana/web3.js";
 import {
   DataV2,
   createCreateMetadataAccountV2Instruction,
 } from "@metaplex-foundation/mpl-token-metadata";
-import { findMetadataPda } from "@metaplex-foundation/js";
-//
 import Swal from "sweetalert2"
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-
-
 import { multiStepContext } from "./StepContext";
+import { findMetadataPda } from "@metaplex-foundation/js";
+
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import Base58 from "base-58";
+
+
+// 
+// import { Metadata } from '@metaplex-foundation/mpl-token-metadata';
+// import { WebBundlr } from '@bundlr-network/client';
+// import { sign } from 'tweetnacl';
+// import { Buffer } from 'buffer';
+
+// import Link from "react-router-dom";
+// import wallet_model from "../../Modal/Multi-WalletModal";
+//
+
+//
 
 const SolanaMain1 = (props) => {
-  const [tokenType, setTokenType] = useState()
+  // const [tokenType, setTokenType] = useState()
   const [errNet, setErrNet] = useState(false)
   // console.log(props, "ADITI SET NET")
   const [commissonFee, setCommissonFee] = useState("free")
@@ -92,12 +89,12 @@ const SolanaMain1 = (props) => {
   const [tokenName, setTokenName] = useState("");
   const [symbol, setSymbol] = useState("");
   const [uri, setUri] = useState("safhfsa");
+  const [agreement, setAgreement] = useState(false)
   const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(1);
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
 
-  const [agreement, setAgreement] = useState(false)
 
   // console.log(agreement, 'aditi agre')
 
@@ -109,8 +106,12 @@ const SolanaMain1 = (props) => {
     amountErr: ""
   });
   const [payment, setPayment] = useState("")
+  const [tokenType, setTokenType] = useState("basic")
+  const [network, setNetwork] = useState("")
+  const [commissionFee, setCommissionFee] = useState("Free")
   useEffect(() => {
     // setLoader(false)
+    
     fetchData()
   }, [setPayment])
 
@@ -148,6 +149,7 @@ const SolanaMain1 = (props) => {
   // console.log(payment.solanaPaymentAddress,"PAyment addrress solana")
   const [provider, setProvider] = useState(null);
   const wallet = useWallet();
+
   useEffect(() => {
     if (wallet && wallet.connected) {
 
@@ -163,6 +165,7 @@ const SolanaMain1 = (props) => {
       connectProvider();
     }
   });
+  
   useEffect(() => {
     if (agreement !== false) {
       setErr((prev) => ({
@@ -283,17 +286,28 @@ const SolanaMain1 = (props) => {
   const getNetworks = () => {
     axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
       .then((res) => {
+        console.log(res.data.msg.items, "uniqueeeeeeeee");
         setData(res.data.msg.items)
-        // console.log(res.data.msg.items, "Aditii ddata jo ni aata solana>>>>>>>>>>>>>>> ");
       })
       .catch((err) => {
         console.log(err, "Error")
       })
   }
 
+  
   useEffect(() => {
+    if(tokenName && symbol){
+      
+    }
+  }, [tokenName, symbol])
+
+
+
+
+  useEffect(() => {
+    console.log(" ")
     getNetworks()
-  }, [setData])
+  }, [])
 
 
   // console.log(agreement, "DITI")
@@ -469,7 +483,12 @@ const SolanaMain1 = (props) => {
   const networkName = (name) => {
     setNet(name.target.value)
     console.log(name.target.value, "Network Name solana")
+    setNetwork(name.target.value)
   }
+
+  const { toggler } =
+    useContext(GlobalContext);
+
 
 
   return (
@@ -534,7 +553,7 @@ const SolanaMain1 = (props) => {
                               name="tokenType"
                               onChange={(e) => setTokenType(e.target.value)}
                             // onChange={ethMainFormHandler}
-                            // value={tokenType}
+                            value={tokenType}
                             >
                               <option value="free">Free</option>
                               <option value="basic">Basic</option>
@@ -683,7 +702,7 @@ const SolanaMain1 = (props) => {
                             <select
                               className="form-select"
                               name="network"
-                              // value={network}
+                              value={network}
                               onChange={networkName}
                             >
                               <option>Select your netowrk</option>
@@ -841,7 +860,6 @@ const SolanaMain1 = (props) => {
 
                                 }else{
                                 onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
-
                                 }
                               
                               }}

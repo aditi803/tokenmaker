@@ -19,7 +19,7 @@ export const copyTextToClipboard = (element) => {
 export const SuccessDeploy = (props) => {
   const navigate = useNavigate()
   const { addToken, deployData } = props
-  const [tooltip, setTooltip] = useState(false)
+  // const [tooltip, setTooltip] = useState(false)
   const { urlLinks, setSolDeploy, Deploy, solDeploy } = useContext(GlobalContext);
   const [test, setTest] = useState(false)
   const createNewToken = () => {
@@ -69,6 +69,7 @@ export const SuccessDeploy = (props) => {
   // eslint-disable-next-line no-unused-expressions
   urlLinks[deployData.chainID] ? explorer = urlLinks[deployData.chainID] : ""
 
+  const [tooltip, setTooltip] = useState(false)
   return (
     <div>
       <div className="card w-100">

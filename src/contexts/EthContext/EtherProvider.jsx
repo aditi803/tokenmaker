@@ -110,6 +110,8 @@ export const EtherProvider = ({ children }) => {
     polygonMumbai: 80001,
     binanceSmartChainTestnet: 97,
     binanceSmartChain: 56,
+    moonRiver:1285,
+    moonBaseAlpha:1287
   };
 
 
@@ -121,6 +123,9 @@ export const EtherProvider = ({ children }) => {
     1: { link: "https://etherscan.io", name: "Ethereum Mainnet Scan", networkName: "Ethereum" },
     5: { link: "https://goerli.etherscan.io", name: "Goerli Testnet Scan", networkName: "Gorli" },
     4: { link: "https://rinkeby.etherscan.io/", name: "RinkeyBy Testnet Scan", networkName: "RinkeyBy" },
+    1285:{ link: "https://moonriver.moonscan.io/", name: "Moonriver Scan", networkName: "Moonriver" },
+    1287:{link: "https://moonbase.moonscan.io/", name: "Moonbase Alpha Scan", networkName: "Moonbase alpha"},
+    43113:{link: " https://testnet.snowtrace.io/", name: "Avalanche Fuji C-Chain Scan", networkName: "Avalanche Fuji C-Chain"},
   }
 
 
