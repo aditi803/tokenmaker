@@ -85,7 +85,7 @@ function Footer() {
                   data-bs-target="#exampleModal"
                   style={{ color: "#fff" }}
                 >
-                  <p> Terms of Use. </p>
+                  <p> Terms of Use</p>
                 </Link>
                 <TermsModal />
                 <Link

@@ -55,58 +55,64 @@ function Main() {
           </div>
 
           {loader ? <MainSkeleton /> :
-            <div className="chain-select">
-              <>
+            <>
+                <div className='row custom-row'>
 
-                {data.map((value, index) => {
-                  // if (index === 0) {
-                  //   return <div className="chain-item">
-                  //     {console.log(value.hrefPath, "jjjjjjj")}
-                  //     <Link to={`/generator/solana`} className="chain-link chain-bsc">
-                  //       <span className="title">{value.categoryName}</span>
-                  //       <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
-                  //       {/* {value?.networks[0]((img) => (
-                  //         <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
-                  //       ))} */}
-                  //       <span className="text-muted description">Create your token on {value.categoryName}</span>
-                  //     </Link>
-                  //   </div>
-                  // }else {
-                  return <div className="chain-item">
-                    {console.log(value.hrefPath, "jjjjjjj")}
-                    <Link to={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
-                      <span className="title">{value.categoryName}</span>
-                      <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
-                      {/* {value?.networks[0]((img) => (
+                  <>
+
+
+                    {data.map((value, index) => {
+                      // if (index === 0) {
+                      //   return <div className="chain-item">
+                      //     {console.log(value.hrefPath, "jjjjjjj")}
+                      //     <Link to={`/generator/solana`} className="chain-link chain-bsc">
+                      //       <span className="title">{value.categoryName}</span>
+                      //       <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
+                      //       {/* {value?.networks[0]((img) => (
+                      //         <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
+                      //       ))} */}
+                      //       <span className="text-muted description">Create your token on {value.categoryName}</span>
+                      //     </Link>
+                      //   </div>
+                      // }else {
+                      return <div className='col-xl-3'>
+                        <div className="chain-item">
+                          {console.log(value.hrefPath, "jjjjjjj")}
+                          <Link to={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
+                            <span className="title">{value.categoryName}</span>
+                            <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
+                            {/* {value?.networks[0]((img) => (
                         <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
                       ))} */}
 
-                      <span className="text-muted description">Create your token on {value.categoryName}</span>
-                    </Link>
-                  </div>
-                  // }
-                })}
-              </>
-            </div>}
+                            <span className="text-muted description">Create your token on {value.categoryName}</span>
+                          </Link>
+                        </div>
+                      </div>
 
-          {/* <div className="chain-select">
-            <>
+                    })}
+                  </>
+              </div>
 
-              {data.map((value) => (
+
+
+              {/* <div className='chain-select'>
                 <div className="chain-item">
-                  {console.log(value.hrefPath, "jjjjjjj")}
-                  <Link to={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
-                    <span className="title">{value.categoryName}</span>
-                    <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
-                    <span className="text-muted description">Create your token on {value.categoryName}</span>
+                  <Link to="/generator/moonriver" className="chain-link chain-bsc">
+                    <span className="title">Moon River</span>
+                    <img className="logo" src={moonRiverImage} alt="" />
+                    
+
+                    <span className="text-muted description">Create your token on Moon River</span>
                   </Link>
                 </div>
-              ))}
-
+              </div> */}
             </>
-          </div> */}
+
+          }
+
         </main>
-      </div>
+      </div >
       <Footer />
     </>
   );
