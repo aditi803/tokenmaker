@@ -81,7 +81,7 @@ export const FrontMain = () => {
           {loader ? <HeroSkeleton /> :
             <>
               <section
-                className="page-section hero"
+                className="page-section hero d-md-flex align-items-center"
                 id="hero"
                 style={{
                   backgroundImage: `url(${imageBaseUrl}${banner.backgroundImage})`,
@@ -103,7 +103,7 @@ export const FrontMain = () => {
                       </div>
                       <div className="my-2">
                         <Link
-                          className="btn btn-pad  me-2"
+                          className="btn me-2"
                           to="/generator"
                           style={{
                             backgroundColor: `${banner.buttonBackgroundColor}`,
@@ -130,7 +130,7 @@ export const FrontMain = () => {
                       style={{ color: `${stepData.headingColor}` }}
                     >
                       <span>{startData}</span> {""}
-                      <span className="sub-highlight">{coloredData}</span>
+                      <span className="sub-highlight mt-0">{coloredData}</span>
                     </h2>
                     <div class="row mt-5 pt-0 pt-md-5 gx-0">
                       {steps.map((data, i) => {
@@ -141,12 +141,7 @@ export const FrontMain = () => {
                                 <div class="row justify-content-center align-items-center">
                                   <div class="col-10 col-lg-5 d-none d-lg-block timeline-date">
                                     <div
-                                      className="feature-box mb-5"
-                                      style={{
-                                        maxWidth: "300px",
-                                        minHeight: "320px",
-                                      }}
-                                    >
+                                      className="feature-box mb-5 py-5 px-4">
                                       <img src={imageBaseUrl + data.stepImage} alt='steps' />
                                       <h5 className="my-3"> {data.title}</h5>
                                       <p>{data.content}</p>
@@ -159,12 +154,7 @@ export const FrontMain = () => {
                                   <div class="col-10 col-lg-5 timeline-text">
                                     <div class="d-block d-lg-none timeline-date">
                                       <div
-                                        className="feature-box mb-5"
-                                        style={{
-                                          maxWidth: "300px",
-                                          minHeight: "320px",
-                                        }}
-                                      >
+                                        className="feature-box mb-5 py-5 px-4">
                                         <img src={imageBaseUrl + data.stepImage} alt='steps' />
                                         <h5 className="my-3"> {data.title}</h5>
                                         <p>{data.content}</p>
@@ -187,12 +177,7 @@ export const FrontMain = () => {
                                   <div class="col-10 col-lg-5 order-2 order-lg-1 timeline-text">
                                     <div class="d-block d-lg-none timeline-date">
                                       <div
-                                        className="feature-box mb-5"
-                                        style={{
-                                          maxWidth: "300px",
-                                          minHeight: "320px",
-                                        }}
-                                      >
+                                        className="feature-box mb-5 py-5 px-4">
                                         <img src={imageBaseUrl + data.stepImage} alt='steps' />
                                         <h5 className="my-3"> {data.title}</h5>
                                         <p>{data.content}</p>
@@ -204,12 +189,7 @@ export const FrontMain = () => {
                                   </div>
                                   <div class="col-10 col-lg-5 d-none d-lg-block order-3  timeline-date">
                                     <div
-                                      className="feature-box mb-5"
-                                      style={{
-                                        maxWidth: "300px",
-                                        minHeight: "320px",
-                                      }}
-                                    >
+                                      className="feature-box mb-5 py-5 px-4">
                                       <img src={imageBaseUrl + data.stepImage} alt='steps' />
                                       <h5 className="my-3"> {data.title}</h5>
                                       <p>{data.content}</p>
@@ -265,10 +245,10 @@ export const FrontMain = () => {
                   </h2>
                   <div className="row">
                     {features.map((data, index) => (
-                      <div className="col-lg-3 col-md-6 d-flex flex-column ">
-                        <div className="feature-box mb-5">
+                      <div className="col-lg-3 col-md-6 d-flex flex-column mb-lg-3">
+                        <div className="feature-box mb-4 py-5 px-3">
                           <img src={imageBaseUrl + data.featureImage} />
-                          <h5>{data.title}</h5>
+                          <h5 className="my-3">{data.title}</h5>
                           <p>{data.content}</p>
                         </div>
                       </div>
@@ -309,11 +289,12 @@ export const FrontMain = () => {
                     <div className="row">
                       <div className="col-12 col-lg-6 faq_left">
                         <h2
-                          className="heading"
+                          className="heading mb-0"
                           style={{ color: `${featuresData.headingColor}` }}
                         >
                           {faqData.heading}
                         </h2>
+                        <span className="d-inline-block divider"></span>
                         <p
                           className="text"
                           style={{ color: `${faqData.contentColor}` }}
@@ -347,7 +328,7 @@ export const FrontMain = () => {
                                 </h2>
                                 <div
                                   id={`collapseOne2${i}`}
-                                  className={`accordion-collapse collapse ${i === showindex ? "show" : null
+                                  className={`accordion-collapse collapse overflow-hidden ${i === showindex ? "show" : null
                                     }`}
                                   aria-labelledby="headingOne2"
                                   data-bs-parent="#accordionExample"
