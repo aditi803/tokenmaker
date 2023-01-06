@@ -77,8 +77,8 @@ const HeroSkeleton = () => {
                         <h2
                             className="section-title mt-4" style={{ maxWidth: "700px" }}
                         >
-                            <Skeleton variant="rounded" height={51} width={700} style={{ marginBottom: "5px" }} />
-                            <Skeleton variant="rounded" height={51} width={610} style={{ margin: "auto" }} />
+                            <Skeleton variant="rounded" height={16} width={500} className="mb-3 mx-auto" />
+                            <Skeleton variant="rounded" height={16} width={200} className=" mx-auto" />
 
                         </h2>
                         <div class="row mt-5 pt-0 pt-md-5 gx-0">
@@ -96,9 +96,11 @@ const HeroSkeleton = () => {
                                                                 width: "268px"
                                                             }}
                                                         >
-                                                            <Skeleton variant="circular" height={50} width={50} className='mx-auto mb-2' />
-                                                            <Skeleton variant="square" height={40} width={231} className='mb-3' />
-                                                            <Skeleton variant="rounded" height={72} width={231} />
+                                                            <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-2' />
+                                                            <Skeleton variant="square" height={14} width={190} className='mt-3 mb-4 mx-auto' />
+                                                            <Skeleton variant="rounded" height={10} width={200} className='mb-2 mx-auto' />
+                                                            <Skeleton variant="rounded" height={10} width={180} className='mb-2 mx-auto' />
+                                                            <Skeleton variant="rounded" height={10} width={160} className='mb-2 mx-auto' />
 
                                                         </div>
                                                     </div>
@@ -115,9 +117,11 @@ const HeroSkeleton = () => {
                                                                     width: "268px"
                                                                 }}
                                                             >
-                                                                <Skeleton variant="circular" height={50} width={50} className='mx-auto mb-2' />
-                                                                <Skeleton variant="square" height={40} width={231} className='mb-3' />
-                                                                <Skeleton variant="rounded" height={72} width={231} />
+                                                                <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-2' />
+                                                                <Skeleton variant="square" height={14} width={190} className='mt-3 mb-4 mx-auto' />
+                                                                <Skeleton variant="rounded" height={10} width={200} className='mb-2 mx-auto' />
+                                                                <Skeleton variant="rounded" height={10} width={180} className='mb-2 mx-auto' />
+                                                                <Skeleton variant="rounded" height={10} width={160} className='mb-2 mx-auto' />
 
                                                             </div>
                                                             <div></div>
@@ -144,9 +148,11 @@ const HeroSkeleton = () => {
                                                                     width: "268px"
                                                                 }}
                                                             >
-                                                                <Skeleton variant="circular" height={50} width={50} className='mx-auto mb-2' />
-                                                                <Skeleton variant="square" height={40} width={231} className='mb-3' />
-                                                                <Skeleton variant="rounded" height={72} width={231} />
+                                                                <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-2' />
+                                                                <Skeleton variant="square" height={14} width={190} className='mt-3 mb-4 mx-auto' />
+                                                                <Skeleton variant="rounded" height={10} width={200} className='mb-2 mx-auto' />
+                                                                <Skeleton variant="rounded" height={10} width={180} className='mb-2 mx-auto' />
+                                                                <Skeleton variant="rounded" height={10} width={160} className='mb-2 mx-auto' />
 
                                                             </div>
                                                         </div>
@@ -162,9 +168,11 @@ const HeroSkeleton = () => {
                                                                 width: "268px"
                                                             }}
                                                         >
-                                                            <Skeleton variant="circular" height={50} width={50} className='mx-auto mb-2' />
-                                                            <Skeleton variant="square" height={40} width={231} className='mb-3' />
-                                                            <Skeleton variant="rounded" height={72} width={231} />
+                                                            <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-2' />
+                                                            <Skeleton variant="square" height={14} width={190} className='mt-3 mb-4 mx-auto' />
+                                                            <Skeleton variant="rounded" height={10} width={200} className='mb-2 mx-auto' />
+                                                            <Skeleton variant="rounded" height={10} width={180} className='mb-2 mx-auto' />
+                                                            <Skeleton variant="rounded" height={10} width={160} className='mb-2 mx-auto' />
 
                                                         </div>
                                                     </div>
@@ -185,11 +193,11 @@ const HeroSkeleton = () => {
                     <h2
                         className="section-title-small text-center d-flex justify-content-center"
                     >
-                        <Skeleton variant="rounded" height={62} width={655} />
+                        <Skeleton variant="rounded" height={20} width={655} />
 
                     </h2>
                     <div className="mt-4 text-center d-flex justify-content-center">
-                        <Skeleton variant="rounded" height={70} width={191} />
+                        <Skeleton variant="rounded" height={36} width={191} />
 
                     </div>
                 </div>
@@ -200,7 +208,7 @@ const HeroSkeleton = () => {
                         className="section-title text-center"
                     >
                         <span className="sub-highlight mb-5">
-                            <Skeleton variant="rectangular" height={61} width={287} className='mx-auto mb-2' />
+                            <Skeleton variant="rectangular" height={20} width={190} className='mx-auto mb-2' />
 
                         </span>
                     </h2>
@@ -211,9 +219,12 @@ const HeroSkeleton = () => {
                                     height: "320px",
                                     width: "268px"
                                 }}>
-                                    <Skeleton variant="circular" height={77} width={76} className='mx-auto mb-2' />
-                                    <Skeleton variant="square" height={40} width={231} className='mb-3' />
-                                    <Skeleton variant="rounded" height={140} width={231} />
+                                    <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-4' />
+                                    <Skeleton variant="square" height={14} width={190} className='mt-3 mb-4 mx-auto' />
+                                    <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
+                                    <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
+                                    <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
+                                    <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
                                 </div>
                             </div>
                         ))}
@@ -227,11 +238,11 @@ const HeroSkeleton = () => {
                     <h2
                         className="section-title-small text-center d-flex justify-content-center"
                     >
-                        <Skeleton variant="rounded" height={62} width={655} />
+                        <Skeleton variant="rounded" height={20} width={655} />
 
                     </h2>
                     <div className="mt-4 text-center d-flex justify-content-center">
-                        <Skeleton variant="rounded" height={70} width={191} />
+                        <Skeleton variant="rounded" height={36} width={191} />
 
                     </div>
                 </div>
@@ -242,15 +253,21 @@ const HeroSkeleton = () => {
                         <div className="row">
                             <div className="col-12 col-lg-6 faq_left">
                                 <h2
-                                    className="heading"
+                                    className="heading mb-4"
                                 >
-                                    <Skeleton variant="rounded" height={62} width={447} />
+                                    <Skeleton variant="rounded" height={20} width={400} />
                                     {/* {faqData.heading} */}
                                 </h2>
+                                <Skeleton className='mb-5' variant="rounded" height={5} width={103} />
                                 <p
                                     className="text"
                                 >
-                                    <Skeleton variant="rounded" height={183} width={447} />
+                                    <Skeleton className='mb-3' variant="rounded" height={10} width={447} />
+                                    <Skeleton className='mb-3' variant="rounded" height={10} width={430} />
+                                    <Skeleton className='mb-3' variant="rounded" height={10} width={447} />
+                                    <Skeleton className='mb-3' variant="rounded" height={10} width={420} />
+                                    <Skeleton className='mb-3' variant="rounded" height={10} width={450} />
+                                    <Skeleton className='mb-3' variant="rounded" height={10} width={200} />
                                     {/* {faqData.content} */}
                                 </p>
                             </div>
@@ -259,14 +276,19 @@ const HeroSkeleton = () => {
                                     <>
 
                                         {/* {item.question} */}
-                                        <Skeleton variant="rounded" height={62} width={655}  style={{marginBottom:"38px"}}/>
-                                               
+                                        <Skeleton variant="rounded" height={60} width={630} style={{ marginBottom: "30px" }} />
+
                                     </>
                                 ))}
+                            </div>
+
+                            <div className="col-12  mt-5 text-center">
+                                <Skeleton variant="rounded" height={20} width={404} className="mb-4 mx-auto" />
+                                <Skeleton variant="rounded" height={36} width={200} className="mb-4 mx-auto" />
+                            </div>
                         </div>
                     </div>
                 </div>
-        </div>
             </section >
         </div >
     )
