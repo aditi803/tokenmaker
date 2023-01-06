@@ -170,6 +170,7 @@ a {
 
 
 .chain-link .logo {
+    background-size: contain;
     display: block;
     width: 63px;
     height: 70px;

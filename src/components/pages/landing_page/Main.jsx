@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton"
-import moonRiverImage from "../../../assets/monBeams.png"
+// import moonRiverImage from "../../../assets/monBeams.png"
 
 function Main() {
 
