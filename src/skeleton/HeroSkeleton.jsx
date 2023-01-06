@@ -193,11 +193,11 @@ const HeroSkeleton = () => {
                     <h2
                         className="section-title-small text-center d-flex justify-content-center"
                     >
-                        <Skeleton variant="rounded" height={62} width={655} />
+                        <Skeleton variant="rounded" height={20} width={655} />
 
                     </h2>
                     <div className="mt-4 text-center d-flex justify-content-center">
-                        <Skeleton variant="rounded" height={70} width={191} />
+                        <Skeleton variant="rounded" height={36} width={191} />
 
                     </div>
                 </div>
@@ -208,7 +208,7 @@ const HeroSkeleton = () => {
                         className="section-title text-center"
                     >
                         <span className="sub-highlight mb-5">
-                            <Skeleton variant="rectangular" height={61} width={287} className='mx-auto mb-2' />
+                            <Skeleton variant="rectangular" height={20} width={190} className='mx-auto mb-2' />
 
                         </span>
                     </h2>
