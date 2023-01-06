@@ -46,7 +46,7 @@ const Header = () => {
                                         {/* </span> */}
                                     </Link>
                                     <div className='nav-btn-div'>
-                                        <Link className='btn'
+                                        <Link className='blue-btn'
                                             to="/generator">
                                             Get Started
                                         </Link>
