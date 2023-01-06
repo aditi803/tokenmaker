@@ -1,38 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { FOOTER } from "../../../api/Api";
-import { TermsModal } from "../../Layots/TermsModal";
-import "./landing_page_styles/footer.css";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import Logo from "../../../assets/footerlogo.png";
-import { PrivacyPolicy } from "../../Layots/PrivacPolicy";
-import CIcon from "@coreui/icons-react";
-import { cilMail } from '@coreui/icons'
+import { Skeleton } from '@mui/material'
+import React from 'react'
+import { PrivacyPolicy } from '../components/Layots/PrivacPolicy'
+import { TermsModal } from '../components/Layots/TermsModal'
 import { FiMail } from 'react-icons/fi'
 import { AiFillPhone } from 'react-icons/ai'
-import FooterSkeleton from "../../../skeleton/FooterSkeleton";
+import { Link } from 'react-router-dom'
+// import Logo from "../../../assets/footerlogo.png";
+import Logo from '../assets/footerlogo.png'
 
-function Footer() {
-  const [footer, setFooter] = useState([]);
-  const [loader, setLoader] = useState(false)
-  useEffect(() => {
-    setLoader(true)
-    const fetchData = async () => {
-      const respHeader = await axios.get(FOOTER);
-      setFooter(respHeader.data.msg);
-      setLoader(false)
-    };
-    fetchData();
-  }, []);
-  return loader ?<FooterSkeleton /> : (
+
+const FooterSkeleton = () => {
+  return (
     <>
       <div
         className="page-footer"
-        style={{ fontSize: "16px", "--backColor": footer.backgroundColor }}
       >
         <footer className="footer">
           <div className="container py-3">
-            <div className="row" style={{ color: `${footer.contentColor}` }}>
+            <div className="row" >
               <div className="col-lg-4 ">
                 <span>
                   <a href=' https://blocktechbrew.com/' target='_blank'>
@@ -150,13 +135,14 @@ function Footer() {
 
             <hr />
             <p className="text-center" style={{ fontSize: "16px" }}>
-              {footer.investorCopyrightText}
+            <Skeleton variant="rounded" height={70} width={200} />
+
             </p>
           </div>
         </footer>
       </div>
     </>
-  );
+  )
 }
 
-export default Footer;
+export default FooterSkeleton

@@ -88,12 +88,12 @@ export const EtherProvider = ({ children }) => {
     try {
       if (window.ethereum) {
         window.ethereum.on("networkChanged", function (networkId) {
-          console.log("networkChanged", networkId);
-          console.log(accAddress, "acc adress update side");
-          console.log(typeof networkId, "typeof netwrkid");
+          // console.log("networkChanged", networkId);
+          // console.log(accAddress, "acc adress update side");
+          // console.log(typeof networkId, "typeof netwrkid");
           setChainId(parseInt(networkId));
           // SignInMetamask()
-          console.log(accAddress[0], "account netwrok update side");
+          // console.log(accAddress[0], "account netwrok update side");
           isLogin();
         });
       }
@@ -129,15 +129,15 @@ export const EtherProvider = ({ children }) => {
   const hideAccAddress = (connectedAccAddress) => {
     try {
       let accAddress;
-      console.log(connectedAccAddress, "hide acc side ");
-      console.log(connectedAccAddress.length, "acc hide side length");
-      console.log(connectedAccAddress[0], "acc hide  side value  ");
+      // console.log(connectedAccAddress, "hide acc side ");
+      // console.log(connectedAccAddress.length, "acc hide side length");
+      // console.log(connectedAccAddress[0], "acc hide  side value  ");
 
       if (connectedAccAddress.length !== 0) {
         const startAdd = connectedAccAddress[0].slice(0, 6);
         const endAdd = connectedAccAddress[0].slice(38, 42);
         accAddress = startAdd + "...." + endAdd;
-        console.log(startAdd, "startadd if side");
+        // console.log(startAdd, "startadd if side");
         return accAddress;
       } else {
         console.log("hide acc else side");
@@ -175,7 +175,7 @@ export const EtherProvider = ({ children }) => {
       error.code === 4001
         ? toast.error(" Request Rejected !! Token Not Added to The Wallet")
         : toast.error(error.message);
-      console.log("err addtoken fn", error);
+      // console.log("err addtoken fn", error);
     }
   };
   //ends here
@@ -187,19 +187,19 @@ export const EtherProvider = ({ children }) => {
       // e.preventDefault();
       //Check if Metamask is Installed Or Not
       if (window.ethereum) {
-        console.log(window.ethereum, "ethereumadd");
+        // console.log(window.ethereum, "ethereumadd");
         let account = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        console.log(account, "acccc");
+        // console.log(account, "acccc");
         //set account balance
         let provider = new ethers.providers.Web3Provider(window.ethereum);
         const balance = await provider.getBalance(account[0]);
-        console.log(balance, "balance");
+        // console.log(balance, "balance");
         const balanceInEth = parseFloat(
           ethers.utils.formatEther(balance)
         ).toFixed(5);
-        console.log(`balance: ${balanceInEth} ETH`);
+        // console.log(`balance: ${balanceInEth} ETH`);
         setAccBalance(balanceInEth);
         //set Account Address of Logged In User
         setAccAddress([account[0]]);
@@ -212,7 +212,7 @@ export const EtherProvider = ({ children }) => {
       error.code === 4001
         ? toast.error("Please Connect Your Metamask Wallet ")
         : toast.error(error.message);
-      console.log("sign in fun err", error);
+      // console.log("sign in fun err", error);
     }
   };
   //ends here
@@ -221,20 +221,20 @@ export const EtherProvider = ({ children }) => {
 
   const changeNetwork = async (networkID) => {
     try {
-      console.log(networkID, "netwrk id in change netwrk");
+      // console.log(networkID, "netwrk id in change netwrk");
 
       const chainIdInDecimal = ethers.utils.hexlify(networkID);
-      console.log(chainIdInDecimal, "hexadecimal chainid");
+      // console.log(chainIdInDecimal, "hexadecimal chainid");
       let parseChainId = "";
       for (let i = 0; i < chainIdInDecimal.length; i++) {
         if (chainIdInDecimal[i] > 0) {
-          console.log(chainIdInDecimal[i], "ifff");
+          // console.log(chainIdInDecimal[i], "ifff");
           parseChainId += chainIdInDecimal[i];
         }
       }
-      console.log(parseChainId, "parseChainId>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-      console.log(`0x${parseChainId}`, "hexa id after")
-      console.log(networkID, "selectedNetworkID");
+      // console.log(parseChainId, "parseChainId>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      // console.log(`0x${parseChainId}`, "hexa id after")
+      // console.log(networkID, "selectedNetworkID");
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: `0x${parseChainId}` }],
@@ -244,7 +244,7 @@ export const EtherProvider = ({ children }) => {
       error.code === 4001
         ? toast.error("Please Allow To Change Network To Continue!!")
         : toast.error(error.message);
-      console.log("err change netwrk side", error);
+      // console.log("err change netwrk side", error);
     }
   };
   //ends here
@@ -260,7 +260,7 @@ export const EtherProvider = ({ children }) => {
       .get("https://tokenmaker-apis.block-brew.com/payment/paymentaddress")
       .then(res => {
         setPayment(res.data.msg)
-        console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>PAYMENT ADDRESS MSG>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        // console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>PAYMENT ADDRESS MSG>>>>>>>>>>>>>>>>>>>>>>>>>>>")
       })
       .catch(err => {
         console.log(err);
@@ -269,10 +269,10 @@ export const EtherProvider = ({ children }) => {
 
   const sendCommision = async (_commissionFee) => {
     try {
-      console.log(typeof _commissionFee,"type of com")
-      console.log(_commissionFee,"_commissionFee  com")
-      console.log(payment,"Payment value hai y ")
-      console.log(payment.paymentAddress,"Payment Addresss --------value hai y ")
+      // console.log(typeof _commissionFee,"type of com")
+      // console.log(_commissionFee,"_commissionFee  com")
+      // console.log(payment,"Payment value hai y ")
+      // console.log(payment.paymentAddress,"Payment Addresss --------value hai y ")
       if(window.ethereum){
         await window.ethereum.send("eth_requestAccounts");
 
@@ -283,7 +283,7 @@ export const EtherProvider = ({ children }) => {
           to: payment.metamaskPaymentAddress,
           value: ethers.utils.parseEther(_commissionFee)
         });
-        console.log("tx", tx);
+        // console.log("tx", tx);
         if(tx.hash){
           return true
         }else{
@@ -312,13 +312,13 @@ export const EtherProvider = ({ children }) => {
       await window.ethereum.send("eth_requestAccounts");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      console.log(signer, "signerrrrrrrrrrrrrrrrrrrrs");
+      // console.log(signer, "signerrrrrrrrrrrrrrrrrrrrs");
       const factory = new ContractFactory(abi, bytecode, signer);
       // If your contract requires constructor args, you can specify them here
       const contract = await factory.deploy();
-      console.log(contract, "contractsssssssssssssss");
-      console.log(contract.address, "deployeed contract address");
-      console.log(contract.deployTransaction.hash, "deployeed contract hash");
+      // console.log(contract, "contractsssssssssssssss");
+      // console.log(contract.address, "deployeed contract address");
+      // console.log(contract.deployTransaction.hash, "deployeed contract hash");
       if (contract.deployTransaction.hash) {
         setDeploySuccess(true);
         //set seploy data and pass to the child components
@@ -335,8 +335,8 @@ export const EtherProvider = ({ children }) => {
         urlLinks[newFormData.network] ? explorer = urlLinks[newFormData.network] : ""
 
         // eslint-disable-next-line no-unused-expressions
-        console.log(`${explorer.link}/tx/${contract.deployTransaction.hash}`, "new tx urlllll")
-        console.log(newFormData.network, "netwrk nameee")
+        // console.log(`${explorer.link}/tx/${contract.deployTransaction.hash}`, "new tx urlllll")
+        // console.log(newFormData.network, "netwrk nameee")
         axios
           .post("https://tokenmaker-apis.block-brew.com/token/tokendetails", {
             tokenName: newFormData.tokenName,
@@ -393,10 +393,10 @@ export const EtherProvider = ({ children }) => {
         sendCommision:sendCommision
       }}
     >
-      {console.log(payment,"Payment value context side ")}
+      {/* {console.log(payment,"Payment value context side ")}
       {console.log(deploySuccess, "deplo success context side")}
       {console.log(accAddress, "acc address context side")}
-      {console.log(chainId, "chainId context side")}
+      {console.log(chainId, "chainId context side")} */}
 
       <ToastContainer />
       {/* <FinalMain deploySuccess = {deploySuccess}/> */}

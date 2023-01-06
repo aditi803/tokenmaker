@@ -24,10 +24,10 @@ export const EthHeader = () => {
     const respHeader = await axios.get(HEADER)
     setHeader(respHeader.data.msg)
     setLoader(false)
-    console.log(respHeader.data.msg, "Header resp")
+    // console.log(respHeader.data.msg, "Header resp")
     const favicon = document.getElementById("favicon");
     document.title = respHeader?.data?.msg?.investorDocumentTitle;
-    console.log(respHeader?.data?.msg?.investorDocumentTitle, "ttile")
+    // console.log(respHeader?.data?.msg?.investorDocumentTitle, "ttile")
     favicon.href = `${imageBaseUrl}${respHeader.data.msg.investorFavicon}`;
   }
   // const {chainName} = props
@@ -48,10 +48,10 @@ export const EthHeader = () => {
   } else if (chainId === 137 || chainId === 80001) {
     chainName = "  MATIC  "
   }
-  console.log(chainName, "chainName header side");
-  console.log(chainId, "chainId header side");
+  // console.log(chainName, "chainName header side");
+  // console.log(chainId, "chainId header side");
 
-  console.log(connectedAccAddress, "connected addres header side");
+  // console.log(connectedAccAddress, "connected addres header side");
   const accAddress = hideAccAddress(connectedAccAddress)
   // function myName(){
   //   if(connectedAccAddress.length !== 0){

@@ -35,14 +35,14 @@ export const MaticMain1 = (props) => {
     axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
       .then((res) => {
         setData(res.data.msg.items)
-        console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
+        // console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
       })
       .catch((err) => {
         console.log(err, "Error")
       })
   }
 
-  console.log(data, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+  // console.log(data, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
 
 
@@ -196,7 +196,7 @@ export const MaticMain1 = (props) => {
         recoverable: false,
       }));
       if (network === "polygonMumbai") {
-        console.log(data.networkCommissionFeem, "Network inside commisssion feee")
+        // console.log(data.networkCommissionFeem, "Network inside commisssion feee")
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
@@ -576,7 +576,7 @@ export const MaticMain1 = (props) => {
       ...prev,
       commissionFee: selectedCommissionFee?.networkCommissionFee
     }))
-    console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
 
 
     //eslint-disable-next-line
@@ -645,10 +645,10 @@ export const MaticMain1 = (props) => {
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
       // do what u want to do with data
       // console.log("data");
-      console.log(err, "da");
+      // console.log(err, "da");
 
       // < Navigate to= "/generator/final" />
-      console.log(ethFormData, ">>>>>>>>>>>>>>>>");
+      // console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
     }
     if (
@@ -670,11 +670,11 @@ export const MaticMain1 = (props) => {
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
     try {
-      console.log(FormData.network, "fromdatanetwork");
+      // console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      console.log(provider, "provider");
+      // console.log(provider, "provider");
       const { chainId } = await provider.getNetwork();
-      console.log(chainId, "chainid");
+      // console.log(chainId, "chainid");
 
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
@@ -684,16 +684,16 @@ export const MaticMain1 = (props) => {
         })
         : "";
 
-      console.log(FormData, "formdata eth side");
+      // console.log(FormData, "formdata eth side");
       if (FormData.network === chainId) {
         // navigate("/generator/final");
         if (connectedAccAddress.length === 0) {
           await SignInMetamask()
         }
-        console.log(FormData.network, "currentNetworkID");
+        // console.log(FormData.network, "currentNetworkID");
 
         let res = await sendCommision(commissionFee)
-        console.log(res, "ress send commision matic main")
+        // console.log(res, "ress send commision matic main")
 
         if (res) {
           //hit contract compile api
@@ -705,7 +705,7 @@ export const MaticMain1 = (props) => {
               FormData
             )
             .then((res) => {
-              console.log(res, "response");
+              // console.log(res, "response");
               // console.log(contractSource, "contract Source api side ");
               //calling deploy function
               deployContract(res.data.result, FormData).then((res) => {
@@ -722,12 +722,12 @@ export const MaticMain1 = (props) => {
                   toast.success("Token Deploy Successfully");
                   // navigate("/generator/final");
                   props.setShow(false);
-                  console.log(res, "else side deploy then return deploy succes");
+                  // console.log(res, "else side deploy then return deploy succes");
                 }
               });
             })
             .catch((error) => {
-              console.log("Api fail error", error);
+              // console.log("Api fail error", error);
               props.setShow(true);
               // navigate("/generator/ethereum");
               error.response.data.message
@@ -741,7 +741,7 @@ export const MaticMain1 = (props) => {
       }
     } catch (error) {
       toast.error(error.message);
-      console.log("compile contract side catch er", error);
+      // console.log("compile contract side catch er", error);
     }
   };
 

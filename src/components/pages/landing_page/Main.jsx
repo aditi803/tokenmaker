@@ -1,4 +1,4 @@
-import React, { FC, useCallback,useState, useContext,useEffect } from "react";
+import React, { FC, useCallback, useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
 import "./landing_page_styles/main.css";
@@ -7,20 +7,20 @@ import Loader from "../../../loader";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-
+import MainSkeleton from '../../../skeleton/MainSkeleton'
 
 
 function Main() {
-  
-  const { setSolDeploy } =useContext(GlobalContext);
+
+  const { setSolDeploy } = useContext(GlobalContext);
   const [data, setData] = useState([])
   const [image, setImage] = useState([])
   const [loader, setLoader] = useState(false)
 
   useEffect(() => {
-  setLoader(true)
-  setSolDeploy(false)
-  getNetworkHanlder()
+    setLoader(true)
+    setSolDeploy(false)
+    getNetworkHanlder()
   }, [])
 
   const getNetworkHanlder = () => {
@@ -40,7 +40,7 @@ function Main() {
 
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
 
-  return loader ? <Loader /> : (
+  return (
     <>
       <Header />
       <div className="page-content">
@@ -53,24 +53,26 @@ function Main() {
               <p style={{ color: 'black' }}>Your token will be deployed on the selected blockchain</p>
             </div>
           </div>
-          <div className="chain-select">
-            <>
 
-              {data.map((value, index) => {
-                // if (index === 0) {
-                //   return <div className="chain-item">
-                //     {console.log(value.hrefPath, "jjjjjjj")}
-                //     <Link to={`/generator/solana`} className="chain-link chain-bsc">
-                //       <span className="title">{value.categoryName}</span>
-                //       <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
-                //       {/* {value?.networks[0]((img) => (
-                //         <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
-                //       ))} */}
-                //       <span className="text-muted description">Create your token on {value.categoryName}</span>
-                //     </Link>
-                //   </div>
-                // }else {
-                  return<div className="chain-item">
+          {loader ? <MainSkeleton /> :
+            <div className="chain-select">
+              <>
+
+                {data.map((value, index) => {
+                  // if (index === 0) {
+                  //   return <div className="chain-item">
+                  //     {console.log(value.hrefPath, "jjjjjjj")}
+                  //     <Link to={`/generator/solana`} className="chain-link chain-bsc">
+                  //       <span className="title">{value.categoryName}</span>
+                  //       <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>
+                  //       {/* {value?.networks[0]((img) => (
+                  //         <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
+                  //       ))} */}
+                  //       <span className="text-muted description">Create your token on {value.categoryName}</span>
+                  //     </Link>
+                  //   </div>
+                  // }else {
+                  return <div className="chain-item">
                     {console.log(value.hrefPath, "jjjjjjj")}
                     <Link to={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
                       <span className="title">{value.categoryName}</span>
@@ -78,14 +80,15 @@ function Main() {
                       {/* {value?.networks[0]((img) => (
                         <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${img.networkImage})` }}></span>
                       ))} */}
-                      
+
                       <span className="text-muted description">Create your token on {value.categoryName}</span>
                     </Link>
                   </div>
-                // }
-              })}
-            </>
-          </div>
+                  // }
+                })}
+              </>
+            </div>}
+
           {/* <div className="chain-select">
             <>
 

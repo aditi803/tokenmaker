@@ -53,7 +53,7 @@ import { multiStepContext } from "./StepContext";
 const SolanaMain1 = (props) => {
   const [tokenType, setTokenType] = useState()
   const [errNet, setErrNet] = useState(false)
-  console.log(props, "ADITI SET NET")
+  // console.log(props, "ADITI SET NET")
   const [commissonFee, setCommissonFee] = useState("free")
   const { setNet, net } = props;
   const steps = [" ", " "];
@@ -88,18 +88,18 @@ const SolanaMain1 = (props) => {
   // 
 
   
-  console.log(publicKey, "public kaye");
+  // console.log(publicKey, "public kaye");
   const [tokenName, setTokenName] = useState("");
   const [symbol, setSymbol] = useState("");
   const [uri, setUri] = useState("safhfsa");
   const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(1);
-  console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+  // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
 
   const [agreement, setAgreement] = useState(false)
 
-  console.log(agreement, 'aditi agre')
+  // console.log(agreement, 'aditi agre')
 
   const [err, setErr] = useState({
     tokenNameErr: "",
@@ -119,11 +119,11 @@ const SolanaMain1 = (props) => {
       setErrNet(false)
     }
 
-    console.log(data, "VAMPIRE")
+    // console.log(data, "VAMPIRE")
     data.forEach((item) => {
       if(item.parentNetworkName === "Solana" && item.value === net && item.tokenType === tokenType ){
         setCommissonFee(item.networkCommissionFee)
-        console.log(item , "VAMPIRE 1")
+        // console.log(item , "VAMPIRE 1")
       }
     })
 
@@ -139,23 +139,23 @@ const SolanaMain1 = (props) => {
       .get("https://tokenmaker-apis.block-brew.com/payment/paymentaddress")
       .then(res => {
         setPayment(res.data.msg)
-        console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>Solana PAYMENT ADDRESS MSG>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        // console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>Solana PAYMENT ADDRESS MSG>>>>>>>>>>>>>>>>>>>>>>>>>>>")
       })
       .catch(err => {
         console.log(err);
       })
   }
-  console.log(payment.solanaPaymentAddress,"PAyment addrress solana")
+  // console.log(payment.solanaPaymentAddress,"PAyment addrress solana")
   const [provider, setProvider] = useState(null);
   const wallet = useWallet();
   useEffect(() => {
     if (wallet && wallet.connected) {
 
       async function connectProvider() {
-        console.log(wallet,"wallet");
+        // console.log(wallet,"wallet");
         await wallet.connect();
         const provider = wallet.wallet.adapter;
-        console.log(provider,"provider");
+        // console.log(provider,"provider");
         
         await provider.connect();
         setProvider(provider);
@@ -255,7 +255,7 @@ const SolanaMain1 = (props) => {
       // if (!sign.detached.verify(message, signature, publicKey.toBytes())) throw new Error('Invalid signature!');
       // const vicky = Keypair.generate()
       const vicky  = "r5wGTPdSNn1kEesgj2aoJ1PyvgHD5MC72xHPW83wGbd"
-      console.log(vicky,"buf");
+      // console.log(vicky,"buf");
       // var bufView = new Uint16Array(vicky);
       // var bufView = new TextEncoder().encode(vicky)
       // var stringview = bufView.toBytes()
@@ -269,8 +269,8 @@ const SolanaMain1 = (props) => {
         setWalletBalance(solbalance)
       }
       
-      console.log(solbalance,"soolbala");
-    console.log(solbalance/LAMPORTS_PER_SOL,"balalal")
+    //   console.log(solbalance,"soolbala");
+    // console.log(solbalance/LAMPORTS_PER_SOL,"balalal")
     })();
 
     // return () => {
@@ -284,7 +284,7 @@ const SolanaMain1 = (props) => {
     axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
       .then((res) => {
         setData(res.data.msg.items)
-        console.log(res.data.msg.items, "Aditii ddata jo ni aata solana>>>>>>>>>>>>>>> ");
+        // console.log(res.data.msg.items, "Aditii ddata jo ni aata solana>>>>>>>>>>>>>>> ");
       })
       .catch((err) => {
         console.log(err, "Error")
@@ -296,7 +296,7 @@ const SolanaMain1 = (props) => {
   }, [setData])
 
 
-  console.log(agreement, "DITI")
+  // console.log(agreement, "DITI")
 
   const onClick = useCallback(
     async (form) => {
@@ -309,31 +309,31 @@ const SolanaMain1 = (props) => {
       if (agreement === false) {
         // return;
       }
-      console.log(connection, "DITI")
+      // console.log(connection, "DITI")
       // const solbalance = await connection.getBalance(publicKey)
       // console.log(solbalance,"balalal")
 
       // console.log(`Switched to account ${publicKey.toBase58()}`);
       // console.log(test,"connection>>>");
       if (!publicKey) {
-        console.log("public key nhi h");
+        // console.log("public key nhi h");
         toast.error("Please Connect Your wallet ")
       }
 
       
 
-      console.log(connection, "connection");
+      // console.log(connection, "connection");
       const lamports = await getMinimumBalanceForRentExemptMint(connection);
-      console.log(lamports, "lamports");
+      // console.log(lamports, "lamports");
       const mintKeypair = Keypair.generate();
-      console.log(mintKeypair, "mintKeypair");
+      // console.log(mintKeypair, "mintKeypair");
       const metadataPDA = await findMetadataPda(mintKeypair.publicKey);
-      console.log(metadataPDA, "metadataPDA");
+      // console.log(metadataPDA, "metadataPDA");
       const tokenATA = await getAssociatedTokenAddress(
         mintKeypair.publicKey,
         publicKey
       );
-      console.log(tokenATA, "tokenATA");
+      // console.log(tokenATA, "tokenATA");
       const tokenMetadata = {
         name: form.tokenName,
         symbol: form.symbol,
@@ -343,9 +343,9 @@ const SolanaMain1 = (props) => {
         collection: null,
         uses: null,
       };
-      console.log(tokenMetadata, "token meta datat");
-      console.log(form.decimals, "decimL");
-      console.log(form.amount, "amount");
+      // console.log(tokenMetadata, "token meta datat");
+      // console.log(form.decimals, "decimL");
+      // console.log(form.amount, "amount");
       const createNewTokenTransaction = new Transaction().add(
         SystemProgram.createAccount({
           fromPubkey: publicKey,
@@ -397,7 +397,7 @@ const SolanaMain1 = (props) => {
       const commisionerAcc = payment.solanaPaymentAddress
       
     // const base = Base58.encode(new Buffer(commisionerAcc))
-          console.log(commisionerAcc,"cacc");
+          // console.log(commisionerAcc,"cacc");
           // console.log(base,"base");
    
           
@@ -411,13 +411,13 @@ const SolanaMain1 = (props) => {
       
     try{
         const signature = await sendTransaction(transaction, connection);
-        console.log(signature,"signature");
+        // console.log(signature,"signature");
         props.setShow(false)
     
         const signpay = await connection.confirmTransaction(signature, "processed");
-        console.log(signpay,"signpay");
-          // props.setshow(false)
-          console.log("transaction ke ooperss");
+        // console.log(signpay,"signpay");
+        //   // props.setshow(false)
+        //   console.log("transaction ke ooperss");
 
         const myTransaction = await sendTransaction(createNewTokenTransaction, connection, {
           signers: [mintKeypair],
@@ -426,20 +426,20 @@ const SolanaMain1 = (props) => {
 
 
         
-        console.log(myTransaction,"trap");
+        // console.log(myTransaction,"trap");
         if(myTransaction){
           setDeployData((prev) => ({
             ...prev,
             tokenAddress: myTransaction
           }));
           setSolDeploy(true)
-        console.log(myTransaction,"myTransaction");
+        // console.log(myTransaction,"myTransaction");
         }
       }catch(error){
 
         console.log(error, "user rejected","error123")
         if(error)
-          console.log("Executing1");
+          // console.log("Executing1");
         Swal.fire({
           icon: 'error',
           title: 'Oops...',

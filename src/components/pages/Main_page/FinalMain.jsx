@@ -14,8 +14,8 @@ export const FinalMain = (props) => {
   const percentage = 100;
   const { addToken, deploySuccess, deployData,solDeploy } = useContext(GlobalContext);
 
-  console.log(deploySuccess, "deploy Success final side");
-  console.log("final main");
+  // console.log(deploySuccess, "deploy Success final side");
+  // console.log("final main");
 
   return (
     <>

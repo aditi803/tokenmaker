@@ -33,7 +33,7 @@ export const SuccessDeploy = (props) => {
   // })
 
   window.addEventListener('hashchange', () => {
-    console.log("sanam");
+    // console.log("sanam");
   })
 
   // 
@@ -55,10 +55,10 @@ export const SuccessDeploy = (props) => {
     }
 
     return () => {
-      console.log(test, 'vicky')
+      // console.log(test, 'vicky')
       // setTest(true)
       if (test) {
-        console.log('vicky test')
+        // console.log('vicky test')
       }
 
       // setSolDeploy(false)
@@ -118,7 +118,7 @@ export const SuccessDeploy = (props) => {
                   rel="noreferrer"
                   title={`View your token on ${explorer.name}`}
                 > */}
-                {console.log(deployData.tokenAddress, "tokkkkk")}
+                {/* {console.log(deployData.tokenAddress, "tokkkkk")} */}
                 {/* {deployData.tokenAddress} */}
                 {
                   solDeploy ?
