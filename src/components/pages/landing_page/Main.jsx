@@ -78,7 +78,7 @@ function Main() {
                       // }else {
                       return <div className='col-xl-2'>
                         <div className="chain-item">
-                          {console.log(value.hrefPath, "jjjjjjj")}
+                          
                           <Link to={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
                             <span className="title">{value.categoryName}</span>
                             <span className="logo" style={{ backgroundImage: `url(${imageBaseUrl}${value?.networks[0].networkImage})` }}></span>

@@ -163,13 +163,6 @@ a {
     margin: 100px;
 }
 
-.transactionWrap {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-
 .chain-link .logo {
     background-size: contain;
     display: block;
