@@ -12,14 +12,15 @@ import MainSkeleton from "../../../skeleton/MainSkeleton"
 
 function Main() {
 
-  const { setSolDeploy } = useContext(GlobalContext);
+  const { setSolDeploy,setDeploySuccess } = useContext(GlobalContext);
+
   const [data, setData] = useState([])
-  const [image, setImage] = useState([])
   const [loader, setLoader] = useState(false)
 
   useEffect(() => {
     setLoader(true)
     setSolDeploy(false)
+    setDeploySuccess(false)
     getNetworkHanlder()
   }, [])
 

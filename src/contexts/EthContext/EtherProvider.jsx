@@ -387,6 +387,7 @@ export const EtherProvider = ({ children }) => {
         solDeploy,
         setSolDeploy,
         deploySuccess: deploySuccess,
+        setDeploySuccess,
 
         deployData: deployData,
         setDeployData,
