@@ -76,7 +76,7 @@ function Main() {
                       //     </Link>
                       //   </div>
                       // }else {
-                      return <div className='col-xl-3'>
+                      return <div className='col-xl-2'>
                         <div className="chain-item">
                           {console.log(value.hrefPath, "jjjjjjj")}
                           <Link to={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
