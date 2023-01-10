@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import "../Main_page/Main.css";
+// import "../Main_page/Main.css";
+import '../../pages/Eth_page/eth_styles/main.css'
 
 import { SuccessDeploy } from "./SuccessDeploy";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";

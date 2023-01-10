@@ -127,3 +127,8 @@ input::-webkit-inner-spin-button {
         background-color: rgba(0, 0, 0, 0.911);
     }
 }
+@media(max-width: 991.98px){
+    footer {
+        padding-top: 30px;
+    }
+}

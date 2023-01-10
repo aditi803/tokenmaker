@@ -64,7 +64,7 @@ const HeroSkeleton = () => {
             <section
                 className="page-section hero d-md-flex align-items-center"
                 id="hero"
-                style={{
+                style={{ background: "none"
                 }}
             >
                 <div className="container self">
