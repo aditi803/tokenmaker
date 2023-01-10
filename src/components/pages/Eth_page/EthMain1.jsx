@@ -747,12 +747,7 @@ const EthMain1 = (props) => {
         }
 
       // console.log(FormData, "formdata eth side");
-<<<<<<< HEAD
       // if (FormData.network === chainId) {
-=======
-      
-      if (FormData.network === chainId) {
->>>>>>> cfc979e4828aad6e01bd930db044170f8149c58e
         // navigate("/generator/final");
         if (connectedAccAddress.length === 0) {
           await SignInMetamask()
@@ -811,16 +806,9 @@ const EthMain1 = (props) => {
         }
 
 
-<<<<<<< HEAD
       // } else {
       //   changeNetwork(FormData.network);
       // }
-=======
-      } else {
-        changeNetwork(FormData.network);
-        
-      }
->>>>>>> cfc979e4828aad6e01bd930db044170f8149c58e
     } catch (error) {
       toast.error(error.message);
       // console.log("compile contract side catch er", error);
