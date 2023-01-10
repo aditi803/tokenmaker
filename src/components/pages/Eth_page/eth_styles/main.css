@@ -139,7 +139,7 @@ option {
     padding: 0px 2px 1px;
 }
 
-.f-12{
+.f-12 {
     font-size: 12px;
 }
 
@@ -147,7 +147,7 @@ option {
     font-size: 14px;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
     cursor: pointer !important;
 }
 
@@ -674,6 +674,23 @@ small {
 
 .tooltip-arrow {
     display: none !important;
+}
+
+@media(min-width: 1685px) {
+    .page-content {
+        padding-bottom: 426px;
+    }
+
+    .page-footer .footer {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+    }
+
+    footer {
+        background-position: center bottom -1px;        
+    }
 }
 
 @media (max-width:998.98px) {
