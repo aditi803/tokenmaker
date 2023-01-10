@@ -485,6 +485,16 @@ i[title]:hover::after {
     border-color: #198754;
 }
 
+.btn-ghost {
+    background-color: #f50058;
+    border-color: #f50058;
+    color: #fff;
+}
+
+.disabled {
+    background-color: #dedede;
+}
+
 @media (max-width:998.98px) {
     .sub-highlight {
         margin-top: 40px;

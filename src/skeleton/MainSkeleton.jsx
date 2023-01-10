@@ -10,7 +10,7 @@ const MainSkeleton = () => {
             id: 2
         },
         {
-            id: 3,
+            id: 3
         },
         {
             id: 4
@@ -40,9 +40,9 @@ const MainSkeleton = () => {
                         return <div className="col-sm-6 col-md-4 col-lg-3 col-xxl">
                             <div className="chain-item d-flex align-items-center justify-content-center flex-column">
                                 <Skeleton variant="rounded" height={20} width={155} />
-
-                                <Skeleton variant="circular" height={71} width={76} style={{ margin: "60px 0 30px" }} />
-                                <Skeleton variant="rounded" height={62} width={230} />
+                                <Skeleton className='my-5' variant="rounded" height={71} width={76} />
+                                <Skeleton className='mb-2' variant="rounded" height={10} width={200} />
+                                <Skeleton variant="rounded" height={10} width={100} />
                             </div>
                         </div>
                         // }

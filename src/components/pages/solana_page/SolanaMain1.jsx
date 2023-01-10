@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import "./eth_styles/main.css";
+// import "./eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
@@ -542,8 +542,8 @@ const SolanaMain1 = (props) => {
                     <div className="col-lg-12">
                       <div className="firstForm">
                         <h2 className="heading">Informations</h2>
-                        <form>
-                          <div className="form-group">
+                        <form className="row">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Token type
                               <span className="val-required">*</span>
@@ -564,7 +564,7 @@ const SolanaMain1 = (props) => {
                               and Basic have limited configurations)
                             </span>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Supply type
                               <span className="val-required">*</span>
@@ -584,7 +584,7 @@ const SolanaMain1 = (props) => {
                               Fixed / Capped / Unlimited
                             </span>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Token Name
                               <span className="val-required">*</span>
@@ -606,7 +606,7 @@ const SolanaMain1 = (props) => {
                               {err.tokenNameErr}
                             </span>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Token Symbol
                               <span className="val-required">*</span>
@@ -628,7 +628,7 @@ const SolanaMain1 = (props) => {
                               {err.tokenSymbolErr}
                             </span>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Decimals<span className="val-required">*</span>
                             </label>
@@ -651,8 +651,7 @@ const SolanaMain1 = (props) => {
                               {err.decimalsErr}
                             </span>
                           </div>
-
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Initial supply
                               <span className="val-required">*</span>
@@ -679,7 +678,7 @@ const SolanaMain1 = (props) => {
                           </div>
                           <button
                             // type="submit"
-                            className="btn form-btn"
+                            className="btn form-btn justify-content-center"
                             onClick={handleSubmit}
                           >
                             Next
@@ -696,7 +695,7 @@ const SolanaMain1 = (props) => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="firstForm">
-                        <h2 className="heading">Network</h2>
+                        <h4 className="heading">Network</h4>
                         <form>
                           <div className="form-group">
                             <select
@@ -728,9 +727,9 @@ const SolanaMain1 = (props) => {
                             </span>
                           </div>
 
-                          <h2 className="heading">Transaction</h2>
+                          <h4 className="heading">Transaction</h4>
                           <div className="card-body">
-                            <div className="transactionWrap">
+                            <div className="transactionWrap d-sm-flex align-items-start justify-content-between mb-3 mb-sm-0">
                               <div className="Ttext">
                                 <p>
                                   Commission fee:{" "}
@@ -756,7 +755,7 @@ const SolanaMain1 = (props) => {
                                 </p>
                               </div>
                               <div
-                                className="Tbtn mt-auto mb-auto"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-success d-block p-2 ">
@@ -770,7 +769,7 @@ const SolanaMain1 = (props) => {
                                 </span>
                               </div>
                             </div>
-                            <div className="transactionWrap">
+                            <div className="transactionWrap d-sm-flex align-items-start justify-content-between mb-3 mb-sm-0">
                               <div className="Ttext ">
                                 <p>
                                   Gas fee:{" "}
@@ -791,7 +790,7 @@ const SolanaMain1 = (props) => {
                                 </p>
                               </div>
                               <div
-                                className="Tbtn mt-auto mb-auto"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-secondary d-block p-2">
@@ -800,7 +799,7 @@ const SolanaMain1 = (props) => {
                               </div>
                             </div>
                           </div>
-                          <h2 className="heading">Agreement</h2>
+                          <h4 className="heading">Agreement</h4>
                           <div className="card-body">
                             <div className="form-group">
                               <label className="form-check">
@@ -839,7 +838,7 @@ const SolanaMain1 = (props) => {
                               </label>
                             </div>
                           </div>
-                          <div className="d-flex">
+                          <div className="d-flex justify-content-between">
                             <button
                               type="button"
                               className="btn form-btn"
