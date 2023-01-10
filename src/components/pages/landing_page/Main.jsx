@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
-import "./landing_page_styles/main.css";
+// import "./landing_page_styles/main.css";
 import axios from 'axios'
 import Loader from "../../../loader";
 import { Link } from "react-router-dom";
