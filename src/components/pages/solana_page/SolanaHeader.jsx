@@ -106,23 +106,10 @@ export const SolanaHeader = (props) => {
                        </noscript>
                     </span> */}
                 </Link>
-
-                <div className="ms-auto" style={{
-                  backgroundColor: "#f50058",
-                  borderColor: "#f50058",
-                  color: "#fff",
-                  borderRadius: "40px",
-                  justifyContent: "center",
-                  padding: "4px 20px",
-                  display:"flex",
-                  alignItems:"center"
-                }}>
-                  
-                  <>{PublicKey && <p className="m-0" style={{fontSize:"17px", fontWeight:"600"}}>{finalAmount.toFixed(5)}{" "}SOL</p>}</>
-                  <WalletMultiButton className="btn btn-ghost" />
-                
+                <div className="nav-btn-div">
+                  <>{PublicKey && <p className="m-0" style={{ fontSize: "17px", fontWeight: "600" }}>{finalAmount.toFixed(5)}{" "}SOL</p>}</>
+                  <WalletMultiButton className="btn blue-btn ml-auto justify-content-center" />
                 </div>
-
               </nav>
             </div>
           </div>

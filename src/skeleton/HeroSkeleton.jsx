@@ -61,11 +61,47 @@ const HeroSkeleton = () => {
     ]
     return (
         <div className="heroskeleton">
-            <section className='banner'>
-                <div className='' >
-                    <div className=''>
-                        <div style={{ flexDirection: "column", width: "100%", padding: "20px 20px", justifyContent: "center", display: "flex", gap: "40px" }} className='left'>
-                            <Skeleton variant="rounded" height={700} style={{ width: "calc(100vw - 62px)" }} />
+            <section
+                className="page-section hero d-md-flex align-items-center"
+                id="hero"
+                style={{ background: "none"
+                }}
+            >
+                <div className="container self">
+                    <div className="row">
+                        <div className="col-lg-6 d-flex flex-column justify-content-center">
+                            <h1 >
+                                <span className="sub-highlight">
+                                    <Skeleton variant="rounded" height={39} width={500} className=" mx-auto" />
+                                    {/* <Skeleton variant="rounded" height={60} width={200} style={{marginLeft:"0 !important"}}/> */}
+                                </span>
+                            </h1>
+                            <div className="my-2">
+                                <p
+                                    className=""
+                                >
+                                 <Skeleton variant="rounded" height={10} width={487} className="mb-2" />
+                                    <Skeleton variant="rounded" height={10} width={480} className="mb-2" />   
+                                    <Skeleton variant="rounded" height={10} width={480} className="mb-2" />   
+                                    <Skeleton variant="rounded" height={10} width={210} className="mb-2" />   
+                                </p>
+                            </div>
+                            <div className="my-2">
+                                {/* <Link
+                          className="blue-btn btn"
+                          to="/generator"
+                          style={{
+                            backgroundColor: `${banner.buttonBackgroundColor}`,
+                            color: `${banner.buttonTextColor}`,
+                          }}
+                        >
+                        </Link> */}
+                        <Skeleton variant="rounded" height={40} width={180} className="mb-2" />  
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <img className="banner-side-image" alt="" />
+                            <Skeleton variant="rounded" height={403} width={480} className="mb-2" />  
                         </div>
                     </div>
                 </div>

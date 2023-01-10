@@ -78,7 +78,7 @@ export const FrontMain = () => {
       <Header />
       <div className="page-content">
         <main className="">
-          {loader ? <HeroSkeleton /> :
+          { loader ? <HeroSkeleton /> :
             <>
               <section
                 className="page-section hero d-md-flex align-items-center"

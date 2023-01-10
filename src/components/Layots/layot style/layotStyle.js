@@ -16,9 +16,8 @@ position: fixed;
 right: 28px;
 bottom: 59px;
 height: 20px;
-
+z-index: 9999;
 font-size: 3rem;
-z-index: 1;
 cursor: pointer;
 color: #f50058;
 `

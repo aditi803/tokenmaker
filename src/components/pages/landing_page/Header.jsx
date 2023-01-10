@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { HEADER } from '../../../api/Api'
-import './landing_page_styles/header.css'
+// import './landing_page_styles/header.css'
 import axios from "axios"
 import HeaderSkeleton from '../../../skeleton/HeaderSkeleton'
 const Header = () => {
