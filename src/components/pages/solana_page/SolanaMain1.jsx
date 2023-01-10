@@ -540,7 +540,7 @@ const SolanaMain1 = (props) => {
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
-                      <div className="firstForm">
+                      <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
                         <h3 className="heading mb-4">Informations</h3>
                         <form className="row">
                           <div className="form-group col-lg-6">

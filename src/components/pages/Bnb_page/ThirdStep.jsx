@@ -7,7 +7,7 @@ const ThirdStep = () => {
     <div className="container">
       <div className="row">
         <div className="col-lg-12">
-            <div className="firstForm">
+            <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
                 <h2 className="heading">Supply</h2>
                 <form>
                 <div className="form-group">
