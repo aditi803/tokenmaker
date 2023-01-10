@@ -745,6 +745,7 @@ const MoonRiverMain1 = (props) => {
             });
         }
       } else {
+        
         changeNetwork(FormData.network);
       }
     } catch (error) {
