@@ -191,7 +191,7 @@ export const EtherProvider = ({ children }) => {
     try {
       // e.preventDefault();
       //Check if Metamask is Installed Or Not
-      if (window.ethereum) {
+      if (window.ethereum.isMetaMask || window.ethereum.isTrust ) {
         // console.log(window.ethereum, "ethereumadd");
         let account = await window.ethereum.request({
           method: "eth_requestAccounts",
@@ -226,10 +226,10 @@ export const EtherProvider = ({ children }) => {
 
   const changeNetwork = async (networkID) => {
     try {
-      // console.log(networkID, "netwrk id in change netwrk");
-
+      console.log(networkID, "netwrk id in change netwrk");
+    
       const chainIdInDecimal = ethers.utils.hexlify(networkID);
-      // console.log(chainIdInDecimal, "hexadecimal chainid");
+      console.log(chainIdInDecimal, "hexadecimal chainid");
       let parseChainId = "";
       for (let i = 0; i < chainIdInDecimal.length; i++) {
         if (chainIdInDecimal[i] > 0) {
@@ -237,7 +237,8 @@ export const EtherProvider = ({ children }) => {
           parseChainId += chainIdInDecimal[i];
         }
       }
-      // console.log(parseChainId, "parseChainId>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      
+      console.log(parseChainId, "parseChainId>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
       // console.log(`0x${parseChainId}`, "hexa id after")
       // console.log(networkID, "selectedNetworkID");
       await window.ethereum.request({

@@ -18,12 +18,17 @@ import {
   createAssociatedTokenAccountInstruction,
   createMintToInstruction,
 } from "@solana/spl-token";
-import { Keypair, SystemProgram, Transaction,LAMPORTS_PER_SOL } from "@solana/web3.js";
+import {
+  Keypair,
+  SystemProgram,
+  Transaction,
+  LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
 import {
   DataV2,
   createCreateMetadataAccountV2Instruction,
 } from "@metaplex-foundation/mpl-token-metadata";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -34,8 +39,7 @@ import { findMetadataPda } from "@metaplex-foundation/js";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import Base58 from "base-58";
 
-
-// 
+//
 // import { Metadata } from '@metaplex-foundation/mpl-token-metadata';
 // import { WebBundlr } from '@bundlr-network/client';
 // import { sign } from 'tweetnacl';
@@ -49,17 +53,14 @@ import Base58 from "base-58";
 
 const SolanaMain1 = (props) => {
   // const [tokenType, setTokenType] = useState()
-  const [errNet, setErrNet] = useState(false)
+  const [errNet, setErrNet] = useState(false);
   // console.log(props, "ADITI SET NET")
-  const [commissonFee, setCommissonFee] = useState("free")
+  const [commissonFee, setCommissonFee] = useState("free");
   const { setNet, net } = props;
   const steps = [" ", " "];
   const { solDeploy, setSolDeploy, setDeployData } = useContext(GlobalContext);
 
-  const {
-    solNetworkName,
-    setSolNetworkName
-  } = useContext(GlobalContext);
+  const { solNetworkName, setSolNetworkName } = useContext(GlobalContext);
   const { currentStep, submitted } = useContext(multiStepContext);
   const { setStep, userData, setUserData } = useContext(multiStepContext);
 
@@ -72,7 +73,7 @@ const SolanaMain1 = (props) => {
   const [signature, setSignature] = useState("");
   const [signedMessage, setSignedMessage] = useState("");
   const [verified, setVerified] = useState();
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   useEffect(() => {
     if (!connected) {
       setError("");
@@ -82,19 +83,17 @@ const SolanaMain1 = (props) => {
       setVerified();
     }
   }, [connected]);
-  // 
+  //
 
-  
   // console.log(publicKey, "public kaye");
   const [tokenName, setTokenName] = useState("");
   const [symbol, setSymbol] = useState("");
   const [uri, setUri] = useState("safhfsa");
-  const [agreement, setAgreement] = useState(false)
+  const [agreement, setAgreement] = useState(false);
   const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(1);
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
-
 
   // console.log(agreement, 'aditi agre')
 
@@ -103,69 +102,66 @@ const SolanaMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
-    amountErr: ""
+    amountErr: "",
   });
-  const [payment, setPayment] = useState("")
-  const [tokenType, setTokenType] = useState("basic")
-  const [network, setNetwork] = useState("")
-  const [commissionFee, setCommissionFee] = useState("Free")
+  const [payment, setPayment] = useState("");
+  const [tokenType, setTokenType] = useState("basic");
+  const [network, setNetwork] = useState("");
+  const [commissionFee, setCommissionFee] = useState("Free");
   useEffect(() => {
     // setLoader(false)
-    
-    fetchData()
-  }, [setPayment])
+
+    fetchData();
+  }, [setPayment]);
 
   useEffect(() => {
-    if(net){
-      setErrNet(false)
+    if (net) {
+      setErrNet(false);
     }
 
     // console.log(data, "VAMPIRE")
     data.forEach((item) => {
-      if(item.parentNetworkName === "Solana" && item.value === net && item.tokenType === tokenType ){
-        setCommissonFee(item.networkCommissionFee)
+      if (
+        item.parentNetworkName === "Solana" &&
+        item.value === net &&
+        item.tokenType === tokenType
+      ) {
+        setCommissonFee(item.networkCommissionFee);
         // console.log(item , "VAMPIRE 1")
       }
-    })
-
-
-
-
-
-  }, [net, data])
-
+    });
+  }, [net, data]);
 
   const fetchData = async () => {
     await axios
       .get("https://tokenmaker-apis.block-brew.com/payment/paymentaddress")
-      .then(res => {
-        setPayment(res.data.msg)
+      .then((res) => {
+        setPayment(res.data.msg);
         // console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>Solana PAYMENT ADDRESS MSG>>>>>>>>>>>>>>>>>>>>>>>>>>>")
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
   // console.log(payment.solanaPaymentAddress,"PAyment addrress solana")
   const [provider, setProvider] = useState(null);
   const wallet = useWallet();
 
   useEffect(() => {
     if (wallet && wallet.connected) {
-
       async function connectProvider() {
         // console.log(wallet,"wallet");
         await wallet.connect();
         const provider = wallet.wallet.adapter;
         // console.log(provider,"provider");
-        
+
         await provider.connect();
         setProvider(provider);
       }
       connectProvider();
     }
   });
-  
+
   useEffect(() => {
     if (agreement !== false) {
       setErr((prev) => ({
@@ -200,7 +196,6 @@ const SolanaMain1 = (props) => {
     }
   }, [agreement, tokenName, symbol, decimals, amount]);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (tokenName === "") {
@@ -218,13 +213,11 @@ const SolanaMain1 = (props) => {
     }
 
     if (agreement === false) {
-
       setErr((prev) => ({
         ...prev,
         agreementErr:
           "Please confirm that you have read and understood our terms of use.",
       }));
-
     }
     if (decimals >= 21 || decimals <= 6) {
       setErr((prev) => ({
@@ -235,89 +228,87 @@ const SolanaMain1 = (props) => {
     if (amount === "") {
       setErr((prev) => ({
         ...prev,
-        amountErr: "Please Enter how many token you want to deploy "
-      }))
+        amountErr: "Please Enter how many token you want to deploy ",
+      }));
     }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
-
       console.log(err, "da");
     }
-    if (tokenName !== "" && symbol !== "" && amount !== "" && decimals !== null) {
+    if (
+      tokenName !== "" &&
+      symbol !== "" &&
+      amount !== "" &&
+      decimals !== null
+    ) {
       // navigate("/generator/final");
       setStep(2);
     }
   };
 
   // };
-  const [walletBalance, setWalletBalance] = useState()
+  const [walletBalance, setWalletBalance] = useState();
   useEffect(() => {
     (async () => {
       // const message = new TextEncoder().encode('Hello, world!');
       // const signatures = await signMessage(message);
       // if (!sign.detached.verify(message, signature, publicKey.toBytes())) throw new Error('Invalid signature!');
       // const vicky = Keypair.generate()
-      const vicky  = "r5wGTPdSNn1kEesgj2aoJ1PyvgHD5MC72xHPW83wGbd"
+      const vicky = "r5wGTPdSNn1kEesgj2aoJ1PyvgHD5MC72xHPW83wGbd";
       // console.log(vicky,"buf");
       // var bufView = new Uint16Array(vicky);
       // var bufView = new TextEncoder().encode(vicky)
       // var stringview = bufView.toBytes()
       // console.log(bufView,"vicky");
       // console.log(stringview,"stringview");
-      let solbalance 
-      if(!publicKey){
-        solbalance= 'd'
-      }else{
-        solbalance = await connection.getBalance(publicKey)
-        setWalletBalance(solbalance)
+      let solbalance;
+      if (!publicKey) {
+        solbalance = "d";
+      } else {
+        solbalance = await connection.getBalance(publicKey);
+        setWalletBalance(solbalance);
       }
-      
-    //   console.log(solbalance,"soolbala");
-    // console.log(solbalance/LAMPORTS_PER_SOL,"balalal")
+
+      //   console.log(solbalance,"soolbala");
+      // console.log(solbalance/LAMPORTS_PER_SOL,"balalal")
     })();
 
     // return () => {
     //   // this now gets called when the component unmounts
     // };
+  });
 
-  })
-
-  
   const getNetworks = () => {
-    axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
+    axios
+      .get(
+        "https://tokenmaker-apis.block-brew.com/commission/commissiondetails"
+      )
       .then((res) => {
         console.log(res.data.msg.items, "uniqueeeeeeeee");
-        setData(res.data.msg.items)
+        setData(res.data.msg.items);
       })
       .catch((err) => {
-        console.log(err, "Error")
-      })
-  }
+        console.log(err, "Error");
+      });
+  };
 
-  
   useEffect(() => {
-    if(tokenName && symbol){
-      
+    if (tokenName && symbol) {
     }
-  }, [tokenName, symbol])
-
-
-
+  }, [tokenName, symbol]);
 
   useEffect(() => {
-    console.log(" ")
-    getNetworks()
-  }, [])
-
+    console.log(" ");
+    getNetworks();
+  }, []);
 
   // console.log(agreement, "DITI")
 
   const onClick = useCallback(
     async (form) => {
-
-      if(!net){
-        setErrNet(true)
-        return
+      if (!net) {
+        setErrNet(true);
+        return;
       }
 
       if (agreement === false) {
@@ -331,10 +322,8 @@ const SolanaMain1 = (props) => {
       // console.log(test,"connection>>>");
       if (!publicKey) {
         // console.log("public key nhi h");
-        toast.error("Please Connect Your wallet ")
+        toast.error("Please Connect Your wallet ");
       }
-
-      
 
       // console.log(connection, "connection");
       const lamports = await getMinimumBalanceForRentExemptMint(connection);
@@ -408,70 +397,75 @@ const SolanaMain1 = (props) => {
         )
       );
       // const commisionerAcc = "GEtzEteYKhYnjkqCitFMjpo3BgnamVuKgbrgRiV7WvDf"
-      const commisionerAcc = payment.solanaPaymentAddress
-      
-    // const base = Base58.encode(new Buffer(commisionerAcc))
-          // console.log(commisionerAcc,"cacc");
-          // console.log(base,"base");
-   
-          
-          const transaction = new Transaction().add(
-      SystemProgram.transfer({
-        fromPubkey: publicKey,
-        toPubkey: commisionerAcc,
-        lamports: 1912900,
-      })
-    );
-      
-    try{
+      const commisionerAcc = payment.solanaPaymentAddress;
+
+      // const base = Base58.encode(new Buffer(commisionerAcc))
+      // console.log(commisionerAcc,"cacc");
+      // console.log(base,"base");
+
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: commisionerAcc,
+          lamports: 1912900,
+        })
+      );
+
+      try {
         const signature = await sendTransaction(transaction, connection);
         // console.log(signature,"signature");
-        props.setShow(false)
-    
-        const signpay = await connection.confirmTransaction(signature, "processed");
+        props.setShow(false);
+
+        const signpay = await connection.confirmTransaction(
+          signature,
+          "processed"
+        );
         // console.log(signpay,"signpay");
         //   // props.setshow(false)
         //   console.log("transaction ke ooperss");
 
-        const myTransaction = await sendTransaction(createNewTokenTransaction, connection, {
-          signers: [mintKeypair],
-        });  
+        const myTransaction = await sendTransaction(
+          createNewTokenTransaction,
+          connection,
+          {
+            signers: [mintKeypair],
+          }
+        );
         // let txid = await connection.confirmTransaction(signature);
 
-
-        
         // console.log(myTransaction,"trap");
-        if(myTransaction){
+        if (myTransaction) {
           setDeployData((prev) => ({
             ...prev,
-            tokenAddress: myTransaction
+            tokenAddress: myTransaction,
           }));
-          setSolDeploy(true)
-        // console.log(myTransaction,"myTransaction");
+          setSolDeploy(true);
+          // console.log(myTransaction,"myTransaction");
         }
-      }catch(error){
+      } catch (error) {
+        // error.code === 4001
+        // ? toast.error("User rejected the request!")
+        // : toast.error(error.message);
+        console.log(error, "Executing122211111", error.code, '>>>>>>>', error.message);
+        if (error.message === 'User rejected the request.') {
+          console.log(error, "Executing1222");
+          Swal.fire({
+            icon: "error",
+            t0itle: "Oops...",
+            text: "User Rejected the Request!",
+            // footer: '<a href="">Why do I have this issue?</a>'
+          });
+          props.setShow(true);
 
-        console.log(error, "user rejected","error123")
-        if(error)
-          // console.log("Executing1");
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Some error has occured!',
-          // footer: '<a href="">Why do I have this issue?</a>'
-        })
-        props.setShow(true)
-
-        navigate("/generator/solana");
+          navigate("/generator/solana");
+        } else {
+          toast.error("ni aana");
+        }
       }
-       
-        
 
       // console.log(form.amount * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
-
     },
     [publicKey, connection, sendTransaction]
-
   );
 
   // console.log("connected", connected);
@@ -481,28 +475,22 @@ const SolanaMain1 = (props) => {
   // );
 
   const networkName = (name) => {
-    setNet(name.target.value)
-    console.log(name.target.value, "Network Name solana")
-    setNetwork(name.target.value)
-  }
+    setNet(name.target.value);
+    console.log(name.target.value, "Network Name solana");
+    setNetwork(name.target.value);
+  };
 
-  const { toggler } =
-    useContext(GlobalContext);
-
-
+  const { toggler } = useContext(GlobalContext);
 
   return (
     <>
-
       <SolanaHeader walletBalance={walletBalance} publicKey={publicKey} />
       <div className="page-content">
         <main>
           <div className="hero-form mb-3 ">
             <div className="container">
               <h1>
-                <span className="sub-highlight">
-                  Create Your Solana Token
-                </span>
+                <span className="sub-highlight">Create Your Solana Token</span>
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
@@ -552,8 +540,8 @@ const SolanaMain1 = (props) => {
                               className="form-select"
                               name="tokenType"
                               onChange={(e) => setTokenType(e.target.value)}
-                            // onChange={ethMainFormHandler}
-                            value={tokenType}
+                              // onChange={ethMainFormHandler}
+                              value={tokenType}
                             >
                               <option value="free">Free</option>
                               <option value="basic">Basic</option>
@@ -572,9 +560,9 @@ const SolanaMain1 = (props) => {
                             <select
                               className="form-select"
                               name="supplyType"
-                            // disabled={f_supplyType}
-                            // onChange={ethMainFormHandler}
-                            // value={supplyType}
+                              // disabled={f_supplyType}
+                              // onChange={ethMainFormHandler}
+                              // value={supplyType}
                             >
                               <option value="fixed">Fixed</option>
                               <option value="capped">Capped</option>
@@ -596,7 +584,7 @@ const SolanaMain1 = (props) => {
                               name="tokenName"
                               value={tokenName}
                               onChange={(e) => setTokenName(e.target.value)}
-                            // onChange={ethMainFormHandler}
+                              // onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
                               The name of your token
@@ -636,12 +624,12 @@ const SolanaMain1 = (props) => {
                               type="number"
                               className="form-control"
                               placeholder="18"
-                              min='6'
-                              max='21'
+                              min="6"
+                              max="21"
                               //   disabled={f_decimals}
                               // value={}
                               name="decimals"
-                            // onChange={(e) => setDecimals(e.target.value)}
+                              // onChange={(e) => setDecimals(e.target.value)}
                             />
                             <span className="form-text text-muted">
                               The number of decimal of your token (default 18)
@@ -664,18 +652,16 @@ const SolanaMain1 = (props) => {
                               name="amount"
                               onChange={(e) => setAmount(e.target.value)}
                               value={amount}
-                            //   disabled={f_initialSupply}
-                            // value={initialSupply}
-                            // onChange={ethMainFormHandler}
+                              //   disabled={f_initialSupply}
+                              // value={initialSupply}
+                              // onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
                               The number of coins minted during the creation of
                               the contract
                             </span>
                             <br />
-                            <span className="text-danger">
-                              {err.amountErr}
-                            </span>
+                            <span className="text-danger">{err.amountErr}</span>
                           </div>
                           <button
                             // type="submit"
@@ -707,21 +693,73 @@ const SolanaMain1 = (props) => {
                             >
                               <option>Select your netowrk</option>
                               {data.map((item) => {
-                                if (item.parentNetworkName === "Solana" && item.tokenType === 'free') {
+                                if (
+                                  item.parentNetworkName === "Solana" &&
+                                  item.tokenType === "free"
+                                ) {
                                   return (
-                                    <option className={(item.value === "solanaMainnet" || item.value === "solanaTestnet")  ? 'disabled' : ''} value={item.value} disabled={item.value === "solanaMainnet" || item.value === "solanaTestnet" }>{item.subNetworkName}</option>
-                                  )
-                                }
-                                else if (item.parentNetworkName === "Solana" && item.tokenType === 'basic') {
-                                  <option className={(item.value === "solanaMainnet" || item.value === "solanaTestnet")  ? 'disabled' : ''} value={item.value} disabled={item.value === "solanaMainnet" || item.value === "solanaTestnet" }>{item.subNetworkName}</option>
-                                }
-                                else if (item.parentNetworkName === "Solana" && item.tokenType === 'custom') {
-                                  <option className={(item.value === "solanaMainnet" || item.value === "solanaTestnet")  ? 'disabled' : ''} value={item.value} disabled={item.value === "solanaMainnet" || item.value === "solanaTestnet" }>{item.subNetworkName}</option>
-
+                                    <option
+                                      className={
+                                        item.value === "solanaMainnet" ||
+                                        item.value === "solanaTestnet"
+                                          ? "disabled"
+                                          : ""
+                                      }
+                                      value={item.value}
+                                      disabled={
+                                        item.value === "solanaMainnet" ||
+                                        item.value === "solanaTestnet"
+                                      }
+                                    >
+                                      {item.subNetworkName}
+                                    </option>
+                                  );
+                                } else if (
+                                  item.parentNetworkName === "Solana" &&
+                                  item.tokenType === "basic"
+                                ) {
+                                  <option
+                                    className={
+                                      item.value === "solanaMainnet" ||
+                                      item.value === "solanaTestnet"
+                                        ? "disabled"
+                                        : ""
+                                    }
+                                    value={item.value}
+                                    disabled={
+                                      item.value === "solanaMainnet" ||
+                                      item.value === "solanaTestnet"
+                                    }
+                                  >
+                                    {item.subNetworkName}
+                                  </option>;
+                                } else if (
+                                  item.parentNetworkName === "Solana" &&
+                                  item.tokenType === "custom"
+                                ) {
+                                  <option
+                                    className={
+                                      item.value === "solanaMainnet" ||
+                                      item.value === "solanaTestnet"
+                                        ? "disabled"
+                                        : ""
+                                    }
+                                    value={item.value}
+                                    disabled={
+                                      item.value === "solanaMainnet" ||
+                                      item.value === "solanaTestnet"
+                                    }
+                                  >
+                                    {item.subNetworkName}
+                                  </option>;
                                 }
                               })}
                             </select>
-                            {errNet && <p style={{color:"red"}}>Please select network.</p>}
+                            {errNet && (
+                              <p style={{ color: "red" }}>
+                                Please select network.
+                              </p>
+                            )}
                             <span className="form-text text-muted">
                               Select the network on wich you want to deploy your
                               token
@@ -761,10 +799,10 @@ const SolanaMain1 = (props) => {
                               >
                                 <span className="badge bg-success d-block p-2 ">
                                   {commissonFee
-                                      ? commissonFee === "free"
-                                        ? "Free"
-                                        : `${commissonFee} SOL`
-                                      : "Free"}
+                                    ? commissonFee === "free"
+                                      ? "Free"
+                                      : `${commissonFee} SOL`
+                                    : "Free"}
                                   {/* 0.01 SOL
                                   {/* {commissonFee} */}
                                 </span>
@@ -812,10 +850,10 @@ const SolanaMain1 = (props) => {
                                   // onChange={ethMainFormHandler}
                                   onChange={(e) => {
                                     setErr((prev) => ({
-                                        ...prev,
-                                      agreementErr : ""
-                                    } ))
-                                    setAgreement(e.target.checked)
+                                      ...prev,
+                                      agreementErr: "",
+                                    }));
+                                    setAgreement(e.target.checked);
                                   }}
                                 />
 
@@ -856,14 +894,17 @@ const SolanaMain1 = (props) => {
                                     ...prev,
                                     agreementErr:
                                       "Please confirm that you have read and understood our terms of use",
-                                  }))
-
-                                }else{
-                                onClick({ tokenName: tokenName, symbol: symbol, decimals: Number(decimals), amount: Number(amount), uri: uri })
+                                  }));
+                                } else {
+                                  onClick({
+                                    tokenName: tokenName,
+                                    symbol: symbol,
+                                    decimals: Number(decimals),
+                                    amount: Number(amount),
+                                    uri: uri,
+                                  });
                                 }
-                              
                               }}
-
                             >
                               Deploy
                             </button>
