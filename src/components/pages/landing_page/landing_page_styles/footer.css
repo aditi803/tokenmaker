@@ -8,9 +8,12 @@
 .page-footer {
     justify-content: center;
     color: #fff;
-    font-size: .875rem;
-    background-color: #f7f4fb;
+    font-size: .875rem;    
   
+}
+.footer-in-mainpage footer{
+    background-color: #f7f4fb;
+
 }
 footer {
     display: block;

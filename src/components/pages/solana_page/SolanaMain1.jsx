@@ -694,8 +694,8 @@ const SolanaMain1 = (props) => {
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
-                      <div className="firstForm">
-                        <h4 className="heading">Network</h4>
+                      <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
+                        <h4 className="heading mb-3">Network</h4>
                         <form>
                           <div className="form-group">
                             <select
@@ -728,7 +728,7 @@ const SolanaMain1 = (props) => {
                           </div>
 
                           <h4 className="heading">Transaction</h4>
-                          <div className="card-body">
+                          <div className="card-body px-0">
                             <div className="transactionWrap d-sm-flex align-items-start justify-content-between mb-3 mb-sm-0">
                               <div className="Ttext">
                                 <p>
@@ -800,7 +800,7 @@ const SolanaMain1 = (props) => {
                             </div>
                           </div>
                           <h4 className="heading">Agreement</h4>
-                          <div className="card-body">
+                          <div className="card-body px-0">
                             <div className="form-group">
                               <label className="form-check">
                                 <input

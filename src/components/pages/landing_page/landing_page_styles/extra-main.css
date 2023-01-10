@@ -1,5 +1,5 @@
 /* self css */
-a{
+a {
     text-decoration: none !important;
 }
 
@@ -13,15 +13,16 @@ a{
 .main-layout.header-fixed .page-content .hero {
     padding-top: 100px;
 }
+
 .hero {
     color: #fff;
     /* background-color: #383838; */
     /* padding-bottom: 2rem; */
     position: relative;
 }
+
 .hero {
     font-size: 1.125rem;
-    padding-top: 0px !important;
     background-image: url(https://tokenmaker.eattheblocks.com/images/Background-V1.1-1.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -29,23 +30,42 @@ a{
     /* height: 50vh; */
     /* padding: 80px 0px; */
 }
-.hero .h1, .hero h1 {
+
+.hero .h1,
+.hero h1 {
     font-size: 3.25rem;
 }
 
-.h1, h1 {
+.h1,
+h1 {
     font-size: calc(1.375rem + 1.5vw);
 }
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-top: 0;
     margin-bottom: 0.5rem;
-    font-family: Poppins,Helvetica Neue,Arial,sans-serif;
+    font-family: Poppins, Helvetica Neue, Arial, sans-serif;
     font-weight: 600;
     line-height: 1.2;
 }
-*, :after, :before {
+
+*,
+:after,
+:before {
     box-sizing: border-box;
 }
+
 h1 {
     display: block;
     font-size: 2em;
@@ -55,6 +75,7 @@ h1 {
     margin-inline-end: 0px;
     font-weight: bold;
 }
+
 .sub-highlight {
     display: inline-block;
     position: relative;
@@ -65,6 +86,7 @@ p {
     margin-top: 0;
     margin-bottom: 1rem;
 }
+
 .chain-select {
     display: flex;
     /* padding: 3rem; */
@@ -75,21 +97,25 @@ p {
     margin-bottom: 250px;
 
 }
+
 .chain-item {
     padding: 0;
     background-color: transparent;
-    background-image: linear-gradient(180deg,#7a7a7a,#fff 0);
+    background-image: linear-gradient(180deg, #7a7a7a, #fff 0);
     border: 1px solid #e0e0e0;
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 1px 15px -6px rgb(0 0 0 / 50%);
     max-width: 300px;
     height: 300px;
 }
-.chain-link, .chain-link:hover {
+
+.chain-link,
+.chain-link:hover {
     color: inherit;
     text-decoration: none;
     background-color: #fff;
 }
+
 .chain-link {
     height: 100%;
     display: flex;
@@ -99,22 +125,27 @@ p {
     justify-content: center;
     padding: 1rem;
     text-align: center;
-    background-color: rgba(0,0,0,.035);
+    background-color: rgba(0, 0, 0, .035);
     position: relative;
 }
+
 a {
     color: #051b35;
     text-decoration: underline;
 }
+
 .chain-link .title {
     display: block;
 }
+
 .chain-link .title {
     font-size: 1.5rem;
 }
+
 .chain-ethereum .logo {
     background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 1920 1920' enable-background='new 0 0 1920 1920' xml:space='preserve'%3E%3Cg%3E%3Cpolygon fill='%238A92B2' points='959.8,80.7 420.1,976.3 959.8,731 '/%3E%3Cpolygon fill='%2362688F' points='959.8,731 420.1,976.3 959.8,1295.4 '/%3E%3Cpolygon fill='%2362688F' points='1499.6,976.3 959.8,80.7 959.8,731 '/%3E%3Cpolygon fill='%23454A75' points='959.8,1295.4 1499.6,976.3 959.8,731 '/%3E%3Cpolygon fill='%238A92B2' points='420.1,1078.7 959.8,1839.3 959.8,1397.6 '/%3E%3Cpolygon fill='%2362688F' points='959.8,1397.6 959.8,1839.3 1499.9,1078.7 '/%3E%3C/g%3E%3C/svg%3E")
 }
+
 .chain-link .logo {
     display: block;
     width: 116px;
@@ -123,43 +154,42 @@ a {
     background-repeat: no-repeat;
     background-position: 50%;
 }
-.chain-link, .chain-link:hover {
+
+.chain-link,
+.chain-link:hover {
     color: inherit;
     text-decoration: none;
 }
+
 a {
     color: #051b35;
     text-decoration: underline;
 }
+
 .chain-link .title {
     display: block;
 }
+
 .chain-link .title {
     font-size: 1.5rem;
     position: absolute;
     top: 15px;
-    
+
 }
-.configurator{
+
+.configurator {
     margin-bottom: 168px;
 }
-.text-muted{
+
+.text-muted {
     /* position: absolute; */
     /* bottom: 10px; */
 }
-.description{
+
+.description {
     bottom: 20px;
     padding: 10px;
     position: absolute;
-}
-/* .chain-bsc .logo {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2500.01 2500'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%23f3ba2f;%7D%3C/style%3E%3C/defs%3E%3Ctitle%3Ebi%3C/title%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cpath class='cls-1' d='M764.48,1050.52,1250,565l485.75,485.73,282.5-282.5L1250,0,482,768l282.49,282.5M0,1250,282.51,967.45,565,1249.94,282.49,1532.45Zm764.48,199.51L1250,1935l485.74-485.72,282.65,282.35-.14.15L1250,2500,482,1732l-.4-.4,282.91-282.12M1935,1250.12l282.51-282.51L2500,1250.1,2217.5,1532.61Z'/%3E%3Cpath class='cls-1' d='M1536.52,1249.85h.12L1250,963.19,1038.13,1175h0l-24.34,24.35-50.2,50.21-.4.39.4.41L1250,1536.81l286.66-286.66.14-.16-.26-.14'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-} */
-.custom-row{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 100px;
 }
 
 .chain-link .logo {
@@ -171,23 +201,30 @@ a {
     background-repeat: no-repeat;
     background-position: 50%;
 }
+
 a:-webkit-any-link {
     /* color: -webkit-link; */
     cursor: pointer;
     text-decoration: underline;
     min-width: 200px;
 }
-*, :after, :before {
+
+*,
+:after,
+:before {
     box-sizing: border-box;
 }
+
 a {
     color: #051b35;
     text-decoration: underline;
 }
+
 .ribbon.top-right {
     top: -3px;
     right: -6px;
 }
+
 .ribbon {
     position: absolute;
     z-index: 100;
@@ -195,7 +232,9 @@ a {
     height: 120px;
     overflow: hidden;
 }
-.ribbon.top-right.ribbon-primary>.small, .ribbon.top-right.ribbon-primary>small {
+
+.ribbon.top-right.ribbon-primary>.small,
+.ribbon.top-right.ribbon-primary>small {
     position: absolute;
     display: block;
     width: 100%;
@@ -212,20 +251,25 @@ a {
     top: 16px;
     left: 27px;
 }
-.small, small {
+
+.small,
+small {
     font-size: .875em;
 }
+
 .chain-link .logo {
     display: block;
     width: 63px;
     height: 70px;
     margin: 20px 22px;
     background-repeat: no-repeat;
-    background-position: 50%;   
+    background-position: 50%;
 }
+
 .chain-polygon .logo {
     background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI0LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAzOC40IDMzLjUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDM4LjQgMzMuNTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiM4MjQ3RTU7fQo8L3N0eWxlPgo8Zz4KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yOSwxMC4yYy0wLjctMC40LTEuNi0wLjQtMi40LDBMMjEsMTMuNWwtMy44LDIuMWwtNS41LDMuM2MtMC43LDAuNC0xLjYsMC40LTIuNCwwTDUsMTYuMwoJCWMtMC43LTAuNC0xLjItMS4yLTEuMi0yLjF2LTVjMC0wLjgsMC40LTEuNiwxLjItMi4xbDQuMy0yLjVjMC43LTAuNCwxLjYtMC40LDIuNCwwTDE2LDcuMmMwLjcsMC40LDEuMiwxLjIsMS4yLDIuMXYzLjNsMy44LTIuMlY3CgkJYzAtMC44LTAuNC0xLjYtMS4yLTIuMWwtOC00LjdjLTAuNy0wLjQtMS42LTAuNC0yLjQsMEwxLjIsNUMwLjQsNS40LDAsNi4yLDAsN3Y5LjRjMCwwLjgsMC40LDEuNiwxLjIsMi4xbDguMSw0LjcKCQljMC43LDAuNCwxLjYsMC40LDIuNCwwbDUuNS0zLjJsMy44LTIuMmw1LjUtMy4yYzAuNy0wLjQsMS42LTAuNCwyLjQsMGw0LjMsMi41YzAuNywwLjQsMS4yLDEuMiwxLjIsMi4xdjVjMCwwLjgtMC40LDEuNi0xLjIsMi4xCgkJTDI5LDI4LjhjLTAuNywwLjQtMS42LDAuNC0yLjQsMGwtNC4zLTIuNWMtMC43LTAuNC0xLjItMS4yLTEuMi0yLjFWMjFsLTMuOCwyLjJ2My4zYzAsMC44LDAuNCwxLjYsMS4yLDIuMWw4LjEsNC43CgkJYzAuNywwLjQsMS42LDAuNCwyLjQsMGw4LjEtNC43YzAuNy0wLjQsMS4yLTEuMiwxLjItMi4xVjE3YzAtMC44LTAuNC0xLjYtMS4yLTIuMUwyOSwxMC4yeiIvPgo8L2c+Cjwvc3ZnPgo=");
 }
+
 /* .hero:after {
     content: " ";
     background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='96px' fill='white' viewBox='0 0 100 100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' preserveAspectRatio='none'%3E%3Cpath className='elementor-shape-fill' d='M0,0 C16.6666667,66 33.3333333,99 50,99 C66.6666667,99 83.3333333,66 100,0 L100,100 L0,100 L0,0 Z'%3E%3C/path%3E%3C/svg%3E");
@@ -237,9 +281,12 @@ a {
     left: 0;
     right: 0;
 } */
-*, :after, :before {
+*,
+:after,
+:before {
     box-sizing: border-box;
 }
+
 /* .sub-highlight:before {
     background-image: linear-gradient(120deg,rgba(243,221,29,.4),rgba(243,221,29,.4));
     content: " ";
