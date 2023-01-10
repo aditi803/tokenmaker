@@ -191,11 +191,11 @@ export const EtherProvider = ({ children }) => {
     try {
       // e.preventDefault();
       //Check if Metamask is Installed Or Not
-      if (window.ethereum) {
+      if (window.ethereum.isTrust || window.ethereum.isMetaMask) {
         // console.log(window.ethereum, "ethereumadd");
         let account = await window.ethereum.request({
           method: "eth_requestAccounts",
-        });
+        },[]);
         // console.log(account, "acccc");
         //set account balance
         let provider = new ethers.providers.Web3Provider(window.ethereum);

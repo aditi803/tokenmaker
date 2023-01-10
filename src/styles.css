@@ -1,0 +1,21 @@
+.page-content {
+    align-self: stretch;
+    justify-content: flex-start;
+    flex: 1 1 auto;
+}
+
+.main-layout.header-fixed .page-content .hero {
+    padding-top: 100px;
+}
+.hero {
+    color: #fff;
+    position: relative;
+}
+
+.hero .h1, .hero h1 {
+    font-size: 3.25rem;
+}
+
+.h1, h1 {
+    font-size: calc(1.375rem + 1.5vw);
+}

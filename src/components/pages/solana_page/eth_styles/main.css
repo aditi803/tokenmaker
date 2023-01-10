@@ -103,13 +103,7 @@ img, svg {
 .h4, h4 {
     font-size: calc(1.275rem + .3vw);
 }
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-family: Poppins,Helvetica Neue,Arial,sans-serif;
-    font-weight: 600;
-    line-height: 1.2;
-}
+
 .form-group {
     margin-bottom: 1rem;
 }
@@ -220,13 +214,7 @@ button, input, optgroup, select, textarea {
     position: relative !important;
     z-index: 1 !important;
 }
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-family: Poppins,Helvetica Neue,Arial,sans-serif;
-    font-weight: 600;
-    line-height: 1.2;
-}
+
 .card-body {
     flex: 1 1 auto;
     padding: 1rem;

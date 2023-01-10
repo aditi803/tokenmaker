@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./eth_styles/main.css";
+
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
