@@ -668,7 +668,7 @@ const BnbMain1 = (props) => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       // console.log(provider, "provider");
       const { chainId } = await provider.getNetwork();
-      // console.log(chainId, "chainid");
+      
 
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
@@ -678,11 +678,19 @@ const BnbMain1 = (props) => {
         })
         : "";
 
+        console.log(chainId, "chainid in bnb main");
+        console.log(FormData.network, "network id in bnb main");
+
+        if(FormData.network !== chainId){
+          await changeNetwork(FormData.network);
+          
+        }
+
       // console.log(FormData.network, "formdata bnb main1 side");
 
       // console.log(chainId, "chainId bnb main1 side ");
 
-      if (FormData.network === chainId) {
+      // if (FormData.network === chainId) {
         // navigate("/generator/final");
         if (connectedAccAddress.length === 0) {
           await SignInMetamask();
@@ -735,9 +743,9 @@ const BnbMain1 = (props) => {
                 : toast.error("Data Fetch Failed Try Again");
             });
         }
-      } else {
-        changeNetwork(FormData.network);
-      }
+      // } else {
+      //   changeNetwork(FormData.network);
+      // }
     } catch (error) {
       toast.error(error.message);
       // console.log("compile contract side catch er", error);

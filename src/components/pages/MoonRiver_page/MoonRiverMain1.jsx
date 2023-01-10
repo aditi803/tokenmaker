@@ -688,8 +688,7 @@ const MoonRiverMain1 = (props) => {
         })
         : "";
 
-      console.log(FormData.network, "formdata bnb main1 side");
-
+      console.log(FormData.network, "network bnb main1 side");
       console.log(chainId, "chainId bnb main1 side ");
 
       if (FormData.network === chainId) {
@@ -746,6 +745,7 @@ const MoonRiverMain1 = (props) => {
             });
         }
       } else {
+        
         changeNetwork(FormData.network);
       }
     } catch (error) {

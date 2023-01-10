@@ -694,8 +694,13 @@ const MaticMain1 = (props) => {
         })
         : "";
 
+        if(FormData.network !== chainId){
+          await changeNetwork(FormData.network);
+          
+        }
+
       // console.log(FormData, "formdata eth side");
-      if (FormData.network === chainId) {
+      // if (FormData.network === chainId) {
         // navigate("/generator/final");
         if (connectedAccAddress.length === 0) {
           await SignInMetamask()
@@ -746,9 +751,11 @@ const MaticMain1 = (props) => {
             });
         }
 
-      } else {
-        changeNetwork(FormData.network);
-      }
+      // } 
+      
+      // else {
+      //   changeNetwork(FormData.network);
+      // }
     } catch (error) {
       toast.error(error.message);
       // console.log("compile contract side catch er", error);

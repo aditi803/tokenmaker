@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./eth_styles/main.css";
+
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
@@ -740,8 +741,13 @@ const EthMain1 = (props) => {
         })
         : "";
 
+        if(FormData.network !== chainId){
+          await changeNetwork(FormData.network);
+          
+        }
+
       // console.log(FormData, "formdata eth side");
-      if (FormData.network === chainId) {
+      // if (FormData.network === chainId) {
         // navigate("/generator/final");
         if (connectedAccAddress.length === 0) {
           await SignInMetamask()
@@ -751,8 +757,14 @@ const EthMain1 = (props) => {
 
         let res = await sendCommision(commissionFee)
         // console.log(res, "ress send commision matic main")
+        if(!res){
+          
+        }
 
-        if (res) {
+
+
+        if (res) 
+        {
           props.setShow(false);
 
           //hit contract compile api
@@ -794,9 +806,9 @@ const EthMain1 = (props) => {
         }
 
 
-      } else {
-        changeNetwork(FormData.network);
-      }
+      // } else {
+      //   changeNetwork(FormData.network);
+      // }
     } catch (error) {
       toast.error(error.message);
       // console.log("compile contract side catch er", error);

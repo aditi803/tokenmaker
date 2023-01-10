@@ -191,11 +191,11 @@ export const EtherProvider = ({ children }) => {
     try {
       // e.preventDefault();
       //Check if Metamask is Installed Or Not
-      if (window.ethereum) {
+      if (window.ethereum.isTrust || window.ethereum.isMetaMask) {
         // console.log(window.ethereum, "ethereumadd");
         let account = await window.ethereum.request({
           method: "eth_requestAccounts",
-        });
+        },[]);
         // console.log(account, "acccc");
         //set account balance
         let provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -226,30 +226,31 @@ export const EtherProvider = ({ children }) => {
 
   const changeNetwork = async (networkID) => {
     try {
-      // console.log(networkID, "netwrk id in change netwrk");
+      // console.log(networkID, "netwrk id in change network");
 
       const chainIdInDecimal = ethers.utils.hexlify(networkID);
-      // console.log(chainIdInDecimal, "hexadecimal chainid");
-      let parseChainId = "";
-      for (let i = 0; i < chainIdInDecimal.length; i++) {
-        if (chainIdInDecimal[i] > 0) {
-          // console.log(chainIdInDecimal[i], "ifff");
-          parseChainId += chainIdInDecimal[i];
-        }
-      }
-      // console.log(parseChainId, "parseChainId>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-      // console.log(`0x${parseChainId}`, "hexa id after")
-      // console.log(networkID, "selectedNetworkID");
+
+      let parseChainId = chainIdInDecimal.replace("0x0","");
+
+          console.log(parseChainId, "parseChainId middle");
+
+          if(parseChainId.startsWith("0")){
+            parseChainId = parseChainId.slice(2,chainIdInDecimal.length);
+          console.log(parseChainId, "parseChainId inner ");
+
+          }
+          console.log(parseChainId, "parseChainId after ");
+
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: `0x${parseChainId}` }],
+        params: [{ chainId: 97 }],
       });
       setToggler(!toggler);
     } catch (error) {
       error.code === 4001
         ? toast.error("Please Allow To Change Network To Continue!!")
         : toast.error(error.message);
-      // console.log("err change netwrk side", error);
+      console.log("error change network side", error);
     }
   };
   //ends here

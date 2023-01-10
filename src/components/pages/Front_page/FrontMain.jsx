@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
-import "./Front_style/FrontMain.css";
+// import "./Front_style/FrontMain.css";
+// import '../../pages/styles.css'
+import './Front_style/MainFront.css'
 import axios from "axios";
 import {
   BANNER_DETAILS,
