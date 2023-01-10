@@ -24,7 +24,7 @@ function Footer() {
     };
     fetchData();
   }, []);
-  return loader ?<FooterSkeleton /> : (
+  return loader ? <FooterSkeleton /> : (
     <>
       <div
         className="page-footer"
@@ -33,7 +33,7 @@ function Footer() {
         <footer className="footer">
           <div className="container py-3">
             <div className="row" style={{ color: `${footer.contentColor}` }}>
-              <div className="col-md-6 col-lg-4 mb-lg-0 mb-4">
+              <div className="col-md-6 col-lg-4 mb-xl-0 mb-4">
                 <span>
                   <a href=' https://blocktechbrew.com/' target='_blank'>
                     <img className="footer-logo" src={Logo} alt="" />
@@ -44,7 +44,7 @@ function Footer() {
                   enhanced security and transparency with our custom blockchain
                   app development
                 </p>
-                <p>Our Social Presence</p>
+                <h6>Our Social Presence</h6>
                 <div className="d-flex icons social-links">
                   <a href=' https://www.facebook.com/blocktechbrew' target='_blank'>
                     <i class="fa-brands fa-facebook-f"></i>
@@ -62,7 +62,7 @@ function Footer() {
                   </a>
                 </div>
               </div>
-              <div className="col-md-6 col-lg-2 services">
+              <div className="col-md-6 col-lg-2 services mb-xl-0 mb-4">
                 <h5 className="mb-4">Our Services</h5>
                 <a href=' https://blocktechbrew.com/metaverse-development-company/' target='_blank' >
                   <p>Metaverse</p>
@@ -104,24 +104,24 @@ function Footer() {
                 <h5 className="mb-4">Our Newsletter</h5>
                 <div className="d-flex mb-4">
                   <input type='number' className="numberinput" placeholder="" />
-                  <button className="sbbutton">Subscribe</button>
+                  <button className="sbbutton blue-btn">Subscribe</button>
                 </div>
-                <h5 className="mb-4">Contact Us</h5>
+                <h5 className="mb-3">Contact Us</h5>
                 <div className="contact">
-                  <a href=" mailto:business@blocktechbrew.com?subject=SendMail&body=Description" target='_blank' style={{ color: "#fff" }}>
-                    <p> <FiMail />  business@blocktechbrew.com</p>
+                  <a className="d-block mb-2" href=" mailto:business@blocktechbrew.com?subject=SendMail&body=Description" target='_blank' style={{ color: "#fff" }}>
+                    <FiMail className="me-2" />  <span>business@blocktechbrew.com</span>
                   </a>
-                  <a href="tel: +91 874-590-9990" style={{ color: "#fff" }}>
-                    <p><AiFillPhone />   +91 874-590-9990</p>
+                  <a className="d-block" href="tel: +91 874-590-9990" style={{ color: "#fff" }}>
+                    <AiFillPhone className="me-2" />   <span>+91 874-590-9990</span>
                   </a>
                 </div>
               </div>
             </div>
 
             <hr />
-            <p className="text-center mb-0" style={{ fontSize: "16px" }}>
+            <div className="text-center mb-0">
               {footer.investorCopyrightText}
-            </p>
+            </div>
           </div>
         </footer>
       </div>

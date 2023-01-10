@@ -775,7 +775,7 @@ const MoonRiverMain1 = (props) => {
           </div>
           <section style={{ marginBottom: "40px" }}>
             {/* test */}
-            <div className="container">
+            <div className="container mt-lg-5">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="steper-div">
@@ -812,8 +812,8 @@ const MoonRiverMain1 = (props) => {
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
-                      <div className="firstForm">
-                        <h2 className="heading">Informations</h2>
+                      <div className="firstForm p-lg-5 p-4 mb-5 mt-0">
+                        <h3 className="heading mb-4">Informations</h3>
                         <form className="row">
                           <div className="form-group col-lg-6">
                             <label className="form-label">
@@ -871,10 +871,9 @@ const MoonRiverMain1 = (props) => {
                             <span className="form-text text-muted">
                               The name of your token
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.tokenNameErr}
-                            </span>
+                            </div>
                           </div>
                           <div className="form-group col-lg-6">
                             <label className="form-label">
@@ -893,10 +892,9 @@ const MoonRiverMain1 = (props) => {
                             <span className="form-text text-muted">
                               You token's symbol (ie Dev)
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.tokenSymbolErr}
-                            </span>
+                            </div>
                           </div>
                           <div className="form-group col-lg-6">
                             <label className="form-label">
@@ -915,12 +913,10 @@ const MoonRiverMain1 = (props) => {
                             <span className="form-text text-muted">
                               The number of decimal of your token (default 18)
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.decimalsErr}
-                            </span>
+                            </div>
                           </div>
-
                           <div className="form-group col-lg-6">
                             <label className="form-label">
                               Initial supply
@@ -946,7 +942,7 @@ const MoonRiverMain1 = (props) => {
                           </div>
                           <button
                             type="submit"
-                            className="btn form-btn justify-content-center align-items-center"
+                            className="btn form-btn justify-content-center align-items-center ms-auto"
                             onClick={handleSubmit}
                           >
                             Next
@@ -962,8 +958,8 @@ const MoonRiverMain1 = (props) => {
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
-                      <div className="firstForm">
-                        <h2 className="heading mb-4">Options</h2>
+                      <div className="firstForm p-lg-5 p-4 mb-5 mt-0">
+                        <h3 className="heading mb-4">Options</h3>
                         <form>
                           <div className="form-group">
                             <label className="form-check form-switch">
@@ -1101,8 +1097,8 @@ const MoonRiverMain1 = (props) => {
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
-                      <div className="firstForm">
-                        <h6 className="heading">Network</h6>
+                      <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
+                        <h5 className="heading mb-3">Network</h5>
                         <form>
                           <div className="form-group">
                             <select
@@ -1143,15 +1139,15 @@ const MoonRiverMain1 = (props) => {
                               <option value="moonRiver">Moon River</option>
                               <option value="moonBaseAlpha">Moon Base Alpha</option>
                             </select>
-                            <span className="form-text text-muted">
+                            <span className="form-text f-12 heading">
                               Select the network on wich you want to deploy your
                               token
                             </span>
                           </div>
 
-                          <h6 className="heading">Transaction</h6>
+                          <h5 className="heading mb-0">Transaction</h5>
                           <div className="card-body px-0">
-                            <div className="transactionWrap d-sm-flex align-items-start justify-content-between mb-3 mb-sm-0">
+                            <div className="transactionWrap d-sm-flex align-items-center justify-content-between mb-3">
                               <div className="Ttext">
                                 <p className="mb-0">
                                   Commission fee:{" "}
@@ -1189,7 +1185,7 @@ const MoonRiverMain1 = (props) => {
                                 </span>
                               </div>
                             </div>
-                            <div className="transactionWrap d-sm-flex align-items-start justify-content-between">
+                            <div className="transactionWrap d-sm-flex align-items-center justify-content-between">
                               <div className="Ttext ">
                                 <p className="mb-0">
                                   Gas fee:{" "}
@@ -1219,7 +1215,7 @@ const MoonRiverMain1 = (props) => {
                               </div>
                             </div>
                           </div>
-                          <h6 className="heading">Agreement</h6>
+                          <h5 className="heading mb-0">Agreement</h5>
                           <div className="card-body px-0">
                             <div className="form-group">
                               <label className="form-check">
@@ -1246,10 +1242,9 @@ const MoonRiverMain1 = (props) => {
                                   {/* modal */}
                                   {/* </span> */}
                                 </span>
-                                <br />
-                                <span className="text-danger">
+                                <div className="f-12 mt-1 text-danger">
                                   {err.agreementErr}
-                                </span>
+                                </div>
                               </label>
                             </div>
                           </div>

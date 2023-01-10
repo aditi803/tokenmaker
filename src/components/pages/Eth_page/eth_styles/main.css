@@ -139,6 +139,18 @@ option {
     padding: 0px 2px 1px;
 }
 
+.f-12{
+    font-size: 12px;
+}
+
+.form-label {
+    font-size: 14px;
+}
+
+input[type="checkbox"]{
+    cursor: pointer !important;
+}
+
 /* may be needs to change the css under me */
 .text-muted {
     --bs-text-opacity: 1;
@@ -147,8 +159,11 @@ option {
 
 .form-text {
     margin-top: 0.25rem;
-    font-size: .875em;
     color: #6c757d;
+    font-size: 12px;
+    line-height: 18px;
+    display: block;
+    margin: 8px 0 5px;
 }
 
 .form-group {
@@ -337,6 +352,8 @@ textarea {
 .form-check-input:disabled~.form-check-label,
 .form-check-input[disabled]~.form-check-label {
     opacity: .5;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 .form-switch .form-check-input:checked {

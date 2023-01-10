@@ -108,7 +108,7 @@ export const SolanaHeader = (props) => {
                 </Link>
                 <div className="nav-btn-div">
                   <>{PublicKey && <p className="m-0" style={{ fontSize: "17px", fontWeight: "600" }}>{finalAmount.toFixed(5)}{" "}SOL</p>}</>
-                  <WalletMultiButton className="btn blue-btn ml-auto" />
+                  <WalletMultiButton className="btn blue-btn ml-auto justify-content-center" />
                 </div>
               </nav>
             </div>

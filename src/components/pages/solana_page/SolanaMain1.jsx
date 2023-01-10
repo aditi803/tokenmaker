@@ -541,7 +541,7 @@ const SolanaMain1 = (props) => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="firstForm">
-                        <h2 className="heading">Informations</h2>
+                        <h3 className="heading mb-4">Informations</h3>
                         <form className="row">
                           <div className="form-group col-lg-6">
                             <label className="form-label">
@@ -601,10 +601,9 @@ const SolanaMain1 = (props) => {
                             <span className="form-text text-muted">
                               The name of your token
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.tokenNameErr}
-                            </span>
+                            </div>
                           </div>
                           <div className="form-group col-lg-6">
                             <label className="form-label">
@@ -623,10 +622,9 @@ const SolanaMain1 = (props) => {
                             <span className="form-text text-muted">
                               You token's symbol (ie ETH)
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.tokenSymbolErr}
-                            </span>
+                            </div>
                           </div>
                           <div className="form-group col-lg-6">
                             <label className="form-label">
@@ -646,10 +644,9 @@ const SolanaMain1 = (props) => {
                             <span className="form-text text-muted">
                               The number of decimal of your token (default 18)
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.decimalsErr}
-                            </span>
+                            </div>
                           </div>
                           <div className="form-group col-lg-6">
                             <label className="form-label">
@@ -671,14 +668,13 @@ const SolanaMain1 = (props) => {
                               The number of coins minted during the creation of
                               the contract
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.amountErr}
-                            </span>
+                            </div>
                           </div>
                           <button
                             // type="submit"
-                            className="btn form-btn justify-content-center"
+                            className="btn form-btn justify-content-center ms-auto"
                             onClick={handleSubmit}
                           >
                             Next
@@ -695,7 +691,7 @@ const SolanaMain1 = (props) => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                        <h4 className="heading mb-3">Network</h4>
+                        <h5 className="heading mb-3">Network</h5>
                         <form>
                           <div className="form-group">
                             <select
@@ -721,17 +717,16 @@ const SolanaMain1 = (props) => {
                               })}
                             </select>
                             {errNet && <p style={{color:"red"}}>Please select network.</p>}
-                            <span className="form-text text-muted">
+                            <span className="form-text heading f-12">
                               Select the network on wich you want to deploy your
                               token
                             </span>
                           </div>
 
-                          <h4 className="heading">Transaction</h4>
+                          <h5 className="heading mb-0">Transaction</h5>
                           <div className="card-body px-0">
-                            <div className="transactionWrap d-sm-flex align-items-start justify-content-between mb-3 mb-sm-0">
+                            <div className="transactionWrap d-sm-flex align-items-center justify-content-between mb-3">
                               <div className="Ttext">
-                                <p>
                                   Commission fee:{" "}
                                   <Tooltip
                                     content={
@@ -752,7 +747,6 @@ const SolanaMain1 = (props) => {
                                   >
                                     <HiInformationCircle size={22} />
                                   </Tooltip>
-                                </p>
                               </div>
                               <div
                                 className="Tbtn my-sm-0 my-3"
@@ -769,7 +763,7 @@ const SolanaMain1 = (props) => {
                                 </span>
                               </div>
                             </div>
-                            <div className="transactionWrap d-sm-flex align-items-start justify-content-between mb-3 mb-sm-0">
+                            <div className="transactionWrap d-sm-flex align-items-center justify-content-between mb-3 mb-sm-0">
                               <div className="Ttext ">
                                 <p>
                                   Gas fee:{" "}
@@ -799,7 +793,7 @@ const SolanaMain1 = (props) => {
                               </div>
                             </div>
                           </div>
-                          <h4 className="heading">Agreement</h4>
+                          <h5 className="heading mb-0">Agreement</h5>
                           <div className="card-body px-0">
                             <div className="form-group">
                               <label className="form-check">
@@ -831,10 +825,9 @@ const SolanaMain1 = (props) => {
                                   {/* modal */}
                                   {/* </span> */}
                                 </span>
-                                <br />
-                                <span className="text-danger">
+                                <div className="text-danger f-12 mt-1">
                                   {err.agreementErr}
-                                </span>
+                                </div>
                               </label>
                             </div>
                           </div>

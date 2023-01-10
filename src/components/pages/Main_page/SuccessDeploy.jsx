@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import "./Success.css"
+// import "./Success.css"
 import { Link, useNavigate, useHistory } from "react-router-dom";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import { cilPencil, cilTrash, cilCopy } from '@coreui/icons'
