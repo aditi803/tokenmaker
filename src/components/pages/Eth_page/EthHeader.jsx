@@ -105,7 +105,8 @@ export const EthHeader = () => {
                       onClick={() => {
                         setAccAddress([]);
                       }}
-                      className="btn uppercase btn btn-action btn-rounded btn-pad"
+                      className="btn blue-btn"
+                      // className="btn uppercase btn btn-action btn-rounded btn-pad" 
                     >
                       {/* {show current acc address } */}
 
@@ -118,7 +119,7 @@ export const EthHeader = () => {
                     <button
                       type="button"
                       onClick={SignInMetamask}
-                      className="btn uppercase btn btn-action btn-rounded btn-pad"
+                      className="btn blue-btn"
                     >
                       <span className="inline-block">Connect your Wallet</span>
                     </button>

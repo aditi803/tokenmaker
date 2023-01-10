@@ -14,18 +14,28 @@
 }
 
 .form-btn {
-    background-color: #6010B1;
+    background: linear-gradient(95.39deg, #C181FF -1.16%, #6010B1 97.84%);
+    border: 0;
     color: #fff;
     display: flex;
+    justify-content: center;
     margin-top: 20px;
-    padding: 5px 25px;
+    /* padding: 5px 25px; */
     cursor: pointer;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    width: 120px;
 }
 
 .form-btn:hover {
-    background-color: #6010B1;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.form-btn:hover {
     color: #fff;
-    transform: translateY(-2px);
 }
 
 .form-select {

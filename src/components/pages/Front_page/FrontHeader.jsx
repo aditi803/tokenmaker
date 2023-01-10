@@ -34,7 +34,7 @@ export const EthHeader = () => {
                     </span> */}
                 </Link>
                 <div className="ms-auto ">
-                  <button type='button' className='btn uppercase btn btn-action btn-rounded btn-pad'>
+                  <button type='button' className='btn blue-btn'>
                     <span className="inline-block">Connect your Wallet</span>
                   </button>
                 </div>
