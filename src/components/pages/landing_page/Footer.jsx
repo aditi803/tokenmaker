@@ -103,7 +103,7 @@ function Footer() {
               <div className="col-md-6 col-lg-4">
                 <h5 className="mb-4">Our Newsletter</h5>
                 <div className="d-flex mb-4">
-                  <input type='number' className="numberinput" placeholder="" />
+                  <input type='text' className="numberinput" placeholder="" />
                   <button className="sbbutton blue-btn">Subscribe</button>
                 </div>
                 <h5 className="mb-3">Contact Us</h5>

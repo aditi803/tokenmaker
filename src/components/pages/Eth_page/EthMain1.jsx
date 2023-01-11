@@ -87,6 +87,7 @@ const EthMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
+    initialSupplyErr:""
     // tokenNameErr: 'Please fill your token name',
     // tokenSymbolErr: 'Please fill your token symbol',
     // agreementErr: 'Please confirm that you have read and understood our terms of use'
@@ -128,6 +129,7 @@ const EthMain1 = (props) => {
     network,
     agreement,
     commissionFee,
+
   } = ethFormData;
 
   const {
@@ -663,7 +665,13 @@ const EthMain1 = (props) => {
         decimalsErr: "",
       }));
     }
-  }, [agreement, tokenName, tokenSymbol, decimals]);
+    if (initialSupply !== null) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "",
+      }));
+    }
+  }, [agreement, tokenName, tokenSymbol, decimals,initialSupply]);
 
   const [manipulate, setManipulate] = useState(false)
 
@@ -690,10 +698,16 @@ const EthMain1 = (props) => {
           "Please confirm that you have read and understood our terms of use",
       }));
     }
-    if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
+    if (ethFormData.decimals >= 21 || ethFormData.decimals <= 6) {
       setErr((prev) => ({
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
+      }));
+    }
+    if (ethFormData.initialSupply === null) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "Please choose how many tokens you want to deploy",
       }));
     }
 
@@ -708,8 +722,9 @@ const EthMain1 = (props) => {
     }
     if (
       ethFormData.tokenName !== "" &&
-      ethFormData.tokenSymbol !== ""
-
+      ethFormData.tokenSymbol !== "" &&
+      ethFormData.decimals !== '' &&
+      ethFormData.initialSupply !== ''
     ) {
       // navigate("/generator/final");
       setStep(2)
@@ -999,7 +1014,7 @@ const EthMain1 = (props) => {
                               <span className="val-required">*</span>
                             </label>
                             <input
-                              type="number"
+                              type="text"
                               className="form-control"
                               placeholder="1000000"
                               name="initialSupply"

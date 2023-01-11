@@ -243,7 +243,7 @@ export const EtherProvider = ({ children }) => {
 
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: 97 }],
+        params: [{ chainId: `0x${parseChainId}` }],
       });
       setToggler(!toggler);
     } catch (error) {
