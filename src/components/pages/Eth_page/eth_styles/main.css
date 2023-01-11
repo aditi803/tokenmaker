@@ -11,14 +11,6 @@ a {
 a {
     text-decoration: none !important;
 }
-@media screen and (max-device-width: 767px) and (orientation: portrait) {
-    * {
-        max-width: 100% !important;
-    }
-    .row{
-        max-width: none !important;
-    }
-}
 
 *,
 :after,
@@ -916,6 +908,19 @@ small {
     }
     .feature-box p {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-device-width: 767px) and (orientation: portrait) {
+    * {
+        max-width: 100% !important;
+    }
+    .row{
+        max-width: none !important;
+    }
+    p{
+        font-size: 14px !important;
+        line-height: 22px !important;
     }
 }
 

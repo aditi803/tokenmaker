@@ -91,7 +91,7 @@ export const FrontMain = () => {
               >
                 <div className="container self">
                   <div className="row">
-                    <div className="col-lg-6 d-flex flex-column justify-content-center">
+                    <div className="col-lg-6 d-flex flex-column justify-content-center mb-4 mb-lg-0">
                       <h1 style={{ color: `${banner.headingColor}` }}>
                         <span className="sub-highlight">{banner.heading}</span>
                       </h1>
@@ -289,7 +289,7 @@ export const FrontMain = () => {
                 <div className="container">
                   <div className="faq_wrap">
                     <div className="row">
-                      <div className="col-12 col-lg-6 faq_left">
+                      <div className="col-12 col-lg-6 faq_left mb-4 mb-lg-0">
                         <h2
                           className="heading mb-0"
                           style={{ color: `${featuresData.headingColor}` }}

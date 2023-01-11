@@ -62,7 +62,7 @@ const HeroSkeleton = () => {
     return (
         <div className="heroskeleton">
             <section
-                className="page-section hero d-md-flex align-items-center"
+                className="page-section hero d-md-flex align-items-center mb-4 mb-lg-0"
                 id="hero"
                 style={{ background: "none"
                 }}
@@ -256,8 +256,7 @@ const HeroSkeleton = () => {
                                     width: "268px"
                                 }}>
                                     <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-3' />
-                                    <Skeleton variant="square" height={14} width={190} className='
-                                    mb-3 mx-auto' />
+                                    <Skeleton variant="square" height={14} width={190} className='mb-3 mx-auto' />
                                     <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
                                     <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
                                     <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
@@ -288,14 +287,14 @@ const HeroSkeleton = () => {
                 <div className="container">
                     <div className="faq_wrap">
                         <div className="row">
-                            <div className="col-12 col-lg-6 faq_left">
+                            <div className="col-12 col-lg-6 faq_left mb-4 mb-lg-0">
                                 <h2
                                     className="heading mb-4"
                                 >
                                     <Skeleton variant="rounded" height={20} width={400} />
                                     {/* {faqData.heading} */}
                                 </h2>
-                                <Skeleton className='mb-5' variant="rounded" height={5} width={103} />
+                                <Skeleton className='mb-5' variant="rounded" height={8} width={103} />
                                 <p
                                     className="text"
                                 >
