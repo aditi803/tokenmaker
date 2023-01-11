@@ -110,6 +110,7 @@ const MoonRiverMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
+    initialSupplyErr: ""
   });
 
   const [fieldsDisabled, setFieldsDisabled] = useState({
@@ -523,7 +524,7 @@ const MoonRiverMain1 = (props) => {
       if (e.target.value === "") {
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: boolean ?? 0,
+          [e.target.name]: boolean ?? '',
         }));
       } else {
         setEthFormData((prev) => ({
@@ -576,7 +577,13 @@ const MoonRiverMain1 = (props) => {
         decimalsErr: "",
       }));
     }
-  }, [agreement, tokenName, tokenSymbol, decimals]);
+    if (initialSupply !== null) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "",
+      }));
+    }
+  }, [agreement, tokenName, tokenSymbol, decimals, initialSupply]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -594,13 +601,20 @@ const MoonRiverMain1 = (props) => {
       }));
     }
 
-    if (ethFormData.agreement === false) {
+    if (!ethFormData.initialSupply) {
       setErr((prev) => ({
         ...prev,
-        agreementErr:
-          "Please confirm that you have read and understood our terms of use",
+        initialSupplyErr: "Please choose how many tokens you want to deploy",
       }));
     }
+
+    // if (ethFormData.agreement === false) {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     agreementErr:
+    //       "Please confirm that you have read and understood our terms of use",
+    //   }));
+    // }
     if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
       setErr((prev) => ({
         ...prev,
@@ -617,7 +631,9 @@ const MoonRiverMain1 = (props) => {
       console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
     }
-    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "") {
+    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "" &&
+      (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
+      ethFormData.initialSupply !== '') {
       // navigate("/generator/final");
       setStep(2);
     }
@@ -745,7 +761,7 @@ const MoonRiverMain1 = (props) => {
             });
         }
       } else {
-        
+
         changeNetwork(FormData.network);
       }
     } catch (error) {
@@ -911,7 +927,7 @@ const MoonRiverMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              The number of decimal of your token (default 18)
+                              The number of decimal of your token must be between 6 & 21 (default 18)
                             </span>
                             <div className="text-danger f-12">
                               {err.decimalsErr}
@@ -935,10 +951,9 @@ const MoonRiverMain1 = (props) => {
                               The number of coins minted during the creation of
                               the contract
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.initialSupplyErr}
-                            </span>
+                            </div>
                           </div>
                           <button
                             type="submit"

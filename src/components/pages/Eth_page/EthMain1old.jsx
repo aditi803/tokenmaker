@@ -1193,17 +1193,17 @@ export const EthMain1 = (props) => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                {data.map((item) => {
+                                {data.map((item,i) => {
                                   if (item.parentNetworkName === "Ethereum" && item.tokenType === 'free') {
                                     return (
-                                      <option value={item.value}>{item.subNetworkName}</option>
+                                      <option value={item.value} key={i}>{item.subNetworkName}</option>
                                     )
                                   }
                                   else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'basic') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
                                   }
                                   else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'custom') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
 
                                   }
                                 })}

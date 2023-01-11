@@ -139,7 +139,7 @@ export const FrontMain = () => {
                         if (i % 2 === 0) {
                           return (
                             <>
-                              <div class={`col-lg-10 offset-lg-1 timeline_left timeline_main`}>
+                              <div class={`col-lg-10 offset-lg-1 timeline_left timeline_main`} key={i}>
                                 <div class="row justify-content-center align-items-center">
                                   <div class="col-10 col-lg-5 d-none d-lg-block timeline-date">
                                     <div
@@ -174,6 +174,7 @@ export const FrontMain = () => {
                               <div
                                 class={`col-lg-10 offset-lg-1 ${i === steps.length - 1 ? "" : "timeline_right"
                                   } timeline_main`}
+                                  key={i}
                               >
                                 <div class="row justify-content-center align-items-center">
                                   <div class="col-10 col-lg-5 order-2 order-lg-1 timeline-text">
@@ -247,7 +248,7 @@ export const FrontMain = () => {
                   </h2>
                   <div className="row">
                     {features.map((data, index) => (
-                      <div className="col-lg-3 col-md-6 d-flex flex-column mb-lg-3">
+                      <div className="col-lg-3 col-md-6 d-flex flex-column mb-lg-3" key={index}>
                         <div className="feature-box mb-4 py-5 px-3">
                           <img src={imageBaseUrl + data.featureImage} />
                           <h5 className="my-3">{data.title}</h5>

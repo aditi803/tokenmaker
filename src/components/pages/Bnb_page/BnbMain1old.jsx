@@ -1186,14 +1186,14 @@ const BnbMain1 = (props) => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                {data.map((item) => {
+                                {data.map((item,i) => {
                                   if (
                                     item.parentNetworkName ===
                                       "Binance Smart Chain" &&
                                     item.tokenType === "free"
                                   ) {
                                     return (
-                                      <option value={item.value}>
+                                      <option value={item.value} key={i}>
                                         {item.subNetworkName}
                                       </option>
                                     );
@@ -1202,7 +1202,7 @@ const BnbMain1 = (props) => {
                                       "Binance Smart Chain" &&
                                     item.tokenType === "basic"
                                   ) {
-                                    <option value={item.value}>
+                                    <option value={item.value} key={i}>
                                       {item.subNetworkName}
                                     </option>;
                                   } else if (
@@ -1210,7 +1210,7 @@ const BnbMain1 = (props) => {
                                       "Binance Smart Chain" &&
                                     item.tokenType === "custom"
                                   ) {
-                                    <option value={item.value}>
+                                    <option value={item.value} key={i}>
                                       {item.subNetworkName}
                                     </option>;
                                   }

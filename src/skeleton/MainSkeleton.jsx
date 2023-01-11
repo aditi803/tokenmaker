@@ -37,7 +37,7 @@ const MainSkeleton = () => {
                         //     </Link>
                         //   </div>
                         // }else {
-                        return <div className="col-sm-6 col-md-4 col-lg-3 col-xxl">
+                        return <div className="col-sm-6 col-md-4 col-lg-3 col-xxl" key={value.id}>
                             <div className="chain-item d-flex align-items-center justify-content-center flex-column">
                                 <Skeleton variant="rounded" height={20} width={155} />
                                 <Skeleton className='my-5' variant="rounded" height={71} width={76} />

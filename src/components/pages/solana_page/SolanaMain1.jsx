@@ -91,9 +91,10 @@ const SolanaMain1 = (props) => {
   const [uri, setUri] = useState("safhfsa");
   const [agreement, setAgreement] = useState(false);
   const [amount, setAmount] = useState("");
-  const [decimals, setDecimals] = useState(1);
+  const [decimals, setDecimals] = useState(18);
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
+  const [buttonClick, setButtonClick] = useState(false)
 
   // console.log(agreement, 'aditi agre')
 
@@ -212,14 +213,14 @@ const SolanaMain1 = (props) => {
       }));
     }
 
-    if (agreement === false) {
-      setErr((prev) => ({
-        ...prev,
-        agreementErr:
-          "Please confirm that you have read and understood our terms of use.",
-      }));
-    }
-    if (decimals >= 21 || decimals <= 6) {
+    // if (agreement === false) {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     agreementErr:
+    //       "Please confirm that you have read and understood our terms of use.",
+    //   }));
+    // }
+    if (decimals <= 21 || decimals >= 6) {
       setErr((prev) => ({
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
@@ -238,8 +239,9 @@ const SolanaMain1 = (props) => {
     if (
       tokenName !== "" &&
       symbol !== "" &&
-      amount !== "" &&
-      decimals !== null
+      (decimals <=21 && decimals >= 6) &&
+      amount !== "" 
+
     ) {
       // navigate("/generator/final");
       setStep(2);
@@ -247,6 +249,8 @@ const SolanaMain1 = (props) => {
   };
 
   // };
+
+  console.log(decimals,"decimals--n")
   const [walletBalance, setWalletBalance] = useState();
   useEffect(() => {
     (async () => {
@@ -306,6 +310,7 @@ const SolanaMain1 = (props) => {
 
   const onClick = useCallback(
     async (form) => {
+      setButtonClick(true)
       if (!net) {
         setErrNet(true);
         return;
@@ -630,12 +635,12 @@ const SolanaMain1 = (props) => {
                               min="6"
                               max="21"
                               //   disabled={f_decimals}
-                              // value={}
+                              value={decimals}
                               name="decimals"
-                              // onChange={(e) => setDecimals(e.target.value)}
+                              onChange={(e) => setDecimals(e.target.value)}
                             />
                             <span className="form-text text-muted">
-                              The number of decimal of your token (default 18)
+                              The number of decimal of your token must be between 6 & 21 (default 18)
                             </span>
                             <div className="text-danger f-12">
                               {err.decimalsErr}
@@ -694,7 +699,7 @@ const SolanaMain1 = (props) => {
                               onChange={networkName}
                             >
                               <option>Select your netowrk</option>
-                              {data.map((item) => {
+                              {data.map((item,i) => {
                                 if (
                                   item.parentNetworkName === "Solana" &&
                                   item.tokenType === "free"
@@ -712,6 +717,7 @@ const SolanaMain1 = (props) => {
                                         item.value === "solanaMainnet" ||
                                         item.value === "solanaTestnet"
                                       }
+                                      key={i}
                                     >
                                       {item.subNetworkName}
                                     </option>
@@ -732,6 +738,7 @@ const SolanaMain1 = (props) => {
                                       item.value === "solanaMainnet" ||
                                       item.value === "solanaTestnet"
                                     }
+                                    key={i}
                                   >
                                     {item.subNetworkName}
                                   </option>;
@@ -751,6 +758,7 @@ const SolanaMain1 = (props) => {
                                       item.value === "solanaMainnet" ||
                                       item.value === "solanaTestnet"
                                     }
+                                    key={i}
                                   >
                                     {item.subNetworkName}
                                   </option>;
@@ -883,6 +891,7 @@ const SolanaMain1 = (props) => {
                             <button
                               type="button"
                               className="btn form-btn"
+                              disabled={buttonClick}
                               onClick={() => {
                                 if (agreement === false) {
                                   setErr((prev) => ({

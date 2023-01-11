@@ -32,6 +32,7 @@ const MaticMain1 = (props) => {
 
   const { currentStep, submitted } = useContext(multiStepContext);
   const { setStep, userData, setUserData } = useContext(multiStepContext);
+  const [buttonClick, setButtonClick] = useState(false)
 
   const navigate = useNavigate();
 
@@ -90,6 +91,7 @@ const MaticMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
+    initialSupplyErr:""
     // tokenNameErr: 'Please fill your token name',
     // tokenSymbolErr: 'Please fill your token symbol',
     // agreementErr: 'Please confirm that you have read and understood our terms of use'
@@ -543,7 +545,7 @@ const MaticMain1 = (props) => {
       if (e.target.value === '') {
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: boolean ?? 0,
+          [e.target.name]: boolean ?? '',
         }));
       } else {
 
@@ -619,6 +621,12 @@ const MaticMain1 = (props) => {
         decimalsErr: "",
       }));
     }
+    if (initialSupply !== null) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "",
+      }));
+    }
   }, [agreement, tokenName, tokenSymbol, decimals]);
 
   const handleSubmit = (e) => {
@@ -637,17 +645,23 @@ const MaticMain1 = (props) => {
       }));
     }
 
-    if (ethFormData.agreement === false) {
-      setErr((prev) => ({
-        ...prev,
-        agreementErr:
-          "Please confirm that you have read and understood our terms of use",
-      }));
-    }
+    // if (ethFormData.agreement === false) {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     agreementErr:
+    //       "Please confirm that you have read and understood our terms of use",
+    //   }));
+    // }
     if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
       setErr((prev) => ({
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
+      }));
+    }
+    if (!ethFormData.initialSupply) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "Please choose how many tokens you want to deploy",
       }));
     }
 
@@ -663,7 +677,9 @@ const MaticMain1 = (props) => {
     }
     if (
       ethFormData.tokenName !== "" &&
-      ethFormData.tokenSymbol !== ""
+      ethFormData.tokenSymbol !== "" &&
+      (ethFormData.decimals <=21 &&  ethFormData.decimals >= 6) &&
+      ethFormData.initialSupply !== ''
     ) {
       // navigate("/generator/final");
       setStep(2)
@@ -679,6 +695,7 @@ const MaticMain1 = (props) => {
   }, [tokenType, initialSupply, maximumSupply])
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
+    setButtonClick(true)
     try {
       // console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -928,7 +945,7 @@ const MaticMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              The number of decimal of your token (default 18)
+                              The number of decimal of your token must be between 6 & 21 (default 18)
                             </span>
                             <div className="text-danger f-12">
                               {err.decimalsErr}
@@ -1125,17 +1142,17 @@ const MaticMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              {data.map((item) => {
+                              {data.map((item,i) => {
                                 if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
                                   return (
-                                    <option value={item.value}>{item.subNetworkName}</option>
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
                                   )
                                 }
                                 else if (item.parentNetworkName === "Polygon" && item.tokenType === 'basic') {
-                                  <option value={item.value}>{item.subNetworkName}</option>
+                                  <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
                                 else if (item.parentNetworkName === "Polygon" && item.tokenType === 'custom') {
-                                  <option value={item.value}>{item.subNetworkName}</option>
+                                  <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
                               })}
                             </select>
@@ -1255,6 +1272,7 @@ const MaticMain1 = (props) => {
                             <button
                               type="button"
                               className="btn form-btn"
+                              disabled={buttonClick}
                               onClick={async () => {
                                 if (ethFormData.agreement === false) {
                                   setErr((prev) => ({
