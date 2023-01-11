@@ -144,9 +144,9 @@
 
 .accordionbutton {
     font-weight: 500;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 30px;
-    padding: 17px 30px;
+    padding: 17px 20px;
 }
 
 .faq .accordionbody {
@@ -466,7 +466,7 @@
     }
 
     .timeline_wrap {
-        padding: 40px 0 40px;
+        padding: 0;
     }
 
     .timeline .text {
@@ -516,12 +516,6 @@
     }
 }
 
-@media screen and (min-width: 1684.98px) {
-    .section-faq {
-        /* margin-bottom: 255px; */
-    }
-}
-
 @media screen and (max-width: 768px) {
 
     .timeline .timeline_left::after,
@@ -530,7 +524,7 @@
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
 }
 
@@ -538,6 +532,9 @@
     .section-title {
         line-height: 31px;
         max-width: 100%;
+    }
+    .section-faq {
+        padding: 50px 0;
     }
 }
 
@@ -576,10 +573,7 @@
         width: 5px;
         left: 6%;
     }
-
-    .timeline .timeline_right {
-        padding: 40px 0;
-    }
+    
 }
 
 @media (max-width:499px) {
@@ -598,21 +592,22 @@
 
 
 @media (max-width: 768px) {
-    .page-section {
-        padding: 3rem;
-    }
-
     .sub-highlight {
         font-size: 36px;
+    }
+    .accordionbutton{
+        padding: 10px 20px;
+    }
+    .blue-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+        min-width: auto;
     }
 }
 
 
 
 @media (max-width: 768px) {
-    .page-section {
-        padding: 3rem;
-    }
 
     .sub-highlight {
         font-size: 36px;

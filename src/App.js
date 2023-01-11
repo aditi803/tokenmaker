@@ -25,6 +25,9 @@ import { SolanaMain } from './components/pages/solana_page/SolanaMain.jsx';
 import  WalletAdapter  from './contexts/solanaContext/SolanaContext.jsx';
 import {MoonRiverMain} from './components/pages/MoonRiver_page/MoonRiverMain';
 import { AvaxMain } from './components/pages/Avax_page/AvaxMain.jsx';
+import Terms from './components/Layots/Terms.jsx';
+import PrivacyPolicy from './components/Layots/PrivacyPolicy.jsx';
+// import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
 function App(props) {
@@ -65,6 +68,8 @@ function App(props) {
           <Route path='/generator/solana' element={[<SolanaMain  net ={net} setNet = {setNet}/>]} />
           <Route path='/generator/moonriver' element={[<MoonRiverMain />]} />
           <Route path='/generator/avax' element={[<AvaxMain />]} />
+          <Route path='/terms' element = {<Terms />} />
+          <Route path='/privacy-policy' element={<PrivacyPolicy /> } />
         </Routes> 
       </Router>
           {/* </WalletAdapter> */}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
-import { PRIVACY} from "../../api/Api";
+import { PRIVACY } from "../../api/Api";
 import parse from 'html-react-parser';
 
 
@@ -16,15 +16,11 @@ export const PrivacyPolicy = () => {
       .get(PRIVACY)
       .then(res => {
         setTerms(res.data.msg)
-        // console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>terms msg")
       })
       .catch(err => {
         console.log(err);
       })
   }
-
-
-  // console.log(terms, '>>>>>>>>>>>>>>>>>>')
 
   return (
     <>

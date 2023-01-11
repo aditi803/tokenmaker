@@ -62,7 +62,7 @@ const HeroSkeleton = () => {
     return (
         <div className="heroskeleton">
             <section
-                className="page-section hero d-md-flex align-items-center"
+                className="page-section hero d-md-flex align-items-center mb-4 mb-lg-0"
                 id="hero"
                 style={{ background: "none"
                 }}
@@ -122,7 +122,7 @@ const HeroSkeleton = () => {
                                 if (i % 2 === 0) {
                                     return (
                                         <>
-                                            <div class={`col-lg-10 offset-lg-1 timeline_left timeline_main`}>
+                                            <div class={`col-lg-10 offset-lg-1 timeline_left timeline_main`} key={data.id}>
                                                 <div class="row justify-content-center align-items-center">
                                                     <div class="col-10 col-lg-5 d-none d-lg-block timeline-date">
                                                         <div
@@ -173,6 +173,7 @@ const HeroSkeleton = () => {
                                             <div
                                                 class={`col-lg-10 offset-lg-1 ${i === stepsData.length - 1 ? "" : "timeline_right"
                                                     } timeline_main`}
+                                                    key={data.id}
                                             >
                                                 <div class="row justify-content-center align-items-center">
                                                     <div class="col-10 col-lg-5 order-2 order-lg-1 timeline-text">
@@ -250,13 +251,13 @@ const HeroSkeleton = () => {
                     </h2>
                     <div className="row">
                         {featuresDatas.map((data, index) => (
-                            <div className="col-lg-3 col-md-6 d-flex flex-column ">
+                            <div className="col-lg-3 col-md-6 d-flex flex-column " key={data.id}>
                                 <div className="feature-box mb-5" style={{
                                     height: "320px",
                                     width: "268px"
                                 }}>
-                                    <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-4' />
-                                    <Skeleton variant="square" height={14} width={190} className='mt-3 mb-4 mx-auto' />
+                                    <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-3' />
+                                    <Skeleton variant="square" height={14} width={190} className='mb-3 mx-auto' />
                                     <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
                                     <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
                                     <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
@@ -287,14 +288,14 @@ const HeroSkeleton = () => {
                 <div className="container">
                     <div className="faq_wrap">
                         <div className="row">
-                            <div className="col-12 col-lg-6 faq_left">
+                            <div className="col-12 col-lg-6 faq_left mb-4 mb-lg-0">
                                 <h2
                                     className="heading mb-4"
                                 >
                                     <Skeleton variant="rounded" height={20} width={400} />
                                     {/* {faqData.heading} */}
                                 </h2>
-                                <Skeleton className='mb-5' variant="rounded" height={5} width={103} />
+                                <Skeleton className='mb-5' variant="rounded" height={8} width={103} />
                                 <p
                                     className="text"
                                 >
@@ -312,7 +313,7 @@ const HeroSkeleton = () => {
                                     <>
 
                                         {/* {item.question} */}
-                                        <Skeleton variant="rounded" height={60} width={630} style={{ marginBottom: "30px" }} />
+                                        <Skeleton variant="rounded" height={60} width={630} style={{ marginBottom: "30px" }} key={item.id}/>
 
                                     </>
                                 ))}

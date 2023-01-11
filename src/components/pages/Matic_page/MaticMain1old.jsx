@@ -1147,17 +1147,17 @@ export const MaticMain1 = (props) => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                {data.map((item) => {
+                                {data.map((item,i) => {
                                   if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
                                     return (
-                                      <option value={item.value}>{item.subNetworkName}</option>
+                                      <option value={item.value} key={i}>{item.subNetworkName}</option>
                                     )
                                   }
                                   else if (item.parentNetworkName === "Polygon" && item.tokenType === 'basic') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
                                   }
                                   else if (item.parentNetworkName === "Polygon" && item.tokenType === 'custom') {
-                                    <option value={item.value}>{item.subNetworkName}</option>
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
                                   }
                                 })}
 

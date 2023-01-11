@@ -91,7 +91,7 @@ export const FrontMain = () => {
               >
                 <div className="container self">
                   <div className="row">
-                    <div className="col-lg-6 d-flex flex-column justify-content-center">
+                    <div className="col-lg-6 d-flex flex-column justify-content-center mb-4 mb-lg-0">
                       <h1 style={{ color: `${banner.headingColor}` }}>
                         <span className="sub-highlight">{banner.heading}</span>
                       </h1>
@@ -139,7 +139,7 @@ export const FrontMain = () => {
                         if (i % 2 === 0) {
                           return (
                             <>
-                              <div class={`col-lg-10 offset-lg-1 timeline_left timeline_main`}>
+                              <div class={`col-lg-10 offset-lg-1 timeline_left timeline_main`} key={i}>
                                 <div class="row justify-content-center align-items-center">
                                   <div class="col-10 col-lg-5 d-none d-lg-block timeline-date">
                                     <div
@@ -174,6 +174,7 @@ export const FrontMain = () => {
                               <div
                                 class={`col-lg-10 offset-lg-1 ${i === steps.length - 1 ? "" : "timeline_right"
                                   } timeline_main`}
+                                  key={i}
                               >
                                 <div class="row justify-content-center align-items-center">
                                   <div class="col-10 col-lg-5 order-2 order-lg-1 timeline-text">
@@ -247,7 +248,7 @@ export const FrontMain = () => {
                   </h2>
                   <div className="row">
                     {features.map((data, index) => (
-                      <div className="col-lg-3 col-md-6 d-flex flex-column mb-lg-3">
+                      <div className="col-xl-3 col-lg-4 col-md-6 d-flex flex-column mb-lg-3">
                         <div className="feature-box mb-4 py-5 px-3">
                           <img src={imageBaseUrl + data.featureImage} />
                           <h5 className="my-3">{data.title}</h5>
@@ -270,9 +271,11 @@ export const FrontMain = () => {
                     {custom.heading}
                   </h2>
                   <div className="mt-4 text-center">
-                    <Link
+                    <a
                       type="button"
-                      to="https://www.blocktechbrew.com/"
+                      target='_blank'
+                      rel='nonreferrer'
+                      href="https://www.blocktechbrew.com/"
                       className="blue-btn btn"
                       style={{
                         backgroundColor: `${custom.buttonBackgroundColor}`,
@@ -280,7 +283,7 @@ export const FrontMain = () => {
                       }}
                     >
                       {custom.buttonText}
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </section>
@@ -289,7 +292,7 @@ export const FrontMain = () => {
                 <div className="container">
                   <div className="faq_wrap">
                     <div className="row">
-                      <div className="col-12 col-lg-6 faq_left">
+                      <div className="col-12 col-lg-6 faq_left mb-4 mb-lg-0">
                         <h2
                           className="heading mb-0"
                           style={{ color: `${featuresData.headingColor}` }}

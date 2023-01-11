@@ -42,6 +42,7 @@ const BnbMain1 = (props) => {
 
   // console.log(props, "PEOPS AT BNB");
 
+  const [buttonClick, setButtonClick] = useState(false)
   const [data, setData] = useState([]);
   const getNetworks = () => {
     axios
@@ -100,6 +101,7 @@ const BnbMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
+    initialSupplyErr:""
   });
 
   const [fieldsDisabled, setFieldsDisabled] = useState({
@@ -513,7 +515,7 @@ const BnbMain1 = (props) => {
       if (e.target.value === "") {
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: boolean ?? 0,
+          [e.target.name]: boolean ?? '',
         }));
       } else {
         setEthFormData((prev) => ({
@@ -566,6 +568,12 @@ const BnbMain1 = (props) => {
         decimalsErr: "",
       }));
     }
+    if (initialSupply !== null) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "",
+      }));
+    }
   }, [agreement, tokenName, tokenSymbol, decimals]);
 
   const handleSubmit = (e) => {
@@ -584,17 +592,23 @@ const BnbMain1 = (props) => {
       }));
     }
 
-    if (ethFormData.agreement === false) {
-      setErr((prev) => ({
-        ...prev,
-        agreementErr:
-          "Please confirm that you have read and understood our terms of use",
-      }));
-    }
+    // if (ethFormData.agreement === false) {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     agreementErr:
+    //       "Please confirm that you have read and understood our terms of use",
+    //   }));
+    // }
     if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
       setErr((prev) => ({
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
+      }));
+    }
+    if (!ethFormData.initialSupply) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "Please choose how many token you want to deploy?",
       }));
     }
 
@@ -607,7 +621,9 @@ const BnbMain1 = (props) => {
       // console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
     }
-    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "") {
+    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== ""
+      && (ethFormData.decimals <=21 &&  ethFormData.decimals >= 6) &&
+      ethFormData.initialSupply !== '') {
       // navigate("/generator/final");
       setStep(2);
     }
@@ -663,6 +679,7 @@ const BnbMain1 = (props) => {
   // )}
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
+    // setButtonClick(true)
     try {
       // console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -1106,14 +1123,14 @@ const BnbMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              {data.map((item) => {
+                              {data.map((item,i) => {
                                 if (
                                   item.parentNetworkName ===
                                   "Binance Smart Chain" &&
                                   item.tokenType === "free"
                                 ) {
                                   return (
-                                    <option value={item.value}>
+                                    <option value={item.value} key={i}>
                                       {item.subNetworkName}
                                     </option>
                                   );
@@ -1122,7 +1139,7 @@ const BnbMain1 = (props) => {
                                   "Binance Smart Chain" &&
                                   item.tokenType === "basic"
                                 ) {
-                                  <option value={item.value}>
+                                  <option value={item.value} key={i}>
                                     {item.subNetworkName}
                                   </option>;
                                 } else if (
@@ -1130,7 +1147,7 @@ const BnbMain1 = (props) => {
                                   "Binance Smart Chain" &&
                                   item.tokenType === "custom"
                                 ) {
-                                  <option value={item.value}>
+                                  <option value={item.value} key={i}>
                                     {item.subNetworkName}
                                   </option>;
                                 }
@@ -1246,13 +1263,15 @@ const BnbMain1 = (props) => {
                             <button
                               type="button"
                               className="btn form-btn"
-                              onClick={() => setStep(2)}
+                              onClick={() => { 
+                                setStep(2) }}
                             >
                               Back
                             </button>
                             <button
                               type="button"
                               className="btn form-btn"
+                              // disabled={buttonClick}
                               onClick={async () => {
                                 if (ethFormData.agreement === false) {
                                   setErr((prev) => ({

@@ -1,6 +1,6 @@
 import { Skeleton } from '@mui/material'
 import React from 'react'
-import { PrivacyPolicy } from '../components/Layots/PrivacPolicy'
+import { PrivacyPolicy } from '../components/Layots/PrivacPolicyModal'
 import { TermsModal } from '../components/Layots/TermsModal'
 import { FiMail } from 'react-icons/fi'
 import { AiFillPhone } from 'react-icons/ai'

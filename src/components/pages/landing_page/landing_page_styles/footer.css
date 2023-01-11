@@ -3,18 +3,13 @@
     text-decoration: none !important;
     color: #6c757d !important;
 }
-
-
 .page-footer {
     justify-content: center;
     color: #fff;
     font-size: .875rem;    
   
 }
-.footer-in-mainpage footer{
-    background-color: #f7f4fb;
 
-}
 footer {
     display: block;
     background-image: url('../../../../assets/footerbg.png');
@@ -109,6 +104,9 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+.footer-in-mainpage footer{
+    background-color: #f7f4fb;
+}
 @media screen and (min-width: 1685px) {
     div#root {
         position: relative;
@@ -122,13 +120,15 @@ input::-webkit-inner-spin-button {
   
 }
 @media screen and (max-width: 1399.98px) {
-    footer {
+    .footer-in-mainpage footer ,footer{
         background-image: none;
         background-color: rgba(0, 0, 0, 0.911);
+        padding-top: 30px;
     }
 }
 @media(max-width: 991.98px){
     footer {
         padding-top: 30px;
     }
+     
 }
