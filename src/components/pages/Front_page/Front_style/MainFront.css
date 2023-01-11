@@ -466,7 +466,7 @@
     }
 
     .timeline_wrap {
-        padding: 40px 0 40px;
+        padding: 0;
     }
 
     .timeline .text {
@@ -530,7 +530,7 @@
     }
 
     .section-title {
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
 }
 
@@ -600,6 +600,14 @@
 @media (max-width: 768px) {
     .sub-highlight {
         font-size: 36px;
+    }
+    .accordionbutton{
+        padding: 10px 20px;
+    }
+    .blue-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+        min-width: auto;
     }
 }
 
