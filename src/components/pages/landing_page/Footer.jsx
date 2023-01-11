@@ -5,7 +5,7 @@ import "./landing_page_styles/footer.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Logo from "../../../assets/footerlogo.png";
-import { PrivacyPolicy } from "../../Layots/PrivacPolicy";
+import { PrivacyPolicy } from "../../Layots/PrivacPolicyModal";
 import CIcon from "@coreui/icons-react";
 import { cilMail } from '@coreui/icons'
 import { FiMail } from 'react-icons/fi'
@@ -80,18 +80,18 @@ function Footer() {
               <div className="col-md-6 col-lg-2">
                 {/* <h5 className="mb-5"></h5> */}
                 <Link
-                  to="/"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
+                  to="/terms"
+                  // data-bs-toggle="modal"
+                  // data-bs-target="#exampleModal"
                   style={{ color: "#fff" }}
                 >
                   <p> Terms of Use</p>
                 </Link>
                 <TermsModal />
                 <Link
-                  to="/"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal1"
+                  to="/privacy-policy"
+                  // data-bs-toggle="modal"
+                  // data-bs-target="#exampleModal1"
                   style={{ color: "#fff" }}
                 >
                   <p>Privacy Policy</p>
@@ -118,7 +118,7 @@ function Footer() {
               </div>
             </div>
 
-            <hr />
+            <hr className="mt-lg-4 mb-lg-3" />
             <div className="text-center mb-0">
               {footer.investorCopyrightText}
             </div>

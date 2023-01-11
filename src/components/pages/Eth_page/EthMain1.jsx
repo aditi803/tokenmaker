@@ -743,7 +743,7 @@ const EthMain1 = (props) => {
   }, [tokenType, initialSupply, maximumSupply]);
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
-    setButtonClick(true)
+    // setButtonClick(true)
     try {
       // console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -1337,7 +1337,7 @@ const EthMain1 = (props) => {
                             <button
                               type="button"
                               className="btn form-btn"
-                              disabled={buttonClick}
+                              // disabled={buttonClick}
                               onClick={async () => {
                                 if (ethFormData.agreement === false) {
                                   setErr((prev) => ({

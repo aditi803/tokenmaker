@@ -248,7 +248,7 @@ export const FrontMain = () => {
                   </h2>
                   <div className="row">
                     {features.map((data, index) => (
-                      <div className="col-lg-3 col-md-6 d-flex flex-column mb-lg-3" key={index}>
+                      <div className="col-xl-3 col-lg-4 col-md-6 d-flex flex-column mb-lg-3">
                         <div className="feature-box mb-4 py-5 px-3">
                           <img src={imageBaseUrl + data.featureImage} />
                           <h5 className="my-3">{data.title}</h5>

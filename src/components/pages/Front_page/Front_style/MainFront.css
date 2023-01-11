@@ -144,9 +144,9 @@
 
 .accordionbutton {
     font-weight: 500;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 30px;
-    padding: 17px 30px;
+    padding: 17px 20px;
 }
 
 .faq .accordionbody {
@@ -539,6 +539,9 @@
         line-height: 31px;
         max-width: 100%;
     }
+    .section-faq {
+        padding: 50px 0;
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -576,10 +579,7 @@
         width: 5px;
         left: 6%;
     }
-
-    .timeline .timeline_right {
-        padding: 40px 0;
-    }
+    
 }
 
 @media (max-width:499px) {
@@ -598,10 +598,6 @@
 
 
 @media (max-width: 768px) {
-    .page-section {
-        padding: 3rem;
-    }
-
     .sub-highlight {
         font-size: 36px;
     }
@@ -610,9 +606,6 @@
 
 
 @media (max-width: 768px) {
-    .page-section {
-        padding: 3rem;
-    }
 
     .sub-highlight {
         font-size: 36px;

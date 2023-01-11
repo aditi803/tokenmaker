@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton"
+import SelectBanner from "../Eth_page/SelectBanner";
 // import moonRiverImage from "../../../assets/monBeams.png"
 
 function Main() {
@@ -46,12 +47,13 @@ function Main() {
       <Header />
       <div className="page-content">
         <main>
-          <div className="hero mb-3 mt-5">
+          {/* <div className="hero mb-3 mt-5">
             <div className="container">
               <h1 className="sub-highlight">Select your network </h1>
               <p style={{ color: 'black' }}>Your token will be deployed on the selected blockchain</p>
             </div>
-          </div>
+          </div> */}
+          <SelectBanner />
 
           {loader ? <MainSkeleton /> :
             <>

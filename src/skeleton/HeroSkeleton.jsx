@@ -256,8 +256,9 @@ const HeroSkeleton = () => {
                                     height: "320px",
                                     width: "268px"
                                 }}>
-                                    <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-4' />
-                                    <Skeleton variant="square" height={14} width={190} className='mt-3 mb-4 mx-auto' />
+                                    <Skeleton variant="circular" height={64} width={64} className='mx-auto mb-3' />
+                                    <Skeleton variant="square" height={14} width={190} className='
+                                    mb-3 mx-auto' />
                                     <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
                                     <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
                                     <Skeleton variant="rounded" height={10} width={231} className="mb-2" />
