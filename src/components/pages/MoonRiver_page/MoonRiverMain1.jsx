@@ -80,6 +80,7 @@ const MoonRiverMain1 = (props) => {
     connectedAccAddress,
     blockchainNetworks,
     sendCommision,
+    toggler
   } = useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -258,20 +259,20 @@ const MoonRiverMain1 = (props) => {
         }));
       }
 
-      //   if (network === "binanceSmartChainTestnet") {
-      //     setEthFormData((prev) => ({
-      //       ...prev,
-      //       commissionFee: data.find((item) => item.value === ethFormData.network)
-      //         ?.networkCommissionFee,
-      //     }));
-      //   }
-      //   if (network === "binanceSmartChain") {
-      //     setEthFormData((prev) => ({
-      //       ...prev,
-      //       commissionFee: data.find((item) => item.value === ethFormData.network)
-      //         ?.networkCommissionFee,
-      //     }));
-      //   }
+        if (network === "moonBaseAlpha") {
+          setEthFormData((prev) => ({
+            ...prev,
+            commissionFee: data.find((item) => item.value === ethFormData.network)
+              ?.networkCommissionFee,
+          }));
+        }
+        if (network === "moonRiver") {
+          setEthFormData((prev) => ({
+            ...prev,
+            commissionFee: data.find((item) => item.value === ethFormData.network)
+              ?.networkCommissionFee,
+          }));
+        }
       if (supplyType === "fixed" || supplyType === "capped") {
         setEthFormData((prev) => ({
           ...prev,
@@ -637,30 +638,26 @@ const MoonRiverMain1 = (props) => {
     return selctedItem?.[0];
   };
 
-  //   useEffect(() => {
-  //     const selectedCommissionFee = data?.find(
-  //       ({ value, parentNetworkName, subNetworkName, tokenType }) => {
-  //         if (
-  //           parentNetworkName === "Binance Smart Chain" &&
-  //           (value === ethFormData.network ||
-  //             value === customVampire(ethFormData.network)) &&
-  //           tokenType === ethFormData.tokenType
-  //         ) {
-  //           return true;
-  //         }
-  //       }
-  //     );
-  //     // setGasFee(selectedCommissionFee)
-  //     setEthFormData((prev) => ({
-  //       ...prev,
-  //       commissionFee: selectedCommissionFee?.networkCommissionFee,
-  //     }));
-  //     console.log(
-  //       selectedCommissionFee,
-  //       ">>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH"
-  //     );
-  //   }, [ethFormData.tokenType, ethFormData.network, data]);
+  
+  useEffect(() => {
+    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
+      if (parentNetworkName === 'Moon River' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+        return true;
+      }
+    })
+    // setGasFee(selectedCommissionFee)
+    setEthFormData(prev => ({
+      ...prev,
+      commissionFee: selectedCommissionFee?.networkCommissionFee
+    }))
+    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(ethFormData, '2>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
 
+
+
+  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler])
   // {web3Loading ? (
   //   <button className=" btn-inner - text " disabled>
   //     {" "}
@@ -1107,10 +1104,10 @@ const MoonRiverMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              {/* {data.map((item) => {
+                               {data.map((item) => {
                               if (
                                 item.parentNetworkName ===
-                                  "Binance Smart Chain" &&
+                                  "Moon River" &&
                                 item.tokenType === "free"
                               ) {
                                 return (
@@ -1120,7 +1117,7 @@ const MoonRiverMain1 = (props) => {
                                 );
                               } else if (
                                 item.parentNetworkName ===
-                                  "Binance Smart Chain" &&
+                                  "Moon River" &&
                                 item.tokenType === "basic"
                               ) {
                                 <option value={item.value}>
@@ -1128,16 +1125,16 @@ const MoonRiverMain1 = (props) => {
                                 </option>;
                               } else if (
                                 item.parentNetworkName ===
-                                  "Binance Smart Chain" &&
+                                  "Moon River" &&
                                 item.tokenType === "custom"
                               ) {
                                 <option value={item.value}>
                                   {item.subNetworkName}
                                 </option>;
                               }
-                            })} */}
-                              <option value="moonRiver">Moon River</option>
-                              <option value="moonBaseAlpha">Moon Base Alpha</option>
+                            })} 
+                              {/* <option value="moonRiver">Moon River</option>
+                              <option value="moonBaseAlpha">Moon Base Alpha</option> */}
                             </select>
                             <span className="form-text f-12 heading">
                               Select the network on wich you want to deploy your
@@ -1180,7 +1177,7 @@ const MoonRiverMain1 = (props) => {
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} DEV`
+                                      : `${commissionFee} MOVR`
                                     : "Free"}
                                 </span>
                               </div>
