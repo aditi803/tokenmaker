@@ -62,7 +62,7 @@ function Footer() {
                   </a>
                 </div>
               </div>
-              <div className="col-md-6 col-lg-2 services mb-xl-0 mb-4">
+              <div className="col-md-6 col-lg-2 services mb-xl-0 mb-md-4">
                 <h5 className="mb-4">Our Services</h5>
                 <a href=' https://blocktechbrew.com/metaverse-development-company/' target='_blank' >
                   <p>Metaverse</p>

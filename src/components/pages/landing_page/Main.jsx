@@ -66,7 +66,7 @@ function Main() {
 
                     {data.map((value, index) => {
                       
-                      return <div className='col-sm-6 col-md-4 col-lg-3 col-xxl' key={index}>
+                      return <div className='col-sm-6 col-md-4 col-lg-3 col-xxl mb-xxl-0 mb-4'>
                         <div className="chain-item">
 
                           <Link to={`/generator/${value.hrefPath}`} className="chain-link chain-bsc">
