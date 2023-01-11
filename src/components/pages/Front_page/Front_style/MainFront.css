@@ -516,12 +516,6 @@
     }
 }
 
-@media screen and (min-width: 1684.98px) {
-    .section-faq {
-        /* margin-bottom: 255px; */
-    }
-}
-
 @media screen and (max-width: 768px) {
 
     .timeline .timeline_left::after,

@@ -893,7 +893,7 @@ small {
     }
 }
 
-@media (max-width:998.98px) {
+@media (max-width:991.98px) {
     body .section-title{
         padding-top: 0;
     }
@@ -908,6 +908,9 @@ small {
     }
     .feature-box p {
         font-size: 12px;
+    }
+    .hero h1.sub-highlight {
+        font-size: 30px;
     }
 }
 
