@@ -271,9 +271,11 @@ export const FrontMain = () => {
                     {custom.heading}
                   </h2>
                   <div className="mt-4 text-center">
-                    <Link
+                    <a
                       type="button"
-                      to="https://www.blocktechbrew.com/"
+                      target='_blank'
+                      rel='nonreferrer'
+                      href="https://www.blocktechbrew.com/"
                       className="blue-btn btn"
                       style={{
                         backgroundColor: `${custom.buttonBackgroundColor}`,
@@ -281,7 +283,7 @@ export const FrontMain = () => {
                       }}
                     >
                       {custom.buttonText}
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </section>

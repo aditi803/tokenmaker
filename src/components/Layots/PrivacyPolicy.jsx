@@ -5,10 +5,12 @@ import Header from '../pages/landing_page/Header'
 import SelectBanner from '../pages/Eth_page/SelectBanner'
 import Footer from '../pages/landing_page/Footer'
 import parse from 'html-react-parser';
+import PrivacySkeleton from '../../skeleton/PrivacySkeleton'
 
 const PrivacyPolicy = () => {
 
   const [terms, setTerms] = useState({ content: '' })
+  const [loader, setLoader] = useState(true)
   useEffect(() => {
     fetchData()
   }, [setTerms])
@@ -19,6 +21,7 @@ const PrivacyPolicy = () => {
       .then(res => {
         setTerms(res.data.msg)
         // console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>terms msg")
+        setLoader(false)
       })
       .catch(err => {
         console.log(err);
@@ -26,19 +29,22 @@ const PrivacyPolicy = () => {
   }
   return (
     <>
-    <Header />
-    <SelectBanner />
-    <div className='container'>
-        <div className='row'>
+      <Header />
+      <SelectBanner />
+      {loader ? <PrivacySkeleton /> :
+        <div className='container'>
+          <div className='row'>
             <div className='col-12'>
-                <h1>{terms.title}</h1>
-                <br />
-                {parse(terms.content.trim())}
+              <h1>{terms.title}</h1>
+              <br />
+              {parse(terms.content.trim())}
             </div>
+          </div>
         </div>
-    </div>
-    <Footer />
-</>
+      }
+
+      <Footer />
+    </>
 
   )
 }
