@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 export const FinalMain = (props) => {
   //  const  {deploySuccess} = props
-  
+
   const navigate = useNavigate();
   const percentage = 100;
-  const { addToken, deploySuccess, deployData,solDeploy } = useContext(GlobalContext);
+  const { addToken, deploySuccess, deployData, solDeploy } = useContext(GlobalContext);
 
   // console.log(deploySuccess, "deploy Success final side");
   // console.log("final main");
@@ -36,37 +36,41 @@ export const FinalMain = (props) => {
               </p>
             </div>
           </div>
-          <section style={{ height: "100vh",maxHeight:"350px" ,bottom:0 }}>
-            <div className="container pt-2">
-              <div className="configurator-container">
-                <div className="configurator-pending-install">
-                  <div className="card">
-                    {/* start */}
-                    {deploySuccess || solDeploy? (
-                      <SuccessDeploy
-                        addToken={addToken}
-                        deployData={deployData}
-                      />
-                    ) : (
-                      <div className="pt-5">
-                        <div className="card-header d-flex align-items-center">
-                          <div className="mr-3" style={{ zoom: 1.5 }}></div>
-                          <i className="fa-solid fa-arrow-right me-3"></i>
-                          <h4 className="m-0">Installation</h4>
-                        </div>
-                        <div className="card-body">
-                          <p className="text-muted">
-                            Please Wait and confirm the transaction with your
-                            wallet to start installing your token.
-                          </p>
+          <section className="my-5 py-5">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-8 offset-lg-2">
+                  <div className="configurator-container">
+                    <div className="configurator-pending-install">
+                      <div className="card">
+                        {/* start */}
+                        {deploySuccess || solDeploy ? (
+                          <SuccessDeploy
+                            addToken={addToken}
+                            deployData={deployData}
+                          />
+                        ) : (
+                          <div className="pt-5">
+                            <div className="card-header d-flex align-items-center">
+                              <div className="mr-3" style={{ zoom: 1.5 }}></div>
+                              <i className="fa-solid fa-arrow-right me-3"></i>
+                              <h4 className="m-0">Installation</h4>
+                            </div>
+                            <div className="card-body">
+                              <p className="text-muted">
+                                Please Wait and confirm the transaction with your
+                                wallet to start installing your token.
+                              </p>
 
-                          <div className="progressBar">
-                            <ProgressBar now={percentage} animated />
+                              <div className="progressBar">
+                                <ProgressBar now={percentage} animated />
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        )}
+                        {/*ends  */}
                       </div>
-                    )}
-                    {/*ends  */}
+                    </div>
                   </div>
                 </div>
               </div>

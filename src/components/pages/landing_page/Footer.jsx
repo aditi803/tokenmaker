@@ -118,7 +118,7 @@ function Footer() {
               </div>
             </div>
 
-            <hr />
+            <hr className="mt-lg-4 mb-lg-3" />
             <div className="text-center mb-0">
               {footer.investorCopyrightText}
             </div>

@@ -1,6 +1,13 @@
 .w-100 {
     width: 100%!important;
 }
+.css-4ff9q7 {
+    color: rgb(189, 189, 189) !important;
+}
+
+.css-4ff9q7.Mui-active {
+    color: rgb(25, 118, 210) !important;
+}
 .card {
     position: relative;
     display: flex;
