@@ -30,19 +30,20 @@ const Terms = () => {
         <>
             <Header />
             <SelectBanner />
-            {   loader ? <TermsSkeleton /> :
-                     <div className='container'>
-                     <div className='row'>
-                         <div className='col-12'>
-                             <h1>{terms.title}</h1>
-                             <br />
-                             {parse(terms.content.trim())}
-                         </div>
-                     </div>
-                 </div>
+            {loader ? <TermsSkeleton /> :
+                <div className="page-content mt-5">
+                    <div className='container mb-5 pt-lg-4 pb-lg-5'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <h2 className='page-title mb-4'>{terms.title}</h2>
+                                <p>{parse(terms.content.trim())}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
-           
-            <Footer />
+
+<Footer />
         </>
 
     )
