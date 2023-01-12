@@ -80,6 +80,7 @@ const AvaxMain1 = (props) => {
     connectedAccAddress,
     blockchainNetworks,
     sendCommision,
+    toggler
   } = useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -110,6 +111,7 @@ const AvaxMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
+    initialSupplyErr: ""
   });
 
   const [fieldsDisabled, setFieldsDisabled] = useState({
@@ -196,16 +198,16 @@ const AvaxMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-      //   if (network === "binanceSmartChainTestnet") {
-      //     setEthFormData((prev) => ({
-      //       ...prev,
-      //     }));
-      //   }
-      //   if (network === "binanceSmartChain") {
-      //     setEthFormData((prev) => ({
-      //       ...prev,
-      //     }));
-      //   }
+        if (network === "avalancheFujiC-Chain") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
+        if (network === "avalanche") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
     } else if (tokenType === "free") {
       setFieldsDisabled(freeDisabled);
       setEthFormData((prev) => ({
@@ -523,7 +525,7 @@ const AvaxMain1 = (props) => {
       if (e.target.value === "") {
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: boolean ?? 0,
+          [e.target.name]: boolean ?? '',
         }));
       } else {
         setEthFormData((prev) => ({
@@ -576,7 +578,13 @@ const AvaxMain1 = (props) => {
         decimalsErr: "",
       }));
     }
-  }, [agreement, tokenName, tokenSymbol, decimals]);
+    if (initialSupply !== null) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "",
+      }));
+    }
+  }, [agreement, tokenName, tokenSymbol, decimals, initialSupply]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -594,9 +602,16 @@ const AvaxMain1 = (props) => {
       }));
     }
 
+    if (!ethFormData.initialSupply) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "Please choose how many tokens you want to deploy",
+      }));
+    }
+
     // if (ethFormData.agreement === false) {
     //   setErr((prev) => ({
-    //     ...prev, 
+    //     ...prev,
     //     agreementErr:
     //       "Please confirm that you have read and understood our terms of use",
     //   }));
@@ -617,7 +632,9 @@ const AvaxMain1 = (props) => {
       console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
     }
-    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "") {
+    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "" &&
+      (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
+      ethFormData.initialSupply !== '') {
       // navigate("/generator/final");
       setStep(2);
     }
@@ -637,30 +654,26 @@ const AvaxMain1 = (props) => {
     return selctedItem?.[0];
   };
 
-  //   useEffect(() => {
-  //     const selectedCommissionFee = data?.find(
-  //       ({ value, parentNetworkName, subNetworkName, tokenType }) => {
-  //         if (
-  //           parentNetworkName === "Binance Smart Chain" &&
-  //           (value === ethFormData.network ||
-  //             value === customVampire(ethFormData.network)) &&
-  //           tokenType === ethFormData.tokenType
-  //         ) {
-  //           return true;
-  //         }
-  //       }
-  //     );
-  //     // setGasFee(selectedCommissionFee)
-  //     setEthFormData((prev) => ({
-  //       ...prev,
-  //       commissionFee: selectedCommissionFee?.networkCommissionFee,
-  //     }));
-  //     console.log(
-  //       selectedCommissionFee,
-  //       ">>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH"
-  //     );
-  //   }, [ethFormData.tokenType, ethFormData.network, data]);
 
+  useEffect(() => {
+    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
+      if (parentNetworkName === 'Avalanche' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+        return true;
+      }
+    })
+    // setGasFee(selectedCommissionFee)
+    setEthFormData(prev => ({
+      ...prev,
+      commissionFee: selectedCommissionFee?.networkCommissionFee
+    }))
+    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(ethFormData, '2>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+
+
+
+  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler])
   // {web3Loading ? (
   //   <button className=" btn-inner - text " disabled>
   //     {" "}
@@ -688,8 +701,7 @@ const AvaxMain1 = (props) => {
         })
         : "";
 
-      console.log(FormData.network, "formdata bnb main1 side");
-
+      console.log(FormData.network, "network bnb main1 side");
       console.log(chainId, "chainId bnb main1 side ");
 
       if (FormData.network === chainId) {
@@ -700,7 +712,7 @@ const AvaxMain1 = (props) => {
         console.log(FormData.network, "currentNetworkID");
 
         let res = await sendCommision(commissionFee);
-        console.log(res, "ress send commision avax main");
+        console.log(res, "ress send commision matic main");
 
         if (res) {
           props.setShow(false);
@@ -746,6 +758,7 @@ const AvaxMain1 = (props) => {
             });
         }
       } else {
+
         changeNetwork(FormData.network);
       }
     } catch (error) {
@@ -762,12 +775,12 @@ const AvaxMain1 = (props) => {
             <div className="container">
               <h1>
                 <span className="sub-highlight ">
-                  Create Your Avax Token
+                  Create Your Avalanche Token
                 </span>
               </h1>
               <p style={{ color: 'black' }}>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable BEP20 Token.
+                Mintable, Burnable Avalanche Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -775,7 +788,7 @@ const AvaxMain1 = (props) => {
           </div>
           <section className="mb-5">
             {/* test */}
-            <div className="container">
+            <div className="container mt-lg-5">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="steper-div">
@@ -813,7 +826,7 @@ const AvaxMain1 = (props) => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                        <h4 className="heading mb-4">Informations</h4>
+                        <h3 className="heading mb-4">Informations</h3>
                         <form className="row">
                           <div className="form-group col-lg-6">
                             <label className="form-label">
@@ -890,7 +903,7 @@ const AvaxMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie BNB)
+                              You token's symbol (ie AVAX)
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}
@@ -911,7 +924,7 @@ const AvaxMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              The number of decimal of your token (default 18)
+                              The number of decimal of your token must be between 6 & 21 (default 18)
                             </span>
                             <div className="text-danger f-12">
                               {err.decimalsErr}
@@ -939,15 +952,13 @@ const AvaxMain1 = (props) => {
                               {err.initialSupplyErr}
                             </div>
                           </div>
-                          <div className="col-12">
-                            <button
-                              type="submit"
-                              className="btn form-btn ms-auto"
-                              onClick={handleSubmit}
-                            >
-                              Next
-                            </button>
-                          </div>
+                          <button
+                            type="submit"
+                            className="btn form-btn justify-content-center align-items-center ms-auto"
+                            onClick={handleSubmit}
+                          >
+                            Next
+                          </button>
                         </form>
                       </div>
                     </div>
@@ -959,8 +970,8 @@ const AvaxMain1 = (props) => {
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
-                      <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                        <h4 className="heading mb-4">Options</h4>
+                      <div className="firstForm p-lg-5 p-4 mb-5 mt-0">
+                        <h3 className="heading mb-4">Options</h3>
                         <form>
                           <div className="form-group">
                             <label className="form-check form-switch">
@@ -973,12 +984,12 @@ const AvaxMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to BEP20 protocol
+                                Conforms to avalanche protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to BEP20 protocol
+                              and confirms to avalanche protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -992,7 +1003,7 @@ const AvaxMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Bscscan
+                                Verified on avascan
                               </span>
                             </label>
                             <span className="form-text text-muted">
@@ -1075,11 +1086,11 @@ const AvaxMain1 = (props) => {
                               Allow your tokens to be paused
                             </span>
                           </div>
-                          <div className='d-flex justify-content-between align-items-center'>
-                            <button type="button" className="btn form-btn" onClick={() => setStep(1)}>
+                          <div className='d-flex justify-content-between'>
+                            <button type="button" className="btn form-btn ml-0" onClick={() => setStep(1)}>
                               Back
                             </button>
-                            <button type="button" className="btn form-btn" onClick={() => setStep(3)}>
+                            <button type="button" className="btn form-btn " onClick={() => setStep(3)}>
                               Next
                             </button>
                           </div>
@@ -1099,111 +1110,116 @@ const AvaxMain1 = (props) => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                        <h2 className="heading">Network</h2>
+                        <h5 className="heading mb-3">Network</h5>
                         <form>
                           <div className="form-group">
                             <select
-                              className="form-select"
+                              className="form-select mb-1"
                               name="network"
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              {/* {data.map((item) => {
-                              if (
-                                item.parentNetworkName ===
-                                  "Binance Smart Chain" &&
-                                item.tokenType === "free"
-                              ) {
-                                return (
+                              {/* <option>Select your network</option> */}
+                              {data.map((item) => {
+                                if (
+                                  item.parentNetworkName ===
+                                  "Avalanche" &&
+                                  item.tokenType === "free"
+                                ) {
+                                  return (
+                                    <option value={item.value}>
+                                      {item.subNetworkName}
+                                    </option>
+                                  );
+                                } else if (
+                                  item.parentNetworkName ===
+                                  "Avalanche" &&
+                                  item.tokenType === "basic"
+                                ) {
                                   <option value={item.value}>
                                     {item.subNetworkName}
-                                  </option>
-                                );
-                              } else if (
-                                item.parentNetworkName ===
-                                  "Binance Smart Chain" &&
-                                item.tokenType === "basic"
-                              ) {
-                                <option value={item.value}>
-                                  {item.subNetworkName}
-                                </option>;
-                              } else if (
-                                item.parentNetworkName ===
-                                  "Binance Smart Chain" &&
-                                item.tokenType === "custom"
-                              ) {
-                                <option value={item.value}>
-                                  {item.subNetworkName}
-                                </option>;
-                              }
-                            })} */}
-                              <option value="avalanche">Avalanche</option>
-                              <option value="avalancheFujiCChain">Avalanche Fuji C-Chain</option>
+                                  </option>;
+                                } else if (
+                                  item.parentNetworkName ===
+                                  "Avalanche" &&
+                                  item.tokenType === "custom"
+                                ) {
+                                  <option value={item.value}>
+                                    {item.subNetworkName}
+                                  </option>;
+                                }
+                              })}
+                              {/* <option value="moonRiver">Moon River</option>
+                              <option value="moonBaseAlpha">Moon Base Alpha</option> */}
                             </select>
-                            <span className="form-text heading">
+                            <span className="form-text f-12 heading">
                               Select the network on wich you want to deploy your
                               token
                             </span>
                           </div>
 
-                          <h4 className="heading mb-0">Transaction</h4>
+                          <h5 className="heading mb-0">Transaction</h5>
                           <div className="card-body px-0">
                             <div className="transactionWrap d-sm-flex align-items-center justify-content-between mb-3">
                               <div className="Ttext">
-                                Commission fee:{" "}
-                                <Tooltip
-                                  content={
-                                    <>
-                                      The commison fee will be
-                                      <br />
-                                      transferred automatically to us
-                                      <br /> during the contract creation.
-                                      <br />
-                                      In case of error,this
-                                      <br /> amount will not be
-                                      <br /> deducted from your <br />
-                                      wallet.Only the gas
-                                      <br /> fees will be deducted
-                                    </>
-                                  }
-                                  direction="top"
-                                >
-                                  <HiInformationCircle size={22} />
-                                </Tooltip>
+                                <p className="mb-0">
+                                  Commission fee:{" "}
+                                  <Tooltip
+                                    content={
+                                      <>
+                                        The commison fee will be
+                                        <br />
+                                        transferred automatically to us
+                                        <br /> during the contract creation.
+                                        <br />
+                                        In case of error,this
+                                        <br /> amount will not be
+                                        <br /> deducted from your <br />
+                                        wallet.Only the gas
+                                        <br /> fees will be deducted
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
+                                </p>
                               </div>
                               <div
-                                className="Tbtn mt-auto mb-auto"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-success d-block p-2 ">
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} BNB`
+                                      : `${commissionFee} AVAX`
                                     : "Free"}
                                 </span>
                               </div>
                             </div>
                             <div className="transactionWrap d-sm-flex align-items-center justify-content-between">
-                              <div className="Ttext">
-                                Gas fee:{" "}
-                                <Tooltip
-                                  content={
-                                    <>
-                                      The gas fee depend <br />
-                                      on gas limit and
-                                      <br /> gas price. Metamask will
-                                      <br /> automatically display
-                                      <br /> the best fee to use
-                                    </>
-                                  }
-                                  direction="top"
-                                >
-                                  <HiInformationCircle size={22} />
-                                </Tooltip>
+                              <div className="Ttext ">
+                                <p className="mb-0">
+                                  Gas fee:{" "}
+                                  <Tooltip
+                                    content={
+                                      <>
+                                        The gas fee depend <br />
+                                        on gas limit and
+                                        <br /> gas price. Metamask will
+                                        <br /> automatically display
+                                        <br /> the best fee to use
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
+                                </p>
                               </div>
                               <div
-                                className="Tbtn mt-auto mb-auto"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-secondary d-block p-2">
@@ -1212,7 +1228,7 @@ const AvaxMain1 = (props) => {
                               </div>
                             </div>
                           </div>
-                          <h4 className="heading  mb-0">Agreement</h4>
+                          <h5 className="heading mb-0">Agreement</h5>
                           <div className="card-body px-0">
                             <div className="form-group">
                               <label className="form-check">
@@ -1239,13 +1255,13 @@ const AvaxMain1 = (props) => {
                                   {/* modal */}
                                   {/* </span> */}
                                 </span>
-                                <div className="text-danger f-12">
+                                <div className="f-12 mt-1 text-danger">
                                   {err.agreementErr}
                                 </div>
                               </label>
                             </div>
                           </div>
-                          <div className="d-flex justify-content-between align-items-center">
+                          <div className="d-flex justify-content-between">
                             <button
                               type="button"
                               className="btn form-btn"

@@ -25,7 +25,7 @@ const MainSkeleton = () => {
     return (
         <>
             <div className="container py-5 my-5">
-                <div className='row gx-2'>
+                <div className='row g-3'>
                     {data.map((value, index) => {
                         // if (index === 0) {
                         //   return <div className="chain-item">
@@ -40,7 +40,7 @@ const MainSkeleton = () => {
                         //     </Link>
                         //   </div>
                         // }else {
-                        return <div className="col-sm-6 col-md-4 col-lg-3 col-xxl-2 mb-2">
+                        return <div className="col-sm-6 col-md-4 col-lg-3">
                             <div className="chain-item d-flex align-items-center justify-content-center flex-column">
                                 <Skeleton variant="rounded" height={20} width={155} />
                                 <Skeleton className='my-5' variant="rounded" height={71} width={76} />

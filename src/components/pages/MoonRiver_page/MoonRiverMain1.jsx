@@ -198,16 +198,16 @@ const MoonRiverMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-      //   if (network === "binanceSmartChainTestnet") {
-      //     setEthFormData((prev) => ({
-      //       ...prev,
-      //     }));
-      //   }
-      //   if (network === "binanceSmartChain") {
-      //     setEthFormData((prev) => ({
-      //       ...prev,
-      //     }));
-      //   }
+        if (network === "moonBaseAlpha") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
+        if (network === "moonRiver") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
     } else if (tokenType === "free") {
       setFieldsDisabled(freeDisabled);
       setEthFormData((prev) => ({
@@ -260,20 +260,20 @@ const MoonRiverMain1 = (props) => {
         }));
       }
 
-        if (network === "moonBaseAlpha") {
-          setEthFormData((prev) => ({
-            ...prev,
-            commissionFee: data.find((item) => item.value === ethFormData.network)
-              ?.networkCommissionFee,
-          }));
-        }
-        if (network === "moonRiver") {
-          setEthFormData((prev) => ({
-            ...prev,
-            commissionFee: data.find((item) => item.value === ethFormData.network)
-              ?.networkCommissionFee,
-          }));
-        }
+      // if (network === "moonBaseAlpha") {
+      //   setEthFormData((prev) => ({
+      //     ...prev,
+      //     commissionFee: data.find((item) => item.value === ethFormData.network)
+      //     //   ?.networkCommissionFee,
+      //   }));
+      // }
+      // if (network === "moonRiver") {
+      //   setEthFormData((prev) => ({
+      //     ...prev,
+      //     commissionFee: data.find((item) => item.value === ethFormData.network)
+      //     //   ?.networkCommissionFee,
+      //   }));
+      // }
       if (supplyType === "fixed" || supplyType === "capped") {
         setEthFormData((prev) => ({
           ...prev,
@@ -654,7 +654,7 @@ const MoonRiverMain1 = (props) => {
     return selctedItem?.[0];
   };
 
-  
+
   useEffect(() => {
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
       if (parentNetworkName === 'Moon River' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
@@ -775,7 +775,7 @@ const MoonRiverMain1 = (props) => {
             <div className="container">
               <h1>
                 <span className="sub-highlight ">
-                  Create Your Binance Smart Chain Token
+                  Create Your Moon River Token
                 </span>
               </h1>
               <p style={{ color: 'black' }}>
@@ -903,7 +903,7 @@ const MoonRiverMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie Dev)
+                              You token's symbol (ie MOVR)
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}
@@ -984,12 +984,12 @@ const MoonRiverMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to BEP20 protocol
+                                Conforms to Moon River protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to BEP20 protocol
+                              and conforms to Moon River protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -1003,7 +1003,7 @@ const MoonRiverMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Bscscan
+                                Verified on moonscan
                               </span>
                             </label>
                             <span className="form-text text-muted">
@@ -1119,35 +1119,36 @@ const MoonRiverMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                               {data.map((item) => {
-                              if (
-                                item.parentNetworkName ===
+                              {/* <option>Select your network</option> */}
+                              {data.map((item) => {
+                                if (
+                                  item.parentNetworkName ===
                                   "Moon River" &&
-                                item.tokenType === "free"
-                              ) {
-                                return (
+                                  item.tokenType === "free"
+                                ) {
+                                  return (
+                                    <option value={item.value}>
+                                      {item.subNetworkName}
+                                    </option>
+                                  );
+                                } else if (
+                                  item.parentNetworkName ===
+                                  "Moon River" &&
+                                  item.tokenType === "basic"
+                                ) {
                                   <option value={item.value}>
                                     {item.subNetworkName}
-                                  </option>
-                                );
-                              } else if (
-                                item.parentNetworkName ===
+                                  </option>;
+                                } else if (
+                                  item.parentNetworkName ===
                                   "Moon River" &&
-                                item.tokenType === "basic"
-                              ) {
-                                <option value={item.value}>
-                                  {item.subNetworkName}
-                                </option>;
-                              } else if (
-                                item.parentNetworkName ===
-                                  "Moon River" &&
-                                item.tokenType === "custom"
-                              ) {
-                                <option value={item.value}>
-                                  {item.subNetworkName}
-                                </option>;
-                              }
-                            })} 
+                                  item.tokenType === "custom"
+                                ) {
+                                  <option value={item.value}>
+                                    {item.subNetworkName}
+                                  </option>;
+                                }
+                              })}
                               {/* <option value="moonRiver">Moon River</option>
                               <option value="moonBaseAlpha">Moon Base Alpha</option> */}
                             </select>
