@@ -9,6 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton";
 import avalancheImage from "../../../assets/Avalanche_logo_without_text.png"
+import SelectBanner from "../Eth_page/SelectBanner";
 
 function Main() {
   const { setSolDeploy, setDeploySuccess,setMoonToggle, moonToggle } = useContext(GlobalContext);
@@ -66,7 +67,7 @@ function Main() {
               </p>
             </div>
           </div> */}
-          {/* <SelectBanner /> */}
+          <SelectBanner />
 
           {loader ? (
             <MainSkeleton />
@@ -101,7 +102,7 @@ function Main() {
                         </div>
                       );
                     })}
-                    <div className="col-sm-6 col-md-4 col-lg-3 col-xxl">
+                    {/* <div className="col-sm-6 col-md-4 col-lg-3 col-xxl">
                           <div className="chain-item">
                             <Link
                               to={`/generator/avax`}
@@ -122,7 +123,7 @@ function Main() {
                               </span>
                             </Link>
                           </div>
-                        </div>
+                        </div> */}
                   </>
                 </div>
               </div>
