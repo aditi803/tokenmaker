@@ -99,7 +99,7 @@ const AvaxMain1 = (props) => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "avalancheNetwork",
+    network: "avalanche",
     agreement: false,
     commissionFee: "0.5",
   });
@@ -435,7 +435,7 @@ const AvaxMain1 = (props) => {
         (supplyType === "capped" || supplyType === "unlimited") &&
         pausable === true &&
         recoverable === false
-      ) {
+      ) { 
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: 1.8,
@@ -775,12 +775,12 @@ const AvaxMain1 = (props) => {
             <div className="container">
               <h1>
                 <span className="sub-highlight ">
-                  Create Your Binance Smart Chain Token
+                  Create Your Avalanche Token
                 </span>
               </h1>
               <p style={{ color: 'black' }}>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable BEP20 Token.
+                Mintable, Burnable Avalanche Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -903,7 +903,7 @@ const AvaxMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie Dev)
+                              You token's symbol (ie AVAX)
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}
@@ -984,12 +984,12 @@ const AvaxMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to BEP20 protocol
+                                Conforms to avalanche protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to BEP20 protocol
+                              and confirms to avalanche protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -1003,7 +1003,7 @@ const AvaxMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Bscscan
+                                Verified on avascan
                               </span>
                             </label>
                             <span className="form-text text-muted">

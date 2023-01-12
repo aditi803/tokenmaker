@@ -802,7 +802,7 @@ const MaticMain1 = (props) => {
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable ERC20 Token.
+                Mintable, Burnable Polygon Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -1008,12 +1008,12 @@ const MaticMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to BEP20 protocol
+                                Conforms to ERC-20 protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to BEP20 protocol
+                              and conforms to ERC-20 protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -1027,7 +1027,7 @@ const MaticMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Bscscan
+                                Verified on polygonscan
                               </span>
                             </label>
                             <span className="form-text text-muted">

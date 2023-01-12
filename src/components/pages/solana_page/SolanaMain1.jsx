@@ -513,7 +513,7 @@ const SolanaMain1 = (props) => {
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable ERC20 Token.
+                Mintable, Burnable Solana Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -627,7 +627,7 @@ const SolanaMain1 = (props) => {
                               onChange={(e) => setSymbol(e.target.value)}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie ETH)
+                              You token's symbol (ie SOL)
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}

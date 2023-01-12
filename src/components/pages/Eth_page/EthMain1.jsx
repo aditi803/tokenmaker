@@ -1062,12 +1062,12 @@ const EthMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to BEP20 protocol
+                                Conforms to ERC20 protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to BEP20 protocol
+                              and conforms to ERC20 protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -1081,7 +1081,7 @@ const EthMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Bscscan
+                                Verified on etherscan
                               </span>
                             </label>
                             <span className="form-text text-muted">

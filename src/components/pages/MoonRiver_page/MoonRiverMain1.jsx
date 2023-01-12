@@ -775,7 +775,7 @@ const MoonRiverMain1 = (props) => {
             <div className="container">
               <h1>
                 <span className="sub-highlight ">
-                  Create Your Binance Smart Chain Token
+                  Create Your Moon River Token
                 </span>
               </h1>
               <p style={{ color: 'black' }}>
@@ -903,7 +903,7 @@ const MoonRiverMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie Dev)
+                              You token's symbol (ie MOVR)
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}
@@ -984,12 +984,12 @@ const MoonRiverMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to BEP20 protocol
+                                Conforms to Moon River protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to BEP20 protocol
+                              and conforms to Moon River protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -1003,7 +1003,7 @@ const MoonRiverMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Bscscan
+                                Verified on moonscan
                               </span>
                             </label>
                             <span className="form-text text-muted">
