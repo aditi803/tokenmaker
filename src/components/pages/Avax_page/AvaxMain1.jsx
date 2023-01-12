@@ -260,20 +260,20 @@ const AvaxMain1 = (props) => {
         }));
       }
 
-      // if (network === "moonBaseAlpha") {
-      //   setEthFormData((prev) => ({
-      //     ...prev,
-      //     commissionFee: data.find((item) => item.value === ethFormData.network)
-      //     //   ?.networkCommissionFee,
-      //   }));
-      // }
-      // if (network === "moonRiver") {
-      //   setEthFormData((prev) => ({
-      //     ...prev,
-      //     commissionFee: data.find((item) => item.value === ethFormData.network)
-      //     //   ?.networkCommissionFee,
-      //   }));
-      // }
+      //   if (network === "binanceSmartChainTestnet") {
+      //     setEthFormData((prev) => ({
+      //       ...prev,
+      //       commissionFee: data.find((item) => item.value === ethFormData.network)
+      //         ?.networkCommissionFee,
+      //     }));
+      //   }
+      //   if (network === "binanceSmartChain") {
+      //     setEthFormData((prev) => ({
+      //       ...prev,
+      //       commissionFee: data.find((item) => item.value === ethFormData.network)
+      //         ?.networkCommissionFee,
+      //     }));
+      //   }
       if (supplyType === "fixed" || supplyType === "capped") {
         setEthFormData((prev) => ({
           ...prev,
@@ -771,7 +771,7 @@ const AvaxMain1 = (props) => {
     <>
       <div className="page-content">
         <main>
-          <div className="hero-form mb-3">
+          <div className="hero-form mb-5">
             <div className="container">
               <h1>
                 <span className="sub-highlight ">
@@ -786,7 +786,7 @@ const AvaxMain1 = (props) => {
               </p>
             </div>
           </div>
-          <section style={{ marginBottom: "40px" }}>
+          <section className="mb-5">
             {/* test */}
             <div className="container mt-lg-5">
               <div className="row">
