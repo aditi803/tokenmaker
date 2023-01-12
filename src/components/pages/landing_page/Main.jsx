@@ -59,14 +59,14 @@ function Main() {
       <Header />
       <div className="page-content">
         <main>
-          <div className="hero mb-3 mt-5">
+          {/* <div className="hero mb-3 mt-5">
             <div className="container">
               <h1 className="sub-highlight">Select your network </h1>
               <p style={{ color: "black" }}>
                 Your token will be deployed on the selected blockchain
               </p>
             </div>
-          </div> 
+          </div>  */}
           <SelectBanner />
 
           {loader ? (
@@ -74,11 +74,11 @@ function Main() {
           ) : (
             <>
               <div className="container py-5 my-5">
-                <div className="row">
+                <div className="row gx-2">
                   <>
                     {data.map((value, index) => {
                       return (
-                        <div className="col-sm-6 col-md-4 col-lg-3 col-xxl">
+                        <div className="col-sm-6 col-md-4 col-lg-3 col-xxl-2 mb-4">
                           <div className="chain-item">
                             <Link
                               to={`/generator/${value.hrefPath}`}
