@@ -92,6 +92,7 @@ const SolanaMain1 = (props) => {
   const [agreement, setAgreement] = useState(false);
   const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(18);
+  const [initialSupply, setInitialSupply] = useState("")
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
 
@@ -103,6 +104,7 @@ const SolanaMain1 = (props) => {
     agreementErr: "",
     decimalsErr: "",
     amountErr: "",
+    initialSupplyErr:""
   });
   const [payment, setPayment] = useState("");
   const [tokenType, setTokenType] = useState("basic");
@@ -194,7 +196,13 @@ const SolanaMain1 = (props) => {
         amountErr: "",
       }));
     }
-  }, [agreement, tokenName, symbol, decimals, amount]);
+    // if (initialSupply !== null) {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     initialSupplyErr: "",
+    //   }));
+    // }
+  }, [agreement, tokenName, symbol, decimals, amount, initialSupply]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -212,23 +220,29 @@ const SolanaMain1 = (props) => {
       }));
     }
 
-    if (agreement === false) {
-      setErr((prev) => ({
-        ...prev,
-        agreementErr:
-          "Please confirm that you have read and understood our terms of use.",
-      }));
-    }
+    // if (agreement === false) {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     agreementErr:
+    //       "Please confirm that you have read and understood our terms of use.",
+    //   }));
+    // }
     if (decimals >= 21 || decimals <= 6) {
       setErr((prev) => ({
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
       }));
     }
-    if (amount === "") {
+    // if (amount === "") {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     amountErr: "Please Enter how many token you want to deploy ",
+    //   }));
+    // }
+    if ( !amount) {
       setErr((prev) => ({
         ...prev,
-        amountErr: "Please Enter how many token you want to deploy ",
+        amountErr: "Please choose how many tokens you want to deploy",
       }));
     }
 
@@ -238,8 +252,8 @@ const SolanaMain1 = (props) => {
     if (
       tokenName !== "" &&
       symbol !== "" &&
-      amount !== "" &&
-      decimals !== null
+      (decimals <= 21 && decimals >= 6) &&
+     amount !== " "
     ) {
       // navigate("/generator/final");
       setStep(2);
@@ -631,8 +645,9 @@ const SolanaMain1 = (props) => {
                               max="21"
                               //   disabled={f_decimals}
                               // value={}
+                              value={decimals}
                               name="decimals"
-                              // onChange={(e) => setDecimals(e.target.value)}
+                              onChange={(e) => setDecimals(e.target.value)}
                             />
                             <span className="form-text text-muted">
                               The number of decimal of your token (default 18)
