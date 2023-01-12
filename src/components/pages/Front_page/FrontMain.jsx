@@ -80,7 +80,7 @@ export const FrontMain = () => {
       <Header />
       <div className="page-content">
         <main className="">
-          { loader ? <HeroSkeleton /> :
+          {loader ? <HeroSkeleton /> :
             <>
               <section
                 className="page-section hero d-md-flex align-items-center"
@@ -174,7 +174,7 @@ export const FrontMain = () => {
                               <div
                                 class={`col-lg-10 offset-lg-1 ${i === steps.length - 1 ? "" : "timeline_right"
                                   } timeline_main`}
-                                  key={i}
+                                key={i}
                               >
                                 <div class="row justify-content-center align-items-center">
                                   <div class="col-10 col-lg-5 order-2 order-lg-1 timeline-text">
@@ -274,7 +274,6 @@ export const FrontMain = () => {
                     <a
                       type="button"
                       target='_blank'
-                      rel='nonreferrer'
                       href="https://www.blocktechbrew.com/"
                       className="blue-btn btn"
                       style={{
