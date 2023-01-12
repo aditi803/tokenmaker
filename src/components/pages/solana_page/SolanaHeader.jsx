@@ -6,70 +6,66 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { HEADER } from "../../../api/Api";
-import axios from "axios"
+import axios from "axios";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 // import { PublicKey } from "@solana/web3.js";
 
 
-export const SolanaHeader = (props) => {
 
-  const walletBalnceAmount = props.walletBalance
-  const PublicKey = props.publicKey
+export const SolanaHeader = (props) => {
+  const walletBalnceAmount = props.walletBalance;
+  const PublicKey = props.publicKey;
   // console.log(walletBalnceAmount, "Wallet Balance Amount")
-  const finalAmount = walletBalnceAmount * 0.000000001
+  const finalAmount = walletBalnceAmount * 0.000000001;
   // console.log(finalAmount, "finalAmount")
   // console.log(PublicKey,"ooblic")
 
-
-  const [header, setHeader] = useState([])
-  const [loader, setLoader] = useState(true)
+  const [header, setHeader] = useState([]);
+  const [loader, setLoader] = useState(true);
   // lo
   useEffect(() => {
     // console.log(finalAmount,"Ada")
-    fetchData()
-
-  }, [])
+    fetchData();
+  }, []);
   const fetchData = async () => {
-
-
-    const respHeader = await axios.get(HEADER)
-    setHeader(respHeader.data.msg)
-    setLoader(false)
+    const respHeader = await axios.get(HEADER);
+    setHeader(respHeader.data.msg);
+    setLoader(false);
     // console.log(respHeader.data.msg, "Header resp")
     const favicon = document.getElementById("favicon");
     document.title = respHeader?.data?.msg?.investorDocumentTitle;
     // console.log(respHeader?.data?.msg?.investorDocumentTitle, "ttile")
     favicon.href = `${imageBaseUrl}${respHeader.data.msg.investorFavicon}`;
-  }
+  };
   // const {chainName} = props
-  let chainName
+  let chainName;
   const {
     connectedAccAddress,
     SignInMetamask,
     setAccAddress,
     hideAccAddress,
     accBalance,
-    chainId
+    chainId,
   } = useContext(GlobalContext);
   // if()
   if (chainId === 1 || chainId === 4 || chainId === 5) {
-    chainName = "  ETH  "
+    chainName = "  ETH  ";
   } else if (chainId === 56 || chainId === 97) {
-    chainName = "  BNB  "
+    chainName = "  BNB  ";
   } else if (chainId === 137 || chainId === 80001) {
-    chainName = "  MATIC  "
+    chainName = "  MATIC  ";
   }
   // console.log(chainName, "chainName header side");
   // console.log(chainId, "chainId header side");
 
   // console.log(connectedAccAddress, "connected addres header side");
-  const accAddress = hideAccAddress(connectedAccAddress)
+  const accAddress = hideAccAddress(connectedAccAddress);
   // function myName(){
   //   if(connectedAccAddress.length !== 0){
   //     return accAddress
   //   }else return "Connect your Wallet"
   // }
-  const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
+  const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/";
 
   return (
     <div className="page-header">
@@ -79,14 +75,14 @@ export const SolanaHeader = (props) => {
             <div className="col">
               <nav className="navbar navbar-expand-lg">
                 <Link to="/" className="navbar-brand">
-                  {!loader &&
+                  {!loader && (
                     <img
                       src={imageBaseUrl + header.investorLogoImage}
                       alt="Logo"
                       className="logoImage"
                       srcSet=""
                     />
-                  }
+                  )}
 
                   {/* <span className="span-1">
                       <span className="span-2">
@@ -107,14 +103,25 @@ export const SolanaHeader = (props) => {
                     </span> */}
                 </Link>
                 <div className="nav-btn-div">
-                  <>{PublicKey && <p className="m-0" style={{ fontSize: "17px", fontWeight: "600" }}>{finalAmount.toFixed(5)}{" "}SOL</p>}</>
-                  <WalletMultiButton className="btn blue-btn ml-auto justify-content-center" />
+                  <div className="blue-btn ml-auto d-flex align-items-center justify-content-center"  style={{height: "48px",lineHeight: "48px",}}>
+                    <>
+                      {PublicKey && (
+                        <p
+                          className="m-0"
+                          style={{ fontSize: "17px", fontWeight: "600" }}
+                        >
+                          {finalAmount.toFixed(5)} SOL
+                        </p>
+                      )}
+                    </>
+                    <WalletMultiButton className="btn " style={{height: "auto",lineHeight: "0",padding: "0 0 0 10px"}} />
+                  </div>
                 </div>
               </nav>
             </div>
           </div>
-        </div >
-      </header >
-    </div >
+        </div>
+      </header>
+    </div>
   );
 };

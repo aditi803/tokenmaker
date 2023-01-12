@@ -256,9 +256,15 @@ export const EtherProvider = ({ children }) => {
       });
       setToggler(!toggler);
     } catch (error) {
-      error.code === 4001
-        ? toast.error("Please Allow To Change Network To Continue!!")
-        : toast.error(error.message);
+      if(error.code === 4001){
+
+        toast.error("Please Allow To Change Network To Continue!!")
+      }
+      console.log(error.code,error.message,"mesgandcode");
+      if(error.message.startsWith("Unrecognized chain ID")){
+        toast.error("Please add suitable chain in metamask for payment")
+      }
+        // : toast.error(error.message);:
       console.log("error change network side", error);
       
     }
@@ -310,10 +316,11 @@ export const EtherProvider = ({ children }) => {
       }
       
     } catch (error) {
-      console.log(error.code,error.message);
-      if(error.message.startsWith("Unrecognized chain ID")){
-        toast.error("Please add suitable chain in metamask for payment")
-      }
+      // console.log(error.code,error.message,"mesgandcode");
+      // if(error.message.startsWith("Unrecognized chain ID")){
+      //   toast.error("Please add suitable chain in metamask for payment")
+      // }
+      console.log("errror")
       if(error.code===-32603){
         toast.error("Insufficient funds")
       }

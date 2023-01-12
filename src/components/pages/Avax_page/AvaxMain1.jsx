@@ -594,13 +594,13 @@ const AvaxMain1 = (props) => {
       }));
     }
 
-    if (ethFormData.agreement === false) {
-      setErr((prev) => ({
-        ...prev,
-        agreementErr:
-          "Please confirm that you have read and understood our terms of use",
-      }));
-    }
+    // if (ethFormData.agreement === false) {
+    //   setErr((prev) => ({
+    //     ...prev, 
+    //     agreementErr:
+    //       "Please confirm that you have read and understood our terms of use",
+    //   }));
+    // }
     if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
       setErr((prev) => ({
         ...prev,
