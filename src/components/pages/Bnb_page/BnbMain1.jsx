@@ -681,9 +681,10 @@ const BnbMain1 = (props) => {
   const compileContract = async (FormData) => {
     // setButtonClick(true)
     try {
+      
       // console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      // console.log(provider, "provider");
+      console.log(provider, "provider");
       const { chainId } = await provider.getNetwork();
       
 
@@ -764,6 +765,7 @@ const BnbMain1 = (props) => {
       //   changeNetwork(FormData.network);
       // }
     } catch (error) {
+      console.log("eroor")
       toast.error(error.message);
       // console.log("compile contract side catch er", error);
     }
