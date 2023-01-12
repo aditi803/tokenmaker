@@ -89,7 +89,7 @@ const EthMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
-    initialSupplyErr:""
+    initialSupplyErr: ""
     // tokenNameErr: 'Please fill your token name',
     // tokenSymbolErr: 'Please fill your token symbol',
     // agreementErr: 'Please confirm that you have read and understood our terms of use'
@@ -673,7 +673,7 @@ const EthMain1 = (props) => {
         initialSupplyErr: "",
       }));
     }
-  }, [agreement, tokenName, tokenSymbol, decimals,initialSupply]);
+  }, [agreement, tokenName, tokenSymbol, decimals, initialSupply]);
 
   const [manipulate, setManipulate] = useState(false)
 
@@ -725,7 +725,7 @@ const EthMain1 = (props) => {
     if (
       ethFormData.tokenName !== "" &&
       ethFormData.tokenSymbol !== "" &&
-      (ethFormData.decimals <=21 &&  ethFormData.decimals >= 6) &&
+      (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
       ethFormData.initialSupply !== ''
     ) {
       // navigate("/generator/final");
@@ -759,69 +759,68 @@ const EthMain1 = (props) => {
         })
         : "";
 
-        if(FormData.network !== chainId){
-          await changeNetwork(FormData.network);
-          
-        }
+      if (FormData.network !== chainId) {
+        await changeNetwork(FormData.network);
+
+      }
 
       // console.log(FormData, "formdata eth side");
       // if (FormData.network === chainId) {
-        // navigate("/generator/final");
-        if (connectedAccAddress.length === 0) {
-          await SignInMetamask()
-        }
-        // console.log(FormData.network, "currentNetworkID");
+      // navigate("/generator/final");
+      if (connectedAccAddress.length === 0) {
+        await SignInMetamask()
+      }
+      // console.log(FormData.network, "currentNetworkID");
 
 
-        let res = await sendCommision(commissionFee)
-        // console.log(res, "ress send commision matic main")
-        if(!res){
-          
-        }
+      let res = await sendCommision(commissionFee)
+      // console.log(res, "ress send commision matic main")
+      if (!res) {
+
+      }
 
 
 
-        if (res) 
-        {
-          props.setShow(false);
+      if (res) {
+        props.setShow(false);
 
-          //hit contract compile api
-          axios
-            .post(
-              "https://tokenmaker-apis.block-brew.com/contract/contract",
-              FormData
-            )
-            .then((res) => {
-              // console.log(res, "response");
-              // console.log(contractSource, "contract Source api side ");
-              //calling deploy function
-              deployContract(res.data.result, FormData).then((res) => {
+        //hit contract compile api
+        axios
+          .post(
+            "https://tokenmaker-apis.block-brew.com/contract/contract",
+            FormData
+          )
+          .then((res) => {
+            // console.log(res, "response");
+            // console.log(contractSource, "contract Source api side ");
+            //calling deploy function
+            deployContract(res.data.result, FormData).then((res) => {
 
-                if (res.error) {
-                  navigate("/generator/ethereum");
-                  props.setShow(true);
-                  res.error.code === "ACTION_REJECTED"
-                    ? toast.error(
-                      "User Rejected The Request"
-                    )
-                    : toast.error(res.error.message);
-                } else {
-                  toast.success("Token Deploy Successfully");
-                  // navigate("/generator/final");
-                  props.setShow(false);
-                  // console.log(res, "else side deploy then return deploy succes");
-                }
-              });
-            })
-            .catch((error) => {
-              // console.log("Api fail error", error);
-              props.setShow(true);
-              // navigate("/generator/ethereum");
-              error.response.data.message
-                ? toast.error(error.response.data.message)
-                : toast.error("Data Fetch Failed Try Again");
+              if (res.error) {
+                navigate("/generator/ethereum");
+                props.setShow(true);
+                res.error.code === "ACTION_REJECTED"
+                  ? toast.error(
+                    "User Rejected The Request"
+                  )
+                  : toast.error(res.error.message);
+              } else {
+                toast.success("Token Deploy Successfully");
+                // navigate("/generator/final");
+                props.setShow(false);
+                // console.log(res, "else side deploy then return deploy succes");
+              }
             });
-        }
+          })
+          .catch((error) => {
+            // console.log("Api fail error", error);
+            props.setShow(true);
+            // navigate("/generator/ethereum");
+            error.response.data.message
+              ? toast.error(error.response.data.message)
+              : toast.error("Data Fetch Failed Try Again");
+          });
+      }
 
 
       // } else {
@@ -848,7 +847,7 @@ const EthMain1 = (props) => {
     <>
       <div className="page-content">
         <main>
-          <div className="hero mb-3 ">
+          <div className="hero mb-5">
             <div className="container">
               <h1>
                 <span className="sub-highlight">
@@ -863,7 +862,7 @@ const EthMain1 = (props) => {
               </p>
             </div>
           </div>
-          <section style={{ marginBottom: "40px" }}>
+          <section className="mb-5">
             {/* test */}
             <div className="container">
               <div className="row">
@@ -903,9 +902,9 @@ const EthMain1 = (props) => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                        <h2 className="heading">Informations</h2>
-                        <form>
-                          <div className="form-group">
+                        <h4 className="heading mb-4">Informations</h4>
+                        <form className="row">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Token type
                               <span className="val-required">*</span>
@@ -925,7 +924,7 @@ const EthMain1 = (props) => {
                               and Basic have limited configurations)
                             </span>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Supply type
                               <span className="val-required">*</span>
@@ -945,7 +944,7 @@ const EthMain1 = (props) => {
                               Fixed / Capped / Unlimited
                             </span>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Token Name
                               <span className="val-required">*</span>
@@ -961,12 +960,11 @@ const EthMain1 = (props) => {
                             <span className="form-text text-muted">
                               The name of your token
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.tokenNameErr}
-                            </span>
+                            </div>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Token Symbol
                               <span className="val-required">*</span>
@@ -983,12 +981,11 @@ const EthMain1 = (props) => {
                             <span className="form-text text-muted">
                               You token's symbol (ie ETH)
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.tokenSymbolErr}
-                            </span>
+                            </div>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Decimals<span className="val-required">*</span>
                             </label>
@@ -1005,13 +1002,11 @@ const EthMain1 = (props) => {
                             <span className="form-text text-muted">
                               The number of decimal of your token must be between 6 & 21 (default 18)
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.decimalsErr}
-                            </span>
+                            </div>
                           </div>
-
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Initial supply
                               <span className="val-required">*</span>
@@ -1029,18 +1024,19 @@ const EthMain1 = (props) => {
                               The number of coins minted during the creation of
                               the contract
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.initialSupplyErr}
-                            </span>
+                            </div>
                           </div>
-                          <button
-                            type="submit"
-                            className="btn form-btn"
-                            onClick={handleSubmit}
-                          >
-                            Next
-                          </button>
+                          <div className="col-12">
+                            <button
+                              type="submit"
+                              className="btn form-btn ms-auto"
+                              onClick={handleSubmit}
+                            >
+                              Next
+                            </button>
+                          </div>
                         </form>
                       </div>
                     </div>
@@ -1053,7 +1049,7 @@ const EthMain1 = (props) => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                        <h2 className="heading">Options</h2>
+                        <h4 className="heading mb-4">Options</h4>
                         <form>
                           <div className="form-group">
                             <label className="form-check form-switch">
@@ -1168,7 +1164,7 @@ const EthMain1 = (props) => {
                               Allow your tokens to be paused
                             </span>
                           </div>
-                          <div className='d-flex'>
+                          <div className='d-flex justify-content-between align-items-center'>
                             <button type="button" className="btn form-btn" onClick={() => setStep(1)}>
                               Back
                             </button>
@@ -1178,7 +1174,6 @@ const EthMain1 = (props) => {
                           </div>
 
                         </form>
-
                       </div>
                     </div>
                   </div>
@@ -1192,7 +1187,7 @@ const EthMain1 = (props) => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                        <h2 className="heading">Network</h2>
+                        <h5 className="heading mb-3">Network</h5>
                         <form>
                           <div className="form-group">
                             <select
@@ -1201,7 +1196,7 @@ const EthMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              {data.map((item,i) => {
+                              {data.map((item, i) => {
                                 if (item.parentNetworkName === "Ethereum" && item.tokenType === 'free') {
                                   return (
                                     <option value={item.value} key={i}>{item.subNetworkName}</option>
@@ -1222,32 +1217,30 @@ const EthMain1 = (props) => {
                             </span>
                           </div>
 
-                          <h2 className="heading">Transaction</h2>
-                          <div className="card-body">
-                            <div className="transactionWrap">
+                          <h5 className="heading mb-0">Transaction</h5>
+                          <div className="card-body px-0">
+                            <div className="transactionWrap d-sm-flex align-items-center justify-content-between mb-3">
                               <div className="Ttext">
-                                <p>
-                                  Commission fee:{" "}
-                                  <Tooltip
-                                    content={
-                                      <>
-                                        The commison fee will be
-                                        <br />
-                                        transferred automatically to us
-                                        <br /> during the contract creation.
-                                        <br />
-                                        In case of error,this
-                                        <br /> amount will not be
-                                        <br /> deducted from your <br />
-                                        wallet.Only the gas
-                                        <br /> fees will be deducted
-                                      </>
-                                    }
-                                    direction="top"
-                                  >
-                                    <HiInformationCircle size={22} />
-                                  </Tooltip>
-                                </p>
+                                Commission fee:{" "}
+                                <Tooltip
+                                  content={
+                                    <>
+                                      The commison fee will be
+                                      <br />
+                                      transferred automatically to us
+                                      <br /> during the contract creation.
+                                      <br />
+                                      In case of error,this
+                                      <br /> amount will not be
+                                      <br /> deducted from your <br />
+                                      wallet.Only the gas
+                                      <br /> fees will be deducted
+                                    </>
+                                  }
+                                  direction="top"
+                                >
+                                  <HiInformationCircle size={22} />
+                                </Tooltip>
                               </div>
                               <div
                                 className="Tbtn mt-auto mb-auto"
@@ -1262,25 +1255,23 @@ const EthMain1 = (props) => {
                                 </span>
                               </div>
                             </div>
-                            <div className="transactionWrap">
+                            <div className="transactionWrap d-sm-flex align-items-center justify-content-between">
                               <div className="Ttext ">
-                                <p>
-                                  Gas fee:{" "}
-                                  <Tooltip
-                                    content={
-                                      <>
-                                        The gas fee depend <br />
-                                        on gas limit and
-                                        <br /> gas price. Metamask will
-                                        <br /> automatically display
-                                        <br /> the best fee to use
-                                      </>
-                                    }
-                                    direction="top"
-                                  >
-                                    <HiInformationCircle size={22} />
-                                  </Tooltip>
-                                </p>
+                                Gas fee:{" "}
+                                <Tooltip
+                                  content={
+                                    <>
+                                      The gas fee depend <br />
+                                      on gas limit and
+                                      <br /> gas price. Metamask will
+                                      <br /> automatically display
+                                      <br /> the best fee to use
+                                    </>
+                                  }
+                                  direction="top"
+                                >
+                                  <HiInformationCircle size={22} />
+                                </Tooltip>
                               </div>
                               <div
                                 className="Tbtn mt-auto mb-auto"
@@ -1292,8 +1283,8 @@ const EthMain1 = (props) => {
                               </div>
                             </div>
                           </div>
-                          <h2 className="heading">Agreement</h2>
-                          <div className="card-body">
+                          <h5 className="heading mb-0">Agreement</h5>
+                          <div className="card-body px-0">
                             <div className="form-group">
                               <label className="form-check">
                                 <input
@@ -1320,13 +1311,13 @@ const EthMain1 = (props) => {
                                   {/* </span> */}
                                 </span>
                                 <br />
-                                <span className="text-danger">
+                                <span className="text-danger f-12">
                                   {err.agreementErr}
                                 </span>
                               </label>
                             </div>
                           </div>
-                          <div className="d-flex">
+                          <div className="d-flex justify-content-between align-items-center">
                             <button
                               type="button"
                               className="btn form-btn"

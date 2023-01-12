@@ -808,7 +808,7 @@ const MaticMain1 = (props) => {
               </p>
             </div>
           </div>
-          <section style={{ marginBottom: "40px" }}>
+          <section className="mb-5">
             {/* test */}
             <div className="container">
               <div className="row">
