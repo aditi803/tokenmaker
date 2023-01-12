@@ -780,7 +780,7 @@ const MoonRiverMain1 = (props) => {
               </h1>
               <p style={{ color: 'black' }}>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable BEP20 Token.
+                Mintable, Burnable Moon River Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
