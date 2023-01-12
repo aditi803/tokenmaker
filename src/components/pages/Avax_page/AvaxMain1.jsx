@@ -99,7 +99,7 @@ const AvaxMain1 = (props) => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "avalanche",
+    network: "avalancheNetwork",
     agreement: false,
     commissionFee: "0.5",
   });
