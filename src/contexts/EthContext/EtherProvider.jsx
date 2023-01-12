@@ -10,6 +10,7 @@ export const EtherProvider = ({ children }) => {
   const [accBalance, setAccBalance] = useState();
   const [chainId, setChainId] = useState();
   const [toggler, setToggler] = useState(false)
+  const [moonToggle, setMoonToggle] = useState(false)
   const [solDeploy,setSolDeploy]=useState(false)
 
   const [deployData, setDeployData] = useState({
@@ -111,7 +112,9 @@ export const EtherProvider = ({ children }) => {
     binanceSmartChainTestnet: 97,
     binanceSmartChain: 56,
     moonRiver:1285,
-    moonBaseAlpha:1287
+    moonBaseAlpha:1287,
+    avalancheFujiCChain:43113,
+    avalancheNetwork:43114
   };
 
 
@@ -125,7 +128,8 @@ export const EtherProvider = ({ children }) => {
     4: { link: "https://rinkeby.etherscan.io/", name: "RinkeyBy Testnet Scan", networkName: "RinkeyBy" },
     1285:{ link: "https://moonriver.moonscan.io/", name: "Moonriver Scan", networkName: "Moonriver" },
     1287:{link: "https://moonbase.moonscan.io/", name: "Moonbase Alpha Scan", networkName: "Moonbase alpha"},
-    43113:{link: " https://testnet.snowtrace.io/", name: "Avalanche Fuji C-Chain Scan", networkName: "Avalanche Fuji C-Chain"},
+    43113:{link: "https://testnet.snowtrace.io/", name: "Avalanche Fuji C-Chain Scan", networkName: "Avalanche Fuji C-Chain"},
+    43114:{link: "https://snowtrace.io/", name: "Avalanche Network Scan", networkName: "Avalanche Network"},
   }
 
 
@@ -227,8 +231,10 @@ export const EtherProvider = ({ children }) => {
   const changeNetwork = async (networkID) => {
     try {
       // console.log(networkID, "netwrk id in change network");
-
+      console.log(networkID,"networkID");
       const chainIdInDecimal = ethers.utils.hexlify(networkID);
+
+      console.log(chainIdInDecimal, "chainid in decimal");
 
       let parseChainId = chainIdInDecimal.replace("0x0","");
 
@@ -378,6 +384,8 @@ export const EtherProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         // compileContract : compileContract,
+        moonToggle,
+        setMoonToggle,
         toggler,
         changeNetwork,
         SignInMetamask: SignInMetamask,

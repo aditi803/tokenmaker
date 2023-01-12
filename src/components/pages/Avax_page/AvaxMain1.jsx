@@ -98,7 +98,7 @@ const AvaxMain1 = (props) => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "Avalanche",
+    network: "avalancheNetwork",
     agreement: false,
     commissionFee: "0.5",
   });
@@ -684,7 +684,7 @@ const AvaxMain1 = (props) => {
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
         ? Object.assign(FormData, {
-            network: blockchainNetworks[FormData.network],
+          network: blockchainNetworks[FormData.network],
           })
         : "";
 
@@ -700,7 +700,7 @@ const AvaxMain1 = (props) => {
         console.log(FormData.network, "currentNetworkID");
 
         let res = await sendCommision(commissionFee);
-        console.log(res, "ress send commision matic main");
+        console.log(res, "ress send commision avax main");
 
         if (res) {
           props.setShow(false);
@@ -720,7 +720,7 @@ const AvaxMain1 = (props) => {
               //calling deploy function
               deployContract(res.data.result, FormData).then((res) => {
                 if (res.error) {
-                  navigate("/generator/binancesmartchain");
+                  navigate("/generator/avax");
                   props.setShow(true);
                   res.error.code === "ACTION_REJECTED"
                     ? toast.error("User Rejected The Request")
@@ -1140,8 +1140,8 @@ const AvaxMain1 = (props) => {
                                 </option>;
                               }
                             })} */}
-                            <option value="Avalanche">Avalanche</option>
-                            <option value="Avalanche Fuji C-Chain">Avalanche Fuji C-Chain</option>
+                            <option value="avalancheNetwork">Avalanche</option>
+                            <option value="avalancheFujiCChain">Avalanche Fuji C-Chain</option>
                           </select>
                           <span className="form-text text-muted">
                             Select the network on wich you want to deploy your
