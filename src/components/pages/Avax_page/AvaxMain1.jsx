@@ -98,7 +98,7 @@ const AvaxMain1 = (props) => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "avalancheNetwork",
+    network: "avalanche",
     agreement: false,
     commissionFee: "0.5",
   });
@@ -433,7 +433,7 @@ const AvaxMain1 = (props) => {
         (supplyType === "capped" || supplyType === "unlimited") &&
         pausable === true &&
         recoverable === false
-      ) {
+      ) { 
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: 1.8,
@@ -720,7 +720,7 @@ const AvaxMain1 = (props) => {
               //calling deploy function
               deployContract(res.data.result, FormData).then((res) => {
                 if (res.error) {
-                  navigate("/generator/avax");
+                  navigate("/generator/avalanche");
                   props.setShow(true);
                   res.error.code === "ACTION_REJECTED"
                     ? toast.error("User Rejected The Request")
@@ -1140,7 +1140,7 @@ const AvaxMain1 = (props) => {
                                 </option>;
                               }
                             })} */}
-                            <option value="avalancheNetwork">Avalanche</option>
+                            <option value="avalanche">Avalanche</option>
                             <option value="avalancheFujiCChain">Avalanche Fuji C-Chain</option>
                           </select>
                           <span className="form-text text-muted">

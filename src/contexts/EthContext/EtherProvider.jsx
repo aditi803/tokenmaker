@@ -114,7 +114,7 @@ export const EtherProvider = ({ children }) => {
     moonRiver:1285,
     moonBaseAlpha:1287,
     avalancheFujiCChain:43113,
-    avalancheNetwork:43114
+    avalanche:43114
   };
 
 
@@ -260,6 +260,7 @@ export const EtherProvider = ({ children }) => {
         ? toast.error("Please Allow To Change Network To Continue!!")
         : toast.error(error.message);
       console.log("error change network side", error);
+      
     }
   };
   //ends here
@@ -309,6 +310,10 @@ export const EtherProvider = ({ children }) => {
       }
       
     } catch (error) {
+      console.log(error.code,error.message);
+      if(error.message.startsWith("Unrecognized chain ID")){
+        toast.error("Please add suitable chain in metamask for payment")
+      }
       if(error.code===-32603){
         toast.error("Insufficient funds")
       }
