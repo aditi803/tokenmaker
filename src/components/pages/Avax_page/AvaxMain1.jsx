@@ -41,7 +41,7 @@ const AvaxMain1 = (props) => {
   const test = useContext(multiStepContext);
 
 
-    console.log(test, "SPIDERMAN")
+  console.log(test, "SPIDERMAN")
 
 
 
@@ -80,6 +80,7 @@ const AvaxMain1 = (props) => {
     connectedAccAddress,
     blockchainNetworks,
     sendCommision,
+    toggler
   } = useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -98,7 +99,7 @@ const AvaxMain1 = (props) => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "avalancheNetwork",
+    network: "avalanche",
     agreement: false,
     commissionFee: "0.5",
   });
@@ -110,6 +111,7 @@ const AvaxMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
+    initialSupplyErr: ""
   });
 
   const [fieldsDisabled, setFieldsDisabled] = useState({
@@ -196,16 +198,16 @@ const AvaxMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-    //   if (network === "binanceSmartChainTestnet") {
-    //     setEthFormData((prev) => ({
-    //       ...prev,
-    //     }));
-    //   }
-    //   if (network === "binanceSmartChain") {
-    //     setEthFormData((prev) => ({
-    //       ...prev,
-    //     }));
-    //   }
+        if (network === "avalancheFujiC-Chain") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
+        if (network === "avalanche") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
     } else if (tokenType === "free") {
       setFieldsDisabled(freeDisabled);
       setEthFormData((prev) => ({
@@ -258,20 +260,20 @@ const AvaxMain1 = (props) => {
         }));
       }
 
-    //   if (network === "binanceSmartChainTestnet") {
-    //     setEthFormData((prev) => ({
-    //       ...prev,
-    //       commissionFee: data.find((item) => item.value === ethFormData.network)
-    //         ?.networkCommissionFee,
-    //     }));
-    //   }
-    //   if (network === "binanceSmartChain") {
-    //     setEthFormData((prev) => ({
-    //       ...prev,
-    //       commissionFee: data.find((item) => item.value === ethFormData.network)
-    //         ?.networkCommissionFee,
-    //     }));
-    //   }
+      // if (network === "moonBaseAlpha") {
+      //   setEthFormData((prev) => ({
+      //     ...prev,
+      //     commissionFee: data.find((item) => item.value === ethFormData.network)
+      //     //   ?.networkCommissionFee,
+      //   }));
+      // }
+      // if (network === "moonRiver") {
+      //   setEthFormData((prev) => ({
+      //     ...prev,
+      //     commissionFee: data.find((item) => item.value === ethFormData.network)
+      //     //   ?.networkCommissionFee,
+      //   }));
+      // }
       if (supplyType === "fixed" || supplyType === "capped") {
         setEthFormData((prev) => ({
           ...prev,
@@ -523,7 +525,7 @@ const AvaxMain1 = (props) => {
       if (e.target.value === "") {
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: boolean ?? 0,
+          [e.target.name]: boolean ?? '',
         }));
       } else {
         setEthFormData((prev) => ({
@@ -576,7 +578,13 @@ const AvaxMain1 = (props) => {
         decimalsErr: "",
       }));
     }
-  }, [agreement, tokenName, tokenSymbol, decimals]);
+    if (initialSupply !== null) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "",
+      }));
+    }
+  }, [agreement, tokenName, tokenSymbol, decimals, initialSupply]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -594,13 +602,20 @@ const AvaxMain1 = (props) => {
       }));
     }
 
-    if (ethFormData.agreement === false) {
+    if (!ethFormData.initialSupply) {
       setErr((prev) => ({
         ...prev,
-        agreementErr:
-          "Please confirm that you have read and understood our terms of use",
+        initialSupplyErr: "Please choose how many tokens you want to deploy",
       }));
     }
+
+    // if (ethFormData.agreement === false) {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     agreementErr:
+    //       "Please confirm that you have read and understood our terms of use",
+    //   }));
+    // }
     if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
       setErr((prev) => ({
         ...prev,
@@ -617,7 +632,9 @@ const AvaxMain1 = (props) => {
       console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
     }
-    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "") {
+    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "" &&
+      (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
+      ethFormData.initialSupply !== '') {
       // navigate("/generator/final");
       setStep(2);
     }
@@ -637,30 +654,26 @@ const AvaxMain1 = (props) => {
     return selctedItem?.[0];
   };
 
-//   useEffect(() => {
-//     const selectedCommissionFee = data?.find(
-//       ({ value, parentNetworkName, subNetworkName, tokenType }) => {
-//         if (
-//           parentNetworkName === "Binance Smart Chain" &&
-//           (value === ethFormData.network ||
-//             value === customVampire(ethFormData.network)) &&
-//           tokenType === ethFormData.tokenType
-//         ) {
-//           return true;
-//         }
-//       }
-//     );
-//     // setGasFee(selectedCommissionFee)
-//     setEthFormData((prev) => ({
-//       ...prev,
-//       commissionFee: selectedCommissionFee?.networkCommissionFee,
-//     }));
-//     console.log(
-//       selectedCommissionFee,
-//       ">>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH"
-//     );
-//   }, [ethFormData.tokenType, ethFormData.network, data]);
 
+  useEffect(() => {
+    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
+      if (parentNetworkName === 'Avalanche' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+        return true;
+      }
+    })
+    // setGasFee(selectedCommissionFee)
+    setEthFormData(prev => ({
+      ...prev,
+      commissionFee: selectedCommissionFee?.networkCommissionFee
+    }))
+    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(ethFormData, '2>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+
+
+
+  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler])
   // {web3Loading ? (
   //   <button className=" btn-inner - text " disabled>
   //     {" "}
@@ -685,11 +698,10 @@ const AvaxMain1 = (props) => {
       blockchainNetworks[FormData.network]
         ? Object.assign(FormData, {
           network: blockchainNetworks[FormData.network],
-          })
+        })
         : "";
 
-      console.log(FormData.network, "formdata bnb main1 side");
-
+      console.log(FormData.network, "network bnb main1 side");
       console.log(chainId, "chainId bnb main1 side ");
 
       if (FormData.network === chainId) {
@@ -700,7 +712,7 @@ const AvaxMain1 = (props) => {
         console.log(FormData.network, "currentNetworkID");
 
         let res = await sendCommision(commissionFee);
-        console.log(res, "ress send commision avax main");
+        console.log(res, "ress send commision matic main");
 
         if (res) {
           props.setShow(false);
@@ -720,7 +732,7 @@ const AvaxMain1 = (props) => {
               //calling deploy function
               deployContract(res.data.result, FormData).then((res) => {
                 if (res.error) {
-                  navigate("/generator/avax");
+                  navigate("/generator/avalanche");
                   props.setShow(true);
                   res.error.code === "ACTION_REJECTED"
                     ? toast.error("User Rejected The Request")
@@ -746,6 +758,7 @@ const AvaxMain1 = (props) => {
             });
         }
       } else {
+
         changeNetwork(FormData.network);
       }
     } catch (error) {
@@ -762,10 +775,10 @@ const AvaxMain1 = (props) => {
             <div className="container">
               <h1>
                 <span className="sub-highlight ">
-                  Create Your Avax Token
+                  Create Your Binance Smart Chain Token
                 </span>
               </h1>
-              <p style={{color:'black'}}>
+              <p style={{ color: 'black' }}>
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable BEP20 Token.
                 <br />
@@ -775,7 +788,7 @@ const AvaxMain1 = (props) => {
           </div>
           <section style={{ marginBottom: "40px" }}>
             {/* test */}
-            <div className="container">
+            <div className="container mt-lg-5">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="steper-div">
@@ -806,16 +819,16 @@ const AvaxMain1 = (props) => {
               <FouthStep />
             )} */}
             {currentStep === 1 ? (
-            //   <FirstStep />
+              //   <FirstStep />
 
               <section>
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                        <h2 className="heading">Informations</h2>
-                        <form>
-                          <div className="form-group">
+                        <h3 className="heading mb-4">Informations</h3>
+                        <form className="row">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Token type
                               <span className="val-required">*</span>
@@ -835,27 +848,27 @@ const AvaxMain1 = (props) => {
                               and Basic have limited configurations)
                             </span>
                           </div>
-                          <div className="form-group">
-                                <label className="form-label">
-                                  Supply type
-                                  <span className="val-required">*</span>
-                                </label>
-                                <select
-                                  className="form-select"
-                                  name="supplyType"
-                                  disabled={f_supplyType}
-                                  onChange={ethMainFormHandler}
-                                  value={supplyType}
-                                >
-                                  <option value="fixed">Fixed</option>
-                                  <option value="capped">Capped</option>
-                                  <option value="unlimited">Unlimited</option>
-                                </select>
-                                <span className="form-text text-muted">
-                                  Fixed / Capped / Unlimited
-                                </span>
-                              </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
+                            <label className="form-label">
+                              Supply type
+                              <span className="val-required">*</span>
+                            </label>
+                            <select
+                              className="form-select"
+                              name="supplyType"
+                              disabled={f_supplyType}
+                              onChange={ethMainFormHandler}
+                              value={supplyType}
+                            >
+                              <option value="fixed">Fixed</option>
+                              <option value="capped">Capped</option>
+                              <option value="unlimited">Unlimited</option>
+                            </select>
+                            <span className="form-text text-muted">
+                              Fixed / Capped / Unlimited
+                            </span>
+                          </div>
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Token Name
                               <span className="val-required">*</span>
@@ -871,12 +884,11 @@ const AvaxMain1 = (props) => {
                             <span className="form-text text-muted">
                               The name of your token
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.tokenNameErr}
-                            </span>
+                            </div>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Token Symbol
                               <span className="val-required">*</span>
@@ -891,14 +903,13 @@ const AvaxMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie BNB)
+                              You token's symbol (ie Dev)
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.tokenSymbolErr}
-                            </span>
+                            </div>
                           </div>
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Decimals<span className="val-required">*</span>
                             </label>
@@ -913,15 +924,13 @@ const AvaxMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              The number of decimal of your token (default 18)
+                              The number of decimal of your token must be between 6 & 21 (default 18)
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.decimalsErr}
-                            </span>
+                            </div>
                           </div>
-
-                          <div className="form-group">
+                          <div className="form-group col-lg-6">
                             <label className="form-label">
                               Initial supply
                               <span className="val-required">*</span>
@@ -939,14 +948,13 @@ const AvaxMain1 = (props) => {
                               The number of coins minted during the creation of
                               the contract
                             </span>
-                            <br />
-                            <span className="text-danger">
+                            <div className="text-danger f-12">
                               {err.initialSupplyErr}
-                            </span>
+                            </div>
                           </div>
                           <button
                             type="submit"
-                            className="btn form-btn"
+                            className="btn form-btn justify-content-center align-items-center ms-auto"
                             onClick={handleSubmit}
                           >
                             Next
@@ -958,335 +966,335 @@ const AvaxMain1 = (props) => {
                 </div>
               </section>
             ) : currentStep === 2 ? (
-<section>
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
-            <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                <h2 className="heading">Options</h2>
-                <form>
-                <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  name="conforms"
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  disabled={f_conforms}
-                                  onChange={ethMainFormHandler}
-                                  defaultChecked={conforms}
-                                />
-                                <span className="form-check-label">
-                                  Conforms to BEP20 protocol
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Your token will const all the functionalities,
-                                and conforms to BEP20 protocol
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  name="verified"
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  onChange={ethMainFormHandler}
-                                  disabled={f_verified}
-                                  defaultChecked={verified}
-                                />
-                                <span className="form-check-label">
-                                  Verified on Bscscan
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                The source code of your contract is
-                                automatically published and verified
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="noCopyrightLink"
-                                  onChange={ethMainFormHandler}
-                                  checked={noCopyrightLink}
-                                  disabled={f_noCopyrightLink}
-                                />
-                                <span className="form-check-label">
-                                  No copyright link
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                A link pointing to this page will be added in
-                                the description of your contract (Free and Basic
-                                contracts only)
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  checked={mintable}
-                                  disabled={f_mintable}
-                                  name="mintable"
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label">
-                                  {" "}
-                                  Mintable{" "}
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow the creation of new tokens in the future
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="burnable"
-                                  checked={burnable}
-                                  disabled={f_burnable}
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label ">
-                                  Burnable
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow your tokens to be burned
-                              </span>
-                            </div>
-                            <div className="form-group">
-                              <label className="form-check form-switch">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  name="pausable"
-                                  checked={pausable}
-                                  disabled={f_pausable}
-                                  onChange={ethMainFormHandler}
-                                />
-                                <span className="form-check-label">
-                                  Pausable
-                                </span>
-                              </label>
-                              <span className="form-text text-muted">
-                                Allow your tokens to be paused
-                              </span>
-                            </div>
-                            <div className='d-flex'>
-                            <button type="button" className="btn form-btn" onClick={()=>setStep(1)}>
-                            Back
-                        </button>
-                            <button type="button" className="btn form-btn" onClick={()=>setStep(3)}>
-                            Next
-                        </button>
-                            </div>
-                       
-                </form>
-
-            </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-             
-            ) : (
               <section>
-              <div className="container">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
-                      <h2 className="heading">Network</h2>
-                      <form>
-                        <div className="form-group">
-                          <select
-                            className="form-select"
-                            name="network"
-                            value={network}
-                            onChange={ethMainFormHandler}
-                          >
-                            {/* {data.map((item) => {
-                              if (
-                                item.parentNetworkName ===
-                                  "Binance Smart Chain" &&
-                                item.tokenType === "free"
-                              ) {
-                                return (
-                                  <option value={item.value}>
-                                    {item.subNetworkName}
-                                  </option>
-                                );
-                              } else if (
-                                item.parentNetworkName ===
-                                  "Binance Smart Chain" &&
-                                item.tokenType === "basic"
-                              ) {
-                                <option value={item.value}>
-                                  {item.subNetworkName}
-                                </option>;
-                              } else if (
-                                item.parentNetworkName ===
-                                  "Binance Smart Chain" &&
-                                item.tokenType === "custom"
-                              ) {
-                                <option value={item.value}>
-                                  {item.subNetworkName}
-                                </option>;
-                              }
-                            })} */}
-                            <option value="avalancheNetwork">Avalanche</option>
-                            <option value="avalancheFujiCChain">Avalanche Fuji C-Chain</option>
-                          </select>
-                          <span className="form-text text-muted">
-                            Select the network on wich you want to deploy your
-                            token
-                          </span>
-                        </div>
-                       
-                        <h2 className="heading">Transaction</h2>
-                        <div className="card-body">
-                          <div className="transactionWrap">
-                            <div className="Ttext">
-                              <p>
-                                Commission fee:{" "}
-                                <Tooltip
-                                  content={
-                                    <>
-                                      The commison fee will be
-                                      <br />
-                                      transferred automatically to us
-                                      <br /> during the contract creation.
-                                      <br />
-                                      In case of error,this
-                                      <br /> amount will not be
-                                      <br /> deducted from your <br />
-                                      wallet.Only the gas
-                                      <br /> fees will be deducted
-                                    </>
-                                  }
-                                  direction="top"
-                                >
-                                  <HiInformationCircle size={22} />
-                                </Tooltip>
-                              </p>
-                            </div>
-                            <div
-                              className="Tbtn mt-auto mb-auto"
-                              style={{ width: "120px" }}
-                            >
-                              <span className="badge bg-success d-block p-2 ">
-                                {commissionFee
-                                  ? commissionFee === "Free"
-                                    ? "Free"
-                                    : `${commissionFee} BNB`
-                                  : "Free"}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="transactionWrap">
-                            <div className="Ttext ">
-                              <p>
-                                Gas fee:{" "}
-                                <Tooltip
-                                  content={
-                                    <>
-                                      The gas fee depend <br />
-                                      on gas limit and
-                                      <br /> gas price. Metamask will
-                                      <br /> automatically display
-                                      <br /> the best fee to use
-                                    </>
-                                  }
-                                  direction="top"
-                                >
-                                  <HiInformationCircle size={22} />
-                                </Tooltip>
-                              </p>
-                            </div>
-                            <div
-                              className="Tbtn mt-auto mb-auto"
-                              style={{ width: "120px" }}
-                            >
-                              <span className="badge bg-secondary d-block p-2">
-                                Variable
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <h2 className="heading">Agreement</h2>
-                        <div className="card-body">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="firstForm p-lg-5 p-4 mb-5 mt-0">
+                        <h3 className="heading mb-4">Options</h3>
+                        <form>
                           <div className="form-group">
-                            <label className="form-check">
+                            <label className="form-check form-switch">
+                              <input
+                                name="conforms"
+                                className="form-check-input"
+                                type="checkbox"
+                                disabled={f_conforms}
+                                onChange={ethMainFormHandler}
+                                defaultChecked={conforms}
+                              />
+                              <span className="form-check-label">
+                                Conforms to BEP20 protocol
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              Your token will const all the functionalities,
+                              and conforms to BEP20 protocol
+                            </span>
+                          </div>
+                          <div className="form-group">
+                            <label className="form-check form-switch">
+                              <input
+                                name="verified"
+                                className="form-check-input"
+                                type="checkbox"
+                                onChange={ethMainFormHandler}
+                                disabled={f_verified}
+                                defaultChecked={verified}
+                              />
+                              <span className="form-check-label">
+                                Verified on Bscscan
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              The source code of your contract is
+                              automatically published and verified
+                            </span>
+                          </div>
+                          <div className="form-group">
+                            <label className="form-check form-switch">
                               <input
                                 className="form-check-input"
                                 type="checkbox"
-                                name="agreement"
-                                value={agreement}
+                                name="noCopyrightLink"
                                 onChange={ethMainFormHandler}
+                                checked={noCopyrightLink}
+                                disabled={f_noCopyrightLink}
                               />
-
                               <span className="form-check-label">
-                                I have read, understood and agreed to the{" "}
-                                {/* <span className="text-underline"> */}
-                                {/*  modal*/}
-                                <Link
-                                  to="/"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#exampleModal"
-                                >
-                                  <u> Terms of Use. </u>
-                                </Link>
-                                <TermsModal />
-                                {/* modal */}
-                                {/* </span> */}
-                              </span>
-                              <br />
-                              <span className="text-danger">
-                                {err.agreementErr}
+                                No copyright link
                               </span>
                             </label>
+                            <span className="form-text text-muted">
+                              A link pointing to this page will be added in
+                              the description of your contract (Free and Basic
+                              contracts only)
+                            </span>
                           </div>
-                        </div>
-                        <div className="d-flex">
-                          <button
-                            type="button"
-                            className="btn form-btn"
-                            onClick={() => setStep(2)}
-                          >
-                            Back
-                          </button>
-                          <button
-                            type="button"
-                            className="btn form-btn"
-                            onClick={async () => {
+                          <div className="form-group">
+                            <label className="form-check form-switch">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                checked={mintable}
+                                disabled={f_mintable}
+                                name="mintable"
+                                onChange={ethMainFormHandler}
+                              />
+                              <span className="form-check-label">
+                                {" "}
+                                Mintable{" "}
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              Allow the creation of new tokens in the future
+                            </span>
+                          </div>
+                          <div className="form-group">
+                            <label className="form-check form-switch">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                name="burnable"
+                                checked={burnable}
+                                disabled={f_burnable}
+                                onChange={ethMainFormHandler}
+                              />
+                              <span className="form-check-label ">
+                                Burnable
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              Allow your tokens to be burned
+                            </span>
+                          </div>
+                          <div className="form-group">
+                            <label className="form-check form-switch">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                name="pausable"
+                                checked={pausable}
+                                disabled={f_pausable}
+                                onChange={ethMainFormHandler}
+                              />
+                              <span className="form-check-label">
+                                Pausable
+                              </span>
+                            </label>
+                            <span className="form-text text-muted">
+                              Allow your tokens to be paused
+                            </span>
+                          </div>
+                          <div className='d-flex justify-content-between'>
+                            <button type="button" className="btn form-btn ml-0" onClick={() => setStep(1)}>
+                              Back
+                            </button>
+                            <button type="button" className="btn form-btn " onClick={() => setStep(3)}>
+                              Next
+                            </button>
+                          </div>
+
+                        </form>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+
+            ) : (
+              <section>
+                <div className="container">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
+                        <h5 className="heading mb-3">Network</h5>
+                        <form>
+                          <div className="form-group">
+                            <select
+                              className="form-select mb-1"
+                              name="network"
+                              value={network}
+                              onChange={ethMainFormHandler}
+                            >
+                              {/* <option>Select your network</option> */}
+                              {data.map((item) => {
+                                if (
+                                  item.parentNetworkName ===
+                                  "Avalanche" &&
+                                  item.tokenType === "free"
+                                ) {
+                                  return (
+                                    <option value={item.value}>
+                                      {item.subNetworkName}
+                                    </option>
+                                  );
+                                } else if (
+                                  item.parentNetworkName ===
+                                  "Avalanche" &&
+                                  item.tokenType === "basic"
+                                ) {
+                                  <option value={item.value}>
+                                    {item.subNetworkName}
+                                  </option>;
+                                } else if (
+                                  item.parentNetworkName ===
+                                  "Avalanche" &&
+                                  item.tokenType === "custom"
+                                ) {
+                                  <option value={item.value}>
+                                    {item.subNetworkName}
+                                  </option>;
+                                }
+                              })}
+                              {/* <option value="moonRiver">Moon River</option>
+                              <option value="moonBaseAlpha">Moon Base Alpha</option> */}
+                            </select>
+                            <span className="form-text f-12 heading">
+                              Select the network on wich you want to deploy your
+                              token
+                            </span>
+                          </div>
+
+                          <h5 className="heading mb-0">Transaction</h5>
+                          <div className="card-body px-0">
+                            <div className="transactionWrap d-sm-flex align-items-center justify-content-between mb-3">
+                              <div className="Ttext">
+                                <p className="mb-0">
+                                  Commission fee:{" "}
+                                  <Tooltip
+                                    content={
+                                      <>
+                                        The commison fee will be
+                                        <br />
+                                        transferred automatically to us
+                                        <br /> during the contract creation.
+                                        <br />
+                                        In case of error,this
+                                        <br /> amount will not be
+                                        <br /> deducted from your <br />
+                                        wallet.Only the gas
+                                        <br /> fees will be deducted
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
+                                </p>
+                              </div>
+                              <div
+                                className="Tbtn my-sm-0 my-3"
+                                style={{ width: "120px" }}
+                              >
+                                <span className="badge bg-success d-block p-2 ">
+                                  {commissionFee
+                                    ? commissionFee === "Free"
+                                      ? "Free"
+                                      : `${commissionFee} AVAX`
+                                    : "Free"}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="transactionWrap d-sm-flex align-items-center justify-content-between">
+                              <div className="Ttext ">
+                                <p className="mb-0">
+                                  Gas fee:{" "}
+                                  <Tooltip
+                                    content={
+                                      <>
+                                        The gas fee depend <br />
+                                        on gas limit and
+                                        <br /> gas price. Metamask will
+                                        <br /> automatically display
+                                        <br /> the best fee to use
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
+                                </p>
+                              </div>
+                              <div
+                                className="Tbtn my-sm-0 my-3"
+                                style={{ width: "120px" }}
+                              >
+                                <span className="badge bg-secondary d-block p-2">
+                                  Variable
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <h5 className="heading mb-0">Agreement</h5>
+                          <div className="card-body px-0">
+                            <div className="form-group">
+                              <label className="form-check">
+                                <input
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  name="agreement"
+                                  value={agreement}
+                                  onChange={ethMainFormHandler}
+                                />
+
+                                <span className="form-check-label">
+                                  I have read, understood and agreed to the{" "}
+                                  {/* <span className="text-underline"> */}
+                                  {/*  modal*/}
+                                  <Link
+                                    to="/"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                  >
+                                    <u> Terms of Use. </u>
+                                  </Link>
+                                  <TermsModal />
+                                  {/* modal */}
+                                  {/* </span> */}
+                                </span>
+                                <div className="f-12 mt-1 text-danger">
+                                  {err.agreementErr}
+                                </div>
+                              </label>
+                            </div>
+                          </div>
+                          <div className="d-flex justify-content-between">
+                            <button
+                              type="button"
+                              className="btn form-btn"
+                              onClick={() => setStep(2)}
+                            >
+                              Back
+                            </button>
+                            <button
+                              type="button"
+                              className="btn form-btn"
+                              onClick={async () => {
                                 if (ethFormData.agreement === false) {
                                   setErr((prev) => ({
                                     ...prev,
                                     agreementErr:
                                       "Please confirm that you have read and understood our terms of use",
                                   }))
-                                 
-                              }
-                              else(
-                                compileContract(ethFormData)
-                              )
-                            }}
-                          >
-                            Deploy
-                          </button>
-                        </div>
-                      </form>
+
+                                }
+                                else (
+                                  compileContract(ethFormData)
+                                )
+                              }}
+                            >
+                              Deploy
+                            </button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
             )}
           </section>
         </main>

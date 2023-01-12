@@ -198,16 +198,16 @@ const MoonRiverMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-      //   if (network === "binanceSmartChainTestnet") {
-      //     setEthFormData((prev) => ({
-      //       ...prev,
-      //     }));
-      //   }
-      //   if (network === "binanceSmartChain") {
-      //     setEthFormData((prev) => ({
-      //       ...prev,
-      //     }));
-      //   }
+        if (network === "moonBaseAlpha") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
+        if (network === "moonRiver") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
     } else if (tokenType === "free") {
       setFieldsDisabled(freeDisabled);
       setEthFormData((prev) => ({
@@ -260,20 +260,20 @@ const MoonRiverMain1 = (props) => {
         }));
       }
 
-        if (network === "moonBaseAlpha") {
-          setEthFormData((prev) => ({
-            ...prev,
-            commissionFee: data.find((item) => item.value === ethFormData.network)
-              ?.networkCommissionFee,
-          }));
-        }
-        if (network === "moonRiver") {
-          setEthFormData((prev) => ({
-            ...prev,
-            commissionFee: data.find((item) => item.value === ethFormData.network)
-              ?.networkCommissionFee,
-          }));
-        }
+      // if (network === "moonBaseAlpha") {
+      //   setEthFormData((prev) => ({
+      //     ...prev,
+      //     commissionFee: data.find((item) => item.value === ethFormData.network)
+      //     //   ?.networkCommissionFee,
+      //   }));
+      // }
+      // if (network === "moonRiver") {
+      //   setEthFormData((prev) => ({
+      //     ...prev,
+      //     commissionFee: data.find((item) => item.value === ethFormData.network)
+      //     //   ?.networkCommissionFee,
+      //   }));
+      // }
       if (supplyType === "fixed" || supplyType === "capped") {
         setEthFormData((prev) => ({
           ...prev,
@@ -654,7 +654,7 @@ const MoonRiverMain1 = (props) => {
     return selctedItem?.[0];
   };
 
-  
+
   useEffect(() => {
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
       if (parentNetworkName === 'Moon River' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
@@ -732,7 +732,7 @@ const MoonRiverMain1 = (props) => {
               //calling deploy function
               deployContract(res.data.result, FormData).then((res) => {
                 if (res.error) {
-                  navigate("/generator/binancesmartchain");
+                  navigate("/generator/moonriver");
                   props.setShow(true);
                   res.error.code === "ACTION_REJECTED"
                     ? toast.error("User Rejected The Request")
@@ -1119,35 +1119,36 @@ const MoonRiverMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                               {data.map((item) => {
-                              if (
-                                item.parentNetworkName ===
+                              {/* <option>Select your network</option> */}
+                              {data.map((item) => {
+                                if (
+                                  item.parentNetworkName ===
                                   "Moon River" &&
-                                item.tokenType === "free"
-                              ) {
-                                return (
+                                  item.tokenType === "free"
+                                ) {
+                                  return (
+                                    <option value={item.value}>
+                                      {item.subNetworkName}
+                                    </option>
+                                  );
+                                } else if (
+                                  item.parentNetworkName ===
+                                  "Moon River" &&
+                                  item.tokenType === "basic"
+                                ) {
                                   <option value={item.value}>
                                     {item.subNetworkName}
-                                  </option>
-                                );
-                              } else if (
-                                item.parentNetworkName ===
+                                  </option>;
+                                } else if (
+                                  item.parentNetworkName ===
                                   "Moon River" &&
-                                item.tokenType === "basic"
-                              ) {
-                                <option value={item.value}>
-                                  {item.subNetworkName}
-                                </option>;
-                              } else if (
-                                item.parentNetworkName ===
-                                  "Moon River" &&
-                                item.tokenType === "custom"
-                              ) {
-                                <option value={item.value}>
-                                  {item.subNetworkName}
-                                </option>;
-                              }
-                            })} 
+                                  item.tokenType === "custom"
+                                ) {
+                                  <option value={item.value}>
+                                    {item.subNetworkName}
+                                  </option>;
+                                }
+                              })}
                               {/* <option value="moonRiver">Moon River</option>
                               <option value="moonBaseAlpha">Moon Base Alpha</option> */}
                             </select>
