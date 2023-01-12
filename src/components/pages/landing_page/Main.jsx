@@ -9,6 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton";
 import avalancheImage from "../../../assets/Avalanche_logo_without_text.png"
+import SelectBanner from "../Eth_page/SelectBanner";
 
 function Main() {
   const { setSolDeploy, setDeploySuccess,setMoonToggle, moonToggle } = useContext(GlobalContext);
@@ -65,7 +66,8 @@ function Main() {
                 Your token will be deployed on the selected blockchain
               </p>
             </div>
-          </div>
+          </div> 
+          <SelectBanner />
 
           {loader ? (
             <MainSkeleton />

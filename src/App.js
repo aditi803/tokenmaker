@@ -67,7 +67,7 @@ function App(props) {
           <Route path='/generator/polygon' element={[<EthHeader header={header} />, <MaticMain />, <Footer />]} />
           <Route path='/generator/solana' element={[<SolanaMain  net ={net} setNet = {setNet}/>]} />
           <Route path='/generator/moonriver' element={[<MoonRiverMain />]} />
-          <Route path='/generator/avax' element={[<AvaxMain />]} />
+          <Route path='/generator/avalanche' element={[<AvaxMain />]} />
           <Route path='/terms' element = {<Terms />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy /> } />
         </Routes> 
