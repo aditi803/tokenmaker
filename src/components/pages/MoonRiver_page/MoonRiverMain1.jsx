@@ -732,7 +732,7 @@ const MoonRiverMain1 = (props) => {
               //calling deploy function
               deployContract(res.data.result, FormData).then((res) => {
                 if (res.error) {
-                  navigate("/generator/binancesmartchain");
+                  navigate("/generator/moonriver");
                   props.setShow(true);
                   res.error.code === "ACTION_REJECTED"
                     ? toast.error("User Rejected The Request")
