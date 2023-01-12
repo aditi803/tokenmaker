@@ -113,8 +113,8 @@ export const EtherProvider = ({ children }) => {
     binanceSmartChain: 56,
     moonRiver:1285,
     moonBaseAlpha:1287,
+    avalanche:43114,
     avalancheFujiCChain:43113,
-    avalanche:43114
   };
 
 
