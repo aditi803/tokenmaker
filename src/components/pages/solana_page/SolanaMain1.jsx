@@ -94,7 +94,6 @@ const SolanaMain1 = (props) => {
   const [decimals, setDecimals] = useState(18);
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
-  const [buttonClick, setButtonClick] = useState(false)
 
   // console.log(agreement, 'aditi agre')
 
@@ -213,14 +212,14 @@ const SolanaMain1 = (props) => {
       }));
     }
 
-    // if (agreement === false) {
-    //   setErr((prev) => ({
-    //     ...prev,
-    //     agreementErr:
-    //       "Please confirm that you have read and understood our terms of use.",
-    //   }));
-    // }
-    if (decimals <= 21 || decimals >= 6) {
+    if (agreement === false) {
+      setErr((prev) => ({
+        ...prev,
+        agreementErr:
+          "Please confirm that you have read and understood our terms of use.",
+      }));
+    }
+    if (decimals >= 21 || decimals <= 6) {
       setErr((prev) => ({
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
@@ -239,9 +238,8 @@ const SolanaMain1 = (props) => {
     if (
       tokenName !== "" &&
       symbol !== "" &&
-      (decimals <=21 && decimals >= 6) &&
-      amount !== "" 
-
+      amount !== "" &&
+      decimals !== null
     ) {
       // navigate("/generator/final");
       setStep(2);
@@ -249,8 +247,6 @@ const SolanaMain1 = (props) => {
   };
 
   // };
-
-  console.log(decimals,"decimals--n")
   const [walletBalance, setWalletBalance] = useState();
   useEffect(() => {
     (async () => {
@@ -258,7 +254,7 @@ const SolanaMain1 = (props) => {
       // const signatures = await signMessage(message);
       // if (!sign.detached.verify(message, signature, publicKey.toBytes())) throw new Error('Invalid signature!');
       // const vicky = Keypair.generate()
-      const vicky = "r5wGTPdSNn1kEesgj2aoJ1PyvgHD5MC72xHPW83wGbd";
+      // const vicky = "r5wGTPdSNn1kEesgj2aoJ1PyvgHD5MC72xHPW83wGbd";
       // console.log(vicky,"buf");
       // var bufView = new Uint16Array(vicky);
       // var bufView = new TextEncoder().encode(vicky)
@@ -310,7 +306,6 @@ const SolanaMain1 = (props) => {
 
   const onClick = useCallback(
     async (form) => {
-      setButtonClick(true)
       if (!net) {
         setErrNet(true);
         return;
@@ -364,7 +359,7 @@ const SolanaMain1 = (props) => {
         }),
         createInitializeMintInstruction(
           mintKeypair.publicKey,
-          form.decimals,
+          1,
           publicKey,
           publicKey,
           TOKEN_PROGRAM_ID
@@ -382,7 +377,7 @@ const SolanaMain1 = (props) => {
           publicKey,
           // form.amount
           // (form.amount* 1000000000000000000)
-          form.amount * Math.pow(10, form.decimals)
+          form.amount * Math.pow(10, 1)
           // form.amount
         ),
         createCreateMetadataAccountV2Instruction(
@@ -635,12 +630,12 @@ const SolanaMain1 = (props) => {
                               min="6"
                               max="21"
                               //   disabled={f_decimals}
-                              value={decimals}
+                              // value={}
                               name="decimals"
-                              onChange={(e) => setDecimals(e.target.value)}
+                              // onChange={(e) => setDecimals(e.target.value)}
                             />
                             <span className="form-text text-muted">
-                              The number of decimal of your token must be between 6 & 21 (default 18)
+                              The number of decimal of your token (default 18)
                             </span>
                             <div className="text-danger f-12">
                               {err.decimalsErr}
@@ -699,7 +694,7 @@ const SolanaMain1 = (props) => {
                               onChange={networkName}
                             >
                               <option>Select your netowrk</option>
-                              {data.map((item,i) => {
+                              {data.map((item) => {
                                 if (
                                   item.parentNetworkName === "Solana" &&
                                   item.tokenType === "free"
@@ -717,7 +712,6 @@ const SolanaMain1 = (props) => {
                                         item.value === "solanaMainnet" ||
                                         item.value === "solanaTestnet"
                                       }
-                                      key={i}
                                     >
                                       {item.subNetworkName}
                                     </option>
@@ -738,7 +732,6 @@ const SolanaMain1 = (props) => {
                                       item.value === "solanaMainnet" ||
                                       item.value === "solanaTestnet"
                                     }
-                                    key={i}
                                   >
                                     {item.subNetworkName}
                                   </option>;
@@ -758,7 +751,6 @@ const SolanaMain1 = (props) => {
                                       item.value === "solanaMainnet" ||
                                       item.value === "solanaTestnet"
                                     }
-                                    key={i}
                                   >
                                     {item.subNetworkName}
                                   </option>;
@@ -891,7 +883,6 @@ const SolanaMain1 = (props) => {
                             <button
                               type="button"
                               className="btn form-btn"
-                              disabled={buttonClick}
                               onClick={() => {
                                 if (agreement === false) {
                                   setErr((prev) => ({
