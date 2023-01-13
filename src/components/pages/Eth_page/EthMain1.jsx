@@ -733,6 +733,9 @@ const EthMain1 = (props) => {
     }
   };
 
+
+  console.log('choosen network ',network)
+
   useEffect(() => {
     if (tokenType === "free") {
       setEthFormData((prev) => ({
@@ -1073,12 +1076,12 @@ const EthMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to ERC20 protocol
+                                Confirms to ERC20 protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to ERC20 protocol
+                              and confirms to ERC20 protocol
                             </span>
                           </div>
                           <div className="form-group">

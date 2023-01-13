@@ -273,6 +273,8 @@ const BnbMain1 = (props) => {
     }
   }, [tokenType, supplyType, network, data]);
 
+  console.log(network, "choosen network")
+
   useEffect(() => {
     if (supplyType === "fixed" || supplyType === "capped") {
       setEthFormData((prev) => ({
@@ -1003,12 +1005,12 @@ const BnbMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to BEP20 protocol
+                                Confirms to BEP20 protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to BEP20 protocol
+                              and confirms to BEP20 protocol
                             </span>
                           </div>
                           <div className="form-group">

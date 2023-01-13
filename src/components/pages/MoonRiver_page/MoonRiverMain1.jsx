@@ -104,6 +104,7 @@ const MoonRiverMain1 = (props) => {
     commissionFee: "0.5",
   });
 
+
   const [show, setShow] = useState(false);
 
   const [err, setErr] = useState({
@@ -146,8 +147,8 @@ const MoonRiverMain1 = (props) => {
     pausable,
     recoverable,
     accessType,
-    network,
     agreement,
+    network,
     commissionFee,
   } = ethFormData;
 
@@ -291,6 +292,9 @@ const MoonRiverMain1 = (props) => {
       }));
     }
   }, [supplyType, initialSupply, maximumSupply]);
+
+  console.log(network, "choosen network")
+
 
   useEffect(() => {
     if (tokenType === "custom") {
@@ -795,7 +799,7 @@ const MoonRiverMain1 = (props) => {
               </h1>
               <p style={{ color: 'black' }}>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable BEP20 Token.
+                Mintable, Burnable Moon River Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -999,12 +1003,12 @@ const MoonRiverMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to Moon River protocol
+                                Confirms to Moon River protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to Moon River protocol
+                              and confirms to Moon River protocol
                             </span>
                           </div>
                           <div className="form-group">
