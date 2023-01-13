@@ -12,7 +12,7 @@ import avalancheImage from "../../../assets/Avalanche_logo_without_text.png"
 import SelectBanner from "../Eth_page/SelectBanner";
 
 function Main() {
-  const { setSolDeploy, setDeploySuccess,setMoonToggle, moonToggle } = useContext(GlobalContext);
+  const { setSolDeploy, setDeploySuccess, startToggle, setStartToggle } = useContext(GlobalContext);
 
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -42,13 +42,8 @@ function Main() {
       });
   };
 
-  const dataObj = data.find((item) => {
-    if (item.categoryName === "Moon River") {
-      setMoonToggle(true);
-    }
-  });
+ 
 
-  const categoryName = dataObj?.categoryName ?? ''
 
   // console.log(categoryName,"Moon network")
 

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { HEADER } from '../../../api/Api'
 // import './landing_page_styles/header.css'
 import axios from "axios"
 import HeaderSkeleton from '../../../skeleton/HeaderSkeleton'
+import { GlobalContext } from '../../../contexts/EthContext/EtherProvider'
 const Header = () => {
     const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
+  const { startToggle, setStartToggle } = useContext(GlobalContext);
+
 
     const [header, setHeader] = useState([])
     const [loader, setLoader] = useState(true)
@@ -45,7 +48,9 @@ const Header = () => {
                                     alt="Logo" className="img-2" /> */}
                                         {/* </span> */}
                                     </Link>
-                                    <div className='nav-btn-div'>
+                                    <div className='nav-btn-div' style={{ display : !startToggle ? 'none' : 'block'}} onClick={() =>{
+                                        setStartToggle(false)
+                                    }}>
                                         <Link className='blue-btn'
                                             to="/generator">
                                             Get Started

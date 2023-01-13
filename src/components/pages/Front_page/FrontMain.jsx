@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useContext } from "react";
 // import "./Front_style/FrontMain.css";
 // import '../../pages/styles.css'
 import './Front_style/MainFront.css'
@@ -18,9 +18,15 @@ import Header from "../landing_page/Header";
 import Footer from "../landing_page/Footer";
 import headerimage from "../../../assets/Header_image.svg";
 import HeroSkeleton from "../../../skeleton/HeroSkeleton";
+import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
 export const FrontMain = () => {
   const [showindex, setShowindex] = useState(0);
+  const {  startToggle, setStartToggle } = useContext(GlobalContext);
+
+  useEffect(() =>{
+    setStartToggle(true)
+  },[startToggle])
 
   const [banner, setBanner] = useState([]);
   const [start, setStart] = useState([]);
@@ -110,6 +116,9 @@ export const FrontMain = () => {
                           style={{
                             backgroundColor: `${banner.buttonBackgroundColor}`,
                             color: `${banner.buttonTextColor}`,
+                          }}
+                          onClick={() => {
+                            setStartToggle(false)
                           }}
                         >
                           {banner.buttonText}

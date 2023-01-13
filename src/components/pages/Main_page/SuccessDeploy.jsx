@@ -72,7 +72,7 @@ export const SuccessDeploy = (props) => {
   const [tooltip, setTooltip] = useState(false)
   return (
     <div>
-      <div className="card w-100">
+      <div className="card w-100 border-0">
         <div className="card-header d-flex align-items-center">
           <div className="mr-3" style={{ "zoom": "1.5" }}>
             {/* <svg
@@ -259,7 +259,7 @@ export const SuccessDeploy = (props) => {
 
                     <a
                       href={`${explorer.link}/tx/${deployData.txHash}`}
-                      className="btn btn-secondary ms-2"
+                      className="btn btn-secondary mt-3"
                       target="_blank"
                       rel="noreferrer"
                     >

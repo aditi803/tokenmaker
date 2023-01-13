@@ -1008,12 +1008,12 @@ const MaticMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to ERC-20 protocol
+                                Confirms to ERC-20 protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and conforms to ERC-20 protocol
+                              and confirms to ERC-20 protocol
                             </span>
                           </div>
                           <div className="form-group">

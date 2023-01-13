@@ -10,8 +10,10 @@ export const EtherProvider = ({ children }) => {
   const [accBalance, setAccBalance] = useState();
   const [chainId, setChainId] = useState();
   const [toggler, setToggler] = useState(false)
-  const [moonToggle, setMoonToggle] = useState(false)
+  const [startToggle, setStartToggle] = useState(true)
   const [solDeploy,setSolDeploy]=useState(false)
+
+
 
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
@@ -402,8 +404,8 @@ export const EtherProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         // compileContract : compileContract,
-        moonToggle,
-        setMoonToggle,
+        startToggle,
+        setStartToggle,
         toggler,
         changeNetwork,
         SignInMetamask: SignInMetamask,

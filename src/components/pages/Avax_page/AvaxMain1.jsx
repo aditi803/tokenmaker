@@ -99,7 +99,7 @@ const AvaxMain1 = (props) => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "avalanche",
+    network: "",
     agreement: false,
     commissionFee: "0.5",
   });
@@ -767,6 +767,8 @@ const AvaxMain1 = (props) => {
     }
   };
 
+  console.log('choosen network', network)
+
   return (
     <>
       <div className="page-content">
@@ -984,7 +986,7 @@ const AvaxMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Conforms to avalanche protocol
+                                Confirms to avalanche protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
@@ -1119,7 +1121,7 @@ const AvaxMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              {/* <option>Select your network</option> */}
+                              <option defaultChecked>Select your network</option>
                               {data.map((item) => {
                                 if (
                                   item.parentNetworkName ===
