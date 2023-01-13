@@ -714,8 +714,11 @@ const MoonRiverMain1 = (props) => {
           if (FormData.network !== chainId) {
             networkFunc = await changeNetwork(FormData.network);
             console.log(networkFunc,"network");
+            if(!networkFunc){
+              throw new Error("error network")
+            }
           }
-          if(networkFunc){
+          // if(networkFunc){
       // if (FormData.network === chainId) {
         // navigate("/generator/final");
         console.log(FormData.network, "currentNetworkID");
@@ -776,7 +779,7 @@ const MoonRiverMain1 = (props) => {
 
       //   changeNetwork(FormData.network);
       // }
-          }
+          
     } catch (error) {
       toast.error(error.message);
       console.log("compile contract side catch er", error);
