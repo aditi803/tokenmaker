@@ -75,7 +75,7 @@ const EthMain1 = (props) => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "mainnet",
+    network: "",
     agreement: false,
     commissionFee: 0.075,
   });
@@ -1210,6 +1210,7 @@ const EthMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
+                              <option>Select your network</option>
                               {data.map((item, i) => {
                                 if (item.parentNetworkName === "Ethereum" && item.tokenType === 'free') {
                                   return (
