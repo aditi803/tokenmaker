@@ -77,7 +77,7 @@ const MaticMain1 = (props) => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "polygonMainnet",
+    network: "",
     agreement: false,
     commissionFee: 150,
   });
@@ -1157,6 +1157,7 @@ const MaticMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
+                              <option>Select your network</option>
                               {data.map((item,i) => {
                                 if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
                                   return (
