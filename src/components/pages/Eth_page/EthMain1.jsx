@@ -771,8 +771,12 @@ const EthMain1 = (props) => {
           if (FormData.network !== chainId) {
             networkFunc = await changeNetwork(FormData.network);
             console.log(networkFunc,"network");
+            if(!networkFunc){
+              throw new Error("error network")
+            }
           }
-          if(networkFunc){
+          
+          // if(networkFunc){
 
           
       // console.log(FormData.network, "currentNetworkID");
@@ -826,13 +830,14 @@ const EthMain1 = (props) => {
               : toast.error("Data Fetch Failed Try Again");
           });
       }
-    }
+    // }
 
 
       // } else {
       //   changeNetwork(FormData.network);
       // }
     } catch (error) {
+      console.log(error,"error,")
       toast.error(error.message);
       // console.log("compile contract side catch er", error);
     }

@@ -706,8 +706,11 @@ const BnbMain1 = (props) => {
           if (FormData.network !== chainId) {
             networkFunc = await changeNetwork(FormData.network);
             console.log(networkFunc,"network");
+            if(!networkFunc){
+              throw new Error("error network")
+            }
           }
-          if(networkFunc){
+          // if(networkFunc){
 
       // console.log(FormData.network, "formdata bnb main1 side");
 
@@ -773,7 +776,7 @@ const BnbMain1 = (props) => {
       // } else {
       //   changeNetwork(FormData.network);
       // }
-          }
+          // }
     } catch (error) {
       console.log("eroor")
       toast.error(error.message);
