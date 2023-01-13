@@ -1157,7 +1157,7 @@ const MaticMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option>Select your network</option>
+                              <option value=''>Select your network</option>
                               {data.map((item,i) => {
                                 if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
                                   return (
