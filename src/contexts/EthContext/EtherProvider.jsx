@@ -363,7 +363,7 @@ export const EtherProvider = ({ children }) => {
       if(error.code==="ACTION_REJECTED"){
         toast.error("User Rejected the request")
       }
-      console.log(error.code,"code");
+      // console.log(error.code,"code");
       console.log(error, "error send commision side")
       if(error.code==="INSUFFICIENT_FUNDS"){
         toast.error("Insufficient funds")
