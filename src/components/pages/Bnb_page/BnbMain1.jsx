@@ -709,7 +709,7 @@ const BnbMain1 = (props) => {
             networkFunc = await changeNetwork(FormData.network);
             console.log(networkFunc,"network");
             if(!networkFunc){
-              throw new Error("error network")
+              throw "vikcy"
             }
           }
           // if(networkFunc){
