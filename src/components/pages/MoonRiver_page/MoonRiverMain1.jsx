@@ -707,19 +707,30 @@ const MoonRiverMain1 = (props) => {
 
       console.log(FormData.network, "network bnb main1 side");
       console.log(chainId, "chainId bnb main1 side ");
-
-      if (FormData.network === chainId) {
+      if (connectedAccAddress.length === 0) {
+        await SignInMetamask();
+      }
+      let networkFunc
+          if (FormData.network !== chainId) {
+            networkFunc = await changeNetwork(FormData.network);
+            console.log(networkFunc,"network");
+          }
+          if(networkFunc){
+      // if (FormData.network === chainId) {
         // navigate("/generator/final");
-        if (connectedAccAddress.length === 0) {
-          await SignInMetamask();
-        }
         console.log(FormData.network, "currentNetworkID");
 
-        let res = await sendCommision(commissionFee);
-        console.log(res, "ress send commision matic main");
-
+        // let res = await sendCommision(commissionFee);
+        // console.log(res, "ress send commision matic main");
+        props.setShow(false);
+      let res = await sendCommision(commissionFee)
+      // console.log(res, "ress send commision matic main")
+      if(!res){
+        props.setShow(true)
+        navigate("/generator/moonriver");
+      }
         if (res) {
-          props.setShow(false);
+          // props.setShow(false);
 
           //hit contract compile api
 
@@ -761,10 +772,11 @@ const MoonRiverMain1 = (props) => {
                 : toast.error("Data Fetch Failed Try Again");
             });
         }
-      } else {
+      // } else {
 
-        changeNetwork(FormData.network);
-      }
+      //   changeNetwork(FormData.network);
+      // }
+          }
     } catch (error) {
       toast.error(error.message);
       console.log("compile contract side catch er", error);

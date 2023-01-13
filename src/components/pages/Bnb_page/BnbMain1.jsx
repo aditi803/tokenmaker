@@ -701,10 +701,15 @@ const BnbMain1 = (props) => {
         console.log(chainId, "chainid in bnb main");
         console.log(FormData.network, "network id in bnb main");
 
-        if(FormData.network !== chainId){
-          await changeNetwork(FormData.network);
-          
+        if (connectedAccAddress.length === 0) {
+          await SignInMetamask();
         }
+        let networkFunc
+          if (FormData.network !== chainId) {
+            networkFunc = await changeNetwork(FormData.network);
+            console.log(networkFunc,"network");
+          }
+          if(networkFunc){
 
       // console.log(FormData.network, "formdata bnb main1 side");
 
@@ -712,16 +717,20 @@ const BnbMain1 = (props) => {
 
       // if (FormData.network === chainId) {
         // navigate("/generator/final");
-        if (connectedAccAddress.length === 0) {
-          await SignInMetamask();
-        }
         // console.log(FormData.network, "currentNetworkID");
 
-        let res = await sendCommision(commissionFee);
-        // console.log(res, "ress send commision matic main");
+        // let res = await sendCommision(commissionFee);
+         // console.log(res, "ress send commision matic main");
+        props.setShow(false);
+      let res = await sendCommision(commissionFee)
+      // console.log(res, "ress send commision matic main")
+      if(!res){
+        props.setShow(true)
+        navigate("/generator/binancesmartchain");
+      }
 
         if (res) {
-          props.setShow(false);
+          // props.setShow(false);
 
           //hit contract compile api
 
@@ -766,6 +775,7 @@ const BnbMain1 = (props) => {
       // } else {
       //   changeNetwork(FormData.network);
       // }
+          }
     } catch (error) {
       console.log("eroor")
       toast.error(error.message);
