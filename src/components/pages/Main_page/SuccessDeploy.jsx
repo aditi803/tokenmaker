@@ -253,10 +253,12 @@ export const SuccessDeploy = (props) => {
                     {`View the transaction on Devnet`}
                   </a></> :
                   <>
+                    <div>
                     <button type="button" onClick={addToken} className="btn btn-success">
                       Add your token to your wallet
                     </button>
-
+                    </div>
+                    <div>
                     <a
                       href={`${explorer.link}/tx/${deployData.txHash}`}
                       className="btn btn-secondary mt-3"
@@ -265,6 +267,7 @@ export const SuccessDeploy = (props) => {
                     >
                       {`View the transaction on ${explorer.name}`}
                     </a>
+                    </div>
                   </>}
             </div>
           </div>
