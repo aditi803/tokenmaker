@@ -1264,9 +1264,9 @@ const MoonRiverMain1 = (props) => {
                                   {/* <span className="text-underline"> */}
                                   {/*  modal*/}
                                   <Link
-                                    to="/"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
+                                    to="/terms"
+                                    // data-bs-toggle="modal"
+                                    // data-bs-target="#exampleModal"
                                   >
                                     <u> Terms of Use. </u>
                                   </Link>

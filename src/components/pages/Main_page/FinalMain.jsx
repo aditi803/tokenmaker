@@ -30,7 +30,7 @@ export const FinalMain = (props) => {
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable ERC20 Token.
+                Mintable, Burnable  Token.
                 <br />
                 No login.No setup.No Coding required.
               </p>

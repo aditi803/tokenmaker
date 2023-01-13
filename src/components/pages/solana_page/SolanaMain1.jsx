@@ -708,7 +708,7 @@ const SolanaMain1 = (props) => {
                               value={network}
                               onChange={networkName}
                             >
-                              <option>Select your netowrk</option>
+                              <option>Select your network</option>
                               {data.map((item) => {
                                 if (
                                   item.parentNetworkName === "Solana" &&
@@ -871,9 +871,9 @@ const SolanaMain1 = (props) => {
                                 <span className="form-check-label">
                                   I have read, understood and agreed to the{" "}
                                   <Link
-                                    to="/"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
+                                    to="/terms"
+                                    // data-bs-toggle="modal"
+                                    // data-bs-target="#exampleModal"
                                   >
                                     <u> Terms of Use. </u>
                                   </Link>

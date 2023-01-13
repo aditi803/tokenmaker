@@ -220,6 +220,7 @@
     background-color: #6010b1c0;
     position: relative;
     top: -10px;
+    border-radius: 10px;
 }
 
 @media screen and (max-width: 992px) {

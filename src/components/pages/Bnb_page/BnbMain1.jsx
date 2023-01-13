@@ -1260,7 +1260,7 @@ const BnbMain1 = (props) => {
                                   {/* <span className="text-underline"> */}
                                   {/*  modal*/}
                                   <Link
-                                    to="/"
+                                    to="/terms"
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
                                   >
