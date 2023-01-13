@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { ContractFactory, ethers } from "ethers";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { error } from "jquery";
 export const GlobalContext = createContext();
 
 export const EtherProvider = ({ children }) => {
@@ -255,6 +256,7 @@ export const EtherProvider = ({ children }) => {
         params: [{ chainId: `0x${parseChainId}` }],
       });
       setToggler(!toggler);
+      return "vicky"
     } catch (error) {
       if(error.code === 4001){
 
@@ -265,6 +267,9 @@ export const EtherProvider = ({ children }) => {
         toast.error("Please add suitable chain in metamask for payment")
       }
         // : toast.error(error.message);:
+        // if(error.message==="User rejected the request."){
+        //   toast.error("User rejected the request!")
+        // }
       console.log("error change network side", error);
       
     }
@@ -324,7 +329,14 @@ export const EtherProvider = ({ children }) => {
       if(error.code===-32603){
         toast.error("Insufficient funds")
       }
+      if(error.code==="ACTION_REJECTED"){
+        toast.error("User Rejected the request")
+      }
+      console.log(error.code,"code");
       console.log(error, "error send commision side")
+      if(error.code==="INSUFFICIENT_FUNDS"){
+        toast.error("Insufficient funds")
+      }
     }
   }
 

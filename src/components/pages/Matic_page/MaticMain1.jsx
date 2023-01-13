@@ -712,25 +712,35 @@ const MaticMain1 = (props) => {
         })
         : "";
 
-        if(FormData.network !== chainId){
-          await changeNetwork(FormData.network);
-          
+        if (connectedAccAddress.length === 0) {
+          await SignInMetamask()
         }
+        let networkFunc
+          if (FormData.network !== chainId) {
+            networkFunc = await changeNetwork(FormData.network);
+            console.log(networkFunc,"network");
+          }
+          if(networkFunc){
 
       // console.log(FormData, "formdata eth side");
       // if (FormData.network === chainId) {
         // navigate("/generator/final");
-        if (connectedAccAddress.length === 0) {
-          await SignInMetamask()
-        }
         // console.log(FormData.network, "currentNetworkID");
 
-        let res = await sendCommision(commissionFee)
+        // let res = await sendCommision(commissionFee)
         // console.log(res, "ress send commision matic main")
+
+        props.setShow(false);
+      let res = await sendCommision(commissionFee)
+      // console.log(res, "ress send commision matic main")
+      if(!res){
+        props.setShow(true)
+        navigate("/generator/polygon");
+      }
 
         if (res) {
           //hit contract compile api
-          props.setShow(false);
+          // props.setShow(false);
 
           axios
             .post(
@@ -774,6 +784,7 @@ const MaticMain1 = (props) => {
       // else {
       //   changeNetwork(FormData.network);
       // }
+          }
     } catch (error) {
       toast.error(error.message);
       // console.log("compile contract side catch er", error);

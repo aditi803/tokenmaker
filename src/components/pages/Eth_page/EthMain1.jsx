@@ -759,30 +759,35 @@ const EthMain1 = (props) => {
         })
         : "";
 
-      if (FormData.network !== chainId) {
-        await changeNetwork(FormData.network);
+        
+        // console.log(FormData, "formdata eth side");
+        // if (FormData.network === chainId) {
+          // navigate("/generator/final");
+          if (connectedAccAddress.length === 0) {
+            await SignInMetamask()
+          }
 
-      }
+          let networkFunc
+          if (FormData.network !== chainId) {
+            networkFunc = await changeNetwork(FormData.network);
+            console.log(networkFunc,"network");
+          }
+          if(networkFunc){
 
-      // console.log(FormData, "formdata eth side");
-      // if (FormData.network === chainId) {
-      // navigate("/generator/final");
-      if (connectedAccAddress.length === 0) {
-        await SignInMetamask()
-      }
+          
       // console.log(FormData.network, "currentNetworkID");
-
-
+      props.setShow(false);
       let res = await sendCommision(commissionFee)
       // console.log(res, "ress send commision matic main")
-      if (!res) {
-
+      if(!res){
+        props.setShow(true)
+        navigate("/generator/ethereum");
       }
 
 
 
       if (res) {
-        props.setShow(false);
+        
 
         //hit contract compile api
         axios
@@ -821,6 +826,7 @@ const EthMain1 = (props) => {
               : toast.error("Data Fetch Failed Try Again");
           });
       }
+    }
 
 
       // } else {
