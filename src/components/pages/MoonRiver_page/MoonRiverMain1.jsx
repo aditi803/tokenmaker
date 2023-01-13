@@ -99,7 +99,7 @@ const MoonRiverMain1 = (props) => {
     pausable: false,
     recoverable: false,
     accessType: "owner",
-    network: "moonRiver",
+    network: "",
     agreement: false,
     commissionFee: "0.5",
   });
@@ -1138,7 +1138,7 @@ const MoonRiverMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              {/* <option>Select your network</option> */}
+                              <option>Select your network</option>
                               {data.map((item) => {
                                 if (
                                   item.parentNetworkName ===
