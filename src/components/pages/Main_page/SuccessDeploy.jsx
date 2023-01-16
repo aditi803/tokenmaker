@@ -258,14 +258,16 @@ export const SuccessDeploy = (props) => {
                         Add your token to your wallet
                       </button>
                     </div>
-                    <a
-                      href={`${explorer.link}/tx/${deployData.txHash}`}
-                      className="btn btn-secondary mt-3"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {`View the transaction on ${explorer.name}`}
-                    </a>
+                    <div>
+                      <a
+                        href={`${explorer.link}/tx/${deployData.txHash}`}
+                        className="btn btn-secondary mt-3"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {`View the transaction on ${explorer.name}`}
+                      </a>
+                    </div>
                   </>}
             </div>
           </div>

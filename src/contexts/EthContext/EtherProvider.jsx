@@ -236,6 +236,7 @@ export const EtherProvider = ({ children }) => {
 
   const changeNetwork = async (networkID) => {
     try {
+      const  explorer = urlLinks[networkID]
       // console.log(networkID, "netwrk id in change network");
       console.log(networkID,"networkID");
       const chainIdInDecimal = ethers.utils.hexlify(networkID);
@@ -252,7 +253,29 @@ export const EtherProvider = ({ children }) => {
 
           }
           console.log(parseChainId, "parseChainId after ");
-
+          // 
+          console.log(parseChainId,"parsechainid");
+          // 
+          console.log(`0x${parseChainId}`,explorer.networkName,explorer.rpc,explorer.link,explorer.symbol,"expoor");
+          const addNetwork = await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainId: `0x${parseChainId}`,
+                chainName: explorer.networkName,
+                rpcUrls: [explorer.rpc],
+                blockExplorerUrls: [explorer.link],
+      
+                nativeCurrency: {
+                  // name: currencyName,
+                  symbol: explorer.symbol, // 2-6 characters long
+                  decimals: 18,
+                },
+              },
+            ],
+          });
+          // 
+          console.log(addNetwork,"addNetwork");
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: `0x${parseChainId}` }],
@@ -279,23 +302,38 @@ export const EtherProvider = ({ children }) => {
   //ends here
 
 
-  // const addNetwork = async () => {
+  // const addNetwork = async (networkID) => {
   //   if (!window.ethereum) {
   //     console.error('Metamask not detected');
   //     return;
   //   }
-  //   await window.ethereum.request({
+  //          const  explorer = urlLinks[networkID]
+  //          console.log(networkID,"networkID");
+  //          const chainIdInDecimal = ethers.utils.hexlify(networkID);
+     
+  //          console.log(chainIdInDecimal, "chainid in decimal");
+     
+  //          let parseChainId = chainIdInDecimal.replace("0x0","");
+     
+  //              console.log(parseChainId, "parseChainId middle");
+     
+  //              if(parseChainId.startsWith("0")){
+  //                parseChainId = parseChainId.slice(2,chainIdInDecimal.length);
+  //              console.log(parseChainId, "parseChainId inner ");
+     
+  //              }
+  //          await window.ethereum.request({
   //     method: 'wallet_addEthereumChain',
   //     params: [
   //       {
   //         chainId: chainId,
-  //         chainName: networkName,
-  //         rpcUrls: [rpcURL],
-  //         blockExplorerUrls: [explorerURL],
+  //         chainName: explorer.networkName,
+  //         rpcUrls: explorer.networkrpc,
+  //         blockExplorerUrls: explorer.link,
 
   //         nativeCurrency: {
   //           // name: currencyName,
-  //           symbol: currencySymbol, // 2-6 characters long
+  //           symbol: explorer.synmbol, // 2-6 characters long
   //           decimals: 18,
   //         },
   //       },
@@ -331,16 +369,19 @@ export const EtherProvider = ({ children }) => {
       // console.log(_commissionFee,"_commissionFee  com")
       // console.log(payment,"Payment value hai y ")
       // console.log(payment.paymentAddress,"Payment Addresss --------value hai y ")
+      console.log(_commissionFee,"cmsn_fee")
       if(window.ethereum){
         await window.ethereum.send("eth_requestAccounts");
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         // ethers.utils.getAddress(addr);
+        console.log(signer,"signerrrrr")
         const tx = await signer.sendTransaction({
           to: payment.metamaskPaymentAddress,
           value: ethers.utils.parseEther(_commissionFee)
         });
+        console.log(tx,"transooc");
         // console.log("tx", tx);
         if(tx.hash){
           return true
@@ -363,7 +404,7 @@ export const EtherProvider = ({ children }) => {
       if(error.code==="ACTION_REJECTED"){
         toast.error("User Rejected the request")
       }
-      console.log(error.code,"code");
+      // console.log(error.code,"code");
       console.log(error, "error send commision side")
       if(error.code==="INSUFFICIENT_FUNDS"){
         toast.error("Insufficient funds")
@@ -406,7 +447,8 @@ export const EtherProvider = ({ children }) => {
 
         // eslint-disable-next-line no-unused-expressions
         urlLinks[newFormData.network] ? explorer = urlLinks[newFormData.network] : ""
-
+        console.log(newFormData.network,"neetwork");
+        console.log(explorer,"expoooo");
         // eslint-disable-next-line no-unused-expressions
         // console.log(`${explorer.link}/tx/${contract.deployTransaction.hash}`, "new tx urlllll")
         // console.log(newFormData.network, "netwrk nameee")

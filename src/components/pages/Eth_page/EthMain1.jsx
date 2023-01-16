@@ -761,15 +761,15 @@ const EthMain1 = (props) => {
           network: blockchainNetworks[FormData.network],
         })
         : "";
+        console.log(network,"networksssssssss")
+        console.log(FormData.network,"nootwoorl")
 
-        
         // console.log(FormData, "formdata eth side");
         // if (FormData.network === chainId) {
           // navigate("/generator/final");
           if (connectedAccAddress.length === 0) {
             await SignInMetamask()
           }
-
           let networkFunc
           if (FormData.network !== chainId) {
             networkFunc = await changeNetwork(FormData.network);
