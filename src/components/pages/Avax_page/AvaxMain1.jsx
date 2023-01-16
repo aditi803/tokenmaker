@@ -757,7 +757,7 @@ const AvaxMain1 = (props) => {
                     ? toast.error("User Rejected The Request")
                     : toast.error(res.error.message);
                 } else {
-                  toast.success("Token Deploy Successfully");
+                  toast.success("Token Deploy Successfully!");
                   // navigate("/generator/final");
                   props.setShow(false);
                   console.log(
@@ -1109,7 +1109,9 @@ const AvaxMain1 = (props) => {
                             </span>
                           </div>
                           <div className='d-flex justify-content-between'>
-                            <button type="button" className="btn form-btn ml-0" onClick={() => setStep(1)}>
+                            <button type="button" className="btn form-btn ml-0" onClick={(e) => {
+                              e.preventDefault()
+                              setStep(1)}}>
                               Back
                             </button>
                             <button type="button" className="btn form-btn " onClick={() => setStep(3)}>

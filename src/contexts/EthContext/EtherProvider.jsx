@@ -181,11 +181,11 @@ export const EtherProvider = ({ children }) => {
       });
 
       // eslint-disable-next-line no-unused-expressions
-      wasAdded ? toast.success("Token Added Successfully To Wallet") : "";
+      wasAdded ? toast.success("Token added successfully to wallet!") : "";
     } catch (error) {
       // eslint-disable-next-line no-unused-expressions
       error.code === 4001
-        ? toast.error(" Request Rejected !! Token Not Added to The Wallet")
+        ? toast.error(" Request Rejected !! Token not added to the wallet!")
         : toast.error(error.message);
       // console.log("err addtoken fn", error);
     }
@@ -220,12 +220,12 @@ export const EtherProvider = ({ children }) => {
         setAccAddress([account[0]]);
       } else {
         //If Metamask Not Installed Or Not Connected
-        toast.error("Please Install Metamask In Your Browser");
+        toast.error("Please Install Metamask In Your Browser!!");
       }
     } catch (error) {
       // eslint-disable-next-line no-unused-expressions
       error.code === 4001
-        ? toast.error("Please Connect Your Metamask Wallet ")
+        ? toast.error("Please Connect Your Metamask Wallet!! ")
         : toast.error(error.message);
       // console.log("sign in fun err", error);
     }
@@ -262,11 +262,11 @@ export const EtherProvider = ({ children }) => {
     } catch (error) {
       if(error.code === 4001){
 
-        toast.error("Please Allow To Change Network To Continue!!")
+        toast.error("Please allow to change network to continue!!")
       }
       console.log(error.code,error.message,"mesgandcode");
       if(error.message.startsWith("Unrecognized chain ID")){
-        toast.error("Please add suitable chain in metamask for payment")
+        toast.error("Please add suitable chain in metamask for payment!!")
       }
         // : toast.error(error.message);:
         // if(error.message==="User rejected the request."){

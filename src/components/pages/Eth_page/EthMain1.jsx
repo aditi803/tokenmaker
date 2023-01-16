@@ -817,7 +817,7 @@ const EthMain1 = (props) => {
                   )
                   : toast.error(res.error.message);
               } else {
-                toast.success("Token Deploy Successfully");
+                toast.success("Token Deploy Successfully!");
                 // navigate("/generator/final");
                 props.setShow(false);
                 // console.log(res, "else side deploy then return deploy succes");
@@ -1179,7 +1179,9 @@ const EthMain1 = (props) => {
                             </span>
                           </div>
                           <div className='d-flex justify-content-between align-items-center'>
-                            <button type="button" className="btn form-btn" onClick={() => setStep(1)}>
+                            <button type="button" className="btn form-btn" onClick={(e) => {
+                              e.preventDefault()
+                              setStep(1)}}>
                               Back
                             </button>
                             <button type="button" className="btn form-btn" onClick={() => setStep(3)}>

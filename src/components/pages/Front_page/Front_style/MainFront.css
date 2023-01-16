@@ -151,13 +151,16 @@
 
 .faq .accordionbody {
     /* background: #3b7f74; */
-    background-color: #6010b1;
+    /* background-color: #6010b1; */
+    background: linear-gradient(95.39deg, #C181FF -1.16%, #6010B1 97.84%);
+
 }
 
 .faq .accordionbody .p {
     font-weight: 400;
     font-size: 18px;
     line-height: 28px;
+    font-family: "poppins";
 }
 
 .faq .accordionitem {
@@ -179,7 +182,9 @@
 .faq .accordion .accordionbutton:not(.collapsed) {
     color: white;
     /* background-color:#3b7f74; */
-    background-color: #6010b1;
+    /* background-color: #6010b1; */
+    background: linear-gradient(95.39deg, #C181FF -1.16%, #6010B1 97.84%);
+
 }
 
 .faq .faq_bottom .h3 {
@@ -204,6 +209,20 @@
     background-color: #6010b1;
     color: #000;
 }
+
+/* 
+.accordion-button::after{
+    background-image: none !important;
+    content: "+" !important;
+    margin-left: auto !important;
+} */
+
+/* .accordion-button::before{
+    background-image: none !important;
+    content: "-" !important;
+    margin-left: auto !important;
+    position: absolute;
+} */
 
 /* .faq_wrap .heading::after {
     position: absolute;

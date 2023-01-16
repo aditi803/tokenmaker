@@ -105,7 +105,7 @@ export const SuccessDeploy = (props) => {
               </g>
             </svg> */}
           </div>
-          <h4 className="m-0">Your token has been successfuly deployed !</h4>
+          <h4 className="m-0">Your token has been successfuly deployed!</h4>
         </div>
         <div className="card-body">
           <div>

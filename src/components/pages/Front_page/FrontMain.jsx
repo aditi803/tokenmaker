@@ -296,7 +296,7 @@ export const FrontMain = () => {
                 </div>
               </section>
 
-              <section className="page-section section-faq" id="faq">
+              <section className="page-section section-faq faq" id="faq">
                 <div className="container">
                   <div className="faq_wrap">
                     <div className="row">

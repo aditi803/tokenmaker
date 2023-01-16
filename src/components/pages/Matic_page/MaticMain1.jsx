@@ -91,7 +91,7 @@ const MaticMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
-    initialSupplyErr:""
+    initialSupplyErr: ""
     // tokenNameErr: 'Please fill your token name',
     // tokenSymbolErr: 'Please fill your token symbol',
     // agreementErr: 'Please confirm that you have read and understood our terms of use'
@@ -678,10 +678,11 @@ const MaticMain1 = (props) => {
     if (
       ethFormData.tokenName !== "" &&
       ethFormData.tokenSymbol !== "" &&
-      (ethFormData.decimals <=21 &&  ethFormData.decimals >= 6) &&
+      (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
       ethFormData.initialSupply !== ''
     ) {
       // navigate("/generator/final");
+      e.preventDefault()
       setStep(2)
     }
   };
@@ -712,82 +713,82 @@ const MaticMain1 = (props) => {
         })
         : "";
 
-        if (connectedAccAddress.length === 0) {
-          await SignInMetamask()
+      if (connectedAccAddress.length === 0) {
+        await SignInMetamask()
+      }
+      let networkFunc
+      if (FormData.network !== chainId) {
+        networkFunc = await changeNetwork(FormData.network);
+        console.log(networkFunc, "network");
+        if (!networkFunc) {
+          throw "vikcy"
         }
-        let networkFunc
-          if (FormData.network !== chainId) {
-            networkFunc = await changeNetwork(FormData.network);
-            console.log(networkFunc,"network");
-            if(!networkFunc){
-              throw "vikcy"
-            }
-          }
-          // if(networkFunc){
+      }
+      // if(networkFunc){
 
       // console.log(FormData, "formdata eth side");
       // if (FormData.network === chainId) {
-        // navigate("/generator/final");
-        // console.log(FormData.network, "currentNetworkID");
+      // navigate("/generator/final");
+      // console.log(FormData.network, "currentNetworkID");
 
-        // let res = await sendCommision(commissionFee)
-        // console.log(res, "ress send commision matic main")
+      // let res = await sendCommision(commissionFee)
+      // console.log(res, "ress send commision matic main")
 
-        props.setShow(false);
+      props.setShow(false);
       let res = await sendCommision(commissionFee)
       // console.log(res, "ress send commision matic main")
-      if(!res){
+      if (!res) {
         props.setShow(true)
         navigate("/generator/polygon");
       }
 
-        if (res) {
-          //hit contract compile api
-          // props.setShow(false);
+      if (res) {
+        //hit contract compile api
+        // props.setShow(false);
 
-          axios
-            .post(
-              "https://tokenmaker-apis.block-brew.com/contract/contract",
-              FormData
-            )
-            .then((res) => {
-              // console.log(res, "response");
-              // console.log(contractSource, "contract Source api side ");
-              //calling deploy function
-              deployContract(res.data.result, FormData).then((res) => {
+        axios
+          .post(
+            "https://tokenmaker-apis.block-brew.com/contract/contract",
+            FormData
+          )
+          .then((res) => {
+            // console.log(res, "response");
+            // console.log(contractSource, "contract Source api side ");
+            //calling deploy function
+            deployContract(res.data.result, FormData).then((res) => {
 
-                if (res.error) {
-                  navigate("/generator/polygon");
-                  props.setShow(true);
-                  res.error.code === "ACTION_REJECTED"
-                    ? toast.error(
-                      "User Rejected The Request"
-                    )
-                    : toast.error(res.error.message);
-                } else {
-                  toast.success("Token Deploy Successfully");
-                  // navigate("/generator/final");
-                  props.setShow(false);
-                  // console.log(res, "else side deploy then return deploy succes");
-                }
-              });
-            })
-            .catch((error) => {
-              // console.log("Api fail error", error);
-              props.setShow(true);
-              // navigate("/generator/ethereum");
-              error.response.data.message
-                ? toast.error(error.response.data.message)
-                : toast.error("Data Fetch Failed Try Again");
+              if (res.error) {
+                navigate("/generator/polygon");
+                props.setShow(true);
+                res.error.code === "ACTION_REJECTED"
+                  ? toast.error(
+                    "User Rejected The Request"
+                  )
+                  : toast.error(res.error.message);
+              } else {
+                toast.success("Token deploy successfully!");
+                // navigate("/generator/final");
+                props.setShow(false);
+                // console.log(res, "else side deploy then return deploy succes");
+              }
             });
-        }
+          })
+          .catch((error) => {
+            // console.log("Api fail error", error);
+            props.setShow(true);
+            // navigate("/generator/ethereum");
+            error.response.data.message
+              ? toast.error(error.response.data.message)
+              : toast.error("Data Fetch Failed Try Again");
+          });
+      }
 
       // } 
-      
+
       // else {
       //   changeNetwork(FormData.network);
       // }
-          // }
+      // }
     } catch (error) {
       toast.error(error.message);
       // console.log("compile contract side catch er", error);
@@ -1125,7 +1126,11 @@ const MaticMain1 = (props) => {
                             </span>
                           </div>
                           <div className='d-flex justify-content-between'>
-                            <button type="button" className="btn form-btn" onClick={() => setStep(1)}>
+                            <button type="button" className="btn form-btn" onClick={(e) => {
+                              e.preventDefault()
+                              setStep(1)
+                            }}
+                            >
                               Back
                             </button>
                             <button type="button" className="btn form-btn" onClick={() => setStep(3)}>
@@ -1158,7 +1163,7 @@ const MaticMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             >
                               <option value=''>Select your network</option>
-                              {data.map((item,i) => {
+                              {data.map((item, i) => {
                                 if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
                                   return (
                                     <option value={item.value} key={i}>{item.subNetworkName}</option>
@@ -1262,8 +1267,8 @@ const MaticMain1 = (props) => {
                                   {/*  modal*/}
                                   <Link
                                     to="/terms"
-                                    // data-bs-toggle="modal"
-                                    // data-bs-target="#exampleModal"
+                                  // data-bs-toggle="modal"
+                                  // data-bs-target="#exampleModal"
                                   >
                                     <u> Terms of Use. </u>
                                   </Link>
