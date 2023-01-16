@@ -253,7 +253,7 @@ export const EtherProvider = ({ children }) => {
 
           }
           console.log(parseChainId, "parseChainId after ");
-          // 
+          // das
           console.log(parseChainId,"parsechainid");
           // 
           console.log(`0x${parseChainId}`,explorer.networkName,explorer.rpc,explorer.link,explorer.symbol,"expoor");
