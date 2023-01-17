@@ -828,7 +828,7 @@ const EthMain1 = (props) => {
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable ERC-20 Token.
                 <br />
-                No login . No setup . No Coding required.
+                No login. No setup. No Coding required.
               </p>
             </div>
           </div>
