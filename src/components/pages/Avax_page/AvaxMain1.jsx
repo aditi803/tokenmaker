@@ -1143,7 +1143,7 @@ const AvaxMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option defaultChecked>Select your network</option>
+                              <option value="none" selected hidden>Select your network</option>
                               {data.map((item) => {
                                 if (
                                   item.parentNetworkName ===

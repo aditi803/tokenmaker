@@ -92,7 +92,7 @@ const SolanaMain1 = (props) => {
   const [agreement, setAgreement] = useState(false);
   const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(18);
-  // const [initialSupply, setInitialSupply] = useState("")
+  const [initialSupply, setInitialSupply] = useState("1000")
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
 
@@ -720,7 +720,7 @@ const SolanaMain1 = (props) => {
                               onChange={(e) => setAmount(e.target.value)}
                               value={amount}
                               //   disabled={f_initialSupply}
-                              // value={initialSupply}
+                              value={initialSupply}
                               // onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
@@ -759,7 +759,7 @@ const SolanaMain1 = (props) => {
                               value={network}
                               onChange={networkName}
                             >
-                              <option>Select your network</option>
+                              <option value="none" selected hidden>Select your network</option>
                               {data.map((item) => {
                                 if (
                                   item.parentNetworkName === "Solana" &&

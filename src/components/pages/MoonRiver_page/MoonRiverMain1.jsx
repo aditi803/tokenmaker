@@ -1140,7 +1140,7 @@ const MoonRiverMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option>Select your network</option>
+                              <option value="none" selected hidden>Select your network</option>
                               {data.map((item) => {
                                 if (
                                   item.parentNetworkName ===

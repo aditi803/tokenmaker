@@ -78,7 +78,7 @@ function Footer() {
                   <p>Crypto Exchange</p>
                 </a>
               </div>
-              <div className="col-6 col-md-3 col-lg-2 mt-5">
+              <div className="col-6 col-md-3 col-lg-2 mt-5 pT">
                 {/* <h5 className="mb-5"></h5> */}
                 <Link
                   to="/terms"

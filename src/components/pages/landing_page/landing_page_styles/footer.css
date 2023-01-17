@@ -10,10 +10,17 @@
   
 }
 
+.pT p:hover{
+    color: #a365f7;
+}
+
 .services p:hover {
     color: #a365f7;
 }
 .social-links a:hover{
+    color: #a365f7 !important;
+}
+.contact a:hover {
     color: #a365f7 !important;
 }
 
