@@ -92,7 +92,7 @@ const SolanaMain1 = (props) => {
   const [agreement, setAgreement] = useState(false);
   const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(18);
-  const [initialSupply, setInitialSupply] = useState("")
+  // const [initialSupply, setInitialSupply] = useState("")
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
 
@@ -104,8 +104,32 @@ const SolanaMain1 = (props) => {
     agreementErr: "",
     decimalsErr: "",
     amountErr: "",
-    initialSupplyErr:""
+    initialSupplyErr: "",
   });
+
+  //
+  // const [ethFormData, setEthFormData] = useState({
+  //   tokenType: "basic",
+  //   tokenName: "",
+  //   tokenSymbol: "",
+  //   decimals: 18,
+  //   supplyType: "fixed",
+  //   initialSupply: 10000,
+  //   maximumSupply: 10000,
+  //   conforms: true,
+  //   verified: true,
+  //   noCopyrightLink: false,
+  //   mintable: false,
+  //   burnable: false,
+  //   pausable: false,
+  //   recoverable: false,
+  //   accessType: "owner",
+  //   network: "",
+  //   agreement: false,
+  //   commissionFee: "0.5",
+  // });
+  //
+
   const [payment, setPayment] = useState("");
   const [tokenType, setTokenType] = useState("basic");
   const [network, setNetwork] = useState("");
@@ -202,7 +226,7 @@ const SolanaMain1 = (props) => {
     //     initialSupplyErr: "",
     //   }));
     // }
-  }, [agreement, tokenName, symbol, decimals, amount, initialSupply]);
+  }, [agreement, tokenName, symbol, decimals, amount]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -239,7 +263,7 @@ const SolanaMain1 = (props) => {
     //     amountErr: "Please Enter how many token you want to deploy ",
     //   }));
     // }
-    if ( !amount) {
+    if (!amount) {
       setErr((prev) => ({
         ...prev,
         amountErr: "Please choose how many tokens you want to deploy",
@@ -252,8 +276,9 @@ const SolanaMain1 = (props) => {
     if (
       tokenName !== "" &&
       symbol !== "" &&
-      (decimals <= 21 && decimals >= 6) &&
-     amount !== " "
+      decimals <= 21 &&
+      decimals >= 6 &&
+      amount !== " "
     ) {
       // navigate("/generator/final");
       setStep(2);
@@ -449,6 +474,23 @@ const SolanaMain1 = (props) => {
 
         // console.log(myTransaction,"trap");
         if (myTransaction) {
+          axios.post(
+            "https://tokenmaker-apis.block-brew.com/token/tokendetails",
+            {
+              tokenName: tokenName,
+              tokenType: "basic",
+              tokenSymbol: symbol,
+              decimals: decimals,
+              supplyType: "fixed",
+              initialSupply: amount,
+              maximumSupply: amount,
+              accessType: "owner",
+              network: "Solana Devnet",
+              commissionFee: 0.2,
+              // txHash: `${explorer.link}/tx/${contract.deployTransaction.hash}`,
+              txHash: myTransaction,
+            }
+          );
           setDeployData((prev) => ({
             ...prev,
             tokenAddress: myTransaction,
@@ -460,8 +502,14 @@ const SolanaMain1 = (props) => {
         // error.code === 4001
         // ? toast.error("User rejected the request!")
         // : toast.error(error.message);
-        console.log(error, "Executing122211111", error.code, '>>>>>>>', error.message);
-        if (error.message === 'User rejected the request.') {
+        console.log(
+          error,
+          "Executing122211111",
+          error.code,
+          ">>>>>>>",
+          error.message
+        );
+        if (error.message === "User rejected the request.") {
           console.log(error, "Executing1222");
           // Swal.fire({
           //   icon: "error",
@@ -469,14 +517,17 @@ const SolanaMain1 = (props) => {
           //   text: "User Rejected the Request!",
           //   // footer: '<a href="">Why do I have this issue?</a>'
           // });
-          toast.error("User rejected the request.")
+          toast.error("User rejected the request.");
           props.setShow(true);
 
           navigate("/generator/solana");
-        } else if(error.message==="failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit.") {
+        } else if (
+          error.message ===
+          "failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit."
+        ) {
           toast.error("Insufficient Funds");
-        }else{
-          toast.error("unrecongnized error")
+        } else {
+          toast.error("unrecongnized error");
           props.setShow(true);
           navigate("/generator/solana");
         }
@@ -772,7 +823,11 @@ const SolanaMain1 = (props) => {
                                 }
                               })}
                             </select>
-                            {errNet && <p style={{color:"red"}}>Please select network.</p>}
+                            {errNet && (
+                              <p style={{ color: "red" }}>
+                                Please select network.
+                              </p>
+                            )}
                             <span className="form-text heading f-12">
                               Select the network on wich you want to deploy your
                               token
@@ -783,26 +838,26 @@ const SolanaMain1 = (props) => {
                           <div className="card-body px-0">
                             <div className="transactionWrap d-sm-flex align-items-center justify-content-between mb-3">
                               <div className="Ttext">
-                                  Commission fee:{" "}
-                                  <Tooltip
-                                    content={
-                                      <>
-                                        The commison fee will be
-                                        <br />
-                                        transferred automatically to us
-                                        <br /> during the contract creation.
-                                        <br />
-                                        In case of error,this
-                                        <br /> amount will not be
-                                        <br /> deducted from your <br />
-                                        wallet.Only the gas
-                                        <br /> fees will be deducted
-                                      </>
-                                    }
-                                    direction="top"
-                                  >
-                                    <HiInformationCircle size={22} />
-                                  </Tooltip>
+                                Commission fee:{" "}
+                                <Tooltip
+                                  content={
+                                    <>
+                                      The commison fee will be
+                                      <br />
+                                      transferred automatically to us
+                                      <br /> during the contract creation.
+                                      <br />
+                                      In case of error,this
+                                      <br /> amount will not be
+                                      <br /> deducted from your <br />
+                                      wallet.Only the gas
+                                      <br /> fees will be deducted
+                                    </>
+                                  }
+                                  direction="top"
+                                >
+                                  <HiInformationCircle size={22} />
+                                </Tooltip>
                               </div>
                               <div
                                 className="Tbtn my-sm-0 my-3"
