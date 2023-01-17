@@ -25,24 +25,33 @@ import {
   customDisabled,
 } from "../../../disabledUtils";
 
-import FirstStep from "./FirstStep";
-import SecondStep from "./SecondStep";
-import ThirdStep from "./ThirdStep";
-import FouthStep from "./FouthStep";
+// import FirstStep from "./FirstStep";
+// import SecondStep from "./SecondStep";
+// import ThirdStep from "./ThirdStep";
+// import FouthStep from "./FouthStep";
 import { multiStepContext, StepContext } from "./StepContext";
 
-const BnbMain1 = (props) => {
+// import StepConte
+
+
+const AvaxMain1 = (props) => {
   // test
   const steps = [" ", " ", " "];
+
+  const test = useContext(multiStepContext);
+
+
+  console.log(test, "SPIDERMAN")
+
+
 
   const { currentStep, submitted } = useContext(multiStepContext);
   const { setStep, userData, setUserData } = useContext(multiStepContext);
 
   // end
 
-  // console.log(props, "PEOPS AT BNB");
+  console.log(props, "PEOPS AT BNB");
 
-  const [buttonClick, setButtonClick] = useState(false);
   const [data, setData] = useState([]);
   const getNetworks = () => {
     axios
@@ -51,7 +60,7 @@ const BnbMain1 = (props) => {
       )
       .then((res) => {
         setData(res.data.msg.items);
-        // console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
+        console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
       })
       .catch((err) => {
         console.log(err, "Error");
@@ -71,6 +80,7 @@ const BnbMain1 = (props) => {
     connectedAccAddress,
     blockchainNetworks,
     sendCommision,
+    toggler
   } = useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -101,7 +111,7 @@ const BnbMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
-    initialSupplyErr: "",
+    initialSupplyErr: ""
   });
 
   const [fieldsDisabled, setFieldsDisabled] = useState({
@@ -188,16 +198,16 @@ const BnbMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-      if (network === "binanceSmartChainTestnet") {
-        setEthFormData((prev) => ({
-          ...prev,
-        }));
-      }
-      if (network === "binanceSmartChain") {
-        setEthFormData((prev) => ({
-          ...prev,
-        }));
-      }
+        if (network === "avalancheFujiC-Chain") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
+        if (network === "avalanche") {
+          setEthFormData((prev) => ({
+            ...prev,
+          }));
+        }
     } else if (tokenType === "free") {
       setFieldsDisabled(freeDisabled);
       setEthFormData((prev) => ({
@@ -250,20 +260,20 @@ const BnbMain1 = (props) => {
         }));
       }
 
-      if (network === "binanceSmartChainTestnet") {
-        setEthFormData((prev) => ({
-          ...prev,
-          commissionFee: data.find((item) => item.value === ethFormData.network)
-            ?.networkCommissionFee,
-        }));
-      }
-      if (network === "binanceSmartChain") {
-        setEthFormData((prev) => ({
-          ...prev,
-          commissionFee: data.find((item) => item.value === ethFormData.network)
-            ?.networkCommissionFee,
-        }));
-      }
+      //   if (network === "binanceSmartChainTestnet") {
+      //     setEthFormData((prev) => ({
+      //       ...prev,
+      //       commissionFee: data.find((item) => item.value === ethFormData.network)
+      //         ?.networkCommissionFee,
+      //     }));
+      //   }
+      //   if (network === "binanceSmartChain") {
+      //     setEthFormData((prev) => ({
+      //       ...prev,
+      //       commissionFee: data.find((item) => item.value === ethFormData.network)
+      //         ?.networkCommissionFee,
+      //     }));
+      //   }
       if (supplyType === "fixed" || supplyType === "capped") {
         setEthFormData((prev) => ({
           ...prev,
@@ -272,8 +282,6 @@ const BnbMain1 = (props) => {
       }
     }
   }, [tokenType, supplyType, network, data]);
-
-  console.log(network, "choosen network");
 
   useEffect(() => {
     if (supplyType === "fixed" || supplyType === "capped") {
@@ -427,7 +435,7 @@ const BnbMain1 = (props) => {
         (supplyType === "capped" || supplyType === "unlimited") &&
         pausable === true &&
         recoverable === false
-      ) {
+      ) { 
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: 1.8,
@@ -517,7 +525,7 @@ const BnbMain1 = (props) => {
       if (e.target.value === "") {
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: boolean ?? "",
+          [e.target.name]: boolean ?? '',
         }));
       } else {
         setEthFormData((prev) => ({
@@ -576,7 +584,7 @@ const BnbMain1 = (props) => {
         initialSupplyErr: "",
       }));
     }
-  }, [agreement, tokenName, tokenSymbol, decimals]);
+  }, [agreement, tokenName, tokenSymbol, decimals, initialSupply]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -594,6 +602,13 @@ const BnbMain1 = (props) => {
       }));
     }
 
+    if (!ethFormData.initialSupply) {
+      setErr((prev) => ({
+        ...prev,
+        initialSupplyErr: "Please choose how many tokens you want to deploy",
+      }));
+    }
+
     // if (ethFormData.agreement === false) {
     //   setErr((prev) => ({
     //     ...prev,
@@ -607,28 +622,19 @@ const BnbMain1 = (props) => {
         decimalsErr: "The number of decimals must be between 6 and 21",
       }));
     }
-    if (!ethFormData.initialSupply) {
-      setErr((prev) => ({
-        ...prev,
-        initialSupplyErr: "Please choose how many token you want to deploy?",
-      }));
-    }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
       // do what u want to do with data
       // console.log("data");
-      // console.log(err, "da");
+      console.log(err, "da");
+
       // < Navigate to= "/generator/final" />
-      // console.log(ethFormData, ">>>>>>>>>>>>>>>>");
+      console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
     }
-    if (
-      ethFormData.tokenName !== "" &&
-      ethFormData.tokenSymbol !== "" &&
-      ethFormData.decimals <= 21 &&
-      ethFormData.decimals >= 6 &&
-      ethFormData.initialSupply !== ""
-    ) {
+    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "" &&
+      (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
+      ethFormData.initialSupply !== '') {
       // navigate("/generator/final");
       setStep(2);
     }
@@ -648,30 +654,26 @@ const BnbMain1 = (props) => {
     return selctedItem?.[0];
   };
 
-  useEffect(() => {
-    const selectedCommissionFee = data?.find(
-      ({ value, parentNetworkName, subNetworkName, tokenType }) => {
-        if (
-          parentNetworkName === "Binance Smart Chain" &&
-          (value === ethFormData.network ||
-            value === customVampire(ethFormData.network)) &&
-          tokenType === ethFormData.tokenType
-        ) {
-          return true;
-        }
-      }
-    );
-    // setGasFee(selectedCommissionFee)
-    setEthFormData((prev) => ({
-      ...prev,
-      commissionFee: selectedCommissionFee?.networkCommissionFee,
-    }));
-    // console.log(
-    //   selectedCommissionFee,
-    //   ">>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH"
-    // );
-  }, [ethFormData.tokenType, ethFormData.network, data]);
 
+  useEffect(() => {
+    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
+      if (parentNetworkName === 'Avalanche' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+        return true;
+      }
+    })
+    // setGasFee(selectedCommissionFee)
+    setEthFormData(prev => ({
+      ...prev,
+      commissionFee: selectedCommissionFee?.networkCommissionFee
+    }))
+    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(ethFormData, '2>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+
+
+
+  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler])
   // {web3Loading ? (
   //   <button className=" btn-inner - text " disabled>
   //     {" "}
@@ -684,131 +686,131 @@ const BnbMain1 = (props) => {
   // )}
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
-    // setButtonClick(true)
     try {
-      // console.log(FormData.network, "fromdatanetwork");
+      console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       console.log(provider, "provider");
       const { chainId } = await provider.getNetwork();
+      console.log(chainId, "chainid");
 
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
         ? Object.assign(FormData, {
-            network: blockchainNetworks[FormData.network],
-          })
-        : "";
+          network: blockchainNetworks[FormData.network],
+        })
+        : ""; 
 
-      console.log(chainId, "chainid in bnb main");
-      console.log(FormData.network, "network id in bnb main");
+      console.log(FormData.network, "network bnb main1 side");
+      console.log(chainId, "chainId bnb main1 side ");
 
       if (connectedAccAddress.length === 0) {
         await SignInMetamask();
       }
-      let networkFunc;
-      if (FormData.network !== chainId) {
-        networkFunc = await changeNetwork(FormData.network);
-        console.log(networkFunc, "network");
-        if (!networkFunc) {
-          throw "vikcy";
-        }
-      }
-      // if(networkFunc){
 
-      // console.log(FormData.network, "formdata bnb main1 side");
+      let networkFunc
+          if (FormData.network !== chainId) {
+            networkFunc = await changeNetwork(FormData.network);
+            console.log(networkFunc,"network");
+            if(!networkFunc){
+              throw "vicky"
+            }
+          }
+          // if(networkFunc){
 
-      // console.log(chainId, "chainId bnb main1 side ");
-
+      
       // if (FormData.network === chainId) {
-      // navigate("/generator/final");
-      // console.log(FormData.network, "currentNetworkID");
+        // navigate("/generator/final");
+        console.log(FormData.network, "currentNetworkID");
 
-      // let res = await sendCommision(commissionFee);
-      // console.log(res, "ress send commision matic main");
-      props.setShow(false);
-      let res = await sendCommision(commissionFee);
+        // let res = await sendCommision(commissionFee);
+        // console.log(res, "ress send commision matic main");
+        props.setShow(false);
+      let res = await sendCommision(commissionFee)
       // console.log(res, "ress send commision matic main")
-      if (!res) {
-        props.setShow(true);
-        navigate("/generator/binancesmartchain");
+      if(!res){
+        props.setShow(true)
+        navigate("/generator/avalanche");
       }
 
-      if (res) {
-        // props.setShow(false);
+        if (res) {
+          // props.setShow(false);
 
-        //hit contract compile api
+          //hit contract compile api
 
-        axios
-          .post(
-            "https://tokenmaker-apis.block-brew.com/contract/contract",
-            // https://tokenmaker-apis.block-brew.com/token/tokendetails
+          axios
+            .post(
+              "https://tokenmaker-apis.block-brew.com/contract/contract",
+              // https://tokenmaker-apis.block-brew.com/token/tokendetails
 
-            FormData
-          )
-          .then((res) => {
-            // console.log(res, "response");
-            // console.log(contractSource, "contract Source api side ");
-            //calling deploy function
-            deployContract(res.data.result, FormData).then((res) => {
-              if (res.error) {
-                navigate("/generator/binancesmartchain");
-                props.setShow(true);
-                res.error.code === "ACTION_REJECTED"
-                  ? toast.error("User Rejected The Request")
-                  : toast.error(res.error.message);
-              } else {
-                toast.success("Token Deploy Successfully!");
-                // navigate("/generator/final");
-                props.setShow(false);
-                // console.log(
-                //   res,
-                //   "else side deploy then return deploy succes"
-                // );
-              }
+              FormData
+            )
+            .then((res) => {
+              console.log(res, "response");
+              // console.log(contractSource, "contract Source api side ");
+              //calling deploy function
+              deployContract(res.data.result, FormData).then((res) => {
+                if (res.error) {
+                  navigate("/generator/avalanche");
+                  props.setShow(true);
+                  res.error.code === "ACTION_REJECTED"
+                    ? toast.error("User Rejected The Request")
+                    : toast.error(res.error.message);
+                } else {
+                  toast.success("Token Deploy Successfully!");
+                  // navigate("/generator/final");
+                  props.setShow(false);
+                  console.log(
+                    res,
+                    "else side deploy then return deploy succes"
+                  );
+                }
+              });
+            })
+            .catch((error) => {
+              console.log("Api fail error", error);
+              props.setShow(true);
+              // navigate("/generator/ethereum");
+              error.response?.data?.message
+                ? toast.error(error.response?.data?.message)
+                : toast.error("Data Fetch Failed Try Again");
             });
-          })
-          .catch((error) => {
-            // console.log("Api fail error", error);
-            props.setShow(true);
-            // navigate("/generator/ethereum");
-            error.response?.data?.message
-              ? toast.error(error.response?.data?.message)
-              : toast.error("Data Fetch Failed Try Again");
-          });
-      }
+        }
       // } else {
+
       //   changeNetwork(FormData.network);
       // }
-      // }
+          // }
     } catch (error) {
-      console.log("eroor");
       toast.error(error.message);
-      // console.log("compile contract side catch er", error);
+      console.log("compile contract side catch er", error);
     }
   };
+
+  console.log('choosen network', network)
 
   return (
     <>
       <div className="page-content">
         <main>
-          <div className="hero-form mb-3">
+          <div className="hero-form mb-5">
             <div className="container">
               <h1>
                 <span className="sub-highlight ">
-                  Create Your Binance Smart Chain Token
+                  Create Your Avalanche Token
                 </span>
               </h1>
-              <p style={{ color: "black" }}>
+              <p style={{ color: 'black' }}>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable BEP20 Token.
+                Mintable, Burnable Avalanche Token.
                 <br />
-                No login . No setup . No Coding required.
+                No login. No setup. No Coding required.
               </p>
             </div>
           </div>
-          <section style={{ marginBottom: "40px" }}>
+          <section className="mb-5">
             {/* test */}
-            <div className="container mt-5">
+            <div className="container mt-lg-5">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="steper-div">
@@ -839,7 +841,7 @@ const BnbMain1 = (props) => {
               <FouthStep />
             )} */}
             {currentStep === 1 ? (
-              // <FirstStep />
+              //   <FirstStep />
 
               <section>
                 <div className="container">
@@ -923,7 +925,7 @@ const BnbMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie BNB)
+                              You token's symbol (ie AVAX)
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}
@@ -944,7 +946,7 @@ const BnbMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              The number of decimal of your token (default 18)
+                              The number of decimal of your token must be between 6 & 21 (default 18)
                             </span>
                             <div className="text-danger f-12">
                               {err.decimalsErr}
@@ -972,15 +974,13 @@ const BnbMain1 = (props) => {
                               {err.initialSupplyErr}
                             </div>
                           </div>
-                          <div className="col-12">
-                            <button
-                              type="submit"
-                              className="btn form-btn ms-auto"
-                              onClick={handleSubmit}
-                            >
-                              Next
-                            </button>
-                          </div>
+                          <button
+                            type="submit"
+                            className="btn form-btn justify-content-center align-items-center ms-auto"
+                            onClick={handleSubmit}
+                          >
+                            Next
+                          </button>
                         </form>
                       </div>
                     </div>
@@ -992,7 +992,7 @@ const BnbMain1 = (props) => {
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-12">
-                      <div className="firstForm p-lg-5 p-4 mt-0 mb-5">
+                      <div className="firstForm p-lg-5 p-4 mb-5 mt-0">
                         <h3 className="heading mb-4">Options</h3>
                         <form>
                           <div className="form-group">
@@ -1006,12 +1006,12 @@ const BnbMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Confirms to BEP20 protocol
+                                Confirms to avalanche protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
-                              Your token will const all the functionalities, and
-                              confirms to BEP20 protocol
+                              Your token will const all the functionalities,
+                              and confirms to avalanche protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -1025,12 +1025,12 @@ const BnbMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Bscscan
+                                Verified on avascan
                               </span>
                             </label>
                             <span className="form-text text-muted">
-                              The source code of your contract is automatically
-                              published and verified
+                              The source code of your contract is
+                              automatically published and verified
                             </span>
                           </div>
                           <div className="form-group">
@@ -1048,8 +1048,8 @@ const BnbMain1 = (props) => {
                               </span>
                             </label>
                             <span className="form-text text-muted">
-                              A link pointing to this page will be added in the
-                              description of your contract (Free and Basic
+                              A link pointing to this page will be added in
+                              the description of your contract (Free and Basic
                               contracts only)
                             </span>
                           </div>
@@ -1100,37 +1100,34 @@ const BnbMain1 = (props) => {
                                 disabled={f_pausable}
                                 onChange={ethMainFormHandler}
                               />
-                              <span className="form-check-label">Pausable</span>
+                              <span className="form-check-label">
+                                Pausable
+                              </span>
                             </label>
                             <span className="form-text text-muted">
                               Allow your tokens to be paused
                             </span>
                           </div>
-                          <div className="d-flex align-items-center justify-content-between">
-                            <button
-                              type="button"
-                              className="btn form-btn"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setStep(1);
-                              }}
-                            >
+                          <div className='d-flex justify-content-between'>
+                            <button type="button" className="btn form-btn ml-0" onClick={(e) => {
+                              e.preventDefault()
+                              setStep(1)}}>
                               Back
                             </button>
-                            <button
-                              type="button"
-                              className="btn form-btn"
-                              onClick={() => setStep(3)}
-                            >
+                            <button type="button" className="btn form-btn " onClick={() => setStep(3)}>
                               Next
                             </button>
                           </div>
+
                         </form>
+
                       </div>
                     </div>
                   </div>
                 </div>
               </section>
+
+
             ) : (
               <section>
                 <div className="container">
@@ -1141,47 +1138,46 @@ const BnbMain1 = (props) => {
                         <form>
                           <div className="form-group">
                             <select
-                              className="form-select"
+                              className="form-select mb-1"
                               name="network"
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option value="none" selected hidden>
-                                Select your network
-                              </option>
-                              {/* <option >Select your network</option> */}
-                              {data.map((item, i) => {
+                              <option defaultChecked>Select your network</option>
+                              {data.map((item) => {
                                 if (
                                   item.parentNetworkName ===
-                                    "Binance Smart Chain" &&
+                                  "Avalanche" &&
                                   item.tokenType === "free"
                                 ) {
                                   return (
-                                    <option value={item.value} key={i}>
+                                    <option value={item.value}>
                                       {item.subNetworkName}
                                     </option>
                                   );
                                 } else if (
                                   item.parentNetworkName ===
-                                    "Binance Smart Chain" &&
+                                  "Avalanche" &&
                                   item.tokenType === "basic"
                                 ) {
-                                  <option value={item.value} key={i}>
+                                  <option value={item.value}>
                                     {item.subNetworkName}
                                   </option>;
                                 } else if (
                                   item.parentNetworkName ===
-                                    "Binance Smart Chain" &&
+                                  "Avalanche" &&
                                   item.tokenType === "custom"
                                 ) {
-                                  <option value={item.value} key={i}>
+                                  <option value={item.value}>
                                     {item.subNetworkName}
                                   </option>;
                                 }
                               })}
+                              {/* <option value="moonRiver">Moon River</option>
+                              <option value="moonBaseAlpha">Moon Base Alpha</option> */}
                             </select>
                             <span className="form-text f-12 heading">
-                              Select the network on which you want to deploy your
+                              Select the network on wich you want to deploy your
                               token
                             </span>
                           </div>
@@ -1190,60 +1186,64 @@ const BnbMain1 = (props) => {
                           <div className="card-body px-0">
                             <div className="transactionWrap d-sm-flex align-items-center justify-content-between mb-3">
                               <div className="Ttext">
-                                Commission fee:{" "}
-                                <Tooltip
-                                  content={
-                                    <>
-                                      The commison fee will be
-                                      <br />
-                                      transferred automatically to us
-                                      <br /> during the contract creation.
-                                      <br />
-                                      In case of error,this
-                                      <br /> amount will not be
-                                      <br /> deducted from your <br />
-                                      wallet.Only the gas
-                                      <br /> fees will be deducted
-                                    </>
-                                  }
-                                  direction="top"
-                                >
-                                  <HiInformationCircle size={22} />
-                                </Tooltip>
+                                <p className="mb-0">
+                                  Commission fee:{" "}
+                                  <Tooltip
+                                    content={
+                                      <>
+                                        The commison fee will be
+                                        <br />
+                                        transferred automatically to us
+                                        <br /> during the contract creation.
+                                        <br />
+                                        In case of error,this
+                                        <br /> amount will not be
+                                        <br /> deducted from your <br />
+                                        wallet.Only the gas
+                                        <br /> fees will be deducted
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
+                                </p>
                               </div>
                               <div
-                                class="Tbtn my-sm-0 my-3"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-success d-block p-2 ">
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} BNB`
+                                      : `${commissionFee} AVAX`
                                     : "Free"}
                                 </span>
                               </div>
                             </div>
                             <div className="transactionWrap d-sm-flex align-items-center justify-content-between">
                               <div className="Ttext ">
-                                Gas fee:{" "}
-                                <Tooltip
-                                  content={
-                                    <>
-                                      The gas fee depend <br />
-                                      on gas limit and
-                                      <br /> gas price. Metamask will
-                                      <br /> automatically display
-                                      <br /> the best fee to use
-                                    </>
-                                  }
-                                  direction="top"
-                                >
-                                  <HiInformationCircle size={22} />
-                                </Tooltip>
+                                <p className="mb-0">
+                                  Gas fee:{" "}
+                                  <Tooltip
+                                    content={
+                                      <>
+                                        The gas fee depend <br />
+                                        on gas limit and
+                                        <br /> gas price. Metamask will
+                                        <br /> automatically display
+                                        <br /> the best fee to use
+                                      </>
+                                    }
+                                    direction="top"
+                                  >
+                                    <HiInformationCircle size={22} />
+                                  </Tooltip>
+                                </p>
                               </div>
                               <div
-                                class="Tbtn my-sm-0 my-3"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-secondary d-block p-2">
@@ -1275,12 +1275,11 @@ const BnbMain1 = (props) => {
                                   >
                                     <u> Terms of Use. </u>
                                   </Link>
-                                  {/* <TermsModal /> */}
+                                  <TermsModal />
                                   {/* modal */}
                                   {/* </span> */}
                                 </span>
-
-                                <div className="text-danger f-12 mt-1">
+                                <div className="f-12 mt-1 text-danger">
                                   {err.agreementErr}
                                 </div>
                               </label>
@@ -1290,24 +1289,25 @@ const BnbMain1 = (props) => {
                             <button
                               type="button"
                               className="btn form-btn"
-                              onClick={() => {
-                                setStep(2);
-                              }}
+                              onClick={() => setStep(2)}
                             >
                               Back
                             </button>
                             <button
                               type="button"
                               className="btn form-btn"
-                              // disabled={buttonClick}
                               onClick={async () => {
                                 if (ethFormData.agreement === false) {
                                   setErr((prev) => ({
                                     ...prev,
                                     agreementErr:
                                       "Please confirm that you have read and understood our terms of use",
-                                  }));
-                                } else compileContract(ethFormData);
+                                  }))
+
+                                }
+                                else (
+                                  compileContract(ethFormData)
+                                )
                               }}
                             >
                               Deploy
@@ -1327,4 +1327,4 @@ const BnbMain1 = (props) => {
   );
 };
 
-export default BnbMain1;
+export default AvaxMain1;

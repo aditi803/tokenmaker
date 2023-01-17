@@ -90,7 +90,7 @@ const SolanaMain1 = (props) => {
   const [symbol, setSymbol] = useState("");
   const [uri, setUri] = useState("safhfsa");
   const [agreement, setAgreement] = useState(false);
-  const [initialSupply, setInitialSupply] = useState("1000");
+  const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(18);
   // const [initialSupply, setInitialSupply] = useState("")
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
@@ -103,9 +103,33 @@ const SolanaMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
+    amountErr: "",
     initialSupplyErr: "",
-    // initialSupplyErr:""
   });
+
+  //
+  // const [ethFormData, setEthFormData] = useState({
+  //   tokenType: "basic",
+  //   tokenName: "",
+  //   tokenSymbol: "",
+  //   decimals: 18,
+  //   supplyType: "fixed",
+  //   initialSupply: 10000,
+  //   maximumSupply: 10000,
+  //   conforms: true,
+  //   verified: true,
+  //   noCopyrightLink: false,
+  //   mintable: false,
+  //   burnable: false,
+  //   pausable: false,
+  //   recoverable: false,
+  //   accessType: "owner",
+  //   network: "",
+  //   agreement: false,
+  //   commissionFee: "0.5",
+  // });
+  //
+
   const [payment, setPayment] = useState("");
   const [tokenType, setTokenType] = useState("basic");
   const [network, setNetwork] = useState("");
@@ -190,10 +214,10 @@ const SolanaMain1 = (props) => {
         decimalsErr: "",
       }));
     }
-    if (initialSupply !== null) {
+    if (amount !== null) {
       setErr((prev) => ({
         ...prev,
-        initialSupplyErr: "",
+        amountErr: "",
       }));
     }
     // if (initialSupply !== null) {
@@ -202,7 +226,7 @@ const SolanaMain1 = (props) => {
     //     initialSupplyErr: "",
     //   }));
     // }
-  }, [agreement, tokenName, symbol, decimals, initialSupply, initialSupply]);
+  }, [agreement, tokenName, symbol, decimals, amount]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -233,11 +257,16 @@ const SolanaMain1 = (props) => {
         decimalsErr: "The number of decimals must be between 6 and 21",
       }));
     }
-
-    if ( !initialSupply) {
+    // if (amount === "") {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     amountErr: "Please Enter how many token you want to deploy ",
+    //   }));
+    // }
+    if (!amount) {
       setErr((prev) => ({
         ...prev,
-        initialSupplyErr: "Please choose how many tokens you want to deploy",
+        amountErr: "Please choose how many tokens you want to deploy",
       }));
     }
 
@@ -247,8 +276,9 @@ const SolanaMain1 = (props) => {
     if (
       tokenName !== "" &&
       symbol !== "" &&
-      (decimals <= 21 && decimals >= 6) &&
-     initialSupply !== ""
+      decimals <= 21 &&
+      decimals >= 6 &&
+      amount !== " "
     ) {
       // navigate("/generator/final");
       setStep(2);
@@ -357,7 +387,7 @@ const SolanaMain1 = (props) => {
       };
       // console.log(tokenMetadata, "token meta datat");
       // console.log(form.decimals, "decimL");
-      // console.log(form.initialSupply, "initialSupply");
+      // console.log(form.amount, "amount");
       const createNewTokenTransaction = new Transaction().add(
         SystemProgram.createAccount({
           fromPubkey: publicKey,
@@ -384,10 +414,10 @@ const SolanaMain1 = (props) => {
           mintKeypair.publicKey,
           tokenATA,
           publicKey,
-          // form.initialSupply
-          // (form.initialSupply* 1000000000000000000)
-          form.initialSupply * Math.pow(10, 1)
-          // form.initialSupply
+          // form.amount
+          // (form.amount* 1000000000000000000)
+          form.amount * Math.pow(10, 1)
+          // form.amount
         ),
         createCreateMetadataAccountV2Instruction(
           {
@@ -444,6 +474,23 @@ const SolanaMain1 = (props) => {
 
         // console.log(myTransaction,"trap");
         if (myTransaction) {
+          axios.post(
+            "https://tokenmaker-apis.block-brew.com/token/tokendetails",
+            {
+              tokenName: tokenName,
+              tokenType: "basic",
+              tokenSymbol: symbol,
+              decimals: decimals,
+              supplyType: "fixed",
+              initialSupply: amount,
+              maximumSupply: amount,
+              accessType: "owner",
+              network: "Solana Devnet",
+              commissionFee: 0.2,
+              // txHash: `${explorer.link}/tx/${contract.deployTransaction.hash}`,
+              txHash: myTransaction,
+            }
+          );
           setDeployData((prev) => ({
             ...prev,
             tokenAddress: myTransaction,
@@ -455,8 +502,14 @@ const SolanaMain1 = (props) => {
         // error.code === 4001
         // ? toast.error("User rejected the request!")
         // : toast.error(error.message);
-        console.log(error, "Executing122211111", error.code, '>>>>>>>', error.message);
-        if (error.message === 'User rejected the request.') {
+        console.log(
+          error,
+          "Executing122211111",
+          error.code,
+          ">>>>>>>",
+          error.message
+        );
+        if (error.message === "User rejected the request.") {
           console.log(error, "Executing1222");
           // Swal.fire({
           //   icon: "error",
@@ -464,20 +517,23 @@ const SolanaMain1 = (props) => {
           //   text: "User Rejected the Request!",
           //   // footer: '<a href="">Why do I have this issue?</a>'
           // });
-          toast.error("User rejected the request.")
+          toast.error("User rejected the request.");
           props.setShow(true);
 
           navigate("/generator/solana");
-        } else if(error.message==="failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit.") {
+        } else if (
+          error.message ===
+          "failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit."
+        ) {
           toast.error("Insufficient Funds");
-        }else{
-          toast.error("unrecongnized error")
+        } else {
+          toast.error("unrecongnized error");
           props.setShow(true);
           navigate("/generator/solana");
         }
       }
 
-      // console.log(form.initialSupply * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
+      // console.log(form.amount * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
     },
     [publicKey, connection, sendTransaction]
   );
@@ -510,7 +566,7 @@ const SolanaMain1 = (props) => {
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable Solana Token.
                 <br />
-                No login . No setup . No Coding required.
+                No login. No setup. No Coding required.
               </p>
             </div>
           </div>
@@ -660,9 +716,9 @@ const SolanaMain1 = (props) => {
                               type="number"
                               className="form-control"
                               placeholder="1000000"
-                              name="initialSupply"
-                              onChange={(e) => setInitialSupply(e.target.value)}
-                              value={initialSupply}
+                              name="amount"
+                              onChange={(e) => setAmount(e.target.value)}
+                              value={amount}
                               //   disabled={f_initialSupply}
                               // value={initialSupply}
                               // onChange={ethMainFormHandler}
@@ -672,7 +728,7 @@ const SolanaMain1 = (props) => {
                               the contract
                             </span>
                             <div className="text-danger f-12">
-                              {err.initialSupplyErr}
+                              {err.amountErr}
                             </div>
                           </div>
                           <button
@@ -698,7 +754,7 @@ const SolanaMain1 = (props) => {
                         <form>
                           <div className="form-group">
                             <select
-                              className="form-select select2-selection"
+                              className="form-select"
                               name="network"
                               value={network}
                               onChange={networkName}
@@ -767,9 +823,13 @@ const SolanaMain1 = (props) => {
                                 }
                               })}
                             </select>
-                            {errNet && <p style={{color:"red"}}>Please select network.</p>}
+                            {errNet && (
+                              <p style={{ color: "red" }}>
+                                Please select network.
+                              </p>
+                            )}
                             <span className="form-text heading f-12">
-                              Select the network on which you want to deploy your
+                              Select the network on wich you want to deploy your
                               token
                             </span>
                           </div>
@@ -778,26 +838,26 @@ const SolanaMain1 = (props) => {
                           <div className="card-body px-0">
                             <div className="transactionWrap d-sm-flex align-items-center justify-content-between mb-3">
                               <div className="Ttext">
-                                  Commission fee:{" "}
-                                  <Tooltip
-                                    content={
-                                      <>
-                                        The commison fee will be
-                                        <br />
-                                        transferred automatically to us
-                                        <br /> during the contract creation.
-                                        <br />
-                                        In case of error,this
-                                        <br /> initialSupply will not be
-                                        <br /> deducted from your <br />
-                                        wallet.Only the gas
-                                        <br /> fees will be deducted
-                                      </>
-                                    }
-                                    direction="top"
-                                  >
-                                    <HiInformationCircle size={22} />
-                                  </Tooltip>
+                                Commission fee:{" "}
+                                <Tooltip
+                                  content={
+                                    <>
+                                      The commison fee will be
+                                      <br />
+                                      transferred automatically to us
+                                      <br /> during the contract creation.
+                                      <br />
+                                      In case of error,this
+                                      <br /> amount will not be
+                                      <br /> deducted from your <br />
+                                      wallet.Only the gas
+                                      <br /> fees will be deducted
+                                    </>
+                                  }
+                                  direction="top"
+                                >
+                                  <HiInformationCircle size={22} />
+                                </Tooltip>
                               </div>
                               <div
                                 className="Tbtn my-sm-0 my-3"
@@ -905,7 +965,7 @@ const SolanaMain1 = (props) => {
                                     tokenName: tokenName,
                                     symbol: symbol,
                                     decimals: Number(decimals),
-                                    initialSupply: Number(initialSupply),
+                                    amount: Number(amount),
                                     uri: uri,
                                   });
                                 }
