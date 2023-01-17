@@ -90,7 +90,6 @@ const SolanaMain1 = (props) => {
   const [symbol, setSymbol] = useState("");
   const [uri, setUri] = useState("safhfsa");
   const [agreement, setAgreement] = useState(false);
-  const [amount, setAmount] = useState("");
   const [decimals, setDecimals] = useState(18);
   const [initialSupply, setInitialSupply] = useState("1000")
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
@@ -103,8 +102,8 @@ const SolanaMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
-    amountErr: "",
     initialSupplyErr: "",
+    // initialSupplyErr: "",
   });
 
   //
@@ -214,10 +213,10 @@ const SolanaMain1 = (props) => {
         decimalsErr: "",
       }));
     }
-    if (amount !== null) {
+    if (initialSupply !== null) {
       setErr((prev) => ({
         ...prev,
-        amountErr: "",
+        initialSupplyErr: "",
       }));
     }
     // if (initialSupply !== null) {
@@ -226,7 +225,7 @@ const SolanaMain1 = (props) => {
     //     initialSupplyErr: "",
     //   }));
     // }
-  }, [agreement, tokenName, symbol, decimals, amount]);
+  }, [agreement, tokenName, symbol, decimals, initialSupply]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -257,16 +256,16 @@ const SolanaMain1 = (props) => {
         decimalsErr: "The number of decimals must be between 6 and 21",
       }));
     }
-    // if (amount === "") {
+    // if (initialSupply === "") {
     //   setErr((prev) => ({
     //     ...prev,
-    //     amountErr: "Please Enter how many token you want to deploy ",
+    //     initialSupplyErr: "Please Enter how many token you want to deploy ",
     //   }));
     // }
-    if (!amount) {
+    if (!initialSupply) {
       setErr((prev) => ({
         ...prev,
-        amountErr: "Please choose how many tokens you want to deploy",
+        initialSupplyErr: "Please choose how many tokens you want to deploy",
       }));
     }
 
@@ -278,7 +277,7 @@ const SolanaMain1 = (props) => {
       symbol !== "" &&
       decimals <= 21 &&
       decimals >= 6 &&
-      amount !== " "
+      initialSupply !== " "
     ) {
       // navigate("/generator/final");
       setStep(2);
@@ -387,7 +386,7 @@ const SolanaMain1 = (props) => {
       };
       // console.log(tokenMetadata, "token meta datat");
       // console.log(form.decimals, "decimL");
-      // console.log(form.amount, "amount");
+      // console.log(form.initialSupply, "initialSupply");
       const createNewTokenTransaction = new Transaction().add(
         SystemProgram.createAccount({
           fromPubkey: publicKey,
@@ -414,10 +413,10 @@ const SolanaMain1 = (props) => {
           mintKeypair.publicKey,
           tokenATA,
           publicKey,
-          // form.amount
-          // (form.amount* 1000000000000000000)
-          form.amount * Math.pow(10, 1)
-          // form.amount
+          // form.initialSupply
+          // (form.initialSupply* 1000000000000000000)
+          form.initialSupply * Math.pow(10, 1)
+          // form.initialSupply
         ),
         createCreateMetadataAccountV2Instruction(
           {
@@ -482,8 +481,8 @@ const SolanaMain1 = (props) => {
               tokenSymbol: symbol,
               decimals: decimals,
               supplyType: "fixed",
-              initialSupply: amount,
-              maximumSupply: amount,
+              initialSupply: initialSupply,
+              maximumSupply: initialSupply,
               accessType: "owner",
               network: "Solana Devnet",
               commissionFee: 0.2,
@@ -533,7 +532,7 @@ const SolanaMain1 = (props) => {
         }
       }
 
-      // console.log(form.amount * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
+      // console.log(form.initialSupply * Math.pow(100,form.decimals),"Aditi data jo nhi atat")
     },
     [publicKey, connection, sendTransaction]
   );
@@ -716,11 +715,10 @@ const SolanaMain1 = (props) => {
                               type="number"
                               className="form-control"
                               placeholder="1000000"
-                              name="amount"
-                              onChange={(e) => setAmount(e.target.value)}
-                              value={amount}
-                              //   disabled={f_initialSupply}
+                              name="initialSupply"
+                              onChange={(e) => setInitialSupply(e.target.value)}
                               value={initialSupply}
+                              //   disabled={f_initialSupply}
                               // onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
@@ -728,7 +726,7 @@ const SolanaMain1 = (props) => {
                               the contract
                             </span>
                             <div className="text-danger f-12">
-                              {err.amountErr}
+                              {err.initialSupplyErr}
                             </div>
                           </div>
                           <button
@@ -848,7 +846,7 @@ const SolanaMain1 = (props) => {
                                       <br /> during the contract creation.
                                       <br />
                                       In case of error,this
-                                      <br /> amount will not be
+                                      <br /> initialSupply will not be
                                       <br /> deducted from your <br />
                                       wallet.Only the gas
                                       <br /> fees will be deducted
@@ -965,7 +963,7 @@ const SolanaMain1 = (props) => {
                                     tokenName: tokenName,
                                     symbol: symbol,
                                     decimals: Number(decimals),
-                                    amount: Number(amount),
+                                    initialSupply: Number(initialSupply),
                                     uri: uri,
                                   });
                                 }
