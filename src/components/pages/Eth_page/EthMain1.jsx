@@ -872,7 +872,7 @@ const EthMain1 = (props) => {
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable ERC20 Token.
                 <br />
-                No login. No setup. No Coding required.
+                No login . No setup . No Coding required.
               </p>
             </div>
           </div>
@@ -1026,7 +1026,7 @@ const EthMain1 = (props) => {
                               <span className="val-required">*</span>
                             </label>
                             <input
-                              type="text"
+                              type="number"
                               className="form-control"
                               placeholder="1000000"
                               name="initialSupply"
@@ -1229,7 +1229,7 @@ const EthMain1 = (props) => {
                               })}
                             </select>
                             <span className="form-text text-muted">
-                              Select the network on wich you want to deploy your
+                              Select the network on which you want to deploy your
                               token
                             </span>
                           </div>

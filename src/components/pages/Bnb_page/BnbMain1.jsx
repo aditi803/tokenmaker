@@ -801,7 +801,7 @@ const BnbMain1 = (props) => {
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable BEP20 Token.
                 <br />
-                No login. No setup. No Coding required.
+                No login . No setup . No Coding required.
               </p>
             </div>
           </div>
@@ -1175,7 +1175,7 @@ const BnbMain1 = (props) => {
                               })}
                             </select>
                             <span className="form-text f-12 heading">
-                              Select the network on wich you want to deploy your
+                              Select the network on which you want to deploy your
                               token
                             </span>
                           </div>

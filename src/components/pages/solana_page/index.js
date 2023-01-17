@@ -124,7 +124,7 @@ const Solana = () => {
                                 Easily deploy your Smart Contract for a Standard, Capped,
                                 Mintable, Burnable BEP20 Token.
                                 <br />
-                                No login. No setup. No Coding required.
+                                No login . No setup . No Coding required.
                             </p>
                         </div>
                     </div>

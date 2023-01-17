@@ -819,7 +819,7 @@ const MaticMain1 = (props) => {
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable Polygon Token.
                 <br />
-                No login. No setup. No Coding required.
+                No login . No setup . No Coding required.
               </p>
             </div>
           </div>
@@ -1178,7 +1178,7 @@ const MaticMain1 = (props) => {
                               })}
                             </select>
                             <span className="form-text text-muted">
-                              Select the network on wich you want to deploy your
+                              Select the network on which you want to deploy your
                               token
                             </span>
                           </div>

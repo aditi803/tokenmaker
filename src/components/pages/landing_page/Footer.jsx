@@ -10,6 +10,7 @@ import CIcon from "@coreui/icons-react";
 import { cilMail } from '@coreui/icons'
 import { FiMail } from 'react-icons/fi'
 import { AiFillPhone } from 'react-icons/ai'
+import {BsTelephoneFill} from 'react-icons/bs'
 import FooterSkeleton from "../../../skeleton/FooterSkeleton";
 
 function Footer() {
@@ -33,7 +34,7 @@ function Footer() {
         <footer className="footer">
           <div className="container py-3">
             <div className="row" style={{ color: `${footer.contentColor}` }}>
-              <div className="col-md-6 col-lg-4 mb-xl-0 mb-4">
+              <div className="col-sm-6 col-md-5 col-lg-4 mb-xl-0 mb-4">
                 <span>
                   <a href=' https://blocktechbrew.com/' target='_blank'>
                     <img className="footer-logo" src={Logo} alt="" />
@@ -62,7 +63,7 @@ function Footer() {
                   </a>
                 </div>
               </div>
-              <div className="col-md-6 col-lg-2 services mb-xl-0 mb-md-4">
+              <div className="col-6 col-md-4 col-lg-2 services mb-xl-0 mb-md-4">
                 <h5 className="mb-4">Our Services</h5>
                 <a href=' https://blocktechbrew.com/metaverse-development-company/' target='_blank' >
                   <p>Metaverse</p>
@@ -77,7 +78,7 @@ function Footer() {
                   <p>Crypto Exchange</p>
                 </a>
               </div>
-              <div className="col-md-6 col-lg-2">
+              <div className="col-6 col-md-3 col-lg-2 mt-5">
                 {/* <h5 className="mb-5"></h5> */}
                 <Link
                   to="/terms"
@@ -87,7 +88,7 @@ function Footer() {
                 >
                   <p> Terms of Use</p>
                 </Link>
-                <TermsModal />
+                {/* <TermsModal /> */}
                 <Link
                   to="/privacy-policy"
                   // data-bs-toggle="modal"
@@ -96,11 +97,11 @@ function Footer() {
                 >
                   <p>Privacy Policy</p>
                 </Link>
-                <PrivacyPolicy />
+                {/* <PrivacyPolicy /> */}
                 {/* <p>Wallet</p>
               <p>Resourses</p> */}
               </div>
-              <div className="col-md-6 col-lg-4">
+              <div className="col-sm-6 col-lg-4">
                 <h5 className="mb-4">Our Newsletter</h5>
                 <div className="d-flex mb-4">
                   <input type='text' className="numberinput" placeholder="" />
@@ -112,7 +113,7 @@ function Footer() {
                     <FiMail className="me-2" />  <span>business@blocktechbrew.com</span>
                   </a>
                   <a className="d-block" href="tel: +91 874-590-9990" style={{ color: "#fff" }}>
-                    <AiFillPhone className="me-2" />   <span>+91 874-590-9990</span>
+                    <BsTelephoneFill className="me-2" />   <span>+91 874-590-9990</span>
                   </a>
                 </div>
               </div>

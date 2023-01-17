@@ -32,7 +32,7 @@ export const FinalMain = (props) => {
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable  Token.
                 <br />
-                No login.No setup.No Coding required.
+                No login .No setup . No Coding required.
               </p>
             </div>
           </div>

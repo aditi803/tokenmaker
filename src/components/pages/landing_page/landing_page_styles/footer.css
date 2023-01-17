@@ -10,6 +10,13 @@
   
 }
 
+.services p:hover {
+    color: #a365f7;
+}
+.social-links a:hover{
+    color: #a365f7 !important;
+}
+
 footer {
     display: block;
     background-image: url('../../../../assets/footerbg.png');

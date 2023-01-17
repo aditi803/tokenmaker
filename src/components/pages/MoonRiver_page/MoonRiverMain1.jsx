@@ -801,7 +801,7 @@ const MoonRiverMain1 = (props) => {
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable Moon River Token.
                 <br />
-                No login. No setup. No Coding required.
+                No login . No setup . No Coding required.
               </p>
             </div>
           </div>
@@ -1174,7 +1174,7 @@ const MoonRiverMain1 = (props) => {
                               <option value="moonBaseAlpha">Moon Base Alpha</option> */}
                             </select>
                             <span className="form-text f-12 heading">
-                              Select the network on wich you want to deploy your
+                              Select the network on which you want to deploy your
                               token
                             </span>
                           </div>
