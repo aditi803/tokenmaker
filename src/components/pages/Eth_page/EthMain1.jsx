@@ -722,18 +722,23 @@ const EthMain1 = (props) => {
         })
         : "";
 
-      if (connectedAccAddress.length === 0) {
-        await SignInMetamask()
-      }
-      let networkFunc
-      if (FormData.network !== chainId) {
-        networkFunc = await changeNetwork(FormData.network);
-        console.log(networkFunc, "network");
-        if (!networkFunc) {
-          throw "vikcy"
-        }
-      }
-      // if(networkFunc){
+        // console.log(FormData, "formdata eth side");
+        // if (FormData.network === chainId) {
+          // navigate("/generator/final");
+          if (connectedAccAddress.length === 0) {
+            await SignInMetamask()
+          }
+          let networkFunc
+          if (FormData.network !== chainId) {
+            console.log("not chnging")
+            networkFunc = await changeNetwork(FormData.network);
+            console.log(networkFunc,"network");
+            if(!networkFunc){
+              throw "vikcy"
+            }
+          }
+          
+          // if(networkFunc){
 
       // console.log(FormData, "formdata eth side");
       // if (FormData.network === chainId) {
@@ -844,8 +849,8 @@ const EthMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label,id) => (
+                          <Step key={id}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}

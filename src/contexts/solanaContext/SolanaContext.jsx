@@ -27,7 +27,7 @@ const [net,setNet] = useState("")
 console.log(net,"net--after put")
 const networkValue = net.replace("solana","")
 console.log(networkValue, "networkValue")
-  const network = WalletAdapterNetwork.Devnet;
+  const network = WalletAdapterNetwork.Mainnet
 
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 

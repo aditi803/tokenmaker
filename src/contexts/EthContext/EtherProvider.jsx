@@ -10,11 +10,9 @@ export const EtherProvider = ({ children }) => {
   const [accAddress, setAccAddress] = useState([]);
   const [accBalance, setAccBalance] = useState();
   const [chainId, setChainId] = useState();
-  const [toggler, setToggler] = useState(false)
-  const [startToggle, setStartToggle] = useState(true)
-  const [solDeploy,setSolDeploy]=useState(false)
-
-
+  const [toggler, setToggler] = useState(false);
+  const [startToggle, setStartToggle] = useState(true);
+  const [solDeploy, setSolDeploy] = useState(false);
 
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
@@ -114,12 +112,11 @@ export const EtherProvider = ({ children }) => {
     polygonMumbai: 80001,
     binanceSmartChainTestnet: 97,
     binanceSmartChain: 56,
-    moonRiver:1285,
-    moonBaseAlpha:1287,
-    avalanche:43114,
-    avalancheFujiCChain:43113,
+    moonRiver: 1285,
+    moonBaseAlpha: 1287,
+    avalanche: 43114,
+    avalancheFujiCChain: 43113,
   };
-
 
   const urlLinks = {
     97: { link: "https://testnet.bscscan.com/", name: "Bsc Testnet Scan", networkName: "Binance Smart Chain Testnet",symbol:"BNB",rpc:"https://data-seed-prebsc-1-s1.binance.org:8545/"},
@@ -199,14 +196,17 @@ export const EtherProvider = ({ children }) => {
       // e.preventDefault();
       //Check if Metamask is Installed Or Not
       if (window.ethereum) {
-        if(!window.ethereum.isMetaMask){
-          console.log("meeeeeeeeeeeeeeta")
+        if (!window.ethereum.isMetaMask) {
+          console.log("meeeeeeeeeeeeeeta");
         }
         // console.log(window.ethereum, "ethereumadd");
-        let account = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        },[]);
-        // console.log(account, "acccc");
+        let account = await window.ethereum.request(
+          {
+            method: "eth_requestAccounts",
+          },
+          []
+        );
+        // console.log(account, "accctc");
         //set account balance
         let provider = new ethers.providers.Web3Provider(window.ethereum);
         const balance = await provider.getBalance(account[0]);
@@ -234,123 +234,123 @@ export const EtherProvider = ({ children }) => {
 
   //change RPC network if not equal to selected network
 
+  const addNewNetwork = async (networkID)=>{
+  
+    try{
+      const explorer = urlLinks[networkID];
+    // console.log(networkID, "netwrk id in change network");
+    console.log(networkID, "networkID");
+    const chainIdInDecimal = ethers.utils.hexlify(networkID);
 
-  const addNewNetwork = async(networkID)=>{
+    console.log(chainIdInDecimal, "chainid in decimal");
+
+    let parseChainId = chainIdInDecimal.replace("0x0", "");
+
+    console.log(parseChainId, "parseChainId middle");
+
+    if (parseChainId.startsWith("0")) {
+      parseChainId = parseChainId.slice(2, chainIdInDecimal.length);
+      console.log(parseChainId, "parseChainId inner ");
+    }
+    console.log(parseChainId, "parseChainId after ");
+    // das
+    console.log(parseChainId, "parsechainid");
+    //
+    console.log(
+      `0x${parseChainId}`,
+      explorer.networkName,
+      explorer.rpc,
+      explorer.link,
+      explorer.symbol,
+      "expoor"
+    );
+
+
+
+
+
+    const addNetwork = await window.ethereum.request({
+      method: 'wallet_addEthereumChain',
+      params: [
+        {
+          chainId: `0x${parseChainId}`,
+          chainName: explorer.networkName,
+          rpcUrls: [explorer.rpc],
+          blockExplorerUrls: [explorer.link],
+
+          nativeCurrency: {
+            // name: currencyName,
+            symbol: explorer.symbol, // 2-6 characters long
+            decimals: 18,
+          },
+        },
+      ],
+    });
     
-    try {
-      const  explorer = urlLinks[networkID]
-      // console.log(networkID, "netwrk id in change network");
-      console.log(networkID,"networkID");
-      const chainIdInDecimal = ethers.utils.hexlify(networkID);
-
-      console.log(chainIdInDecimal, "chainid in decimal");
-
-      let parseChainId = chainIdInDecimal.replace("0x0","");
-
-          console.log(parseChainId, "parseChainId middle");
-
-          if(parseChainId.startsWith("0")){
-            parseChainId = parseChainId.slice(2,chainIdInDecimal.length);
-          console.log(parseChainId, "parseChainId inner ");
-
-          }
-          console.log(parseChainId, "parseChainId after ");
-          // das
-          console.log(parseChainId,"parsechainid");
-          // 
-          console.log(`0x${parseChainId}`,explorer.networkName,explorer.rpc,explorer.link,explorer.symbol,"expoor");
-          const addNetwork = await window.ethereum.request({
-            method: 'wallet_addEthereumChain',
-            params: [
-              {
-                chainId: `0x${parseChainId}`,
-                chainName: explorer.networkName,
-                rpcUrls: [explorer.rpc],
-                blockExplorerUrls: [explorer.link],
-      
-                nativeCurrency: {
-                  // name: currencyName,
-                  symbol: explorer.symbol, // 2-6 characters long
-                  decimals: 18,
-                },
-              },
-            ],
-          });
-          // 
-          console.log(addNetwork,"addNetwork");
+    console.log(addNetwork,"addNetwork");
   }catch(error){
-    toast.error("unrecongnized chain network error")
+    console.log(error,"addnetwork error")
+    toast.error(error)
   }
-}
+  }
 
 
   const changeNetwork = async (networkID) => {
     try {
-      const  explorer = urlLinks[networkID]
+      const explorer = urlLinks[networkID];
       // console.log(networkID, "netwrk id in change network");
-      console.log(networkID,"networkID");
+      console.log(networkID, "networkID");
       const chainIdInDecimal = ethers.utils.hexlify(networkID);
 
       console.log(chainIdInDecimal, "chainid in decimal");
 
-      let parseChainId = chainIdInDecimal.replace("0x0","");
+      let parseChainId = chainIdInDecimal.replace("0x0", "");
 
-          console.log(parseChainId, "parseChainId middle");
+      console.log(parseChainId, "parseChainId middle");
 
-          if(parseChainId.startsWith("0")){
-            parseChainId = parseChainId.slice(2,chainIdInDecimal.length);
-          console.log(parseChainId, "parseChainId inner ");
-
-          }
-          console.log(parseChainId, "parseChainId after ");
-          // das
-          console.log(parseChainId,"parsechainid");
-          // 
-          console.log(`0x${parseChainId}`,explorer.networkName,explorer.rpc,explorer.link,explorer.symbol,"expoor");
-          // const addNetwork = await window.ethereum.request({
-          //   method: 'wallet_addEthereumChain',
-          //   params: [
-          //     {
-          //       chainId: `0x${parseChainId}`,
-          //       chainName: explorer.networkName,
-          //       rpcUrls: [explorer.rpc],
-          //       blockExplorerUrls: [explorer.link],
+      if (parseChainId.startsWith("0")) {
+        parseChainId = parseChainId.slice(2, chainIdInDecimal.length);
+        console.log(parseChainId, "parseChainId inner ");
+      }
+      console.log(parseChainId, "parseChainId after ");
+      // das
+      console.log(parseChainId, "parsechainid");
+      //
+      console.log(
+        `0x${parseChainId}`,
+        explorer.networkName,
+        explorer.rpc,
+        explorer.link,
+        explorer.symbol,
+        "expoor"
+      );
+    // const overall =   window.ethereum.request({
+    //     method: 'eth_accounts',
+    //   });
+    //   console.log(overall,)
       
-          //       nativeCurrency: {
-          //         // name: currencyName,
-          //         symbol: explorer.symbol, // 2-6 characters long
-          //         decimals: 18,
-          //       },
-          //     },
-          //   ],
-          // });
-          // // 
-          // console.log(addNetwork,"addNetwork");
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: `0x${parseChainId}` }],
       });
       setToggler(!toggler);
-      return "vicky"
+      return "vicky";
     } catch (error) {
-      if(error.code === 4001){
-
-        toast.error("Please allow to change network to continue!!")
+      if (error.code === 4001) {
+        toast.error("Please allow to change network to continue!!");
       }
-      console.log(error.code,error.message,"mesgandcode");
-      if(error.message.startsWith("Unrecognized chain ID")){
-        toast.error("Please add suitable chain in metamask for payment!!")
+      console.log(error.code, error.message, "mesgandcode");
+      if (error.message.startsWith("Unrecognized chain ID")) {
+        toast.error("Please add suitable chain in metamask for payment!!");
       }
-        // : toast.error(error.message);:
-        // if(error.message==="User rejected the request."){
-        //   toast.error("User rejected the request!")
-        // }
+      // : toast.error(error.message);:
+      // if(error.message==="User rejected the request."){
+      //   toast.error("User rejected the request!")
+      // }
       console.log("error change network side", error);
-      
     }
   };
   //ends here
-
 
   // const addNetwork = async (networkID) => {
   //   if (!window.ethereum) {
@@ -360,17 +360,17 @@ export const EtherProvider = ({ children }) => {
   //          const  explorer = urlLinks[networkID]
   //          console.log(networkID,"networkID");
   //          const chainIdInDecimal = ethers.utils.hexlify(networkID);
-     
+
   //          console.log(chainIdInDecimal, "chainid in decimal");
-     
+
   //          let parseChainId = chainIdInDecimal.replace("0x0","");
-     
+
   //              console.log(parseChainId, "parseChainId middle");
-     
+
   //              if(parseChainId.startsWith("0")){
   //                parseChainId = parseChainId.slice(2,chainIdInDecimal.length);
   //              console.log(parseChainId, "parseChainId inner ");
-     
+
   //              }
   //          await window.ethereum.request({
   //     method: 'wallet_addEthereumChain',
@@ -393,25 +393,23 @@ export const EtherProvider = ({ children }) => {
   //   window.location.reload();
   // };
 
-
-
-  const [payment, setPayment] = useState("")
+  const [payment, setPayment] = useState("");
   useEffect(() => {
     // setLoader(false)
-    fetchData()
-  }, [setPayment])
+    fetchData();
+  }, [setPayment]);
 
   const fetchData = async () => {
     await axios
       .get("https://tokenmaker-apis.block-brew.com/payment/paymentaddress")
-      .then(res => {
-        setPayment(res.data.msg)
+      .then((res) => {
+        setPayment(res.data.msg);
         // console.log(res.data.msg, "?>>>>>>>>>>>>>>>>>>PAYMENT ADDRESS MSG>>>>>>>>>>>>>>>>>>>>>>>>>>>")
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
   const sendCommision = async (_commissionFee) => {
     try {
@@ -419,55 +417,52 @@ export const EtherProvider = ({ children }) => {
       // console.log(_commissionFee,"_commissionFee  com")
       // console.log(payment,"Payment value hai y ")
       // console.log(payment.paymentAddress,"Payment Addresss --------value hai y ")
-      console.log(_commissionFee,"cmsn_fee")
-      if(window.ethereum){
+      console.log(_commissionFee, "cmsn_fee");
+      if (window.ethereum) {
         await window.ethereum.send("eth_requestAccounts");
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         // ethers.utils.getAddress(addr);
-        console.log(signer,"signerrrrr")
+        console.log(signer, "signerrrrr");
         const tx = await signer.sendTransaction({
           to: payment.metamaskPaymentAddress,
-          value: ethers.utils.parseEther(_commissionFee)
+          value: ethers.utils.parseEther(_commissionFee),
         });
-        console.log(tx,"transooc");
+        console.log(tx, "transooc");
         // console.log("tx", tx);
-        if(tx.hash){
-          return true
-        }else{
-          return  false
+        if (tx.hash) {
+          return true;
+        } else {
+          return false;
         }
-      }else{
-        toast.error("install metamask")
+      } else {
+        toast.error("install metamask");
       }
-      
     } catch (error) {
       // console.log(error.code,error.message,"mesgandcode");
       // if(error.message.startsWith("Unrecognized chain ID")){
       //   toast.error("Please add suitable chain in metamask for payment")
       // }
-      console.log("errror")
-      if(error.code===-32603){
-        toast.error("Insufficient funds")
+      console.log("errror");
+      if (error.code === -32603) {
+        toast.error("Insufficient funds");
       }
-      if(error.code==="ACTION_REJECTED"){
-        toast.error("User Rejected the request")
+      if (error.code === "ACTION_REJECTED") {
+        toast.error("User Rejected the request");
       }
       // console.log(error.code,"code");
-      console.log(error, "error send commision side")
-      if(error.code==="INSUFFICIENT_FUNDS"){
-        toast.error("Insufficient funds")
+      console.log(error, "error send commision side");
+      if (error.code === "INSUFFICIENT_FUNDS") {
+        toast.error("Insufficient funds");
       }
     }
-  }
+  };
 
   //deploy Contract on blockchain
   const deployContract = async (contractSource, newFormData) => {
-
     try {
-
-      let explorer
+      let explorer;
       const abi = contractSource.abi;
       const bytecode = contractSource.bytecode;
       // console.log(abi, "abi deploy side");
@@ -497,9 +492,11 @@ export const EtherProvider = ({ children }) => {
         }));
 
         // eslint-disable-next-line no-unused-expressions
-        urlLinks[newFormData.network] ? explorer = urlLinks[newFormData.network] : ""
-        console.log(newFormData.network,"neetwork");
-        console.log(explorer,"expoooo");
+        urlLinks[newFormData.network]
+          ? (explorer = urlLinks[newFormData.network])
+          : "";
+        console.log(newFormData.network, "neetwork");
+        console.log(explorer, "expoooo");
         // eslint-disable-next-line no-unused-expressions
         // console.log(`${explorer.link}/tx/${contract.deployTransaction.hash}`, "new tx urlllll")
         // console.log(newFormData.network, "netwrk nameee")
@@ -541,6 +538,7 @@ export const EtherProvider = ({ children }) => {
         startToggle,
         setStartToggle,
         toggler,
+        addNewNetwork,
         changeNetwork,
         SignInMetamask: SignInMetamask,
         connectedAccAddress: accAddress,
@@ -560,7 +558,7 @@ export const EtherProvider = ({ children }) => {
         accBalance: accBalance,
         chainId: chainId,
         urlLinks: urlLinks,
-        sendCommision:sendCommision
+        sendCommision: sendCommision,
       }}
     >
       {/* {console.log(payment,"Payment value context side ")}

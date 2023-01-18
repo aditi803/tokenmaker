@@ -836,8 +836,8 @@ const MaticMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label,index) => (
+                          <Step key={index}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}
