@@ -1183,7 +1183,7 @@ const BnbMain1 = (props) => {
                               })}
                             </select>
                             <span className="form-text f-12 heading">
-                              Select the network on wich you want to deploy your
+                              Select the network on which you want to deploy your
                               token
                             </span>
                           </div>

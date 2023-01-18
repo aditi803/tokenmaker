@@ -153,17 +153,12 @@ export const FrontMain = () => {
                         if (i % 2 === 0) {
                           return (
                             <>
-                              <div
-                                className={`col-lg-10 offset-lg-1 timeline_left timeline_main`}
-                                key={i}
-                              >
-                                <div className="row justify-content-center align-items-center">
-                                  <div className="col-10 col-lg-5 d-none d-lg-block timeline-date">
-                                    <div className="feature-box mb-5 py-5 px-4">
-                                      <img
-                                        src={imageBaseUrl + data.stepImage}
-                                        alt="steps"
-                                      />
+                              <div class={`col-lg-10 offset-lg-1 timeline_left timeline_main`} key={i}>
+                                <div class="row justify-content-center align-items-center">
+                                  <div class="col-10 col-lg-5 d-none d-lg-block timeline-date">
+                                    <div
+                                      className="feature-box mb-5 py-4 px-4">
+                                      <img src={imageBaseUrl + data.stepImage} alt='steps' />
                                       <h5 className="my-3"> {data.title}</h5>
                                       <p>{data.content}</p>
                                     </div>
@@ -172,13 +167,11 @@ export const FrontMain = () => {
                                     <span>{i + 1}</span>
                                     <div className="line-div"></div>
                                   </div>
-                                  <div className="col-10 col-lg-5 timeline-text">
-                                    <div className="d-block d-lg-none timeline-date">
-                                      <div className="feature-box mb-5 py-5 px-4">
-                                        <img
-                                          src={imageBaseUrl + data.stepImage}
-                                          alt="steps"
-                                        />
+                                  <div class="col-10 col-lg-5 timeline-text">
+                                    <div class="d-block d-lg-none timeline-date">
+                                      <div
+                                        className="feature-box mb-5 py-4 px-4">
+                                        <img src={imageBaseUrl + data.stepImage} alt='steps' />
                                         <h5 className="my-3"> {data.title}</h5>
                                         <p>{data.content}</p>
                                       </div>
@@ -198,14 +191,12 @@ export const FrontMain = () => {
                                 } timeline_main`}
                                 key={i}
                               >
-                                <div className="row justify-content-center align-items-center">
-                                  <div className="col-10 col-lg-5 order-2 order-lg-1 timeline-text">
-                                    <div className="d-block d-lg-none timeline-date">
-                                      <div className="feature-box mb-5 py-5 px-4">
-                                        <img
-                                          src={imageBaseUrl + data.stepImage}
-                                          alt="steps"
-                                        />
+                                <div class="row justify-content-center align-items-center">
+                                  <div class="col-10 col-lg-5 order-2 order-lg-1 timeline-text">
+                                    <div class="d-block d-lg-none timeline-date">
+                                      <div
+                                        className="feature-box mb-5 py-4 px-4">
+                                        <img src={imageBaseUrl + data.stepImage} alt='steps' />
                                         <h5 className="my-3"> {data.title}</h5>
                                         <p>{data.content}</p>
                                       </div>
@@ -214,12 +205,10 @@ export const FrontMain = () => {
                                   <div className="col-2 timeline_dot order-1 order-lg-2">
                                     <span>{i + 1}</span>
                                   </div>
-                                  <div className="col-10 col-lg-5 d-none d-lg-block order-3  timeline-date">
-                                    <div className="feature-box mb-5 py-5 px-4">
-                                      <img
-                                        src={imageBaseUrl + data.stepImage}
-                                        alt="steps"
-                                      />
+                                  <div class="col-10 col-lg-5 d-none d-lg-block order-3  timeline-date">
+                                    <div
+                                      className="feature-box mb-5 py-4 px-4">
+                                      <img src={imageBaseUrl + data.stepImage} alt='steps' />
                                       <h5 className="my-3"> {data.title}</h5>
                                       <p>{data.content}</p>
                                     </div>
@@ -319,7 +308,7 @@ export const FrontMain = () => {
                 <div className="container">
                   <div className="faq_wrap">
                     <div className="row">
-                      <div className="col-12 col-lg-6 faq_left mb-4 mb-lg-0">
+                      <div className="col-12 col-lg-6 faq_left mb-sm-4 mb-lg-0">
                         <h2
                           className="heading mb-0"
                           style={{ color: `${featuresData.headingColor}` }}

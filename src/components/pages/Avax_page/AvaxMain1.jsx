@@ -14,10 +14,7 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-//
-// import Link from "react-router-dom";
-// import wallet_model from "../../Modal/Multi-WalletModal";
-// //
+
 
 import {
   freeDisabled,
@@ -25,13 +22,7 @@ import {
   customDisabled,
 } from "../../../disabledUtils";
 
-// import FirstStep from "./FirstStep";
-// import SecondStep from "./SecondStep";
-// import ThirdStep from "./ThirdStep";
-// import FouthStep from "./FouthStep";
 import { multiStepContext, StepContext } from "./StepContext";
-
-// import StepConte
 
 
 const AvaxMain1 = (props) => {
@@ -610,13 +601,7 @@ const AvaxMain1 = (props) => {
       }));
     }
 
-    // if (ethFormData.agreement === false) {
-    //   setErr((prev) => ({
-    //     ...prev,
-    //     agreementErr:
-    //       "Please confirm that you have read and understood our terms of use",
-    //   }));
-    // }
+    
     if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
       setErr((prev) => ({
         ...prev,
@@ -625,13 +610,11 @@ const AvaxMain1 = (props) => {
     }
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
-      // do what u want to do with data
-      // console.log("data");
+     
       console.log(err, "da");
 
       // < Navigate to= "/generator/final" />
       console.log(ethFormData, ">>>>>>>>>>>>>>>>");
-      // navigate("/generator/final")
     }
     if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "" &&
       (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
@@ -667,24 +650,9 @@ const AvaxMain1 = (props) => {
       ...prev,
       commissionFee: selectedCommissionFee?.networkCommissionFee
     }))
-    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-    // console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-    // console.log(ethFormData, '2>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-    // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-
-
-
+    
   }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler])
-  // {web3Loading ? (
-  //   <button className=" btn-inner - text " disabled>
-  //     {" "}
-  //     Loading ...{" "}
-  //   </button>
-  // ) : (
-  //   <button className=" btn-inner - text " onClick={connectWallet}>
-  //     get accounts
-  //   </button>
-  // )}
+ 
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
     try {
@@ -721,15 +689,11 @@ const AvaxMain1 = (props) => {
           // if(networkFunc){
 
       
-      // if (FormData.network === chainId) {
-        // navigate("/generator/final");
         console.log(FormData.network, "currentNetworkID");
 
-        // let res = await sendCommision(commissionFee);
-        // console.log(res, "ress send commision matic main");
+        
         props.setShow(false);
       let res = await sendCommision(commissionFee)
-      // console.log(res, "ress send commision matic main")
       if(!res){
         props.setShow(true)
         navigate("/generator/avalanche");
@@ -743,7 +707,6 @@ const AvaxMain1 = (props) => {
           axios
             .post(
               "https://tokenmaker-apis.block-brew.com/contract/contract",
-              // https://tokenmaker-apis.block-brew.com/token/tokendetails
 
               FormData
             )
@@ -1145,7 +1108,7 @@ const AvaxMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option defaultChecked >Select your network</option>
+                              <option value="none" selected hidden>Select your network</option>
                               {data.map((item,i) => {
                                 if (
                                   item.parentNetworkName ===
@@ -1179,7 +1142,7 @@ const AvaxMain1 = (props) => {
                               <option value="moonBaseAlpha">Moon Base Alpha</option> */}
                             </select>
                             <span className="form-text f-12 heading">
-                              Select the network on wich you want to deploy your
+                              Select the network on which you want to deploy your
                               token
                             </span>
                           </div>

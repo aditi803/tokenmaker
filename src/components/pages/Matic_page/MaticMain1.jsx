@@ -1163,7 +1163,7 @@ const MaticMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option value=''>Select your network</option>
+                              <option value='none' selected hidden>Select your network</option>
                               {data.map((item, i) => {
                                 if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
                                   return (
@@ -1179,7 +1179,7 @@ const MaticMain1 = (props) => {
                               })}
                             </select>
                             <span className="form-text text-muted">
-                              Select the network on wich you want to deploy your
+                              Select the network on which you want to deploy your
                               token
                             </span>
                           </div>

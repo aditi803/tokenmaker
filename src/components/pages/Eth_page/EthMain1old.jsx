@@ -1234,7 +1234,7 @@ export const EthMain1 = (props) => {
                                 <option value="rinkeby">Rinkeby</option> */}
                               </select>
                               <span className="form-text text-muted">
-                                Select the network on wich you want to deploy
+                                Select the network on which you want to deploy
                                 your token
                               </span>
                             </div>

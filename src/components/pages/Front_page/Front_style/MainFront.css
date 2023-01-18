@@ -10,6 +10,7 @@
     border-radius: 4px;
     display: inline-block;
     text-align: center;
+    font-family: "poppins";
 }
 
 .self {
@@ -25,7 +26,7 @@
     background-color: #fff;
     box-shadow: 0px 4.51862px 5.64827px 2.25931px rgba(0, 0, 0, 0.25);
     border-radius: 9.03723px;
-    max-width: 270px;
+    max-width: 280px;
     margin: auto;
     z-index: 11;
     position: relative;
@@ -44,7 +45,9 @@
     /* width: 35%; */
     margin: 2px auto;
 }
-
+.feature-box h5{
+    font-size: 22px;
+}
 .feature-box p {
     font-size: 14px;
 }
@@ -100,21 +103,18 @@
 
 .section-faq {
     padding: 110px 0;
-    background-image: url("../../../../assets/faqbackground.png");
+    background-image: url("../../../../assets/faqbackground.2.png");
+    background-color: #f7f4fb;
     background-size: cover;
 }
 
-.section-faq .container {
-    margin-bottom: 102px !important;
-    padding-bottom: 44px !important;
-}
 
 .faq {
     /* background: #f2f7f6 url('../../../../../../public/esgImages/top1.png'); */
     background-position: top center;
     background-repeat: no-repeat;
     background-size: 100%;
-    padding: 110px 0 250px;
+    padding: 110px 0 40px;
     font-family: "Gilroy";
     scroll-behavior: smooth;
 }
@@ -125,10 +125,11 @@
     font-weight: 700;
     line-height: 90px;
     color: black;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .faq_wrap .text {
+    font-family: "poppins";
     font-size: 16px;
     margin-top: 30px;
     line-height: 24px;
@@ -383,12 +384,12 @@
 
 .timeline .timeline_dot span {
     font-weight: 700;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 80px;
     background: url(../../../../assets/shadow.svg) no-repeat center center;
     background-size: contain;
     color: #fff;
-    padding: 42px;
+    padding: 38px;
     border-radius: 50%;
     position: relative;
     z-index: 1;
@@ -421,9 +422,9 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 32px;
-    color: var(--bs-primary-color);
-    text-align: start;
-    opacity: 0.6;
+    color: #fff;
+    text-align: center;
+    opacity: 0.8;
 }
 
 .timeline .timeline_right .timeline-date h2 {
@@ -454,7 +455,7 @@
     content: "";
     position: absolute;
     left: calc(50% - 5px);
-    top: 180px;
+    top: 220px;
     width: 10px;
     height: 100%;
     z-index: -1;
@@ -481,6 +482,9 @@
 }
 
 @media screen and (max-width: 992px) {
+    .feature-box{
+        max-width: 400px;
+    }
     .timeline_main.timeline_left .timeline_dot span:after {
         left: 100%;
     }
@@ -500,8 +504,10 @@
     }
 
     .timeline .timeline-text p {
-        font-size: 20px;
+        font-size: 18px;
         line-height: 28px;
+        color: #000;
+        opacity: .8;
     }
 
     .timeline .timeline_dot span {
@@ -510,15 +516,15 @@
     }
 
     .timeline .timeline_left::after {
-        left: 6.5%;
-        top: 158px;
-        height: calc(100% + 60px);
+        left: 40px;
+        top: 160px;
+    height: calc(100% + 20px);
     }
 
     .timeline .timeline_right::after {
         height: calc(100% - 60px);
         top: 219px;
-        left: 6.5%;
+        left: 40px;
     }
 }
 
@@ -540,11 +546,19 @@
 
     .timeline .timeline_left::after,
     .timeline .timeline_right::after {
-        left: 5.5%;
+        left: 26px;
+        width: 6px;
     }
 
     .section-title {
         font-size: 1.4rem;
+    }
+    .section-features .feature-box{
+        width: 100%;
+    }
+    .timeline .timeline_dot span {
+        font-size: 20px;
+        padding: 10px 18px;
     }
 }
 
@@ -572,7 +586,7 @@
 
     .timeline .timeline_dot span {
         font-size: 16px;
-        padding: 5px 12px;
+        padding: 10px 18px;
         margin: 0 5px;
     }
 
@@ -581,17 +595,16 @@
     }
 
     .timeline .timeline_left::after {
-        top: 46%;
         height: calc(100% + 30px);
         width: 5px;
-        left: 6%;
+        left: 26px;
     }
 
     .timeline .timeline_right::after {
-        height: calc(100% - 10px);
-        top: 50%;
+        height: calc(100% + 30px);
         width: 5px;
-        left: 6%;
+        left: 26px;
+        top: 170px;
     }
     
 }

@@ -1149,8 +1149,8 @@ const MoonRiverMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option>Select your network</option>
-                              {data.map((item, i) => {
+                              <option value="none" selected hidden>Select your network</option>
+                              {data.map((item,i) => {
                                 if (
                                   item.parentNetworkName === "Moon River" &&
                                   item.tokenType === "free"
@@ -1180,7 +1180,7 @@ const MoonRiverMain1 = (props) => {
                               <option value="moonBaseAlpha">Moon Base Alpha</option> */}
                             </select>
                             <span className="form-text f-12 heading">
-                              Select the network on wich you want to deploy your
+                              Select the network on which you want to deploy your
                               token
                             </span>
                           </div>

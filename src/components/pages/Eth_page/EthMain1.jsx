@@ -1,59 +1,61 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./eth_styles/main.css";
-
+import "../Eth_page/eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
-import axios from "axios";
-import { ContractFactory, ethers } from "ethers";
 import { toast } from "react-toastify";
-import { EthMain } from "./EthMain";
 import { HiInformationCircle } from "react-icons/hi";
-// import Link from "react-router-dom";
 import Tooltip from "../../Layots/ToolTip";
+//
+// import Link from "react-router-dom";
 // import wallet_model from "../../Modal/Multi-WalletModal";
-// //
-
-
+// 
 
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
+import "../Eth_page/eth_styles/main.css";
 import {
   freeDisabled,
   basicDisabled,
   customDisabled,
 } from "../../../disabledUtils";
+import axios from "axios";
+import { ethers } from "ethers";
+import Loader from "../../../loader";
 import { multiStepContext } from "./StepContext";
-
 const EthMain1 = (props) => {
   const steps = [" ", " ", " "];
 
-  const [buttonClick, setButtonClick] = useState(false)
-
   const { currentStep, submitted } = useContext(multiStepContext);
   const { setStep, userData, setUserData } = useContext(multiStepContext);
+  const [buttonClick, setButtonClick] = useState(false)
 
-  // const {compileContract}  = useContext(GlobalContext)
   const navigate = useNavigate();
 
-  const { toggler, deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
+  const { deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
     useContext(GlobalContext);
+
+  const networkFee = []
 
   const [data, setData] = useState([])
   const getNetworks = () => {
     axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
       .then((res) => {
         setData(res.data.msg.items)
-        // console.log(res.data.msg.items, "Aditii ddata jo ni aata>>>>>>>>>>>>>>> ");
+        // console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
       })
       .catch((err) => {
         console.log(err, "Error")
       })
   }
+
+  // console.log(data, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+
+
 
   useEffect(() => {
     getNetworks()
@@ -77,7 +79,7 @@ const EthMain1 = (props) => {
     accessType: "owner",
     network: "",
     agreement: false,
-    commissionFee: 0.075,
+    commissionFee: 150,
   });
 
   //
@@ -131,7 +133,6 @@ const EthMain1 = (props) => {
     network,
     agreement,
     commissionFee,
-
   } = ethFormData;
 
   const {
@@ -149,6 +150,14 @@ const EthMain1 = (props) => {
     f_accessType,
   } = fieldsDisabled;
 
+  useEffect(() => {
+    if (supplyType === "fixed" || supplyType === "capped") {
+      setEthFormData((prev) => ({
+        ...prev,
+        maximumSupply: initialSupply,
+      }));
+    }
+  }, [supplyType, initialSupply, maximumSupply]);
   useEffect(() => {
     //
     // if (recoverable === true) {
@@ -198,6 +207,7 @@ const EthMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
+      
       if (network === "rinkeby") {
         setEthFormData((prev) => ({
           ...prev,
@@ -224,7 +234,7 @@ const EthMain1 = (props) => {
       setEthFormData((prev) => ({
         ...prev,
         noCopyrightLink: false,
-        // commissionFee: null,
+        commissionFee: null,
         accessType: "owner",
         supplyType: "fixed",
         mintable: false,
@@ -237,7 +247,7 @@ const EthMain1 = (props) => {
       setEthFormData((prev) => ({
         ...prev,
         noCopyrightLink: true,
-        commissionFee: 0.15,
+        // commissionFee: 0.15,
       }));
       // added
       if (supplyType === "unlimited") {
@@ -251,7 +261,7 @@ const EthMain1 = (props) => {
         setEthFormData((prev) => ({
           ...prev,
           noCopyrightLink: true,
-          commissionFee: 0.225,
+          // commissionFee: 0.225,
           mintable: true,
         }));
         setFieldsDisabled({
@@ -309,28 +319,6 @@ const EthMain1 = (props) => {
       }
     }
   }, [tokenType, supplyType, network, data]);
-  useEffect(() => {
-    // if(initialSupply.length===0){
-    //   setEthFormData((prev) => ({
-    //     ...prev,
-    //     initialSupply: 0,
-    //   }));
-    // }
-
-    // if(initialSupply.length!==0){
-    //   setEthFormData((prev) => ({
-    //     ...prev,
-    //     initialSupply: initialSupply,
-    //   }));
-    // }
-
-    if (supplyType === "fixed" || supplyType === "capped") {
-      setEthFormData((prev) => ({
-        ...prev,
-        maximumSupply: initialSupply,
-      }));
-    }
-  }, [supplyType, initialSupply, maximumSupply]);
 
   useEffect(() => {
     if (tokenType === "custom") {
@@ -338,19 +326,19 @@ const EthMain1 = (props) => {
       if (burnable === true && pausable === true && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.35,
+          // commissionFee: 700,
         }));
       }
       if (pausable === true && burnable === true && recoverable === false) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.275,
+          // commissionFee: 550,
         }));
       }
       if (pausable === true && burnable === false && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.275,
+          // commissionFee: 550,
         }));
       }
       if (
@@ -359,25 +347,25 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.225,
+          // commissionFee: 450,
         }));
       }
       if (burnable === false && pausable === true && recoverable === false) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.2,
+          // commissionFee: 400,
         }));
       }
       if (pausable === false && burnable === true && recoverable === true) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.3,
+          // commissionFee: 600,
         }));
       }
       if (pausable === false && recoverable === false && burnable === false) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.15,
+          // commissionFee: 300,
         }));
       }
       // Roles and fixed
@@ -389,7 +377,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.4,
+          // commissionFee: 800,
         }));
       }
       if (
@@ -400,7 +388,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.325,
+          // commissionFee: 650,
         }));
       }
       if (
@@ -411,7 +399,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.325,
+          // commissionFee: 650,
         }));
       }
       if (
@@ -421,7 +409,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.275,
+          // commissionFee: 550,
         }));
       }
       if (
@@ -432,7 +420,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.25,
+          // commissionFee: 500,
         }));
       }
       if (
@@ -443,7 +431,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.35,
+          // commissionFee: 700,
         }));
       }
       if (
@@ -454,7 +442,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.2,
+          // commissionFee: 400,
         }));
       }
 
@@ -467,7 +455,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.225,
+          // commissionFee: 450,
         }));
       }
 
@@ -479,7 +467,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.275,
+          // commissionFee: 550,
         }));
       }
       if (
@@ -490,7 +478,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.3,
+          // commissionFee: 600,
         }));
       }
       // double
@@ -503,7 +491,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.35,
+          // commissionFee: 700,
         }));
       }
 
@@ -516,7 +504,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.275,
+          // commissionFee: 550,
         }));
       }
       if (
@@ -527,7 +515,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.325,
+          // commissionFee: 650,
         }));
       }
       if (
@@ -538,7 +526,7 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.35,
+          // commissionFee: 700,
         }));
       }
       // double
@@ -551,58 +539,11 @@ const EthMain1 = (props) => {
       ) {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: 0.4,
+          // commissionFee: 800,
         }));
       }
     }
   }, [pausable, recoverable, burnable, tokenType, accessType]);
-
-  // function commissionFeeCheck () {
-
-  // }
-
-  // const blockchainNetworks = {
-  //   mainnet: 1,
-  //   gorli: 5,
-  //   rinkeby: 4,
-  //   polygonMainnet: 137,
-  //   polygonMumbai: 80001,
-  //   binanceSmartChainTestnet: 97,
-  //   binanceSmartChain: 56,
-  // };
-
-
-  const customVampire = (network) => {
-    const blockArray = Object.entries(blockchainNetworks);
-    const selctedItem = blockArray.find((item) => item[1] === network)
-    return selctedItem?.[0]
-  }
-
-
-  useEffect(() => {
-    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Ethereum' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
-        return true;
-      }
-    })
-    // setGasFee(selectedCommissionFee)
-    setEthFormData(prev => ({
-      ...prev,
-      commissionFee: selectedCommissionFee?.networkCommissionFee
-    }))
-    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-    // console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-    // console.log(ethFormData, '2>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-    // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-
-
-
-  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler])
-
-
-
-
-
 
   const ethMainFormHandler = (e) => {
     let boolean = null;
@@ -610,24 +551,21 @@ const EthMain1 = (props) => {
       boolean = e.target?.checked;
     }
     if (e.target.name === "initialSupply") {
-      if (e.target.value === "") {
+      if (e.target.value === '') {
         setEthFormData((prev) => ({
           ...prev,
           [e.target.name]: boolean ?? '',
         }));
       } else {
+
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]:
-            e.target.value.charAt(0) !== "0"
-              ? e.target.value
-              : e.target.value.substring(1),
+          [e.target.name]: (e.target.value).charAt(0) !== '0' ? e.target.value : (e.target.value).substring(1),
         }));
       }
 
       return;
     }
-
     if (e.target.name === "tokenSymbol") {
       return setEthFormData((prev) => ({
         ...prev,
@@ -639,6 +577,31 @@ const EthMain1 = (props) => {
       [e.target.name]: boolean ?? e.target.value,
     }));
   };
+
+
+  const customVampire = (network) => {
+    const blockArray = Object.entries(blockchainNetworks);
+    const selctedItem = blockArray.find((item) => item[1] === network)
+    return selctedItem?.[0]
+  }
+
+  useEffect(() => {
+    //eslint-disable-next-line
+    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
+      if (parentNetworkName === 'Ethereum' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+        return true;
+      }
+    })
+    // setGasFee(selectedCommissionFee)
+    setEthFormData(prev => ({
+      ...prev,
+      commissionFee: selectedCommissionFee?.networkCommissionFee
+    }))
+    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+
+
+    //eslint-disable-next-line
+  }, [ethFormData.tokenType, ethFormData.network, data])
 
   useEffect(() => {
     if (agreement !== false) {
@@ -673,9 +636,7 @@ const EthMain1 = (props) => {
         initialSupplyErr: "",
       }));
     }
-  }, [agreement, tokenName, tokenSymbol, decimals, initialSupply]);
-
-  const [manipulate, setManipulate] = useState(false)
+  }, [agreement, tokenName, tokenSymbol, decimals]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -693,14 +654,14 @@ const EthMain1 = (props) => {
       }));
     }
 
-    // if (!ethFormData.agreement) {
+    // if (ethFormData.agreement === false) {
     //   setErr((prev) => ({
     //     ...prev,
     //     agreementErr:
-    //       "Please confirm that you have read and understood our terms of uses",
+    //       "Please confirm that you have read and understood our terms of use",
     //   }));
     // }
-    if (ethFormData.decimals >= 21 || ethFormData.decimals <= 6) {
+    if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
       setErr((prev) => ({
         ...prev,
         decimalsErr: "The number of decimals must be between 6 and 21",
@@ -713,10 +674,11 @@ const EthMain1 = (props) => {
       }));
     }
 
+
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
       // do what u want to do with data
       // console.log("data");
-      // console.log(err, "da");
+      // console.log(err, "da")
 
       // < Navigate to= "/generator/final" />
       // console.log(ethFormData, ">>>>>>>>>>>>>>>>");
@@ -729,24 +691,22 @@ const EthMain1 = (props) => {
       ethFormData.initialSupply !== ''
     ) {
       // navigate("/generator/final");
+      e.preventDefault()
       setStep(2)
     }
   };
-
-
-  console.log('choosen network ',network)
-
   useEffect(() => {
     if (tokenType === "free") {
       setEthFormData((prev) => ({
         ...prev,
-        initialSupply: 10000,
+        initialSupply: 10000
       }));
     }
-  }, [tokenType, initialSupply, maximumSupply]);
+  }, [tokenType, initialSupply, maximumSupply])
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
     // setButtonClick(true)
+
     try {
       // console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -761,8 +721,6 @@ const EthMain1 = (props) => {
           network: blockchainNetworks[FormData.network],
         })
         : "";
-        console.log(network,"networksssssssss")
-        console.log(FormData.network,"nootwoorl")
 
         // console.log(FormData, "formdata eth side");
         // if (FormData.network === chainId) {
@@ -782,22 +740,26 @@ const EthMain1 = (props) => {
           
           // if(networkFunc){
 
-          
+      // console.log(FormData, "formdata eth side");
+      // if (FormData.network === chainId) {
+      // navigate("/generator/final");
       // console.log(FormData.network, "currentNetworkID");
+
+      // let res = await sendCommision(commissionFee)
+      // console.log(res, "ress send commision matic main")
+
       props.setShow(false);
       let res = await sendCommision(commissionFee)
       // console.log(res, "ress send commision matic main")
-      if(!res){
+      if (!res) {
         props.setShow(true)
         navigate("/generator/ethereum");
       }
 
-
-
       if (res) {
-        
-
         //hit contract compile api
+        // props.setShow(false);
+
         axios
           .post(
             "https://tokenmaker-apis.block-brew.com/contract/contract",
@@ -810,7 +772,7 @@ const EthMain1 = (props) => {
             deployContract(res.data.result, FormData).then((res) => {
 
               if (res.error) {
-                navigate("/generator/ethereum");
+                navigate("/generator/polygon");
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
@@ -818,7 +780,7 @@ const EthMain1 = (props) => {
                   )
                   : toast.error(res.error.message);
               } else {
-                toast.success("Token Deploy Successfully!");
+                toast.success("Token deploy successfully!");
                 // navigate("/generator/final");
                 props.setShow(false);
                 // console.log(res, "else side deploy then return deploy succes");
@@ -834,14 +796,14 @@ const EthMain1 = (props) => {
               : toast.error("Data Fetch Failed Try Again");
           });
       }
-    // }
 
+      // } 
 
-      // } else {
+      // else {
       //   changeNetwork(FormData.network);
       // }
+      // }
     } catch (error) {
-      console.log(error,"error,")
       toast.error(error.message);
       // console.log("compile contract side catch er", error);
     }
@@ -865,13 +827,11 @@ const EthMain1 = (props) => {
           <div className="hero mb-5">
             <div className="container">
               <h1>
-                <span className="sub-highlight">
-                  Create Your Ethereum Token
-                </span>
+                <span className="sub-highlight">Create Your Ethereum Token</span>
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable ERC20 Token.
+                Mintable, Burnable ERC-20 Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -1027,7 +987,7 @@ const EthMain1 = (props) => {
                               <span className="val-required">*</span>
                             </label>
                             <input
-                              type="text"
+                              type="number"
                               className="form-control"
                               placeholder="1000000"
                               name="initialSupply"
@@ -1077,12 +1037,12 @@ const EthMain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Confirms to ERC20 protocol
+                                Confirms to ERC-20 protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and confirms to ERC20 protocol
+                              and confirms to ERC-20 protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -1179,10 +1139,12 @@ const EthMain1 = (props) => {
                               Allow your tokens to be paused
                             </span>
                           </div>
-                          <div className='d-flex justify-content-between align-items-center'>
+                          <div className='d-flex justify-content-between'>
                             <button type="button" className="btn form-btn" onClick={(e) => {
                               e.preventDefault()
-                              setStep(1)}}>
+                              setStep(1)
+                            }}
+                            >
                               Back
                             </button>
                             <button type="button" className="btn form-btn" onClick={() => setStep(3)}>
@@ -1191,6 +1153,7 @@ const EthMain1 = (props) => {
                           </div>
 
                         </form>
+
                       </div>
                     </div>
                   </div>
@@ -1213,7 +1176,7 @@ const EthMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option>Select your network</option>
+                              <option value='none' selected hidden>Select your network</option>
                               {data.map((item, i) => {
                                 if (item.parentNetworkName === "Ethereum" && item.tokenType === 'free') {
                                   return (
@@ -1225,12 +1188,11 @@ const EthMain1 = (props) => {
                                 }
                                 else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'custom') {
                                   <option value={item.value} key={i}>{item.subNetworkName}</option>
-
                                 }
                               })}
                             </select>
                             <span className="form-text text-muted">
-                              Select the network on wich you want to deploy your
+                              Select the network on which you want to deploy your
                               token
                             </span>
                           </div>
@@ -1261,7 +1223,7 @@ const EthMain1 = (props) => {
                                 </Tooltip>
                               </div>
                               <div
-                                className="Tbtn mt-auto mb-auto"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-success d-block p-2 ">
@@ -1292,7 +1254,7 @@ const EthMain1 = (props) => {
                                 </Tooltip>
                               </div>
                               <div
-                                className="Tbtn mt-auto mb-auto"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-secondary d-block p-2">
@@ -1319,23 +1281,22 @@ const EthMain1 = (props) => {
                                   {/*  modal*/}
                                   <Link
                                     to="/terms"
-                                    // data-bs-toggle="modal"
-                                    // data-bs-target="#exampleModal"
+                                  // data-bs-toggle="modal"
+                                  // data-bs-target="#exampleModal"
                                   >
                                     <u> Terms of Use. </u>
                                   </Link>
-                                  {/* <TermsModal /> */}
+                                  <TermsModal />
                                   {/* modal */}
                                   {/* </span> */}
                                 </span>
-                                <br />
-                                <span className="text-danger f-12">
+                                <div className="text-danger f-12">
                                   {err.agreementErr}
-                                </span>
+                                </div>
                               </label>
                             </div>
                           </div>
-                          <div className="d-flex justify-content-between align-items-center">
+                          <div className="d-flex justify-content-between">
                             <button
                               type="button"
                               className="btn form-btn"
@@ -1377,6 +1338,5 @@ const EthMain1 = (props) => {
     </>
   );
 };
-
 
 export default EthMain1;
