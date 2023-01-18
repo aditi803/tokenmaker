@@ -1,64 +1,83 @@
-import { Skeleton } from '@mui/material'
-import React from 'react'
-import { PrivacyPolicy } from '../components/Layots/PrivacPolicyModal'
-import { TermsModal } from '../components/Layots/TermsModal'
-import { FiMail } from 'react-icons/fi'
-import { AiFillPhone } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
+import { Skeleton } from "@mui/material";
+import React from "react";
+import { PrivacyPolicy } from "../components/Layots/PrivacPolicyModal";
+import { TermsModal } from "../components/Layots/TermsModal";
+import { FiMail } from "react-icons/fi";
+import { AiFillPhone } from "react-icons/ai";
+import { Link } from "react-router-dom";
 // import Logo from "../../../assets/footerlogo.png";
-import Logo from '../assets/footerlogo.png'
-
+import Logo from "../assets/footerlogo.png";
 
 const FooterSkeleton = () => {
   return (
     <>
-      <div
-        className="page-footer"
-      >
+      <div className="page-footer">
         <footer className="footer">
           <div className="container py-3">
-            <div className="row" >
+            <div className="row">
               <div className="col-lg-4 ">
                 <span>
-                  <a href=' https://blocktechbrew.com/' target='_blank'>
+                  <a href=" https://blocktechbrew.com/" target="_blank">
                     <img className="footer-logo" src={Logo} alt="" />
                   </a>
                 </span>
-                <p style={{ fontSize: "12px", marginBottom: "20px", maxWidth: '330px' }}>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    marginBottom: "20px",
+                    maxWidth: "330px",
+                  }}
+                >
                   Build business ecosystems laced with decentralization,
                   enhanced security and transparency with our custom blockchain
                   app development
                 </p>
                 <p>Our Social Presence</p>
                 <div className="d-flex icons social-links">
-                  <a href=' https://www.facebook.com/blocktechbrew' target='_blank'>
-                    <i class="fa-brands fa-facebook-f"></i>
+                  <a
+                    href=" https://www.facebook.com/blocktechbrew"
+                    target="_blank"
+                  >
+                    <i className="fa-brands fa-facebook-f"></i>
                   </a>
-                  <a href=' https://twitter.com/blocktechbrew' target='_blank'>
-                    <i class="fa-brands fa-twitter"></i>
+                  <a href=" https://twitter.com/blocktechbrew" target="_blank">
+                    <i className="fa-brands fa-twitter"></i>
                   </a>
-                  <a href=' https://www.linkedin.com/company/block-tech-brew/' target='_blank'>
-
-                    <i class="fa-brands fa-linkedin-in"></i>
+                  <a
+                    href=" https://www.linkedin.com/company/block-tech-brew/"
+                    target="_blank"
+                  >
+                    <i className="fa-brands fa-linkedin-in"></i>
                   </a>
-                  <a href=' https://www.instagram.com/blocktechbrew/?hl=en' target='_blank'>
-
-                    <i class="fa-brands fa-instagram"></i>
+                  <a
+                    href=" https://www.instagram.com/blocktechbrew/?hl=en"
+                    target="_blank"
+                  >
+                    <i className="fa-brands fa-instagram"></i>
                   </a>
                 </div>
               </div>
               <div className="col-lg-2 services">
                 <h5 className="mb-4">Our Services</h5>
-                <a href=' https://blocktechbrew.com/metaverse-development-company/' target='_blank' >
+                <a
+                  href=" https://blocktechbrew.com/metaverse-development-company/"
+                  target="_blank"
+                >
                   <p>Metaverse</p>
                 </a>
-                <a href=' https://blocktechbrew.com/defi/' target='_blank'>
+                <a href=" https://blocktechbrew.com/defi/" target="_blank">
                   <p>Defi</p>
                 </a>
-                <a href=' https://blocktechbrew.com/nft-marketplace-development-company/' target='_blank'>
+                <a
+                  href=" https://blocktechbrew.com/nft-marketplace-development-company/"
+                  target="_blank"
+                >
                   <p>NFT Marketplace</p>
                 </a>
-                <a href='  https://blocktechbrew.com/cryptocurrency-exchange/' target='_blank'>
+                <a
+                  href="  https://blocktechbrew.com/cryptocurrency-exchange/"
+                  target="_blank"
+                >
                   <p>Crypto Exchange</p>
                 </a>
               </div>
@@ -88,16 +107,25 @@ const FooterSkeleton = () => {
               <div className="col-lg-4">
                 <h5 className="mb-4">Our Newsletter</h5>
                 <div className="d-flex mb-4">
-                  <input type='number' className="numberinput" placeholder="" />
+                  <input type="number" className="numberinput" placeholder="" />
                   <button className="sbbutton">Subscribe</button>
                 </div>
                 <h5 className="mb-4">Contact Us</h5>
                 <div className="contact">
-                  <a href=" mailto:business@blocktechbrew.com?subject=SendMail&body=Description" target='_blank' style={{ color: "#fff" }}>
-                    <p> <FiMail />  business@blocktechbrew.com</p>
+                  <a
+                    href=" mailto:business@blocktechbrew.com?subject=SendMail&body=Description"
+                    target="_blank"
+                    style={{ color: "#fff" }}
+                  >
+                    <p>
+                      {" "}
+                      <FiMail /> business@blocktechbrew.com
+                    </p>
                   </a>
                   <a href="tel: +91 874-590-9990" style={{ color: "#fff" }}>
-                    <p><AiFillPhone />   +91 874-590-9990</p>
+                    <p>
+                      <AiFillPhone /> +91 874-590-9990
+                    </p>
                   </a>
                 </div>
               </div>
@@ -135,14 +163,13 @@ const FooterSkeleton = () => {
 
             <hr />
             <p className="text-center" style={{ fontSize: "16px" }}>
-            <Skeleton variant="rounded" height={70} width={200} />
-
+              <Skeleton variant="rounded" height={70} width={200} />
             </p>
           </div>
         </footer>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default FooterSkeleton
+export default FooterSkeleton;

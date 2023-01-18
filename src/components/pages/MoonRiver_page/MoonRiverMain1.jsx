@@ -33,17 +33,13 @@ import { multiStepContext, StepContext } from "./StepContext";
 
 // import StepConte
 
-
 const MoonRiverMain1 = (props) => {
   // test
   const steps = [" ", " ", " "];
 
   const test = useContext(multiStepContext);
 
-
-  console.log(test, "SPIDERMAN")
-
-
+  console.log(test, "SPIDERMAN");
 
   const { currentStep, submitted } = useContext(multiStepContext);
   const { setStep, userData, setUserData } = useContext(multiStepContext);
@@ -75,12 +71,13 @@ const MoonRiverMain1 = (props) => {
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
   const {
     deployContract,
+    addNewNetwork,
     changeNetwork,
     SignInMetamask,
     connectedAccAddress,
     blockchainNetworks,
     sendCommision,
-    toggler
+    toggler,
   } = useContext(GlobalContext);
 
   const [ethFormData, setEthFormData] = useState({
@@ -104,7 +101,6 @@ const MoonRiverMain1 = (props) => {
     commissionFee: "0.5",
   });
 
-
   const [show, setShow] = useState(false);
 
   const [err, setErr] = useState({
@@ -112,7 +108,7 @@ const MoonRiverMain1 = (props) => {
     tokenSymbolErr: "",
     agreementErr: "",
     decimalsErr: "",
-    initialSupplyErr: ""
+    initialSupplyErr: "",
   });
 
   const [fieldsDisabled, setFieldsDisabled] = useState({
@@ -199,16 +195,16 @@ const MoonRiverMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-        if (network === "moonBaseAlpha") {
-          setEthFormData((prev) => ({
-            ...prev,
-          }));
-        }
-        if (network === "moonRiver") {
-          setEthFormData((prev) => ({
-            ...prev,
-          }));
-        }
+      if (network === "moonBaseAlpha") {
+        setEthFormData((prev) => ({
+          ...prev,
+        }));
+      }
+      if (network === "moonRiver") {
+        setEthFormData((prev) => ({
+          ...prev,
+        }));
+      }
     } else if (tokenType === "free") {
       setFieldsDisabled(freeDisabled);
       setEthFormData((prev) => ({
@@ -293,8 +289,7 @@ const MoonRiverMain1 = (props) => {
     }
   }, [supplyType, initialSupply, maximumSupply]);
 
-  console.log(network, "choosen network")
-
+  console.log(network, "choosen network");
 
   useEffect(() => {
     if (tokenType === "custom") {
@@ -529,7 +524,7 @@ const MoonRiverMain1 = (props) => {
       if (e.target.value === "") {
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: boolean ?? '',
+          [e.target.name]: boolean ?? "",
         }));
       } else {
         setEthFormData((prev) => ({
@@ -636,9 +631,13 @@ const MoonRiverMain1 = (props) => {
       console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
     }
-    if (ethFormData.tokenName !== "" && ethFormData.tokenSymbol !== "" &&
-      (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
-      ethFormData.initialSupply !== '') {
+    if (
+      ethFormData.tokenName !== "" &&
+      ethFormData.tokenSymbol !== "" &&
+      ethFormData.decimals <= 21 &&
+      ethFormData.decimals >= 6 &&
+      ethFormData.initialSupply !== ""
+    ) {
       // navigate("/generator/final");
       setStep(2);
     }
@@ -658,26 +657,35 @@ const MoonRiverMain1 = (props) => {
     return selctedItem?.[0];
   };
 
-
   useEffect(() => {
-    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Moon River' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
-        return true;
+    const selectedCommissionFee = data?.find(
+      ({ value, parentNetworkName, subNetworkName, tokenType }) => {
+        if (
+          parentNetworkName === "Moon River" &&
+          (value === ethFormData.network ||
+            value === customVampire(ethFormData.network)) &&
+          tokenType === ethFormData.tokenType
+        ) {
+          return true;
+        }
       }
-    })
+    );
     // setGasFee(selectedCommissionFee)
-    setEthFormData(prev => ({
+    setEthFormData((prev) => ({
       ...prev,
-      commissionFee: selectedCommissionFee?.networkCommissionFee
-    }))
+      commissionFee: selectedCommissionFee?.networkCommissionFee,
+    }));
     // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
     // console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
     // console.log(ethFormData, '2>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
     // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-
-
-
-  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler])
+  }, [
+    ethFormData.tokenType,
+    ethFormData.network,
+    data,
+    commissionFee,
+    toggler,
+  ]);
   // {web3Loading ? (
   //   <button className=" btn-inner - text " disabled>
   //     {" "}
@@ -701,8 +709,8 @@ const MoonRiverMain1 = (props) => {
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
         ? Object.assign(FormData, {
-          network: blockchainNetworks[FormData.network],
-        })
+            network: blockchainNetworks[FormData.network],
+          })
         : "";
 
       console.log(FormData.network, "network bnb main1 side");
@@ -710,76 +718,73 @@ const MoonRiverMain1 = (props) => {
       if (connectedAccAddress.length === 0) {
         await SignInMetamask();
       }
-      let networkFunc
-          if (FormData.network !== chainId) {
-            networkFunc = await changeNetwork(FormData.network);
-            console.log(networkFunc,"network");
-            if(!networkFunc){
-              throw "vikcy"
-            }
-          }
-          // if(networkFunc){
+      let networkFunc;
+      if (FormData.network !== chainId) {
+        await addNewNetwork(FormData.network);
+        networkFunc = await changeNetwork(FormData.network);
+        console.log(networkFunc, "network");
+        if (!networkFunc) {
+          throw "vikcy";
+        }
+      }
+      // if(networkFunc){
       // if (FormData.network === chainId) {
-        // navigate("/generator/final");
-        console.log(FormData.network, "currentNetworkID");
+      // navigate("/generator/final");
+      console.log(FormData.network, "currentNetworkID");
 
-        // let res = await sendCommision(commissionFee);
-        // console.log(res, "ress send commision matic main");
-        props.setShow(false);
-      let res = await sendCommision(commissionFee)
+      // let res = await sendCommision(commissionFee);
+      // console.log(res, "ress send commision matic main");
+      props.setShow(false);
+      let res = await sendCommision(commissionFee);
       // console.log(res, "ress send commision matic main")
-      if(!res){
-        props.setShow(true)
+      if (!res) {
+        props.setShow(true);
         navigate("/generator/moonriver");
       }
-        if (res) {
-          // props.setShow(false);
+      if (res) {
+        // props.setShow(false);
 
-          //hit contract compile api
+        //hit contract compile api
 
-          axios
-            .post(
-              "https://tokenmaker-apis.block-brew.com/contract/contract",
-              // https://tokenmaker-apis.block-brew.com/token/tokendetails
+        axios
+          .post(
+            "https://tokenmaker-apis.block-brew.com/contract/contract",
+            // https://tokenmaker-apis.block-brew.com/token/tokendetails
 
-              FormData
-            )
-            .then((res) => {
-              console.log(res, "response");
-              // console.log(contractSource, "contract Source api side ");
-              //calling deploy function
-              deployContract(res.data.result, FormData).then((res) => {
-                if (res.error) {
-                  navigate("/generator/moonriver");
-                  props.setShow(true);
-                  res.error.code === "ACTION_REJECTED"
-                    ? toast.error("User Rejected The Request")
-                    : toast.error(res.error.message);
-                } else {
-                  toast.success("Token Deploy Successfully!");
-                  // navigate("/generator/final");
-                  props.setShow(false);
-                  console.log(
-                    res,
-                    "else side deploy then return deploy succes"
-                  );
-                }
-              });
-            })
-            .catch((error) => {
-              console.log("Api fail error", error);
-              props.setShow(true);
-              // navigate("/generator/ethereum");
-              error.response?.data?.message
-                ? toast.error(error.response?.data?.message)
-                : toast.error("Data Fetch Failed Try Again");
+            FormData
+          )
+          .then((res) => {
+            console.log(res, "response");
+            // console.log(contractSource, "contract Source api side ");
+            //calling deploy function
+            deployContract(res.data.result, FormData).then((res) => {
+              if (res.error) {
+                navigate("/generator/moonriver");
+                props.setShow(true);
+                res.error.code === "ACTION_REJECTED"
+                  ? toast.error("User Rejected The Request")
+                  : toast.error(res.error.message);
+              } else {
+                toast.success("Token Deploy Successfully!");
+                // navigate("/generator/final");
+                props.setShow(false);
+                console.log(res, "else side deploy then return deploy succes");
+              }
             });
-        }
+          })
+          .catch((error) => {
+            console.log("Api fail error", error);
+            props.setShow(true);
+            // navigate("/generator/ethereum");
+            error.response?.data?.message
+              ? toast.error(error.response?.data?.message)
+              : toast.error("Data Fetch Failed Try Again");
+          });
+      }
       // } else {
 
       //   changeNetwork(FormData.network);
       // }
-          
     } catch (error) {
       toast.error(error.message);
       console.log("compile contract side catch er", error);
@@ -797,7 +802,7 @@ const MoonRiverMain1 = (props) => {
                   Create Your Moon River Token
                 </span>
               </h1>
-              <p style={{ color: 'black' }}>
+              <p style={{ color: "black" }}>
                 Easily deploy your Smart Contract for a Standard, Capped,
                 Mintable, Burnable Moon River Token.
                 <br />
@@ -817,8 +822,8 @@ const MoonRiverMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label, index) => (
+                          <Step key={index}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}
@@ -943,7 +948,8 @@ const MoonRiverMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              The number of decimal of your token must be between 6 & 21 (default 18)
+                              The number of decimal of your token must be
+                              between 6 & 21 (default 18)
                             </span>
                             <div className="text-danger f-12">
                               {err.decimalsErr}
@@ -1007,8 +1013,8 @@ const MoonRiverMain1 = (props) => {
                               </span>
                             </label>
                             <span className="form-text text-muted">
-                              Your token will const all the functionalities,
-                              and confirms to Moon River protocol
+                              Your token will const all the functionalities, and
+                              confirms to Moon River protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -1026,8 +1032,8 @@ const MoonRiverMain1 = (props) => {
                               </span>
                             </label>
                             <span className="form-text text-muted">
-                              The source code of your contract is
-                              automatically published and verified
+                              The source code of your contract is automatically
+                              published and verified
                             </span>
                           </div>
                           <div className="form-group">
@@ -1045,8 +1051,8 @@ const MoonRiverMain1 = (props) => {
                               </span>
                             </label>
                             <span className="form-text text-muted">
-                              A link pointing to this page will be added in
-                              the description of your contract (Free and Basic
+                              A link pointing to this page will be added in the
+                              description of your contract (Free and Basic
                               contracts only)
                             </span>
                           </div>
@@ -1097,34 +1103,37 @@ const MoonRiverMain1 = (props) => {
                                 disabled={f_pausable}
                                 onChange={ethMainFormHandler}
                               />
-                              <span className="form-check-label">
-                                Pausable
-                              </span>
+                              <span className="form-check-label">Pausable</span>
                             </label>
                             <span className="form-text text-muted">
                               Allow your tokens to be paused
                             </span>
                           </div>
-                          <div className='d-flex justify-content-between'>
-                            <button type="button" className="btn form-btn ml-0" onClick={(e) => {
-                              e.preventDefault()
-                              setStep(1)}}>
+                          <div className="d-flex justify-content-between">
+                            <button
+                              type="button"
+                              className="btn form-btn ml-0"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setStep(1);
+                              }}
+                            >
                               Back
                             </button>
-                            <button type="button" className="btn form-btn " onClick={() => setStep(3)}>
+                            <button
+                              type="button"
+                              className="btn form-btn "
+                              onClick={() => setStep(3)}
+                            >
                               Next
                             </button>
                           </div>
-
                         </form>
-
                       </div>
                     </div>
                   </div>
                 </div>
               </section>
-
-
             ) : (
               <section>
                 <div className="container">
@@ -1141,31 +1150,28 @@ const MoonRiverMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             >
                               <option>Select your network</option>
-                              {data.map((item) => {
+                              {data.map((item, i) => {
                                 if (
-                                  item.parentNetworkName ===
-                                  "Moon River" &&
+                                  item.parentNetworkName === "Moon River" &&
                                   item.tokenType === "free"
                                 ) {
                                   return (
-                                    <option value={item.value}>
+                                    <option value={item.value} key={i}>
                                       {item.subNetworkName}
                                     </option>
                                   );
                                 } else if (
-                                  item.parentNetworkName ===
-                                  "Moon River" &&
+                                  item.parentNetworkName === "Moon River" &&
                                   item.tokenType === "basic"
                                 ) {
-                                  <option value={item.value}>
+                                  <option value={item.value} key={i}>
                                     {item.subNetworkName}
                                   </option>;
                                 } else if (
-                                  item.parentNetworkName ===
-                                  "Moon River" &&
+                                  item.parentNetworkName === "Moon River" &&
                                   item.tokenType === "custom"
                                 ) {
-                                  <option value={item.value}>
+                                  <option value={item.value} key={i}>
                                     {item.subNetworkName}
                                   </option>;
                                 }
@@ -1299,12 +1305,8 @@ const MoonRiverMain1 = (props) => {
                                     ...prev,
                                     agreementErr:
                                       "Please confirm that you have read and understood our terms of use",
-                                  }))
-
-                                }
-                                else (
-                                  compileContract(ethFormData)
-                                )
+                                  }));
+                                } else compileContract(ethFormData);
                               }}
                             >
                               Deploy

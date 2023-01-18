@@ -7,24 +7,26 @@ import { Link } from "react-router-dom";
 import Logo from "../../../assets/footerlogo.png";
 import { PrivacyPolicy } from "../../Layots/PrivacPolicyModal";
 import CIcon from "@coreui/icons-react";
-import { cilMail } from '@coreui/icons'
-import { FiMail } from 'react-icons/fi'
-import { AiFillPhone } from 'react-icons/ai'
+import { cilMail } from "@coreui/icons";
+import { FiMail } from "react-icons/fi";
+import { AiFillPhone } from "react-icons/ai";
 import FooterSkeleton from "../../../skeleton/FooterSkeleton";
 
 function Footer() {
   const [footer, setFooter] = useState([]);
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
-    setLoader(true)
+    setLoader(true);
     const fetchData = async () => {
       const respHeader = await axios.get(FOOTER);
       setFooter(respHeader.data.msg);
-      setLoader(false)
+      setLoader(false);
     };
     fetchData();
   }, []);
-  return loader ? <FooterSkeleton /> : (
+  return loader ? (
+    <FooterSkeleton />
+  ) : (
     <>
       <div
         className="page-footer"
@@ -35,45 +37,67 @@ function Footer() {
             <div className="row" style={{ color: `${footer.contentColor}` }}>
               <div className="col-md-6 col-lg-4 mb-xl-0 mb-4">
                 <span>
-                  <a href=' https://blocktechbrew.com/' target='_blank'>
+                  <a href=" https://blocktechbrew.com/" target="_blank">
                     <img className="footer-logo" src={Logo} alt="" />
                   </a>
                 </span>
-                <p style={{ fontSize: "12px", marginBottom: "20px", maxWidth: '330px' }}>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    marginBottom: "20px",
+                    maxWidth: "330px",
+                  }}
+                >
                   Build business ecosystems laced with decentralization,
                   enhanced security and transparency with our custom blockchain
                   app development
                 </p>
                 <h6>Our Social Presence</h6>
                 <div className="d-flex icons social-links">
-                  <a href=' https://www.facebook.com/blocktechbrew' target='_blank'>
-                    <i class="fa-brands fa-facebook-f"></i>
+                  <a
+                    href=" https://www.facebook.com/blocktechbrew"
+                    target="_blank"
+                  >
+                    <i className="fa-brands fa-facebook-f"></i>
                   </a>
-                  <a href=' https://twitter.com/blocktechbrew' target='_blank'>
-                    <i class="fa-brands fa-twitter"></i>
+                  <a href=" https://twitter.com/blocktechbrew" target="_blank">
+                    <i className="fa-brands fa-twitter"></i>
                   </a>
-                  <a href=' https://www.linkedin.com/company/block-tech-brew/' target='_blank'>
-
-                    <i class="fa-brands fa-linkedin-in"></i>
+                  <a
+                    href=" https://www.linkedin.com/company/block-tech-brew/"
+                    target="_blank"
+                  >
+                    <i className="fa-brands fa-linkedin-in"></i>
                   </a>
-                  <a href=' https://www.instagram.com/blocktechbrew/?hl=en' target='_blank'>
-
-                    <i class="fa-brands fa-instagram"></i>
+                  <a
+                    href=" https://www.instagram.com/blocktechbrew/?hl=en"
+                    target="_blank"
+                  >
+                    <i className="fa-brands fa-instagram"></i>
                   </a>
                 </div>
               </div>
               <div className="col-md-6 col-lg-2 services mb-xl-0 mb-md-4">
                 <h5 className="mb-4">Our Services</h5>
-                <a href=' https://blocktechbrew.com/metaverse-development-company/' target='_blank' >
+                <a
+                  href=" https://blocktechbrew.com/metaverse-development-company/"
+                  target="_blank"
+                >
                   <p>Metaverse</p>
                 </a>
-                <a href=' https://blocktechbrew.com/defi/' target='_blank'>
+                <a href=" https://blocktechbrew.com/defi/" target="_blank">
                   <p>Defi</p>
                 </a>
-                <a href=' https://blocktechbrew.com/nft-marketplace-development-company/' target='_blank'>
+                <a
+                  href=" https://blocktechbrew.com/nft-marketplace-development-company/"
+                  target="_blank"
+                >
                   <p>NFT Marketplace</p>
                 </a>
-                <a href='  https://blocktechbrew.com/cryptocurrency-exchange/' target='_blank'>
+                <a
+                  href="  https://blocktechbrew.com/cryptocurrency-exchange/"
+                  target="_blank"
+                >
                   <p>Crypto Exchange</p>
                 </a>
               </div>
@@ -103,16 +127,27 @@ function Footer() {
               <div className="col-md-6 col-lg-4">
                 <h5 className="mb-4">Our Newsletter</h5>
                 <div className="d-flex mb-4">
-                  <input type='text' className="numberinput" placeholder="" />
+                  <input type="text" className="numberinput" placeholder="" />
                   <button className="sbbutton blue-btn">Subscribe</button>
                 </div>
                 <h5 className="mb-3">Contact Us</h5>
                 <div className="contact">
-                  <a className="d-block mb-2" href=" mailto:business@blocktechbrew.com?subject=SendMail&body=Description" target='_blank' style={{ color: "#fff" }}>
-                    <FiMail className="me-2" />  <span>business@blocktechbrew.com</span>
+                  <a
+                    className="d-block mb-2"
+                    href=" mailto:business@blocktechbrew.com?subject=SendMail&body=Description"
+                    target="_blank"
+                    style={{ color: "#fff" }}
+                  >
+                    <FiMail className="me-2" />{" "}
+                    <span>business@blocktechbrew.com</span>
                   </a>
-                  <a className="d-block" href="tel: +91 874-590-9990" style={{ color: "#fff" }}>
-                    <AiFillPhone className="me-2" />   <span>+91 874-590-9990</span>
+                  <a
+                    className="d-block"
+                    href="tel: +91 874-590-9990"
+                    style={{ color: "#fff" }}
+                  >
+                    <AiFillPhone className="me-2" />{" "}
+                    <span>+91 874-590-9990</span>
                   </a>
                 </div>
               </div>

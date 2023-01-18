@@ -820,8 +820,8 @@ const AvaxMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label,id) => (
+                          <Step key={id}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}
@@ -1144,14 +1144,14 @@ const AvaxMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             >
                               <option defaultChecked>Select your network</option>
-                              {data.map((item) => {
+                              {data.map((item,i) => {
                                 if (
                                   item.parentNetworkName ===
                                   "Avalanche" &&
                                   item.tokenType === "free"
                                 ) {
                                   return (
-                                    <option value={item.value}>
+                                    <option value={item.value} key={i}>
                                       {item.subNetworkName}
                                     </option>
                                   );
@@ -1160,7 +1160,7 @@ const AvaxMain1 = (props) => {
                                   "Avalanche" &&
                                   item.tokenType === "basic"
                                 ) {
-                                  <option value={item.value}>
+                                  <option value={item.value} key={i}>
                                     {item.subNetworkName}
                                   </option>;
                                 } else if (
@@ -1168,7 +1168,7 @@ const AvaxMain1 = (props) => {
                                   "Avalanche" &&
                                   item.tokenType === "custom"
                                 ) {
-                                  <option value={item.value}>
+                                  <option value={item.value} key={i}>
                                     {item.subNetworkName}
                                   </option>;
                                 }

@@ -581,8 +581,8 @@ const SolanaMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label, index) => (
+                          <Step key={index}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}
@@ -759,8 +759,11 @@ const SolanaMain1 = (props) => {
                               value={network}
                               onChange={networkName}
                             >
-                              <option>Select your network</option>
-                              {data.map((item) => {
+                              <option defaultValue="none"   hidden>
+                                Select your network
+                              </option>
+                              {/* <option>Select your network</option> */}
+                              {data.map((item, i) => {
                                 if (
                                   item.parentNetworkName === "Solana" &&
                                   item.tokenType === "free"
@@ -773,6 +776,7 @@ const SolanaMain1 = (props) => {
                                           ? "disabled"
                                           : ""
                                       }
+                                      key={i}
                                       value={item.value}
                                       disabled={
                                         item.value === "solanaMainnet" ||
@@ -793,6 +797,7 @@ const SolanaMain1 = (props) => {
                                         ? "disabled"
                                         : ""
                                     }
+                                    key={i}
                                     value={item.value}
                                     disabled={
                                       item.value === "solanaMainnet" ||
@@ -812,6 +817,7 @@ const SolanaMain1 = (props) => {
                                         ? "disabled"
                                         : ""
                                     }
+                                    key={i}
                                     value={item.value}
                                     disabled={
                                       item.value === "solanaMainnet" ||

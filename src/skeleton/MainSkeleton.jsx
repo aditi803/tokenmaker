@@ -24,6 +24,7 @@ const MainSkeleton = () => {
     ]
     return (
         <>
+        
             <div className="container py-5 my-5">
                 <div className='row g-3'>
                     {data.map((value, index) => {
@@ -49,7 +50,8 @@ const MainSkeleton = () => {
                             </div>
                         </div>
                         // }
-                    })}
+                    })
+                    }
                 </div>
             </div>
         </>

@@ -772,6 +772,7 @@ const EthMain1 = (props) => {
           }
           let networkFunc
           if (FormData.network !== chainId) {
+            console.log("not chnging")
             networkFunc = await changeNetwork(FormData.network);
             console.log(networkFunc,"network");
             if(!networkFunc){
@@ -888,8 +889,8 @@ const EthMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label,id) => (
+                          <Step key={id}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}

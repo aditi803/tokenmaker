@@ -10,7 +10,7 @@ import Tooltip from "../../Layots/ToolTip";
 //
 // import Link from "react-router-dom";
 // import wallet_model from "../../Modal/Multi-WalletModal";
-// 
+//
 
 import "../Eth_page/eth_styles/main.css";
 import {
@@ -25,30 +25,37 @@ import Loader from "../../../loader";
 export const MaticMain1 = (props) => {
   const navigate = useNavigate();
 
-  const { deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
-    useContext(GlobalContext);
+  const {
+    deployContract,
+    changeNetwork,
+    connectedAccAddress,
+    SignInMetamask,
+    blockchainNetworks,
+    sendCommision,
+  } = useContext(GlobalContext);
 
-  const networkFee = []
+  const networkFee = [];
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const getNetworks = () => {
-    axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
+    axios
+      .get(
+        "https://tokenmaker-apis.block-brew.com/commission/commissiondetails"
+      )
       .then((res) => {
-        setData(res.data.msg.items)
+        setData(res.data.msg.items);
         // console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
       })
       .catch((err) => {
-        console.log(err, "Error")
-      })
-  }
+        console.log(err, "Error");
+      });
+  };
 
   // console.log(data, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
-
-
   useEffect(() => {
-    getNetworks()
-  }, [setData])
+    getNetworks();
+  }, [setData]);
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -199,7 +206,9 @@ export const MaticMain1 = (props) => {
         // console.log(data.networkCommissionFeem, "Network inside commisssion feee")
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          commissionFee: data?.find(
+            (item) => item.value === ethFormData.network
+          )?.networkCommissionFee,
 
           // commissionFee: null,
         }));
@@ -209,7 +218,9 @@ export const MaticMain1 = (props) => {
           ...prev,
           // commissionFee: data.networkCommissionFee,
           // commissionFee: 150,
-          commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          commissionFee: data?.find(
+            (item) => item.value === ethFormData.network
+          )?.networkCommissionFee,
         }));
       }
     } else if (tokenType === "free") {
@@ -264,7 +275,7 @@ export const MaticMain1 = (props) => {
       } else if (supplyType === "fixed") {
         setEthFormData((prev) => ({
           ...prev,
-          mintable:false,
+          mintable: false,
         }));
         // if(recoverable===true){
         //   setEthFormData((prev) => ({
@@ -285,14 +296,18 @@ export const MaticMain1 = (props) => {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.commissionFee
-          commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          commissionFee: data?.find(
+            (item) => item.value === ethFormData.network
+          )?.networkCommissionFee,
           // commissionFee: null,
         }));
       }
       if (network === "polygonMainnet") {
         setEthFormData((prev) => ({
           ...prev,
-          commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
+          commissionFee: data?.find(
+            (item) => item.value === ethFormData.network
+          )?.networkCommissionFee,
           // commissionFee: 0.15,
         }));
       }
@@ -530,16 +545,18 @@ export const MaticMain1 = (props) => {
       boolean = e.target?.checked;
     }
     if (e.target.name === "initialSupply") {
-      if (e.target.value === '') {
+      if (e.target.value === "") {
         setEthFormData((prev) => ({
           ...prev,
           [e.target.name]: boolean ?? 0,
         }));
       } else {
-
         setEthFormData((prev) => ({
           ...prev,
-          [e.target.name]: (e.target.value).charAt(0) !== '0' ? e.target.value : (e.target.value).substring(1),
+          [e.target.name]:
+            e.target.value.charAt(0) !== "0"
+              ? e.target.value
+              : e.target.value.substring(1),
         }));
       }
 
@@ -557,30 +574,35 @@ export const MaticMain1 = (props) => {
     }));
   };
 
-
   const customVampire = (network) => {
     const blockArray = Object.entries(blockchainNetworks);
-    const selctedItem = blockArray.find((item) => item[1] === network)
-    return selctedItem?.[0]
-  }
+    const selctedItem = blockArray.find((item) => item[1] === network);
+    return selctedItem?.[0];
+  };
 
   useEffect(() => {
     //eslint-disable-next-line
-    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Polygon' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
-        return true;
+    const selectedCommissionFee = data?.find(
+      ({ value, parentNetworkName, subNetworkName, tokenType }) => {
+        if (
+          parentNetworkName === "Polygon" &&
+          (value === ethFormData.network ||
+            value === customVampire(ethFormData.network)) &&
+          tokenType === ethFormData.tokenType
+        ) {
+          return true;
+        }
       }
-    })
+    );
     // setGasFee(selectedCommissionFee)
-    setEthFormData(prev => ({
+    setEthFormData((prev) => ({
       ...prev,
-      commissionFee: selectedCommissionFee?.networkCommissionFee
-    }))
+      commissionFee: selectedCommissionFee?.networkCommissionFee,
+    }));
     // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
 
-
     //eslint-disable-next-line
-  }, [ethFormData.tokenType, ethFormData.network, data])
+  }, [ethFormData.tokenType, ethFormData.network, data]);
 
   useEffect(() => {
     if (agreement !== false) {
@@ -641,12 +663,10 @@ export const MaticMain1 = (props) => {
       }));
     }
 
-
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
       // do what u want to do with data
       // console.log("data");
       // console.log(err, "da");
-
       // < Navigate to= "/generator/final" />
       // console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
@@ -663,10 +683,10 @@ export const MaticMain1 = (props) => {
     if (tokenType === "free") {
       setEthFormData((prev) => ({
         ...prev,
-        initialSupply: 10000
+        initialSupply: 10000,
       }));
     }
-  }, [tokenType, initialSupply, maximumSupply])
+  }, [tokenType, initialSupply, maximumSupply]);
   //compile contract and generate bytecode and abi
   const compileContract = async (FormData) => {
     try {
@@ -680,24 +700,24 @@ export const MaticMain1 = (props) => {
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
         ? Object.assign(FormData, {
-          network: blockchainNetworks[FormData.network],
-        })
+            network: blockchainNetworks[FormData.network],
+          })
         : "";
 
       // console.log(FormData, "formdata eth side");
       if (FormData.network === chainId) {
         // navigate("/generator/final");
         if (connectedAccAddress.length === 0) {
-          await SignInMetamask()
+          await SignInMetamask();
         }
         // console.log(FormData.network, "currentNetworkID");
 
-        let res = await sendCommision(commissionFee)
+        let res = await sendCommision(commissionFee);
         // console.log(res, "ress send commision matic main")
 
         if (res) {
           //hit contract compile api
-        props.setShow(false);
+          props.setShow(false);
 
           axios
             .post(
@@ -709,14 +729,11 @@ export const MaticMain1 = (props) => {
               // console.log(contractSource, "contract Source api side ");
               //calling deploy function
               deployContract(res.data.result, FormData).then((res) => {
-
                 if (res.error) {
                   navigate("/generator/polygon");
                   props.setShow(true);
                   res.error.code === "ACTION_REJECTED"
-                    ? toast.error(
-                      "User Rejected The Request"
-                    )
+                    ? toast.error("User Rejected The Request")
                     : toast.error(res.error.message);
                 } else {
                   toast.success("Token Deploy Successfully");
@@ -735,7 +752,6 @@ export const MaticMain1 = (props) => {
                 : toast.error("Data Fetch Failed Try Again");
             });
         }
-
       } else {
         changeNetwork(FormData.network);
       }
@@ -773,7 +789,7 @@ export const MaticMain1 = (props) => {
               </p>
             </div>
           </div>
-          <section style={{marginBottom:'340px'}}>
+          <section style={{ marginBottom: "340px" }}>
             <div className="container">
               <div className="configurator-container">
                 <div className="configurator">
@@ -1112,14 +1128,19 @@ export const MaticMain1 = (props) => {
                               <div className="form-info">
                                 <div className="form-text text-muted">
                                   <p>
-                                    <span><strong>Owner:</strong></span> Your
-                                    wallet address will be set as the owner of
-                                    your token to perform administratives tasks
-                                    (ie, mint new tokens).
+                                    <span>
+                                      <strong>Owner:</strong>
+                                    </span>{" "}
+                                    Your wallet address will be set as the owner
+                                    of your token to perform administratives
+                                    tasks (ie, mint new tokens).
                                   </p>
                                   <p>
-                                    <span> <strong>Roles:</strong></span> All
-                                    admin tasks (mint, burn, etc...) will be
+                                    <span>
+                                      {" "}
+                                      <strong>Roles:</strong>
+                                    </span>{" "}
+                                    All admin tasks (mint, burn, etc...) will be
                                     available to different users, based on their
                                     roles. By default, your wallet's address
                                     will be given all the roles.
@@ -1147,17 +1168,30 @@ export const MaticMain1 = (props) => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                {data.map((item,i) => {
-                                  if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
+                                {data.map((item, i) => {
+                                  if (
+                                    item.parentNetworkName === "Polygon" &&
+                                    item.tokenType === "free"
+                                  ) {
                                     return (
-                                      <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                    )
-                                  }
-                                  else if (item.parentNetworkName === "Polygon" && item.tokenType === 'basic') {
-                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                  }
-                                  else if (item.parentNetworkName === "Polygon" && item.tokenType === 'custom') {
-                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
+                                      <option value={item.value} key={i}>
+                                        {item.subNetworkName}
+                                      </option>
+                                    );
+                                  } else if (
+                                    item.parentNetworkName === "Polygon" &&
+                                    item.tokenType === "basic"
+                                  ) {
+                                    <option value={item.value} key={i}>
+                                      {item.subNetworkName}
+                                    </option>;
+                                  } else if (
+                                    item.parentNetworkName === "Polygon" &&
+                                    item.tokenType === "custom"
+                                  ) {
+                                    <option value={item.value} key={i}>
+                                      {item.subNetworkName}
+                                    </option>;
                                   }
                                 })}
 
@@ -1231,7 +1265,7 @@ export const MaticMain1 = (props) => {
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
-                                    // data-bs-custom-class="custom-tooltip"
+                                    // data-bs-custom-className="custom-tooltip"
                                     title="The commison fee will be
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
@@ -1257,12 +1291,14 @@ export const MaticMain1 = (props) => {
                                   </Tooltip>
                                 </p>
                               </div>
-                              <div className="Tbtn" style={{width:"120px"}}>
+                              <div className="Tbtn" style={{ width: "120px" }}>
                                 <span className="badge bg-success d-block p-2">
                                   {commissionFee
-                                    ? commissionFee === "Free" ? "Free" : `${commissionFee} MATIC `
-                                    // ? `${commissionFee} MATIC`
-                                    : "Free"}
+                                    ? commissionFee === "Free"
+                                      ? "Free"
+                                      : `${commissionFee} MATIC `
+                                    : // ? `${commissionFee} MATIC`
+                                      "Free"}
                                 </span>
                               </div>
                             </div>
@@ -1280,9 +1316,11 @@ export const MaticMain1 = (props) => {
                                   <Tooltip
                                     content={
                                       <>
-                                        The gas fee depend <br />on gas limit and<br /> gas price.
-                                        Metamask will<br /> automatically display<br /> the best fee to use
-
+                                        The gas fee depend <br />
+                                        on gas limit and
+                                        <br /> gas price. Metamask will
+                                        <br /> automatically display
+                                        <br /> the best fee to use
                                       </>
                                     }
                                     direction="top"
@@ -1291,7 +1329,7 @@ export const MaticMain1 = (props) => {
                                   </Tooltip>
                                 </p>
                               </div>
-                              <div className="Tbtn" style={{width:"120px"}}>
+                              <div className="Tbtn" style={{ width: "120px" }}>
                                 <span className="badge bg-secondary d-block p-2">
                                   Variable
                                 </span>
@@ -1304,12 +1342,17 @@ export const MaticMain1 = (props) => {
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
                             style={{
-                              color:"#fff",
-                              backgroundColor:"#198754",
-                              borderColor:"#198754"
+                              color: "#fff",
+                              backgroundColor: "#198754",
+                              borderColor: "#198754",
                             }}
                             onClick={async () => {
-                              if (ethFormData.tokenName && ethFormData.tokenSymbol && ethFormData.decimals && ethFormData.agreement === true) {
+                              if (
+                                ethFormData.tokenName &&
+                                ethFormData.tokenSymbol &&
+                                ethFormData.decimals &&
+                                ethFormData.agreement === true
+                              ) {
                                 // let res = await sendCommision(commissionFee)
                                 // if(res===true){
                                 compileContract(ethFormData);

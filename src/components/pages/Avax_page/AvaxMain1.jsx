@@ -75,6 +75,7 @@ const AvaxMain1 = (props) => {
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
   const {
     deployContract,
+    addNewNetwork,
     changeNetwork,
     SignInMetamask,
     connectedAccAddress,
@@ -710,6 +711,7 @@ const AvaxMain1 = (props) => {
 
       let networkFunc
           if (FormData.network !== chainId) {
+            await addNewNetwork(FormData.network)
             networkFunc = await changeNetwork(FormData.network);
             console.log(networkFunc,"network");
             if(!networkFunc){
@@ -820,8 +822,8 @@ const AvaxMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label,index) => (
+                          <Step key={index}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}
@@ -1143,15 +1145,15 @@ const AvaxMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option defaultChecked>Select your network</option>
-                              {data.map((item) => {
+                              <option defaultChecked >Select your network</option>
+                              {data.map((item,i) => {
                                 if (
                                   item.parentNetworkName ===
                                   "Avalanche" &&
                                   item.tokenType === "free"
                                 ) {
                                   return (
-                                    <option value={item.value}>
+                                    <option value={item.value} key={i}>
                                       {item.subNetworkName}
                                     </option>
                                   );
@@ -1160,7 +1162,7 @@ const AvaxMain1 = (props) => {
                                   "Avalanche" &&
                                   item.tokenType === "basic"
                                 ) {
-                                  <option value={item.value}>
+                                  <option value={item.value} key={i}>
                                     {item.subNetworkName}
                                   </option>;
                                 } else if (
@@ -1168,7 +1170,7 @@ const AvaxMain1 = (props) => {
                                   "Avalanche" &&
                                   item.tokenType === "custom"
                                 ) {
-                                  <option value={item.value}>
+                                  <option value={item.value} key={i}>
                                     {item.subNetworkName}
                                   </option>;
                                 }
