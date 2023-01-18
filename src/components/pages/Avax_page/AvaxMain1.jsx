@@ -684,7 +684,7 @@ const AvaxMain1 = (props) => {
       if (connectedAccAddress.length === 0) {
         await SignInMetamask();
       }
-
+// ads
       let networkFunc;
       if (FormData.network !== chainId) {
         await addNewNetwork(FormData.network);
