@@ -50,25 +50,6 @@ const FouthStep = () => {
                                     </option>;
                                   }
                                 })} */}
-<<<<<<< HEAD
-                  </select>
-                  <span className="form-text text-muted">
-                    Select the network on wich you want to deploy your token
-                  </span>
-                </div>
-                <h2 className="heading">Transaction</h2>
-                <div className="card-body">
-                  <div className="transactionWrap">
-                    <div className="Ttext">
-                      <p>
-                        Commission fee:{" "}
-                        <i
-                          className="fa-solid fa-circle-info tip"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          // data-bs-custom-className="custom-tooltip"
-                          title="The commison fee will be
-=======
                               </select>
                               <span className="form-text text-muted">
                                 Select the network on which you want to deploy
@@ -87,7 +68,6 @@ const FouthStep = () => {
                                     data-placement="top"
                                     // data-bs-custom-class="custom-tooltip"
                                     title="The commison fee will be
->>>>>>> 9602b269ab4d8fa1292fd9cbc38c3fd413859642
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
                         ></i>

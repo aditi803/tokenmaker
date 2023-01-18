@@ -181,5 +181,5 @@ window.addEventListener('scroll', toggleVisible);
     </>
   );
 }
-// wdss
+
 export default Footer;
