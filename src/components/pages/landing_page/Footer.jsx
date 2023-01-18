@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import Logo from "../../../assets/footerlogo.png";
 import { PrivacyPolicy } from "../../Layots/PrivacPolicyModal";
 import CIcon from "@coreui/icons-react";
-import { cilMail } from '@coreui/icons'
-import { FiMail } from 'react-icons/fi'
-import { AiFillPhone } from 'react-icons/ai'
-import {BsTelephoneFill} from 'react-icons/bs'
+import { cilMail } from "@coreui/icons";
+import { FiMail } from "react-icons/fi";
+import { AiFillPhone } from "react-icons/ai";
+import { BsTelephoneFill } from "react-icons/bs";
 import FooterSkeleton from "../../../skeleton/FooterSkeleton";
 
 function Footer() {
@@ -26,30 +26,30 @@ function Footer() {
     fetchData();
   }, []);
 
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
 
-  
-const toggleVisible = () => {
-	const scrolled = document.documentElement.scrollTop;
-	if (scrolled > 300){
-	setVisible(true)
-	}
-	else if (scrolled <= 300){
-	setVisible(false)
-	}
-};
+  const toggleVisible = () => {
+    const scrolled = document.documentElement.scrollTop;
+    if (scrolled > 300) {
+      setVisible(true);
+    } else if (scrolled <= 300) {
+      setVisible(false);
+    }
+  };
 
-const scrollToTop = () =>{
-	window.scrollTo({
-	top: 0,
-	behavior: 'smooth'
-	/* you can also use 'auto' behaviour
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+      /* you can also use 'auto' behaviour
 		in place of 'smooth' */
-	});
-};
+    });
+  };
 
-window.addEventListener('scroll', toggleVisible);
-  return loader ? <FooterSkeleton /> : (
+  window.addEventListener("scroll", toggleVisible);
+  return loader ? (
+    <FooterSkeleton />
+  ) : (
     <>
       <div
         className="page-footer"
@@ -60,8 +60,13 @@ window.addEventListener('scroll', toggleVisible);
             <div className="row" style={{ color: `${footer.contentColor}` }}>
               <div className="col-sm-6 col-md-5 col-lg-4 mb-xl-0 mb-4">
                 <span>
-                  <Link to='/'>
-                    <img className="footer-logo" src={Logo} alt=""  onClick={scrollToTop} />
+                  <Link to="/">
+                    <img
+                      className="footer-logo"
+                      src={Logo}
+                      alt=""
+                      onClick={scrollToTop}
+                    />
                   </Link>
                 </span>
                 <p
@@ -164,8 +169,13 @@ window.addEventListener('scroll', toggleVisible);
                     <FiMail className="me-2" />{" "}
                     <span>business@blocktechbrew.com</span>
                   </a>
-                  <a className="d-block" href="tel: +91 874-590-9990" style={{ color: "#fff" }}>
-                    <BsTelephoneFill className="me-2" />   <span>+91 874-590-9990</span>
+                  <a
+                    className="d-block"
+                    href="tel: +91 874-590-9990"
+                    style={{ color: "#fff" }}
+                  >
+                    <BsTelephoneFill className="me-2" />{" "}
+                    <span>+91 874-590-9990</span>
                   </a>
                 </div>
               </div>
