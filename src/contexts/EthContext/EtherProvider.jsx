@@ -234,7 +234,9 @@ export const EtherProvider = ({ children }) => {
 
   //change RPC network if not equal to selected network
 
-  const changeNetwork = async (networkID) => {
+
+  const addNewNetwork = async(networkID)=>{
+    
     try {
       const  explorer = urlLinks[networkID]
       // console.log(networkID, "netwrk id in change network");
@@ -276,6 +278,54 @@ export const EtherProvider = ({ children }) => {
           });
           // 
           console.log(addNetwork,"addNetwork");
+  }catch(error){
+    toast.error("unrecongnized chain network error")
+  }
+}
+
+
+  const changeNetwork = async (networkID) => {
+    try {
+      const  explorer = urlLinks[networkID]
+      // console.log(networkID, "netwrk id in change network");
+      console.log(networkID,"networkID");
+      const chainIdInDecimal = ethers.utils.hexlify(networkID);
+
+      console.log(chainIdInDecimal, "chainid in decimal");
+
+      let parseChainId = chainIdInDecimal.replace("0x0","");
+
+          console.log(parseChainId, "parseChainId middle");
+
+          if(parseChainId.startsWith("0")){
+            parseChainId = parseChainId.slice(2,chainIdInDecimal.length);
+          console.log(parseChainId, "parseChainId inner ");
+
+          }
+          console.log(parseChainId, "parseChainId after ");
+          // das
+          console.log(parseChainId,"parsechainid");
+          // 
+          console.log(`0x${parseChainId}`,explorer.networkName,explorer.rpc,explorer.link,explorer.symbol,"expoor");
+          // const addNetwork = await window.ethereum.request({
+          //   method: 'wallet_addEthereumChain',
+          //   params: [
+          //     {
+          //       chainId: `0x${parseChainId}`,
+          //       chainName: explorer.networkName,
+          //       rpcUrls: [explorer.rpc],
+          //       blockExplorerUrls: [explorer.link],
+      
+          //       nativeCurrency: {
+          //         // name: currencyName,
+          //         symbol: explorer.symbol, // 2-6 characters long
+          //         decimals: 18,
+          //       },
+          //     },
+          //   ],
+          // });
+          // // 
+          // console.log(addNetwork,"addNetwork");
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: `0x${parseChainId}` }],
@@ -494,6 +544,7 @@ export const EtherProvider = ({ children }) => {
         changeNetwork,
         SignInMetamask: SignInMetamask,
         connectedAccAddress: accAddress,
+        addNewNetwork,
         setAccAddress: setAccAddress,
         hideAccAddress: hideAccAddress,
         addToken: addToken,

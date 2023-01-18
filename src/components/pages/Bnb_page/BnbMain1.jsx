@@ -67,6 +67,7 @@ const BnbMain1 = (props) => {
   const {
     deployContract,
     changeNetwork,
+    addNewNetwork,
     SignInMetamask,
     connectedAccAddress,
     blockchainNetworks,
@@ -707,6 +708,7 @@ const BnbMain1 = (props) => {
       }
       let networkFunc;
       if (FormData.network !== chainId) {
+        await addNewNetwork(FormData.network)
         networkFunc = await changeNetwork(FormData.network);
         console.log(networkFunc, "network");
         if (!networkFunc) {

@@ -67,6 +67,7 @@ const AvaxMain1 = (props) => {
   const {
     deployContract,
     changeNetwork,
+    addNewNetwork,
     SignInMetamask,
     connectedAccAddress,
     blockchainNetworks,
@@ -678,6 +679,7 @@ const AvaxMain1 = (props) => {
 
       let networkFunc
           if (FormData.network !== chainId) {
+            await await addNewNetwork(FormData.network)
             networkFunc = await changeNetwork(FormData.network);
             console.log(networkFunc,"network");
             if(!networkFunc){

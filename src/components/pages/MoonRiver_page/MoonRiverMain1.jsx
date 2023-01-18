@@ -75,6 +75,7 @@ const MoonRiverMain1 = (props) => {
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
   const {
     deployContract,
+    addNewNetwork,
     changeNetwork,
     SignInMetamask,
     connectedAccAddress,
@@ -712,6 +713,7 @@ const MoonRiverMain1 = (props) => {
       }
       let networkFunc
           if (FormData.network !== chainId) {
+            await addNewNetwork(FormData.network)
             networkFunc = await changeNetwork(FormData.network);
             console.log(networkFunc,"network");
             if(!networkFunc){
