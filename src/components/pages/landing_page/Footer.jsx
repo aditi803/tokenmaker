@@ -25,6 +25,30 @@ function Footer() {
     };
     fetchData();
   }, []);
+
+  const [visible, setVisible] = useState(false)
+
+  
+const toggleVisible = () => {
+	const scrolled = document.documentElement.scrollTop;
+	if (scrolled > 300){
+	setVisible(true)
+	}
+	else if (scrolled <= 300){
+	setVisible(false)
+	}
+};
+
+const scrollToTop = () =>{
+	window.scrollTo({
+	top: 0,
+	behavior: 'smooth'
+	/* you can also use 'auto' behaviour
+		in place of 'smooth' */
+	});
+};
+
+window.addEventListener('scroll', toggleVisible);
   return loader ? <FooterSkeleton /> : (
     <>
       <div
@@ -36,9 +60,9 @@ function Footer() {
             <div className="row" style={{ color: `${footer.contentColor}` }}>
               <div className="col-sm-6 col-md-5 col-lg-4 mb-xl-0 mb-4">
                 <span>
-                  <a href=' https://blocktechbrew.com/' target='_blank'>
-                    <img className="footer-logo" src={Logo} alt="" />
-                  </a>
+                  <Link to='/'>
+                    <img className="footer-logo" src={Logo} alt=""  onClick={scrollToTop} />
+                  </Link>
                 </span>
                 <p style={{ fontSize: "12px", marginBottom: "20px", maxWidth: '330px' }}>
                   Build business ecosystems laced with decentralization,
