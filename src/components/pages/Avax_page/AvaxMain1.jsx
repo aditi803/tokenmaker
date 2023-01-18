@@ -694,7 +694,6 @@ const AvaxMain1 = (props) => {
           throw "vicky";
         }
       }
-      // if(networkFunc){
 
       console.log(FormData.network, "currentNetworkID");
 
