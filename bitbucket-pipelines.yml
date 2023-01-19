@@ -11,6 +11,7 @@ pipelines:
           caches:
             - node
           script:
+            - rm -rf package-lock.json 
             - npm install --legacy-peer-deps
             - CI=false npm run build
           artifacts:
