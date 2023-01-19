@@ -91,7 +91,7 @@ const SolanaMain1 = (props) => {
   const [uri, setUri] = useState("safhfsa");
   const [agreement, setAgreement] = useState(false);
   const [decimals, setDecimals] = useState(18);
-  const [initialSupply, setInitialSupply] = useState("1000")
+  const [initialSupply, setInitialSupply] = useState("10000")
   // console.log(tokenName, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Tpokebn Name here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   const navigate = useNavigate();
 

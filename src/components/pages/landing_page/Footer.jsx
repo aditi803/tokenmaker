@@ -10,12 +10,14 @@ import CIcon from "@coreui/icons-react";
 import { cilMail } from '@coreui/icons'
 import { FiMail } from 'react-icons/fi'
 import { AiFillPhone } from 'react-icons/ai'
-import {BsTelephoneFill} from 'react-icons/bs'
+import { BsTelephoneFill } from 'react-icons/bs'
 import FooterSkeleton from "../../../skeleton/FooterSkeleton";
+import {toast} from 'react-toastify'
 
 function Footer() {
   const [footer, setFooter] = useState([]);
   const [loader, setLoader] = useState(false)
+  const [subscribe, setSubscribe] = useState('')
   useEffect(() => {
     setLoader(true)
     const fetchData = async () => {
@@ -28,27 +30,41 @@ function Footer() {
 
   const [visible, setVisible] = useState(false)
 
-  
-const toggleVisible = () => {
-	const scrolled = document.documentElement.scrollTop;
-	if (scrolled > 300){
-	setVisible(true)
-	}
-	else if (scrolled <= 300){
-	setVisible(false)
-	}
-};
 
-const scrollToTop = () =>{
-	window.scrollTo({
-	top: 0,
-	behavior: 'smooth'
-	/* you can also use 'auto' behaviour
-		in place of 'smooth' */
-	});
-};
+  const toggleVisible = () => {
+    const scrolled = document.documentElement.scrollTop;
+    if (scrolled > 300) {
+      setVisible(true)
+    }
+    else if (scrolled <= 300) {
+      setVisible(false)
+    }
+  };
 
-window.addEventListener('scroll', toggleVisible);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+      /* you can also use 'auto' behaviour
+        in place of 'smooth' */
+    });
+  };
+
+  const subscribeNewsletter = (e) => {
+    console.log("subscribe button")
+    axios.post("https://tokenmaker-apis.block-brew.com/subscribe/addsubscriber",{email:subscribe})
+    .then((res) => {
+      toast.success("Successfully subscribed!")
+    }) 
+    .catch((err) => {
+      toast.error("Unable to subscribe")
+    })
+   setSubscribe("")
+  }
+
+  // console.log(subscribe, "susbscribe")
+
+  window.addEventListener('scroll', toggleVisible);
   return loader ? <FooterSkeleton /> : (
     <>
       <div
@@ -61,7 +77,7 @@ window.addEventListener('scroll', toggleVisible);
               <div className="col-sm-6 col-md-5 col-lg-4 mb-xl-0 mb-4">
                 <span>
                   <Link to='/'>
-                    <img className="footer-logo" src={Logo} alt=""  onClick={scrollToTop} />
+                    <img className="footer-logo" src={Logo} alt="" onClick={scrollToTop} />
                   </Link>
                 </span>
                 <p style={{ fontSize: "12px", marginBottom: "20px", maxWidth: '330px' }}>
@@ -128,8 +144,10 @@ window.addEventListener('scroll', toggleVisible);
               <div className="col-sm-6 col-lg-4">
                 <h5 className="mb-4">Our Newsletter</h5>
                 <div className="d-flex mb-4">
-                  <input type='text' className="numberinput" placeholder="" />
-                  <button className="sbbutton blue-btn">Subscribe</button>
+                  <input type='text' className="numberinput" placeholder="Enter your email here" onChange={(e) => setSubscribe(e.target.value)} />
+                  <button className="sbbutton blue-btn" onClick={() => {
+                    subscribeNewsletter()
+                  }}>Subscribe</button>
                 </div>
                 <h5 className="mb-3">Contact Us</h5>
                 <div className="contact">

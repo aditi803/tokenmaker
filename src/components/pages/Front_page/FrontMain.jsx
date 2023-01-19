@@ -357,7 +357,7 @@ export const FrontMain = () => {
                       </div>
                     </div>
                   </div>
-                  <div className={`faq_bottom text-center my-3 my-md-5`}>
+                  <div className={`faq_bottom text-center mt-3 mt-md-5`}>
                     <h3
                       style={{ color: `${featuresData.headingColor}` }}
                       className="faq-bottom-text"

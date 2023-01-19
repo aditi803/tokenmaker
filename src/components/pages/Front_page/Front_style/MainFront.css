@@ -103,18 +103,19 @@
 
 .section-faq {
     padding: 110px 0;
-    background-image: url("../../../../assets/faqbackground.2.png");
-    background-color: #f7f4fb;
+    background-image: url("../../../../assets/faqbackground.png");
+    /* background-color: #f7f4fb; */
     background-size: cover;
 }
 
 
 .faq {
-    /* background: #f2f7f6 url('../../../../../../public/esgImages/top1.png'); */
+    background-image: url('../../../../assets/faqbackground.png');
+    background-color: #f2f7f6;
     background-position: top center;
     background-repeat: no-repeat;
     background-size: 100%;
-    padding: 110px 0 40px;
+    padding: 110px 0 0;
     font-family: "Gilroy";
     scroll-behavior: smooth;
 }
@@ -480,6 +481,9 @@
     /* margin-right: 1.5rem; */
     /* flex-shrink: 0; */
 }
+
+
+
 
 @media screen and (max-width: 992px) {
     .feature-box{
