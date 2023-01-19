@@ -66,6 +66,7 @@ const BnbMain1 = (props) => {
   // const {compileContract,navigateTo}  = useContext(GlobalContext)
   const {
     deployContract,
+    addNewNetwork,
     changeNetwork,
     SignInMetamask,
     connectedAccAddress,
@@ -707,6 +708,7 @@ const BnbMain1 = (props) => {
       }
       let networkFunc;
       if (FormData.network !== chainId) {
+        await addNewNetwork(FormData.network)
         networkFunc = await changeNetwork(FormData.network);
         console.log(networkFunc, "network");
         if (!networkFunc) {
@@ -818,8 +820,8 @@ const BnbMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label,id) => (
+                          <Step key={id}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}
@@ -1146,7 +1148,7 @@ const BnbMain1 = (props) => {
                               value={network}
                               onChange={ethMainFormHandler}
                             >
-                              <option value="none" selected hidden>
+                              <option defaultValue="none"   hidden>
                                 Select your network
                               </option>
                               {/* <option >Select your network</option> */}
@@ -1212,7 +1214,7 @@ const BnbMain1 = (props) => {
                                 </Tooltip>
                               </div>
                               <div
-                                class="Tbtn my-sm-0 my-3"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-success d-block p-2 ">
@@ -1243,7 +1245,7 @@ const BnbMain1 = (props) => {
                                 </Tooltip>
                               </div>
                               <div
-                                class="Tbtn my-sm-0 my-3"
+                                className="Tbtn my-sm-0 my-3"
                                 style={{ width: "120px" }}
                               >
                                 <span className="badge bg-secondary d-block p-2">

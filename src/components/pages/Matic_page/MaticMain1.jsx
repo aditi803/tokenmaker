@@ -36,7 +36,7 @@ const MaticMain1 = (props) => {
 
   const navigate = useNavigate();
 
-  const { deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
+  const { deployContract, changeNetwork,addNewNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
     useContext(GlobalContext);
 
   const networkFee = []
@@ -718,6 +718,7 @@ const MaticMain1 = (props) => {
       }
       let networkFunc
       if (FormData.network !== chainId) {
+        await addNewNetwork(FormData.network)
         networkFunc = await changeNetwork(FormData.network);
         console.log(networkFunc, "network");
         if (!networkFunc) {
@@ -835,8 +836,8 @@ const MaticMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label,index) => (
+                          <Step key={index}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}

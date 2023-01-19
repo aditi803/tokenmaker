@@ -24,24 +24,34 @@ export const EthMain1 = (props) => {
   // const {compileContract}  = useContext(GlobalContext)
   const navigate = useNavigate();
 
-  const { toggler, deployContract, changeNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
-    useContext(GlobalContext);
+  const {
+    toggler,
+    deployContract,
+    changeNetwork,
+    connectedAccAddress,
+    SignInMetamask,
+    blockchainNetworks,
+    sendCommision,
+  } = useContext(GlobalContext);
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const getNetworks = () => {
-    axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
+    axios
+      .get(
+        "https://tokenmaker-apis.block-brew.com/commission/commissiondetails"
+      )
       .then((res) => {
-        setData(res.data.msg.items)
+        setData(res.data.msg.items);
         // console.log(res.data.msg.items, "Aditii ddata jo ni aata>>>>>>>>>>>>>>> ");
       })
       .catch((err) => {
-        console.log(err, "Error")
-      })
-  }
+        console.log(err, "Error");
+      });
+  };
 
   useEffect(() => {
-    getNetworks()
-  }, [setData])
+    getNetworks();
+  }, [setData]);
 
   const [ethFormData, setEthFormData] = useState({
     tokenType: "basic",
@@ -253,7 +263,7 @@ export const EthMain1 = (props) => {
       } else if (supplyType === "fixed") {
         setEthFormData((prev) => ({
           ...prev,
-          mintable:false,
+          mintable: false,
         }));
         // if(recoverable===true){
         //   setEthFormData((prev) => ({
@@ -553,38 +563,41 @@ export const EthMain1 = (props) => {
   //   binanceSmartChain: 56,
   // };
 
-
   const customVampire = (network) => {
     const blockArray = Object.entries(blockchainNetworks);
-    const selctedItem = blockArray.find((item) => item[1] === network)
-    return selctedItem?.[0]
-  }
-
+    const selctedItem = blockArray.find((item) => item[1] === network);
+    return selctedItem?.[0];
+  };
 
   useEffect(() => {
-    const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Ethereum' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
-        return true;
+    const selectedCommissionFee = data?.find(
+      ({ value, parentNetworkName, subNetworkName, tokenType }) => {
+        if (
+          parentNetworkName === "Ethereum" &&
+          (value === ethFormData.network ||
+            value === customVampire(ethFormData.network)) &&
+          tokenType === ethFormData.tokenType
+        ) {
+          return true;
+        }
       }
-    })
+    );
     // setGasFee(selectedCommissionFee)
-    setEthFormData(prev => ({
+    setEthFormData((prev) => ({
       ...prev,
-      commissionFee: selectedCommissionFee?.networkCommissionFee
-    }))
+      commissionFee: selectedCommissionFee?.networkCommissionFee,
+    }));
     // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
     // console.log(data, '1>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
     // console.log(ethFormData, '2>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
     // console.log(data, '3>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-
-
-
-  }, [ethFormData.tokenType, ethFormData.network, data, commissionFee, toggler ])
-
-
-
-
-
+  }, [
+    ethFormData.tokenType,
+    ethFormData.network,
+    data,
+    commissionFee,
+    toggler,
+  ]);
 
   const ethMainFormHandler = (e) => {
     let boolean = null;
@@ -651,7 +664,7 @@ export const EthMain1 = (props) => {
     }
   }, [agreement, tokenName, tokenSymbol, decimals]);
 
-  const [manipulate, setManipulate] = useState(false)
+  const [manipulate, setManipulate] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -687,7 +700,6 @@ export const EthMain1 = (props) => {
       // do what u want to do with data
       // console.log("data");
       // console.log(err, "da");
-
       // < Navigate to= "/generator/final" />
       // console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
@@ -722,24 +734,23 @@ export const EthMain1 = (props) => {
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
         ? Object.assign(FormData, {
-          network: blockchainNetworks[FormData.network],
-        })
+            network: blockchainNetworks[FormData.network],
+          })
         : "";
 
       // console.log(FormData, "formdata eth side");
       if (FormData.network === chainId) {
         // navigate("/generator/final");
         if (connectedAccAddress.length === 0) {
-          await SignInMetamask()
+          await SignInMetamask();
         }
         // console.log(FormData.network, "currentNetworkID");
 
-
-        let res = await sendCommision(commissionFee)
+        let res = await sendCommision(commissionFee);
         // console.log(res, "ress send commision matic main")
 
         if (res) {
-        props.setShow(false);
+          props.setShow(false);
 
           //hit contract compile api
           axios
@@ -752,14 +763,11 @@ export const EthMain1 = (props) => {
               // console.log(contractSource, "contract Source api side ");
               //calling deploy function
               deployContract(res.data.result, FormData).then((res) => {
-
                 if (res.error) {
                   navigate("/generator/ethereum");
                   props.setShow(true);
                   res.error.code === "ACTION_REJECTED"
-                    ? toast.error(
-                      "User Rejected The Request"
-                    )
+                    ? toast.error("User Rejected The Request")
                     : toast.error(res.error.message);
                 } else {
                   toast.success("Token Deploy Successfully");
@@ -778,8 +786,6 @@ export const EthMain1 = (props) => {
                 : toast.error("Data Fetch Failed Try Again");
             });
         }
-
-
       } else {
         changeNetwork(FormData.network);
       }
@@ -819,7 +825,7 @@ export const EthMain1 = (props) => {
               </p>
             </div>
           </div>
-          <section style={{marginBottom:'340px'}}>
+          <section style={{ marginBottom: "340px" }}>
             <div className="container">
               <div className="configurator-container">
                 <div className="configurator">
@@ -1158,14 +1164,18 @@ export const EthMain1 = (props) => {
                               <div className="form-info">
                                 <div className="form-text text-muted">
                                   <p>
-                                    <span><strong>Owner:</strong></span> Your
-                                    wallet address will be set as the owner of
-                                    your token to perform administratives tasks
-                                    (ie, mint new tokens).
+                                    <span>
+                                      <strong>Owner:</strong>
+                                    </span>{" "}
+                                    Your wallet address will be set as the owner
+                                    of your token to perform administratives
+                                    tasks (ie, mint new tokens).
                                   </p>
                                   <p>
-                                    <span><strong>Roles:</strong></span> All
-                                    admin tasks (mint, burn, etc...) will be
+                                    <span>
+                                      <strong>Roles:</strong>
+                                    </span>{" "}
+                                    All admin tasks (mint, burn, etc...) will be
                                     available to different users, based on their
                                     roles. By default, your wallet's address
                                     will be given all the roles.
@@ -1193,18 +1203,30 @@ export const EthMain1 = (props) => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                {data.map((item,i) => {
-                                  if (item.parentNetworkName === "Ethereum" && item.tokenType === 'free') {
+                                {data.map((item, i) => {
+                                  if (
+                                    item.parentNetworkName === "Ethereum" &&
+                                    item.tokenType === "free"
+                                  ) {
                                     return (
-                                      <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                    )
-                                  }
-                                  else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'basic') {
-                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                  }
-                                  else if (item.parentNetworkName === "Ethereum" && item.tokenType === 'custom') {
-                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
-
+                                      <option value={item.value} key={i}>
+                                        {item.subNetworkName}
+                                      </option>
+                                    );
+                                  } else if (
+                                    item.parentNetworkName === "Ethereum" &&
+                                    item.tokenType === "basic"
+                                  ) {
+                                    <option value={item.value} key={i}>
+                                      {item.subNetworkName}
+                                    </option>;
+                                  } else if (
+                                    item.parentNetworkName === "Ethereum" &&
+                                    item.tokenType === "custom"
+                                  ) {
+                                    <option value={item.value} key={i}>
+                                      {item.subNetworkName}
+                                    </option>;
                                   }
                                 })}
 
@@ -1277,7 +1299,7 @@ export const EthMain1 = (props) => {
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
-                                    // data-bs-custom-class="custom-tooltip"
+                                    // data-bs-custom-className="custom-tooltip"
                                     title="The commison fee will be
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
@@ -1306,11 +1328,12 @@ export const EthMain1 = (props) => {
                                 </p>
                               </div>
 
-                              <div className="Tbtn" style={{width:"120px"}}>
+                              <div className="Tbtn" style={{ width: "120px" }}>
                                 <span className="badge bg-success d-block p-2">
                                   {commissionFee
-                                    ?
-                                     commissionFee === "Free" ? "Free" : `${commissionFee} ETH`
+                                    ? commissionFee === "Free"
+                                      ? "Free"
+                                      : `${commissionFee} ETH`
                                     : ""}
                                   {/* {
                                      commissionFee === "Free" ? "Free" : `${commissionFee} ETH`
@@ -1336,9 +1359,11 @@ export const EthMain1 = (props) => {
                                   <Tooltip
                                     content={
                                       <>
-                                        The gas fee depend <br />on gas limit and<br /> gas price.
-                                        Metamask will<br /> automatically display<br /> the best fee to use
-
+                                        The gas fee depend <br />
+                                        on gas limit and
+                                        <br /> gas price. Metamask will
+                                        <br /> automatically display
+                                        <br /> the best fee to use
                                       </>
                                     }
                                     direction="top"
@@ -1347,7 +1372,7 @@ export const EthMain1 = (props) => {
                                   </Tooltip>
                                 </p>
                               </div>
-                              <div className="Tbtn" style={{width:"120px"}}>
+                              <div className="Tbtn" style={{ width: "120px" }}>
                                 <span className="badge bg-secondary d-block p-2">
                                   Variable
                                 </span>
@@ -1360,9 +1385,9 @@ export const EthMain1 = (props) => {
                             type="submit"
                             className="btn-lg btn-success1 w-100 botn-clr"
                             style={{
-                              color:"#fff",
-                              backgroundColor:"#198754",
-                              borderColor:"#198754"
+                              color: "#fff",
+                              backgroundColor: "#198754",
+                              borderColor: "#198754",
                             }}
                             onClick={async () => {
                               if (
@@ -1371,7 +1396,6 @@ export const EthMain1 = (props) => {
                                 ethFormData.decimals &&
                                 ethFormData.agreement === true
                               ) {
-
                                 // let res = await sendCommision(commissionFee)
                                 // if(res===true){
                                 compileContract(ethFormData);

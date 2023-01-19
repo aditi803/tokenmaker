@@ -26,7 +26,6 @@ import {
 } from "../../../disabledUtils";
 
 const BnbMain1 = (props) => {
-
   // console.log(props, "PEOPS AT BNB");
 
   const [data, setData] = useState([]);
@@ -122,7 +121,7 @@ const BnbMain1 = (props) => {
     supplyType,
     initialSupply,
     maximumSupply,
-    
+
     conforms,
     verified,
     noCopyrightLink,
@@ -643,7 +642,6 @@ const BnbMain1 = (props) => {
       // do what u want to do with data
       // console.log("data");
       // console.log(err, "da");
-
       // < Navigate to= "/generator/final" />
       // console.log(ethFormData, ">>>>>>>>>>>>>>>>");
       // navigate("/generator/final")
@@ -1186,7 +1184,7 @@ const BnbMain1 = (props) => {
                                 value={network}
                                 onChange={ethMainFormHandler}
                               >
-                                {data.map((item,i) => {
+                                {data.map((item, i) => {
                                   if (
                                     item.parentNetworkName ===
                                       "Binance Smart Chain" &&
@@ -1282,7 +1280,7 @@ const BnbMain1 = (props) => {
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
-                                    // data-bs-custom-class="custom-tooltip"
+                                    // data-bs-custom-className="custom-tooltip"
                                     title="The commison fee will be
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
@@ -1387,7 +1385,6 @@ const BnbMain1 = (props) => {
                 </div>
               </div>
             </div>
-
           </section>
         </main>
       </div>

@@ -28,7 +28,6 @@ import {
   DataV2,
   createCreateMetadataAccountV2Instruction,
 } from "@metaplex-foundation/mpl-token-metadata";
-import Swal from "sweetalert2";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -580,8 +579,8 @@ const SolanaMain1 = (props) => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label) => (
-                          <Step key={label}>
+                        {steps.map((label, index) => (
+                          <Step key={index}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
                         ))}
@@ -757,8 +756,11 @@ const SolanaMain1 = (props) => {
                               value={network}
                               onChange={networkName}
                             >
-                              <option value="none" selected hidden>Select your network</option>
-                              {data.map((item) => {
+                              <option defaultValue="none"   hidden>
+                                Select your network
+                              </option>
+                              {/* <option>Select your network</option> */}
+                              {data.map((item, i) => {
                                 if (
                                   item.parentNetworkName === "Solana" &&
                                   item.tokenType === "free"
@@ -771,6 +773,7 @@ const SolanaMain1 = (props) => {
                                           ? "disabled"
                                           : ""
                                       }
+                                      key={i}
                                       value={item.value}
                                       disabled={
                                         item.value === "solanaMainnet" ||
@@ -791,6 +794,7 @@ const SolanaMain1 = (props) => {
                                         ? "disabled"
                                         : ""
                                     }
+                                    key={i}
                                     value={item.value}
                                     disabled={
                                       item.value === "solanaMainnet" ||
@@ -810,6 +814,7 @@ const SolanaMain1 = (props) => {
                                         ? "disabled"
                                         : ""
                                     }
+                                    key={i}
                                     value={item.value}
                                     disabled={
                                       item.value === "solanaMainnet" ||
