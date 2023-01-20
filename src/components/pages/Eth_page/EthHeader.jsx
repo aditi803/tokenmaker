@@ -6,62 +6,56 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { HEADER } from "../../../api/Api";
-import axios from "axios"
+import axios from "axios";
 
 export const EthHeader = () => {
-
-  const [header, setHeader] = useState([])
-  const [loader, setLoader] = useState(true)
+  const [header, setHeader] = useState([]);
+  const [loader, setLoader] = useState(true);
   // lo
   useEffect(() => {
-
-    fetchData()
-
-  }, [])
+    fetchData();
+  }, []);
   const fetchData = async () => {
-
-
-    const respHeader = await axios.get(HEADER)
-    setHeader(respHeader.data.msg)
-    setLoader(false)
+    const respHeader = await axios.get(HEADER);
+    setHeader(respHeader.data.msg);
+    setLoader(false);
     // console.log(respHeader.data.msg, "Header resp")
     const favicon = document.getElementById("favicon");
     document.title = respHeader?.data?.msg?.investorDocumentTitle;
     // console.log(respHeader?.data?.msg?.investorDocumentTitle, "ttile")
     favicon.href = `${imageBaseUrl}${respHeader.data.msg.investorFavicon}`;
-  }
+  };
   // const {chainName} = props
-  let chainName
+  let chainName;
   const {
     connectedAccAddress,
     SignInMetamask,
     setAccAddress,
     hideAccAddress,
     accBalance,
-    chainId
+    chainId,
   } = useContext(GlobalContext);
   // if()
   if (chainId === 1 || chainId === 4 || chainId === 5) {
-    chainName = "  ETH  "
+    chainName = "  ETH  ";
   } else if (chainId === 56 || chainId === 97) {
-    chainName = "  BNB  "
+    chainName = "  BNB  ";
   } else if (chainId === 137 || chainId === 80001) {
-    chainName = "  MATIC  "
+    chainName = "  MATIC  ";
   }
   // console.log(chainName, "chainName header side");
   // console.log(chainId, "chainId header side");
 
   // console.log(connectedAccAddress, "connected addres header side");
-  const accAddress = hideAccAddress(connectedAccAddress)
+  const accAddress = hideAccAddress(connectedAccAddress);
   // function myName(){
   //   if(connectedAccAddress.length !== 0){
   //     return accAddress
   //   }else return "Connect your Wallet"
   // }
-  const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
+  const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/";
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="page-header">
       <header className="header navbar-area">
@@ -70,14 +64,15 @@ export const EthHeader = () => {
             <div className="col">
               <nav className="navbar navbar-expand-lg">
                 <Link to="/" className="navbar-brand">
-                  {!loader &&
+                  {!loader && (
                     <img
-                      src={imageBaseUrl + header.investorLogoImage}
+                      // src={imageBaseUrl + header.investorLogoImage}
+                      src="https://cdn-hnjof.nitrocdn.com/rbqEPUqwZnAoyiJEQENsAgBiOCFoQUNg/assets/images/optimized/rev-1b9374e/wp-content/themes/blockbrew-child/media/2023/01/f9c842d749181b725b2174009ffbe8f4.final_Logo.svg"
                       alt="Logo"
                       className="logoImage"
                       srcSet=""
                     />
-                  }
+                  )}
 
                   {/* <span className="span-1">
                       <span className="span-2">
@@ -98,7 +93,6 @@ export const EthHeader = () => {
                     </span> */}
                 </Link>
                 <div className="ms-md-auto mt-2 mt-md-0 ">
-                  
                   {connectedAccAddress.length !== 0 ? (
                     <button
                       type="button"
@@ -106,16 +100,21 @@ export const EthHeader = () => {
                         setAccAddress([]);
                       }}
                       className="btn blue-btn"
-                      // className="btn uppercase btn btn-action btn-rounded btn-pad" 
+                      // className="btn uppercase btn btn-action btn-rounded btn-pad"
                     >
                       {/* {show current acc address } */}
 
-                      <span className="inline-block" >
-                        <span style={{ fontWeight: "bold", paddingRight: "10px" }}>  {accBalance} {chainName} </span>  <span>{accAddress}</span>
+                      <span className="inline-block">
+                        <span
+                          style={{ fontWeight: "bold", paddingRight: "10px" }}
+                        >
+                          {" "}
+                          {accBalance} {chainName}{" "}
+                        </span>{" "}
+                        <span>{accAddress}</span>
                       </span>
                     </button>
                   ) : (
-                    
                     <button
                       type="button"
                       onClick={SignInMetamask}
