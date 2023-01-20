@@ -12,7 +12,7 @@ import { FiMail } from 'react-icons/fi'
 import { AiFillPhone } from 'react-icons/ai'
 import { BsTelephoneFill } from 'react-icons/bs'
 import FooterSkeleton from "../../../skeleton/FooterSkeleton";
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 
 function Footer() {
   const [footer, setFooter] = useState([]);
@@ -52,14 +52,15 @@ function Footer() {
 
   const subscribeNewsletter = (e) => {
     console.log("subscribe button")
-    axios.post("https://tokenmaker-apis.block-brew.com/subscribe/addsubscriber",{email:subscribe})
-    .then((res) => {
-      toast.success("Successfully subscribed!")
-    }) 
-    .catch((err) => {
-      toast.error("Unable to subscribe")
-    })
-   setSubscribe("")
+    axios.post("https://tokenmaker-apis.block-brew.com/subscribe/addsubscriber", { email: subscribe })
+      .then((res) => {
+        setSubscribe("")
+
+        toast.success("Successfully subscribed!")
+      })
+      .catch(({ response }) => {
+        toast.error(response.data.msg)
+      })
   }
 
   // console.log(subscribe, "susbscribe")

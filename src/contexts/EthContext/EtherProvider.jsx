@@ -124,7 +124,7 @@ export const EtherProvider = ({ children }) => {
     137: { link: "https://polygonscan.com/", name: "Polygon Mainnet Scan", networkName: "Polygon Mainnet",symbol:"MATIC",rpc:"https://polygon-mainnet.g.alchemy.com/v2/P11J7QqdiWk7NpU9ldBImA58-VB0mkJ-" },
     80001: { link: "https://mumbai.polygonscan.com/", name: "Polygon Testnet Scan", networkName: "Polygon Mumbai",symbol:"MATIC",rpc:"https://rpc-mumbai.maticvigil.com/" },
     1: { link: "https://etherscan.io", name: "Ethereum Mainnet Scan", networkName: "Ethereum",symbol:"ETH",rpc:"https://mainnet.infura.io/v3/" },
-    5: { link: "https://goerli.etherscan.io", name: "Goerli Testnet Scan", networkName: "Gorli",symbol:"GoerliETH",rpc:"https://goerli.infura.io/v3/" },
+    5: { link: "https://goerli.etherscan.io", name: "Goerli Testnet Scan", networkName: "Goerli",symbol:"GoerliETH",rpc:"https://goerli.infura.io/v3/" },
     4: { link: "https://rinkeby.etherscan.io/", name: "RinkeyBy Testnet Scan", networkName: "RinkeyBy", },
     1285:{ link: "https://moonriver.moonscan.io/", name: "Moonriver Scan", networkName: "Moon River",symbol:"MOVR",rpc:"https://rpc.api.moonriver.moonbeam.network" },
     1287:{link: "https://moonbase.moonscan.io/", name: "Moonbase Alpha Scan", networkName: "Moon Base Alpha",symbol:"DEV",rpc:"https://rpc.api.moonbase.moonbeam.network"},

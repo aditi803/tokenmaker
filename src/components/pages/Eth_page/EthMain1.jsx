@@ -45,8 +45,8 @@ const EthMain1 = (props) => {
   const getNetworks = () => {
     axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
       .then((res) => {
-        setData(res.data.msg.items)
-        // console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
+        setData(res.data.msg)
+        console.log(res.data.msg, "data Ethereum");
       })
       .catch((err) => {
         console.log(err, "Error")
@@ -222,7 +222,7 @@ const EthMain1 = (props) => {
           // commissionFee: data.find((item) => item.value === ethFormData.network)?.networkCommissionFee
         }));
       }
-      if (network === "gorli") {
+      if (network === "goerli") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: null,
