@@ -322,7 +322,7 @@ const SolanaMain1 = (props) => {
       )
       .then((res) => {
         console.log(res.data.msg.items, "uniqueeeeeeeee");
-        setData(res.data.msg.items);
+        setData(res.data.msg);
       })
       .catch((err) => {
         console.log(err, "Error");

@@ -43,7 +43,7 @@ export const MaticMain1 = (props) => {
         "https://tokenmaker-apis.block-brew.com/commission/commissiondetails"
       )
       .then((res) => {
-        setData(res.data.msg.items);
+        setData(res.data.msg);
         // console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
       })
       .catch((err) => {
