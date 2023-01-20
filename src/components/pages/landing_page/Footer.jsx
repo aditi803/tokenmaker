@@ -55,8 +55,7 @@ function Footer() {
     axios.post("https://tokenmaker-apis.block-brew.com/subscribe/addsubscriber", { email: subscribe })
       .then((res) => {
         setSubscribe("")
-
-        toast.success("Successfully subscribed!")
+        toast.success("Successfully subscribed!!")
       })
       .catch(({ response }) => {
         toast.error(response.data.msg)
@@ -145,7 +144,7 @@ function Footer() {
               <div className="col-sm-6 col-lg-4">
                 <h5 className="mb-4">Our Newsletter</h5>
                 <div className="d-flex mb-4">
-                  <input type='text' className="numberinput" placeholder="Enter your email here" onChange={(e) => setSubscribe(e.target.value)} />
+                  <input type='text' value={subscribe} className="numberinput" placeholder="Enter your email here" onChange={(e) => setSubscribe(e.target.value)} />
                   <button className="sbbutton blue-btn" onClick={() => {
                     subscribeNewsletter()
                   }}>Subscribe</button>
