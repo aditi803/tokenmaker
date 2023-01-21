@@ -542,7 +542,6 @@ export const EtherProvider = ({ children }) => {
         changeNetwork,
         SignInMetamask: SignInMetamask,
         connectedAccAddress: accAddress,
-        addNewNetwork,
         setAccAddress: setAccAddress,
         hideAccAddress: hideAccAddress,
         addToken: addToken,

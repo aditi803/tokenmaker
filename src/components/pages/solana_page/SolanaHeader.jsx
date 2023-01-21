@@ -77,8 +77,8 @@ export const SolanaHeader = (props) => {
                 <Link to="/" className="navbar-brand">
                   {!loader && (
                     <img
-                      src={imageBaseUrl + header.investorLogoImage}
-                      alt="Logo"
+                      // src={imageBaseUrl + header.investorLogoImage}
+                      src="https://cdn-hnjof.nitrocdn.com/rbqEPUqwZnAoyiJEQENsAgBiOCFoQUNg/assets/images/optimized/rev-1b9374e/wp-content/themes/blockbrew-child/media/2023/01/f9c842d749181b725b2174009ffbe8f4.final_Logo.svg"                      alt="Logo"
                       className="logoImage"
                       srcSet=""
                     />

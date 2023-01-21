@@ -3,9 +3,10 @@ import { FOOTER } from "../../../api/Api";
 import { TermsModal } from "../../Layots/TermsModal";
 import "./landing_page_styles/footer.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Logo from "../../../assets/footerlogo.png";
 import { PrivacyPolicy } from "../../Layots/PrivacPolicyModal";
+import { Link } from "react-router-dom";
+import Logo from "../../../assets/icon.png";
+// import Logo from "../../../assets/footerlogo.png";
 import CIcon from "@coreui/icons-react";
 import { cilMail } from '@coreui/icons'
 import { FiMail } from 'react-icons/fi'
@@ -78,6 +79,7 @@ function Footer() {
               <div className="col-sm-6 col-md-5 col-lg-4 mb-xl-0 mb-4">
                 <span>
                   <Link to='/'>
+                    {/* <img className="footer-logo" src={Logo} alt="" onClick={scrollToTop} /> */}
                     <img className="footer-logo" src={Logo} alt="" onClick={scrollToTop} />
                   </Link>
                 </span>
