@@ -486,7 +486,7 @@ export const EtherProvider = ({ children }) => {
           ...prev,
           tokenAddress: contract.address,
           tokenSymbol: newFormData.tokenSymbol,
-          tokenDecimals: newFormData.decimals,
+          tokenDecimals: 18,
           txHash: contract.deployTransaction.hash,
           chainID: newFormData.network,
         }));

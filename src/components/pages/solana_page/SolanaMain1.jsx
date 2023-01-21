@@ -450,14 +450,14 @@ const SolanaMain1 = (props) => {
 
       try {
         const signature = await sendTransaction(transaction, connection);
-        // console.log(signature,"signature");
+        console.log(signature,"signature");
         props.setShow(false);
 
         const signpay = await connection.confirmTransaction(
           signature,
           "processed"
         );
-        // console.log(signpay,"signpay");
+        console.log(signpay,"signpay");
         //   // props.setshow(false)
         //   console.log("transaction ke ooperss");
 
@@ -468,6 +468,7 @@ const SolanaMain1 = (props) => {
             signers: [mintKeypair],
           }
         );
+        console.log(myTransaction,"myTranstrnas");
         // let txid = await connection.confirmTransaction(signature);
 
         // console.log(myTransaction,"trap");

@@ -665,6 +665,7 @@ const AvaxMain1 = (props) => {
   const compileContract = async (FormData) => {
     try {
       console.log(FormData.network, "fromdatanetwork");
+      // console.log(ethFormData.decimal,"demikal")
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       console.log(provider, "provider");
       const { chainId } = await provider.getNetwork();
