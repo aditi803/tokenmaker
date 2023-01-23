@@ -17,7 +17,7 @@ import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import App from "../../App";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
-
+// a
 
 
 export default function WalletAdapter() {
