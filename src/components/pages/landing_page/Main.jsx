@@ -10,7 +10,7 @@ import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton";
 import avalancheImage from "../../../assets/Avalanche_logo_without_text.png"
 import SelectBanner from "../Eth_page/SelectBanner";
-
+import celoLogo from "../../../assets/Celo_Logo.jpg"
 function Main() {
   const { setSolDeploy, setDeploySuccess, startToggle, setStartToggle } = useContext(GlobalContext);
 
@@ -97,6 +97,7 @@ function Main() {
                         </div>
                       );
                     })}
+
                     {/* <div className="col-sm-6 col-md-4 col-lg-3 col-xxl">
                           <div className="chain-item">
                             <Link
@@ -120,6 +121,28 @@ function Main() {
                           </div>
                         </div> */}
                   </>
+                  <div className="col-sm-6 col-md-4 col-lg-3" >
+                          <div className="chain-item">
+                            <Link
+                              to={`/generator/celo`}
+                              className="chain-link chain-bsc"
+                            >
+                              <span className="title">
+                                Celo Network
+                              </span>
+                              <span
+                                className="logo"
+                                style={{
+                                  backgroundImage: `url(${celoLogo})`,
+                                }}
+                              ></span>
+
+                              <span className="text-muted description">
+                                Create your token on Celo Blockchain
+                              </span>
+                            </Link>
+                          </div>
+                        </div>
                 </div>
               </div>
             </>

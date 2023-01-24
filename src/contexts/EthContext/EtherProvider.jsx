@@ -116,6 +116,8 @@ export const EtherProvider = ({ children }) => {
     moonBaseAlpha: 1287,
     avalanche: 43114,
     avalancheFujiCChain: 43113,
+    celo:42220,
+    celoTestnet:44787
   };
 
   const urlLinks = {
@@ -130,6 +132,10 @@ export const EtherProvider = ({ children }) => {
     1287:{link: "https://moonbase.moonscan.io/", name: "Moonbase Alpha Scan", networkName: "Moon Base Alpha",symbol:"DEV",rpc:"https://rpc.api.moonbase.moonbeam.network"},
     43113:{link: "https://testnet.snowtrace.io/", name: "Avalanche Fuji C-Chain Scan", networkName: "Avalanche Fuji C Chain",symbol:"AVAX",rpc:"https://api.avax-test.network/ext/bc/C/rpc"},
     43114:{link: "https://snowtrace.io/", name: "Avalanche Network Scan", networkName: "Avalanche",symbol:"AVAX",rpc:"https://api.avax.network/ext/bc/C/rpc"},
+    42220:{link: "https://explorer.celo.org", name: "Celo Network Scan", networkName: "Celo (Mainnet)",symbol:"CELO",rpc:"https://forno.celo.org"},
+    44787:{link: "https://alfajores-blockscout.celo-testnet.org/", name: "Celo TestNetwork Scan", networkName: "Alfajores Testnet",symbol:"A-CELO",rpc:"https://alfajores-forno.celo-testnet.org"},
+    
+ 
   }
 
 

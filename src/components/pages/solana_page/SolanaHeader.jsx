@@ -27,6 +27,7 @@ export const SolanaHeader = (props) => {
     // console.log(finalAmount,"Ada")
     fetchData();
   }, []);
+  
   const fetchData = async () => {
     const respHeader = await axios.get(HEADER);
     setHeader(respHeader.data.msg);
