@@ -27,7 +27,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import Loader from "../../../loader";
 import { multiStepContext } from "./StepContext";
-const CeloMain1 = (props) => {
+const OptimismMain1 = (props) => {
   const steps = [" ", " ", " "];
 
   const { currentStep, submitted } = useContext(multiStepContext);
@@ -216,7 +216,7 @@ const CeloMain1 = (props) => {
           // commissionFee: null,
         }));
       }
-      if (network === "celoMainnet") {
+      if (network === "optimismMainnet") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.networkCommissionFee,
@@ -301,7 +301,7 @@ const CeloMain1 = (props) => {
           // commissionFee: null,
         }));
       }
-      if (network === "CeloMainnet") {
+      if (network === "optimismMainnet") {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
@@ -579,7 +579,7 @@ const CeloMain1 = (props) => {
   useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'celo' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName === 'optimism' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -742,7 +742,7 @@ const CeloMain1 = (props) => {
       // console.log(res, "ress send commision matic main")
       if (!res) {
         props.setShow(true)
-        navigate("/generator/celo");
+        navigate("/generator/optimism");
       }
 
       if (res) {
@@ -761,7 +761,7 @@ const CeloMain1 = (props) => {
             deployContract(res.data.result, FormData).then((res) => {
 
               if (res.error) {
-                navigate("/generator/celo");
+                navigate("/generator/optimism");
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
@@ -816,11 +816,11 @@ const CeloMain1 = (props) => {
           <div className="hero mb-5">
             <div className="container">
               <h1>
-                <span className="sub-highlight">Create Your Celo Token</span>
+                <span className="sub-highlight">Create Your Optimism Token</span>
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable Celo Token.
+                Mintable, Burnable Optimism Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -943,7 +943,7 @@ const CeloMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie celo)
+                              You token's symbol (ie Ether)
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}
@@ -1045,7 +1045,7 @@ const CeloMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Celoscan
+                                Verified on Optimisticscan
                               </span>
                             </label>
                             <span className="form-text text-muted">
@@ -1167,8 +1167,8 @@ const CeloMain1 = (props) => {
                             >
                               <option value='none' selected hidden>Select your network</option>
 
-                               <option value="celo" >Celo Mainnet</option>
-                               <option value="celoTestnet" >Celo Testnet</option>
+                               <option value="optimisticMainnet" >Optimistic Mainnet</option>
+                               <option value="optimisticTestnet" >Optimistic Testnet</option>
                             
                               
                               {/* {data.map((item, i) => {
@@ -1224,7 +1224,7 @@ const CeloMain1 = (props) => {
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} Celo`
+                                      : `${commissionFee} Optimism`
                                     : "Free"}
                                 </span>
                               </div>
@@ -1333,4 +1333,4 @@ const CeloMain1 = (props) => {
   );
 };
 
-export default CeloMain1;
+export default OptimismMain1;
