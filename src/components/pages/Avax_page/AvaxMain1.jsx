@@ -675,8 +675,8 @@ const AvaxMain1 = (props) => {
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
         ? Object.assign(FormData, {
-            network: blockchainNetworks[FormData.network],
-          })
+          network: blockchainNetworks[FormData.network],
+        })
         : "";
 
       console.log(FormData.network, "network bnb main1 side");
@@ -685,7 +685,7 @@ const AvaxMain1 = (props) => {
       if (connectedAccAddress.length === 0) {
         await SignInMetamask();
       }
-// ads
+      // ads
       let networkFunc;
       if (FormData.network !== chainId) {
         await addNewNetwork(FormData.network);
@@ -1241,8 +1241,8 @@ const AvaxMain1 = (props) => {
                                   {/*  modal*/}
                                   <Link
                                     to="/terms"
-                                    // data-bs-toggle="modal"
-                                    // data-bs-target="#exampleModal"
+                                  // data-bs-toggle="modal"
+                                  // data-bs-target="#exampleModal"
                                   >
                                     <u> Terms of Use. </u>
                                   </Link>
