@@ -28,6 +28,8 @@ import { AvaxMain } from './components/pages/Avax_page/AvaxMain.jsx';
 import Terms from './components/Layots/Terms.jsx';
 import PrivacyPolicy from './components/Layots/PrivacyPolicy.jsx';
 import { CeloMain } from './components/pages/celo_page/celoMain.jsx';
+import { HecoMain } from './components/pages/Heco_page/hecoMain.jsx';
+import { OptimismMain } from './components/pages/Optimism_page/optimismMain.jsx';
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
@@ -70,6 +72,8 @@ function App(props) {
           <Route path='/generator/moonriver' element={[<MoonRiverMain />]} />
           <Route path='/generator/avalanche' element={[<AvaxMain />]} />
           <Route path='/generator/celo' element={[<EthHeader header={header} />, <CeloMain />, <Footer />]} />
+          <Route path='/generator/heco' element={[<EthHeader header={header} />, <HecoMain />, <Footer />]} />
+          <Route path='/generator/optimism' element={[<EthHeader header={header} />, <OptimismMain />, <Footer />]} />
           <Route path='/terms' element = {<Terms />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy /> } />
         </Routes> 

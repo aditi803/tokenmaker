@@ -27,7 +27,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import Loader from "../../../loader";
 import { multiStepContext } from "./StepContext";
-const CeloMain1 = (props) => {
+const HecoMain1 = (props) => {
   const steps = [" ", " ", " "];
 
   const { currentStep, submitted } = useContext(multiStepContext);
@@ -207,7 +207,7 @@ const CeloMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-      if (network === "Alfajores") {
+      if (network === "heco-testnet") {
         // console.log(data.networkCommissionFeem, "Network inside commisssion feee")
         setEthFormData((prev) => ({
           ...prev,
@@ -216,7 +216,7 @@ const CeloMain1 = (props) => {
           // commissionFee: null,
         }));
       }
-      if (network === "celoMainnet") {
+      if (network === "hecoMainnet") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.networkCommissionFee,
@@ -293,7 +293,7 @@ const CeloMain1 = (props) => {
         // }
       }
 
-      if (network === "Alfajores") {
+      if (network === "hecoTestnet") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.commissionFee
@@ -301,7 +301,7 @@ const CeloMain1 = (props) => {
           // commissionFee: null,
         }));
       }
-      if (network === "celoMainnet") {
+      if (network === "hecoMainnet") {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
@@ -579,7 +579,7 @@ const CeloMain1 = (props) => {
   useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Celo' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName === 'Heco' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -628,7 +628,6 @@ const CeloMain1 = (props) => {
       }));
     }
   }, [agreement, tokenName, tokenSymbol, decimals]);
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -743,7 +742,7 @@ const CeloMain1 = (props) => {
       // console.log(res, "ress send commision matic main")
       if (!res) {
         props.setShow(true)
-        navigate("/generator/celo");
+        navigate("/generator/heco");
       }
 
       if (res) {
@@ -762,7 +761,7 @@ const CeloMain1 = (props) => {
             deployContract(res.data.result, FormData).then((res) => {
 
               if (res.error) {
-                navigate("/generator/celo");
+                navigate("/generator/heco");
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
@@ -817,11 +816,11 @@ const CeloMain1 = (props) => {
           <div className="hero mb-5">
             <div className="container">
               <h1>
-                <span className="sub-highlight">Create Your Celo Token</span>
+                <span className="sub-highlight">Create Your Heco Token</span>
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable Celo Token.
+                Mintable, Burnable Heco Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -944,7 +943,7 @@ const CeloMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie celo)
+                              You token's symbol (ie Heco)
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}
@@ -1046,7 +1045,7 @@ const CeloMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Celoscan
+                                Verified on Hecoscan
                               </span>
                             </label>
                             <span className="form-text text-muted">
@@ -1168,20 +1167,20 @@ const CeloMain1 = (props) => {
                             >
                               <option value='none' selected hidden>Select your network</option>
 
-                               {/* <option value="celo" >Celo Mainnet</option>
-                               <option value="celoTestnet" >Celo Testnet</option> */}
+                               {/* <option value="hecoMainnet" >Heco Mainnet</option>
+                               <option value="hecoTestnet" >Heco Testnet</option> */}
                             
                               
                               {data.map((item, i) => {
-                                if (item.parentNetworkName === "Celo" && item.tokenType === 'free') {
+                                if (item.parentNetworkName === "Heco" && item.tokenType === 'free') {
                                   return (
                                     <option value={item.value} key={i}>{item.subNetworkName}</option>
                                   )
                                 }
-                                else if (item.parentNetworkName === "Celo" && item.tokenType === 'basic') {
+                                else if (item.parentNetworkName === "Heco" && item.tokenType === 'basic') {
                                   <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
-                                else if (item.parentNetworkName === "Celo" && item.tokenType === 'custom') {
+                                else if (item.parentNetworkName === "Heco" && item.tokenType === 'custom') {
                                   <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
                               })}
@@ -1225,7 +1224,7 @@ const CeloMain1 = (props) => {
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} Celo`
+                                      : `${commissionFee} Heco`
                                     : "Free"}
                                 </span>
                               </div>
@@ -1334,4 +1333,4 @@ const CeloMain1 = (props) => {
   );
 };
 
-export default CeloMain1;
+export default HecoMain1;

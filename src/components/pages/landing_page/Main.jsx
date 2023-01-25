@@ -8,11 +8,14 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton";
-import avalancheImage from "../../../assets/Avalanche_logo_without_text.png"
+import avalancheImage from "../../../assets/Avalanche_logo_without_text.png";
 import SelectBanner from "../Eth_page/SelectBanner";
-import celoLogo from "../../../assets/Celo_Logo.jpg"
+import celoLogo from "../../../assets/Celo_Logo.jpg";
+import hecoLogo from "../../../assets/download (1)heco.png";
+import optimisticLogo from "../../../assets/optimistic.png";
 function Main() {
-  const { setSolDeploy, setDeploySuccess, startToggle, setStartToggle } = useContext(GlobalContext);
+  const { setSolDeploy, setDeploySuccess, startToggle, setStartToggle } =
+    useContext(GlobalContext);
 
   const [data, setData] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -41,9 +44,6 @@ function Main() {
         setLoader(false);
       });
   };
-
- 
-
 
   // console.log(categoryName,"Moon network")
 
@@ -98,51 +98,7 @@ function Main() {
                       );
                     })}
 
-                    {/* <div className="col-sm-6 col-md-4 col-lg-3 col-xxl">
-                          <div className="chain-item">
-                            <Link
-                              to={`/generator/avax`}
-                              className="chain-link chain-bsc"
-                            >
-                              <span className="title">
-                                "Avalanche"
-                              </span>
-                              <span
-                                className="logo"
-                                style={{
-                                  backgroundImage: `url(${avalancheImage})`,
-                                }}
-                              ></span>
-
-                              <span className="text-muted description">
-                                Create your token on Avalanche Blockchain
-                              </span>
-                            </Link>
-                          </div>
-                        </div> */}
                   </>
-                  {/* <div className="col-sm-6 col-md-4 col-lg-3" >
-                          <div className="chain-item">
-                            <Link
-                              to={`/generator/celo`}
-                              className="chain-link chain-bsc"
-                            >
-                              <span className="title">
-                                Celo Network
-                              </span>
-                              <span
-                                className="logo"
-                                style={{
-                                  backgroundImage: `url(${celoLogo})`,
-                                }}
-                              ></span>
-
-                              <span className="text-muted description">
-                                Create your token on Celo Blockchain
-                              </span>
-                            </Link>
-                          </div>
-                        </div> */}
                 </div>
               </div>
             </>
