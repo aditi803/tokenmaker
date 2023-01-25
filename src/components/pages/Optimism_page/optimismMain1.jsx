@@ -207,7 +207,7 @@ const OptimismMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-      if (network === "Alfajores") {
+      if (network === "optimismGoreli") {
         // console.log(data.networkCommissionFeem, "Network inside commisssion feee")
         setEthFormData((prev) => ({
           ...prev,
@@ -293,7 +293,7 @@ const OptimismMain1 = (props) => {
         // }
       }
 
-      if (network === "Alfajores") {
+      if (network === "optimismGoreli") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.commissionFee
@@ -1167,10 +1167,8 @@ const OptimismMain1 = (props) => {
                             >
                               <option value='none' selected hidden>Select your network</option>
 
-                               <option value="optimisticMainnet" >Optimistic Mainnet</option>
-                               <option value="optimisticTestnet" >Optimistic Testnet</option>
-                            
-                              
+                               <option value="OptimismMainnet" >Optimistic Mainnet</option>
+                               <option value="OptimismGoreli" >Optimistic Goreli</option>
                               {/* {data.map((item, i) => {
                                 if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
                                   return (

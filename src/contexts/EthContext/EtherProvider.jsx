@@ -13,7 +13,7 @@ export const EtherProvider = ({ children }) => {
   const [toggler, setToggler] = useState(false);
   const [startToggle, setStartToggle] = useState(true);
   const [solDeploy, setSolDeploy] = useState(false);
-
+  const [networkData, setNetworkData] = useState([]);
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
     tokenSymbol: "",
@@ -121,7 +121,7 @@ export const EtherProvider = ({ children }) => {
     hecoTestnet:256,
     hecoMainnet:128,
     OptimismMainnet:10,
-    OptimismTestnet:69
+    OptimismGoreli:420,
   };
 
   const urlLinks = {
@@ -141,9 +141,8 @@ export const EtherProvider = ({ children }) => {
     256:{link: "https://testnet.hecoinfo.com/", name: "Heco TestNetwork Scan", networkName: "HECO Testnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
     128:{link: "https://scan.hecochain.com", name: "Heco Mainnet Scan", networkName: "heco-mainnet ",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
     10:{link: "https://optimistic.etherscan.io", name: "Optimism Mainnet Scan", networkName: "Optimism",symbol:"Ether",rpc:"https://mainnet.optimism.io"},
-    69:{link: "https://kovan-optimistic.etherscan.io", name: "Optimism Kovan", networkName: "Optimism Kovan Testnet",symbol:"ETH",rpc:"https://kovan.optimism.io/"},
+    420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goreli", networkName: "Optimism Goerli",symbol:"ETH",rpc:"https://goerli.optimism.io"},
     
- 
   }
 
 
@@ -572,6 +571,8 @@ export const EtherProvider = ({ children }) => {
         chainId: chainId,
         urlLinks: urlLinks,
         sendCommision: sendCommision,
+        networkData,
+         setNetworkData
       }}
     >
       {/* {console.log(payment,"Payment value context side ")}
