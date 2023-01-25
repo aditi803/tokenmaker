@@ -13,7 +13,7 @@ export const EtherProvider = ({ children }) => {
   const [toggler, setToggler] = useState(false);
   const [startToggle, setStartToggle] = useState(true);
   const [solDeploy, setSolDeploy] = useState(false);
-
+  const [networkData, setNetworkData] = useState([]);
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
     tokenSymbol: "",
@@ -111,12 +111,12 @@ export const EtherProvider = ({ children }) => {
     moonBaseAlpha: 1287,
     avalanche: 43114,
     avalancheFujiCChain: 43113,
-    celoMainnet: 42220,
-    celoTestnet: 44787,
-    hecoTestnet: 256,
-    hecoMainnet: 128,
-    optimismMainnet: 10,
-    optimismTestnet: 69
+    celoMainnet:42220,
+    celoTestnet:44787,
+    hecoTestnet:256,
+    hecoMainnet:128,
+    OptimismMainnet:10,
+    OptimismGoreli:420,
   };
 
   const urlLinks = {
@@ -127,18 +127,17 @@ export const EtherProvider = ({ children }) => {
     1: { link: "https://etherscan.io", name: "Ethereum Mainnet Scan", networkName: "Ethereum", symbol: "ETH", rpc: "https://mainnet.infura.io/v3/" },
     5: { link: "https://goerli.etherscan.io", name: "Goerli Testnet Scan", networkName: "Goerli", symbol: "GoerliETH", rpc: "https://goerli.infura.io/v3/" },
     4: { link: "https://rinkeby.etherscan.io/", name: "RinkeyBy Testnet Scan", networkName: "RinkeyBy", },
-    1285: { link: "https://moonriver.moonscan.io/", name: "Moonriver Scan", networkName: "Moon River", symbol: "MOVR", rpc: "https://rpc.api.moonriver.moonbeam.network" },
-    1287: { link: "https://moonbase.moonscan.io/", name: "Moonbase Alpha Scan", networkName: "Moon Base Alpha", symbol: "DEV", rpc: "https://rpc.api.moonbase.moonbeam.network" },
-    43113: { link: "https://testnet.snowtrace.io/", name: "Avalanche Fuji C-Chain Scan", networkName: "Avalanche Fuji C Chain", symbol: "AVAX", rpc: "https://api.avax-test.network/ext/bc/C/rpc" },
-    43114: { link: "https://snowtrace.io/", name: "Avalanche Network Scan", networkName: "Avalanche", symbol: "AVAX", rpc: "https://api.avax.network/ext/bc/C/rpc" },
-    42220: { link: "https://explorer.celo.org", name: "Celo Network Scan", networkName: "Celo Mainnet", symbol: "CELO", rpc: "https://forno.celo.org" },
-    44787: { link: "https://alfajores-blockscout.celo-testnet.org/", name: "Celo TestNetwork Scan", networkName: "Alfajores Testnet", symbol: "A-CELO", rpc: "https://alfajores-forno.celo-testnet.org" },
-    256: { link: "https://testnet.hecoinfo.com/", name: "Heco TestNetwork Scan", networkName: "HECO Testnet", symbol: "HT", rpc: "https://http-testnet.hecochain.com" },
-    128: { link: "https://scan.hecochain.com", name: "Heco Mainnet Scan", networkName: "heco-mainnet ", symbol: "HT", rpc: "https://http-testnet.hecochain.com" },
-    10: { link: "https://optimistic.etherscan.io", name: "Optimism Mainnet Scan", networkName: "Optimism", symbol: "Ether", rpc: "https://mainnet.optimism.io" },
-    69: { link: "https://kovan-optimistic.etherscan.io", name: "Optimism Kovan", networkName: "Optimism Kovan Testnet", symbol: "ETH", rpc: "https://kovan.optimism.io/" },
-
-
+    1285:{ link: "https://moonriver.moonscan.io/", name: "Moonriver Scan", networkName: "Moon River",symbol:"MOVR",rpc:"https://rpc.api.moonriver.moonbeam.network" },
+    1287:{link: "https://moonbase.moonscan.io/", name: "Moonbase Alpha Scan", networkName: "Moon Base Alpha",symbol:"DEV",rpc:"https://rpc.api.moonbase.moonbeam.network"},
+    43113:{link: "https://testnet.snowtrace.io/", name: "Avalanche Fuji C-Chain Scan", networkName: "Avalanche Fuji C Chain",symbol:"AVAX",rpc:"https://api.avax-test.network/ext/bc/C/rpc"},
+    43114:{link: "https://snowtrace.io/", name: "Avalanche Network Scan", networkName: "Avalanche",symbol:"AVAX",rpc:"https://api.avax.network/ext/bc/C/rpc"},
+    42220:{link: "https://explorer.celo.org", name: "Celo Network Scan", networkName: "Celo Mainnet",symbol:"CELO",rpc:"https://forno.celo.org"},
+    44787:{link: "https://alfajores-blockscout.celo-testnet.org/", name: "Celo TestNetwork Scan", networkName: "Alfajores Testnet",symbol:"A-CELO",rpc:"https://alfajores-forno.celo-testnet.org"},
+    256:{link: "https://testnet.hecoinfo.com/", name: "Heco TestNetwork Scan", networkName: "HECO Testnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
+    128:{link: "https://scan.hecochain.com", name: "Heco Mainnet Scan", networkName: "heco-mainnet ",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
+    10:{link: "https://optimistic.etherscan.io", name: "Optimism Mainnet Scan", networkName: "Optimism",symbol:"Ether",rpc:"https://mainnet.optimism.io"},
+    420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goreli", networkName: "Optimism Goerli",symbol:"ETH",rpc:"https://goerli.optimism.io"},
+    
   }
 
 
@@ -499,6 +498,8 @@ export const EtherProvider = ({ children }) => {
         chainId: chainId,
         urlLinks: urlLinks,
         sendCommision: sendCommision,
+        networkData,
+         setNetworkData
       }}
     >
       <ToastContainer />

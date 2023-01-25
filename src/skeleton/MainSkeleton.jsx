@@ -27,31 +27,6 @@ const MainSkeleton = () => {
         {id:9}
     ]
 
-    const [network, setNetwork] = useState([])
-
-
-    const getNetworkHanlder = () => {
-        // changeApiStatus(true)
-        axios
-          .get("https://tokenmaker-apis.block-brew.com/network/networkdetails")
-          .then((res) => {
-            setNetwork(res);
-            console.log(
-              res,
-              ">>>>>>>>>>>>>>>>>>>>>Add data view page>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-            );
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
-
-
-      useEffect(() => {
-        getNetworkHanlder()
-      },[])
-
-    console.log(network, "Network data")
     return (
         <>
 
@@ -75,4 +50,4 @@ const MainSkeleton = () => {
     )
 }
 
-export default MainSkeleton
+export default MainSkeleton;
