@@ -115,8 +115,14 @@ export const EtherProvider = ({ children }) => {
     celoTestnet:44787,
     hecoTestnet:256,
     hecoMainnet:128,
-    OptimismMainnet:10,
-    OptimismGoreli:420,
+    optimismMainnet:10,
+    optimismGoreli:420,
+    iotexMainnet: 4689,
+    iotexTestnet:4690,
+    fantomMainnet: 250,
+    fantomTestnet: 4002,
+    fuseMainnet: 122,
+    fuseTestnet: 123,
   };
 
   const urlLinks = {
@@ -136,7 +142,13 @@ export const EtherProvider = ({ children }) => {
     256:{link: "https://testnet.hecoinfo.com/", name: "Heco TestNetwork Scan", networkName: "HECO Testnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
     128:{link: "https://scan.hecochain.com", name: "Heco Mainnet Scan", networkName: "heco-mainnet ",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
     10:{link: "https://optimistic.etherscan.io", name: "Optimism Mainnet Scan", networkName: "Optimism",symbol:"Ether",rpc:"https://mainnet.optimism.io"},
-    420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goreli", networkName: "Optimism Goerli",symbol:"ETH",rpc:"https://goerli.optimism.io"},
+    420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goreli Scan", networkName: "Optimism Goerli",symbol:"ETH",rpc:"https://goerli.optimism.io"},
+    4689:{link: "https://iotexscan.io", name: "IoTeX Mainnet Scan", networkName: "IoTeX Mainnet",symbol:"IOTX",rpc:"https://babel-api.mainnet.iotex.io"},
+    4690:{link: "https://testnet.iotexscan.io/", name: "IoTeX Testnet Scan", networkName: "IoTeX Testnet",symbol:"IOTX",rpc:"https://babel-api.testnet.iotex.io"},
+    250:{link: "https://ftmscan.com/", name: "Fantom Scan", networkName: "Fantom",symbol:"FTM",rpc:"https://rpc.ftm.tools/"},
+    4002:{link: "https://testnet.ftmscan.com", name: "Fantom testnet Scan", networkName: "Fantom Testnet",symbol:"FTM",rpc:"https://rpc.ankr.com/fantom_testnet"},
+    122:{link: "https://explorer.fuse.io", name: "Fuse Mainnet Scan", networkName: "Fuse Mainnet",symbol:"FUSE",rpc:"https://rpc.fuse.io"},
+    123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Sparknet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
     
   }
 

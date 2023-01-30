@@ -32,6 +32,10 @@ import { HecoMain } from './components/pages/Heco_page/hecoMain.jsx';
 import { OptimismMain } from './components/pages/Optimism_page/optimismMain.jsx';
 import Common from './components/pages/Common/CommonMain1.js';
 import { CommonMain } from './components/pages/Common/CommonMain.js';
+import { IotexMain } from './components/pages/Iotex_page/IotexMain.jsx';
+import { FantomMain } from './components/pages/Fantom_page/FantomMain.jsx';
+import FuseMain1 from './components/pages/Fuse_page/FuseMain1.jsx';
+import { FuseMain } from './components/pages/Fuse_page/FuseMain.jsx';
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
@@ -68,8 +72,8 @@ function App(props) {
           <Route path='/' element={[<FrontMain />, <ScrollButton />]} />
 
           <Route path='/generator/solana' element={[<SolanaMain net={net} setNet={setNet} />]} />
-          <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <BnbMain />, <Footer />]} />
-          <Route path='/generator/moonriver' element={[<EthHeader header={header} />, <MoonRiverMain />, <Footer />]} />
+          <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+          <Route path='/generator/moonriver' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
 
           <Route path='/generator/ethereum' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
 
@@ -85,11 +89,17 @@ function App(props) {
 
           <Route path='/terms' element={<Terms />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+
+          {/* <Route path='/generator/IoTeX' element={[<EthHeader header={header} />, <IotexMain />, <Footer />]} /> */}
+          <Route path='/generator/IoTeX' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          <Route path='/generator/Fantom' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+          <Route path='/generator/Fuse' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
         </Routes>
       </Router>
       {/* </WalletAdapter> */}
       {/* </StepContext> */}
-    </EtherProvider>
+    </EtherProvider >
   )
 }
 export default App;

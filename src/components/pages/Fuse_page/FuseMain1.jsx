@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-// import "../Eth_page/eth_styles/main.css";
-import "../Eth_page/eth_styles/main.css"
+import "../Eth_page/eth_styles/main.css";
 import "react-toastify/dist/ReactToastify.css";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-// import { TermsModal } from "../../Layots/TermsModal";
+import { Link, useNavigate } from "react-router-dom";
 import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import { toast } from "react-toastify";
 import { HiInformationCircle } from "react-icons/hi";
-// import Tooltip from "../../Layots/ToolTip";
 import Tooltip from "../../Layots/ToolTip";
 //
 // import Link from "react-router-dom";
@@ -30,8 +27,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import Loader from "../../../loader";
 import { multiStepContext } from "./StepContext";
-
-const Commonmain1 = (props) => {
+const FuseMain1 = (props) => {
   const steps = [" ", " ", " "];
 
   const { currentStep, submitted } = useContext(multiStepContext);
@@ -40,10 +36,7 @@ const Commonmain1 = (props) => {
 
   const navigate = useNavigate();
 
-  let location = useLocation()
-  console.log(location, "PAth is  ")
-
-  const { deployContract, changeNetwork, addNewNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
+  const { deployContract, changeNetwork,addNewNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
     useContext(GlobalContext);
 
   const networkFee = []
@@ -120,11 +113,6 @@ const Commonmain1 = (props) => {
     f_recoverable: true,
     f_accessType: true,
   });
-
-
-  console.log(location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1), 'Pathname')
-
-  const pathValue =   location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1)
 
   const {
     tokenType,
@@ -219,7 +207,7 @@ const Commonmain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-      if (network === "optimismTestnet") {
+      if (network === "FuseTestnet") {
         // console.log(data.networkCommissionFeem, "Network inside commisssion feee")
         setEthFormData((prev) => ({
           ...prev,
@@ -228,7 +216,7 @@ const Commonmain1 = (props) => {
           // commissionFee: null,
         }));
       }
-      if (network === "optimismMainnet") {
+      if (network === "FuseMainnet") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.networkCommissionFee,
@@ -305,7 +293,7 @@ const Commonmain1 = (props) => {
         // }
       }
 
-      if (network === "optimismTestnet") {
+      if (network === "FuseTestnet") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.commissionFee
@@ -313,7 +301,7 @@ const Commonmain1 = (props) => {
           // commissionFee: null,
         }));
       }
-      if (network === "optimismMainnet") {
+      if (network === "FuseMainnet") {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
@@ -588,10 +576,10 @@ const Commonmain1 = (props) => {
     return selctedItem?.[0]
   }
 
-useEffect(() => {
+  useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-     if(parentNetworkName.split(" ").join("").charAt(0).toUpperCase() + parentNetworkName.split(" ").join("").slice(1) === (location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1)) && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName === 'Fuse' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -737,7 +725,15 @@ useEffect(() => {
           throw "vikcy"
         }
       }
-      
+      // if(networkFunc){
+
+      // console.log(FormData, "formdata eth side");
+      // if (FormData.network === chainId) {
+      // navigate("/generator/final");
+      // console.log(FormData.network, "currentNetworkID");
+
+      // let res = await sendCommision(commissionFee)
+      // console.log(res, "ress send commision matic main")
 
       props.setShow(false);
       // let res = await sendCommision(commissionFee)
@@ -746,7 +742,7 @@ useEffect(() => {
       // console.log(res, "ress send commision matic main")
       if (!res) {
         props.setShow(true)
-        navigate("/generator/optimism");
+        navigate("/generator/Fuse");
       }
 
       if (res) {
@@ -759,12 +755,13 @@ useEffect(() => {
             FormData
           )
           .then((res) => {
-            
+            // console.log(res, "response");
+            // console.log(contractSource, "contract Source api side ");
             //calling deploy function
             deployContract(res.data.result, FormData).then((res) => {
 
               if (res.error) {
-                navigate("/generator/optimism");
+                navigate("/generator/Fuse");
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
@@ -801,14 +798,16 @@ useEffect(() => {
     }
   };
 
-  
-
-  const formatPath = (path) => {
-
-    return `/generator/${path.toLowerCase(path)}`
-
-  }
-
+  // {web3Loading ? (
+  //   <button className=" btn-inner - text " disabled>
+  //     {" "}
+  //     Loading ...{" "}
+  //   </button>
+  // ) : (
+  //   <button className=" btn-inner - text " onClick={connectWallet}>
+  //     get accounts
+  //   </button>
+  // )}
 
   return (
     <>
@@ -817,11 +816,11 @@ useEffect(() => {
           <div className="hero mb-5">
             <div className="container">
               <h1>
-                <span className="sub-highlight">Create Your {pathValue} Token</span>
+                <span className="sub-highlight">Create Your Fuse Token</span>
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable {pathValue} Token.
+                Mintable, Burnable Fuse Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -839,7 +838,7 @@ useEffect(() => {
                         alternativeLabel
                         orientation="horizontal"
                       >
-                        {steps.map((label, index) => (
+                        {steps.map((label,index) => (
                           <Step key={index}>
                             <StepLabel>{label}</StepLabel>
                           </Step>
@@ -1167,20 +1166,22 @@ useEffect(() => {
                               onChange={ethMainFormHandler}
                             >
                               <option value='none' selected hidden>Select your network</option>
-                              {
-                                data.map((item, i) => {
-                                    if (formatPath( item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'free') {
-                                      return (
-                                        <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                      )
-                                    }
-                                    else if (formatPath( item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'basic') {
-                                      <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                    }
-                                    else if (formatPath( item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'custom') {
-                                      <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                    }
-                                })}
+
+                               <option value="FuseMainnet" >Fuse Mainnet</option>
+                               <option value="FuseTestnet" >Fuse Testnet</option>
+                              {/* {data.map((item, i) => {
+                                if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
+                                  return (
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
+                                  )
+                                }
+                                else if (item.parentNetworkName === "Polygon" && item.tokenType === 'basic') {
+                                  <option value={item.value} key={i}>{item.subNetworkName}</option>
+                                }
+                                else if (item.parentNetworkName === "Polygon" && item.tokenType === 'custom') {
+                                  <option value={item.value} key={i}>{item.subNetworkName}</option>
+                                }
+                              })} */}
                             </select>
                             <span className="form-text text-muted">
                               Select the network on which you want to deploy your
@@ -1221,7 +1222,7 @@ useEffect(() => {
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} ETH`
+                                      : `${commissionFee} FTM`
                                     : "Free"}
                                 </span>
                               </div>
@@ -1330,4 +1331,4 @@ useEffect(() => {
   );
 };
 
-export default Commonmain1;
+export default FuseMain1;

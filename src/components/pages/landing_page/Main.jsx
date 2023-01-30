@@ -3,20 +3,18 @@ import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
 // import "./landing_page_styles/main.css";
 import axios from "axios";
-import Loader from "../../../loader";
+// import Loader from "../../../loader";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton";
 import SelectBanner from "../Eth_page/SelectBanner";
-import celoLogo from "../../../assets/Celo_Logo.jpg";
-import hecoLogo from "../../../assets/download (1)heco.png";
-import optimisticLogo from "../../../assets/optimistic.png";
+
 function Main() {
-  const { setSolDeploy, setDeploySuccess, startToggle, setStartToggle,networkData, setNetworkData } =
+  const { setSolDeploy, setDeploySuccess, networkData, setNetworkData } =
     useContext(GlobalContext);
 
-  
+
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -53,7 +51,7 @@ function Main() {
       <Header />
       <div className="page-content">
         <main>
-          
+
           <SelectBanner />
 
           {loader ? (
@@ -89,6 +87,7 @@ function Main() {
                         </div>
                       );
                     })}
+
                   </>
                 </div>
               </div>
