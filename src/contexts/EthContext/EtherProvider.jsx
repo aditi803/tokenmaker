@@ -121,6 +121,8 @@ export const EtherProvider = ({ children }) => {
     IoTeXTestnet:4690,
     FantomMainnet: 250,
     FantomTestnet: 4002,
+    FuseMainnet: 122,
+    FuseTestnet: 123,
   };
 
   const urlLinks = {
@@ -145,7 +147,9 @@ export const EtherProvider = ({ children }) => {
     4690:{link: "https://testnet.iotexscan.io/", name: "IoTeX Testnet Scan", networkName: "IoTeX Testnet",symbol:"IOTX",rpc:"https://babel-api.testnet.iotex.io"},
     250:{link: "https://ftmscan.com/", name: "Fantom Scan", networkName: "Fantom",symbol:"FTM",rpc:"https://rpc.ftm.tools/"},
     4002:{link: "https://testnet.ftmscan.com", name: "Fantom testnet Scan", networkName: "Fantom Testnet",symbol:"FTM",rpc:"https://rpc.ankr.com/fantom_testnet"},
-
+    122:{link: "https://explorer.fuse.io", name: "Fuse Mainnet Scan", networkName: "Fuse Mainnet",symbol:"FUSE",rpc:"https://rpc.fuse.io"},
+    123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Sparknet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
+    
   }
 
 

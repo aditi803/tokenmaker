@@ -11,6 +11,7 @@ import MainSkeleton from "../../../skeleton/MainSkeleton";
 import SelectBanner from "../Eth_page/SelectBanner";
 import IoTeXLogo from "../../../assets/iotexLogo.png";
 import fantomLogo from "../../../assets/fantom-logo-blue.png";
+import fuseLogo from "../../../assets/fuseloogo.jpeg";
 function Main() {
   const { setSolDeploy, setDeploySuccess, startToggle, setStartToggle,networkData, setNetworkData } =
     useContext(GlobalContext);
@@ -124,6 +125,26 @@ function Main() {
 
                             <span className="text-muted description">
                               Create your token on Fantom Blockchain
+                            </span>
+                          </Link>
+                        </div>
+                      </div>
+                    <div className="col-sm-6 col-md-4 col-lg-3">
+                        <div className="chain-item">
+                          <Link
+                            to={`/generator/Fuse`}
+                            className="chain-link chain-bsc"
+                          >
+                            <span className="title">Fuse Network</span>
+                            <span
+                              className="logo"
+                              style={{
+                                backgroundImage: `url(${fuseLogo})`,
+                              }}
+                            ></span>
+
+                            <span className="text-muted description">
+                              Create your token on Fuse Blockchain
                             </span>
                           </Link>
                         </div>
