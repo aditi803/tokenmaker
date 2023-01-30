@@ -27,7 +27,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import Loader from "../../../loader";
 import { multiStepContext } from "./StepContext";
-const HecoMain1 = (props) => {
+const FantomMain1 = (props) => {
   const steps = [" ", " ", " "];
 
   const { currentStep, submitted } = useContext(multiStepContext);
@@ -207,7 +207,7 @@ const HecoMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-      if (network === "heco-testnet") {
+      if (network === "FantomTestnet") {
         // console.log(data.networkCommissionFeem, "Network inside commisssion feee")
         setEthFormData((prev) => ({
           ...prev,
@@ -216,7 +216,7 @@ const HecoMain1 = (props) => {
           // commissionFee: null,
         }));
       }
-      if (network === "hecoMainnet") {
+      if (network === "FantomMainnet") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.networkCommissionFee,
@@ -293,7 +293,7 @@ const HecoMain1 = (props) => {
         // }
       }
 
-      if (network === "hecoTestnet") {
+      if (network === "FantomTestnet") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.commissionFee
@@ -301,7 +301,7 @@ const HecoMain1 = (props) => {
           // commissionFee: null,
         }));
       }
-      if (network === "hecoMainnet") {
+      if (network === "FantomMainnet") {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
@@ -579,7 +579,7 @@ const HecoMain1 = (props) => {
   useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Heco' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName === 'Fantom' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -742,7 +742,7 @@ const HecoMain1 = (props) => {
       // console.log(res, "ress send commision matic main")
       if (!res) {
         props.setShow(true)
-        navigate("/generator/heco");
+        navigate("/generator/Fantom");
       }
 
       if (res) {
@@ -761,7 +761,7 @@ const HecoMain1 = (props) => {
             deployContract(res.data.result, FormData).then((res) => {
 
               if (res.error) {
-                navigate("/generator/heco");
+                navigate("/generator/Fantom");
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
@@ -816,11 +816,11 @@ const HecoMain1 = (props) => {
           <div className="hero mb-5">
             <div className="container">
               <h1>
-                <span className="sub-highlight">Create Your Heco Token</span>
+                <span className="sub-highlight">Create Your Fantom Token</span>
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable Heco Token.
+                Mintable, Burnable Fantom Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -943,7 +943,7 @@ const HecoMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie Heco)
+                              You token's symbol (ie Ether)
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}
@@ -1045,7 +1045,7 @@ const HecoMain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Hecoscan
+                                Verified on Optimisticscan
                               </span>
                             </label>
                             <span className="form-text text-muted">
@@ -1167,23 +1167,21 @@ const HecoMain1 = (props) => {
                             >
                               <option value='none' selected hidden>Select your network</option>
 
-                               {/* <option value="hecoMainnet" >Heco Mainnet</option>
-                               <option value="hecoTestnet" >Heco Testnet</option> */}
-                            
-                              
-                              {data.map((item, i) => {
-                                if (item.parentNetworkName === "Heco" && item.tokenType === 'free') {
+                               <option value="FantomMainnet" >Fantom Mainnet</option>
+                               <option value="FantomTestnet" >Fantom Testnet</option>
+                              {/* {data.map((item, i) => {
+                                if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
                                   return (
                                     <option value={item.value} key={i}>{item.subNetworkName}</option>
                                   )
                                 }
-                                else if (item.parentNetworkName === "Heco" && item.tokenType === 'basic') {
+                                else if (item.parentNetworkName === "Polygon" && item.tokenType === 'basic') {
                                   <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
-                                else if (item.parentNetworkName === "Heco" && item.tokenType === 'custom') {
+                                else if (item.parentNetworkName === "Polygon" && item.tokenType === 'custom') {
                                   <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
-                              })}
+                              })} */}
                             </select>
                             <span className="form-text text-muted">
                               Select the network on which you want to deploy your
@@ -1224,7 +1222,7 @@ const HecoMain1 = (props) => {
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} Heco`
+                                      : `${commissionFee} FTM`
                                     : "Free"}
                                 </span>
                               </div>
@@ -1333,4 +1331,4 @@ const HecoMain1 = (props) => {
   );
 };
 
-export default HecoMain1;
+export default FantomMain1;

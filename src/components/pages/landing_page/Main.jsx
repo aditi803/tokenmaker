@@ -10,8 +10,7 @@ import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton";
 import SelectBanner from "../Eth_page/SelectBanner";
 import IoTeXLogo from "../../../assets/iotexLogo.png";
-import hecoLogo from "../../../assets/download (1)heco.png";
-import optimisticLogo from "../../../assets/optimistic.png";
+import fantomLogo from "../../../assets/fantom-logo-blue.png";
 function Main() {
   const { setSolDeploy, setDeploySuccess, startToggle, setStartToggle,networkData, setNetworkData } =
     useContext(GlobalContext);
@@ -53,14 +52,7 @@ function Main() {
       <Header />
       <div className="page-content">
         <main>
-          {/* <div className="hero mb-3 mt-5">
-            <div className="container">
-              <h1 className="sub-highlight">Select your network </h1>
-              <p style={{ color: "black" }}>
-                Your token will be deployed on the selected blockchain
-              </p>
-            </div>
-          </div>  */}
+          
           <SelectBanner />
 
           {loader ? (
@@ -96,31 +88,7 @@ function Main() {
                         </div>
                       );
                     })}
-
-                    {/* <div className="col-sm-6 col-md-4 col-lg-3 col-xxl">
-                          <div className="chain-item">
-                            <Link
-                              to={`/generator/avax`}
-                              className="chain-link chain-bsc"
-                            >
-                              <span className="title">
-                                "Avalanche"
-                              </span>
-                              <span
-                                className="logo"
-                                style={{
-                                  backgroundImage: `url(${avalancheImage})`,
-                                }}
-                              ></span>
-
-                              <span className="text-muted description">
-                                Create your token on Avalanche Blockchain
-                              </span>
-                            </Link>
-                          </div>
-                        </div> */}
-                    <>
-                      <div className="col-sm-6 col-md-4 col-lg-3">
+                    <div className="col-sm-6 col-md-4 col-lg-3">
                         <div className="chain-item">
                           <Link
                             to={`/generator/IoTeX`}
@@ -140,47 +108,26 @@ function Main() {
                           </Link>
                         </div>
                       </div>
-                      <div className="col-sm-6 col-md-4 col-lg-3">
+                    <div className="col-sm-6 col-md-4 col-lg-3">
                         <div className="chain-item">
                           <Link
-                            to={`/generator/IoTeX`}
+                            to={`/generator/Fantom`}
                             className="chain-link chain-bsc"
                           >
-                            <span className="title">Heco Network</span>
+                            <span className="title">Fantom Network</span>
                             <span
                               className="logo"
                               style={{
-                                backgroundImage: `url(${hecoLogo})`,
+                                backgroundImage: `url(${fantomLogo})`,
                               }}
                             ></span>
 
                             <span className="text-muted description">
-                              Create your token on Heco Blockchain
+                              Create your token on Fantom Blockchain
                             </span>
                           </Link>
                         </div>
                       </div>
-                      <div className="col-sm-6 col-md-4 col-lg-3">
-                        <div className="chain-item">
-                          <Link
-                            to={`/generator/optimism`}
-                            className="chain-link chain-bsc"
-                          >
-                            <span className="title">optimistic Network</span>
-                            <span
-                              className="logo"
-                              style={{
-                                backgroundImage: `url(${optimisticLogo})`,
-                              }}
-                            ></span>
-
-                            <span className="text-muted description">
-                              Create your token on optimistic Blockchain
-                            </span>
-                          </Link>
-                        </div>
-                      </div>
-                    </>
                   </>
                 </div>
               </div>

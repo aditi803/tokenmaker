@@ -301,7 +301,7 @@ const CeloMain1 = (props) => {
           // commissionFee: null,
         }));
       }
-      if (network === "CeloMainnet") {
+      if (network === "celoMainnet") {
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
@@ -579,7 +579,7 @@ const CeloMain1 = (props) => {
   useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'celo' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName === 'Celo' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -628,6 +628,7 @@ const CeloMain1 = (props) => {
       }));
     }
   }, [agreement, tokenName, tokenSymbol, decimals]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -1167,23 +1168,23 @@ const CeloMain1 = (props) => {
                             >
                               <option value='none' selected hidden>Select your network</option>
 
-                               <option value="celo" >Celo Mainnet</option>
-                               <option value="celoTestnet" >Celo Testnet</option>
+                               {/* <option value="celo" >Celo Mainnet</option>
+                               <option value="celoTestnet" >Celo Testnet</option> */}
                             
                               
-                              {/* {data.map((item, i) => {
-                                if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
+                              {data.map((item, i) => {
+                                if (item.parentNetworkName === "Celo" && item.tokenType === 'free') {
                                   return (
                                     <option value={item.value} key={i}>{item.subNetworkName}</option>
                                   )
                                 }
-                                else if (item.parentNetworkName === "Polygon" && item.tokenType === 'basic') {
+                                else if (item.parentNetworkName === "Celo" && item.tokenType === 'basic') {
                                   <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
-                                else if (item.parentNetworkName === "Polygon" && item.tokenType === 'custom') {
+                                else if (item.parentNetworkName === "Celo" && item.tokenType === 'custom') {
                                   <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
-                              })} */}
+                              })}
                             </select>
                             <span className="form-text text-muted">
                               Select the network on which you want to deploy your

@@ -207,7 +207,7 @@ const OptimismMain1 = (props) => {
         pausable: false,
         recoverable: false,
       }));
-      if (network === "optimismGoreli") {
+      if (network === "optimismTestnet") {
         // console.log(data.networkCommissionFeem, "Network inside commisssion feee")
         setEthFormData((prev) => ({
           ...prev,
@@ -293,7 +293,7 @@ const OptimismMain1 = (props) => {
         // }
       }
 
-      if (network === "optimismGoreli") {
+      if (network === "optimismTestnet") {
         setEthFormData((prev) => ({
           ...prev,
           // commissionFee: data.commissionFee
@@ -579,7 +579,7 @@ const OptimismMain1 = (props) => {
   useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'optimism' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName === 'Optimism' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -1166,22 +1166,20 @@ const OptimismMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             >
                               <option value='none' selected hidden>Select your network</option>
-
-                               <option value="OptimismMainnet" >Optimistic Mainnet</option>
-                               <option value="OptimismGoreli" >Optimistic Goreli</option>
-                              {/* {data.map((item, i) => {
-                                if (item.parentNetworkName === "Polygon" && item.tokenType === 'free') {
+                              
+                              {data.map((item, i) => {
+                                if (item.parentNetworkName === "Optimism" && item.tokenType === 'free') {
                                   return (
                                     <option value={item.value} key={i}>{item.subNetworkName}</option>
                                   )
                                 }
-                                else if (item.parentNetworkName === "Polygon" && item.tokenType === 'basic') {
+                                else if (item.parentNetworkName === "Optimism" && item.tokenType === 'basic') {
                                   <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
-                                else if (item.parentNetworkName === "Polygon" && item.tokenType === 'custom') {
+                                else if (item.parentNetworkName === "Optimism" && item.tokenType === 'custom') {
                                   <option value={item.value} key={i}>{item.subNetworkName}</option>
                                 }
-                              })} */}
+                              })}
                             </select>
                             <span className="form-text text-muted">
                               Select the network on which you want to deploy your
@@ -1222,7 +1220,7 @@ const OptimismMain1 = (props) => {
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} Optimism`
+                                      : `${commissionFee} ETH`
                                     : "Free"}
                                 </span>
                               </div>

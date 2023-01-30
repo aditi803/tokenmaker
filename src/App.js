@@ -31,6 +31,7 @@ import { CeloMain } from './components/pages/celo_page/celoMain.jsx';
 import { HecoMain } from './components/pages/Heco_page/hecoMain.jsx';
 import { OptimismMain } from './components/pages/Optimism_page/optimismMain.jsx';
 import { IotexMain } from './components/pages/Iotex_page/IotexMain.jsx';
+import { FantomMain } from './components/pages/Fantom_page/FantomMain.jsx';
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
@@ -76,6 +77,7 @@ function App(props) {
           <Route path='/generator/heco' element={[<EthHeader header={header} />, <HecoMain />, <Footer />]} />
           <Route path='/generator/optimism' element={[<EthHeader header={header} />, <OptimismMain />, <Footer />]} />
           <Route path='/generator/IoTeX' element={[<EthHeader header={header} />, <IotexMain />, <Footer />]} />
+          <Route path='/generator/Fantom' element={[<EthHeader header={header} />, <FantomMain />, <Footer />]} />
           <Route path='/terms' element = {<Terms />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy /> } />
         </Routes> 
