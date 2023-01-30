@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import "../Eth_page/eth_styles/main.css";
+// import "../Eth_page/eth_styles/main.css";
+import "../Eth_page/eth_styles/main.css"
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+// import { TermsModal } from "../../Layots/TermsModal";
 import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import { toast } from "react-toastify";
 import { HiInformationCircle } from "react-icons/hi";
+// import Tooltip from "../../Layots/ToolTip";
 import Tooltip from "../../Layots/ToolTip";
 //
 // import Link from "react-router-dom";
@@ -27,7 +30,8 @@ import axios from "axios";
 import { ethers } from "ethers";
 import Loader from "../../../loader";
 import { multiStepContext } from "./StepContext";
-const OptimismMain1 = (props) => {
+
+const Commonmain1 = (props) => {
   const steps = [" ", " ", " "];
 
   const { currentStep, submitted } = useContext(multiStepContext);
@@ -116,6 +120,9 @@ const OptimismMain1 = (props) => {
     f_recoverable: true,
     f_accessType: true,
   });
+
+
+  console.log(location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1), 'Pathname')
 
   const {
     tokenType,
@@ -579,10 +586,10 @@ const OptimismMain1 = (props) => {
     return selctedItem?.[0]
   }
 
-  useEffect(() => {
+useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Optimism' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+     if(parentNetworkName.split(" ").join("").charAt(0).toUpperCase() + parentNetworkName.split(" ").join("").slice(1) === (location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1)) && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -728,15 +735,7 @@ const OptimismMain1 = (props) => {
           throw "vikcy"
         }
       }
-      // if(networkFunc){
-
-      // console.log(FormData, "formdata eth side");
-      // if (FormData.network === chainId) {
-      // navigate("/generator/final");
-      // console.log(FormData.network, "currentNetworkID");
-
-      // let res = await sendCommision(commissionFee)
-      // console.log(res, "ress send commision matic main")
+      
 
       props.setShow(false);
       // let res = await sendCommision(commissionFee)
@@ -758,8 +757,7 @@ const OptimismMain1 = (props) => {
             FormData
           )
           .then((res) => {
-            // console.log(res, "response");
-            // console.log(contractSource, "contract Source api side ");
+            
             //calling deploy function
             deployContract(res.data.result, FormData).then((res) => {
 
@@ -1176,18 +1174,17 @@ const OptimismMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             >
                               <option value='none' selected hidden>Select your network</option>
-
                               {
                                 data.map((item, i) => {
-                                    if (formatPath( item.parentNetworkName) === location.pathname && item.tokenType === 'free') {
+                                    if (formatPath( item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'free') {
                                       return (
                                         <option value={item.value} key={i}>{item.subNetworkName}</option>
                                       )
                                     }
-                                    else if (formatPath( item.parentNetworkName) === location.pathname && item.tokenType === 'basic') {
+                                    else if (formatPath( item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'basic') {
                                       <option value={item.value} key={i}>{item.subNetworkName}</option>
                                     }
-                                    else if (formatPath( item.parentNetworkName) === location.pathname && item.tokenType === 'custom') {
+                                    else if (formatPath( item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'custom') {
                                       <option value={item.value} key={i}>{item.subNetworkName}</option>
                                     }
                                 })}
@@ -1340,4 +1337,4 @@ const OptimismMain1 = (props) => {
   );
 };
 
-export default OptimismMain1;
+export default Commonmain1;

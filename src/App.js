@@ -22,20 +22,22 @@ import { useState } from 'react';
 import axios from "axios";
 import { HEADER } from './api/Api.js';
 import { SolanaMain } from './components/pages/solana_page/SolanaMain.jsx';
-import  WalletAdapter  from './contexts/solanaContext/SolanaContext.jsx';
-import {MoonRiverMain} from './components/pages/MoonRiver_page/MoonRiverMain';
+import WalletAdapter from './contexts/solanaContext/SolanaContext.jsx';
+import { MoonRiverMain } from './components/pages/MoonRiver_page/MoonRiverMain';
 import { AvaxMain } from './components/pages/Avax_page/AvaxMain.jsx';
 import Terms from './components/Layots/Terms.jsx';
 import PrivacyPolicy from './components/Layots/PrivacyPolicy.jsx';
 import { CeloMain } from './components/pages/celo_page/celoMain.jsx';
 import { HecoMain } from './components/pages/Heco_page/hecoMain.jsx';
 import { OptimismMain } from './components/pages/Optimism_page/optimismMain.jsx';
+import Common from './components/pages/Common/CommonMain1.js';
+import { CommonMain } from './components/pages/Common/CommonMain.js';
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
 function App(props) {
   // console.log(props,"props appjs")
-  const {net,setNet}  = props;
+  const { net, setNet } = props;
 
 
   const [header, setHeader] = useState([])
@@ -58,28 +60,35 @@ function App(props) {
 
     <EtherProvider>
       {/* <StepContext> */}
-          {/* <WalletAdapter> */}
+      {/* <WalletAdapter> */}
       <Router>
         <Routes>
 
-          <Route path='/generator' element={ <Main header={header}/>} />
+          <Route path='/generator' element={<Main header={header} />} />
           <Route path='/' element={[<FrontMain />, <ScrollButton />]} />
 
-          <Route path='/generator/ethereum' element={ <EthMain />} />
+          <Route path='/generator/solana' element={[<SolanaMain net={net} setNet={setNet} />]} />
           <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <BnbMain />, <Footer />]} />
-          <Route path='/generator/polygon' element={[<EthHeader header={header} />, <MaticMain />, <Footer />]} />
-          <Route path='/generator/solana' element={[<SolanaMain  net ={net} setNet = {setNet}/>]} />
-          <Route path='/generator/moonriver' element={[<MoonRiverMain />]} />
-          <Route path='/generator/avalanche' element={[<AvaxMain />]} />
-          <Route path='/generator/celo' element={[<EthHeader header={header} />, <CeloMain />, <Footer />]} />
-          <Route path='/generator/heco' element={[<EthHeader header={header} />, <HecoMain />, <Footer />]} />
-          <Route path='/generator/optimism' element={[<EthHeader header={header} />, <OptimismMain />, <Footer />]} />
-          <Route path='/terms' element = {<Terms />} />
-          <Route path='/privacy-policy' element={<PrivacyPolicy /> } />
-        </Routes> 
+          <Route path='/generator/moonriver' element={[<EthHeader header={header} />, <MoonRiverMain />, <Footer />]} />
+
+          <Route path='/generator/ethereum' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          <Route path='/generator/polygon' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          <Route path='/generator/avalanche' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          <Route path='/generator/celo' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          <Route path='/generator/heco' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          <Route path='/generator/optimism' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          <Route path='/terms' element={<Terms />} />
+          <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+        </Routes>
       </Router>
-          {/* </WalletAdapter> */}
-          {/* </StepContext> */}
+      {/* </WalletAdapter> */}
+      {/* </StepContext> */}
     </EtherProvider>
   )
 }
