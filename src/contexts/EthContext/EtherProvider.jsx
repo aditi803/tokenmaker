@@ -122,6 +122,8 @@ export const EtherProvider = ({ children }) => {
     hecoMainnet:128,
     OptimismMainnet:10,
     OptimismGoreli:420,
+    IoTeXMainnet: 4689,
+    IoTeXTestnet:4690,
   };
 
   const urlLinks = {
@@ -141,8 +143,10 @@ export const EtherProvider = ({ children }) => {
     256:{link: "https://testnet.hecoinfo.com/", name: "Heco TestNetwork Scan", networkName: "HECO Testnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
     128:{link: "https://scan.hecochain.com", name: "Heco Mainnet Scan", networkName: "heco-mainnet ",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
     10:{link: "https://optimistic.etherscan.io", name: "Optimism Mainnet Scan", networkName: "Optimism",symbol:"Ether",rpc:"https://mainnet.optimism.io"},
-    420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goreli", networkName: "Optimism Goerli",symbol:"ETH",rpc:"https://goerli.optimism.io"},
-    
+    420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goreli Scan", networkName: "Optimism Goerli",symbol:"ETH",rpc:"https://goerli.optimism.io"},
+    4689:{link: "https://iotexscan.io", name: "IoTeX Mainnet Scan", networkName: "IoTeX Mainnet",symbol:"IOTX",rpc:"https://babel-api.mainnet.iotex.io"},
+    4690:{link: "https://testnet.iotexscan.io/", name: "IoTeX Testnet Scan", networkName: "IoTeX Testnet",symbol:"IOTX",rpc:"https://babel-api.testnet.iotex.io"},
+
   }
 
 

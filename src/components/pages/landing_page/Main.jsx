@@ -9,7 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton";
 import SelectBanner from "../Eth_page/SelectBanner";
-import celoLogo from "../../../assets/Celo_Logo.jpg";
+import IoTeXLogo from "../../../assets/iotexLogo.png";
 import hecoLogo from "../../../assets/download (1)heco.png";
 import optimisticLogo from "../../../assets/optimistic.png";
 function Main() {
@@ -123,19 +123,19 @@ function Main() {
                       <div className="col-sm-6 col-md-4 col-lg-3">
                         <div className="chain-item">
                           <Link
-                            to={`/generator/celo`}
+                            to={`/generator/IoTeX`}
                             className="chain-link chain-bsc"
                           >
-                            <span className="title">Celo Network</span>
+                            <span className="title">IoTeX Network</span>
                             <span
                               className="logo"
                               style={{
-                                backgroundImage: `url(${celoLogo})`,
+                                backgroundImage: `url(${IoTeXLogo})`,
                               }}
                             ></span>
 
                             <span className="text-muted description">
-                              Create your token on Celo Blockchain
+                              Create your token on IoTeX Blockchain
                             </span>
                           </Link>
                         </div>
@@ -143,7 +143,7 @@ function Main() {
                       <div className="col-sm-6 col-md-4 col-lg-3">
                         <div className="chain-item">
                           <Link
-                            to={`/generator/heco`}
+                            to={`/generator/IoTeX`}
                             className="chain-link chain-bsc"
                           >
                             <span className="title">Heco Network</span>
