@@ -67,7 +67,7 @@ export const EthHeader = () => {
                   {!loader && (
                     <img
                       // src={imageBaseUrl + header.investorLogoImage}
-                      src="https://cdn-hnjof.nitrocdn.com/rbqEPUqwZnAoyiJEQENsAgBiOCFoQUNg/assets/images/optimized/rev-d67d202/wp-content/themes/blockbrew-child/media/2023/01/08a0cce1b743fca7c160d7a65ac76e99.final_Logo.svg"
+                      src="../../../assets/websiteHeaderLogo.svg"
                       alt="Logo"
                       className="logoImage"
                       srcSet=""
