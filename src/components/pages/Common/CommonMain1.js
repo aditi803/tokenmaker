@@ -30,6 +30,7 @@ import axios from "axios";
 import { ethers } from "ethers";
 import Loader from "../../../loader";
 import { multiStepContext } from "./StepContext";
+// import { symbol } from "prop-types";
 
 const Commonmain1 = (props) => {
   const steps = [" ", " ", " "];
@@ -87,6 +88,7 @@ const Commonmain1 = (props) => {
     network: "",
     agreement: false,
     commissionFee: 150,
+    symbol: ""
   });
 
   //
@@ -591,16 +593,17 @@ const Commonmain1 = (props) => {
 useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-     if(parentNetworkName.split(" ").join("").charAt(0).toUpperCase() + parentNetworkName.split(" ").join("").slice(1) === (location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1)) && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+     if(parentNetworkName.split(" ").join("").toLowerCase().charAt(0).toUpperCase() + parentNetworkName.split(" ").join("").toLowerCase().slice(1) === (location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1)) && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
     // setGasFee(selectedCommissionFee)
     setEthFormData(prev => ({
       ...prev,
-      commissionFee: selectedCommissionFee?.networkCommissionFee
+      commissionFee: selectedCommissionFee?.networkCommissionFee,
+      symbol: selectedCommissionFee?.symbol
     }))
-    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
+    console.log(selectedCommissionFee, 'selectedCommissionFee')
 
 
     //eslint-disable-next-line
@@ -1221,7 +1224,7 @@ useEffect(() => {
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} ETH`
+                                      : (commissionFee + " " + ethFormData?.symbol)
                                     : "Free"}
                                 </span>
                               </div>
