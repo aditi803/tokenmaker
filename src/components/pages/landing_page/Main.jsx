@@ -3,20 +3,18 @@ import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 
 // import "./landing_page_styles/main.css";
 import axios from "axios";
-import Loader from "../../../loader";
+// import Loader from "../../../loader";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import MainSkeleton from "../../../skeleton/MainSkeleton";
 import SelectBanner from "../Eth_page/SelectBanner";
-import IoTeXLogo from "../../../assets/iotexLogo.png";
-import fantomLogo from "../../../assets/fantom-logo-blue.png";
-import fuseLogo from "../../../assets/fuseloogo.jpeg";
+
 function Main() {
-  const { setSolDeploy, setDeploySuccess, startToggle, setStartToggle,networkData, setNetworkData } =
+  const { setSolDeploy, setDeploySuccess, networkData, setNetworkData } =
     useContext(GlobalContext);
 
-  
+
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -53,7 +51,7 @@ function Main() {
       <Header />
       <div className="page-content">
         <main>
-          
+
           <SelectBanner />
 
           {loader ? (
@@ -89,66 +87,7 @@ function Main() {
                         </div>
                       );
                     })}
-                    <div className="col-sm-6 col-md-4 col-lg-3">
-                        <div className="chain-item">
-                          <Link
-                            to={`/generator/IoTeX`}
-                            className="chain-link chain-bsc"
-                          >
-                            <span className="title">IoTeX Network</span>
-                            <span
-                              className="logo"
-                              style={{
-                                backgroundImage: `url(${IoTeXLogo})`,
-                              }}
-                            ></span>
 
-                            <span className="text-muted description">
-                              Create your token on IoTeX Blockchain
-                            </span>
-                          </Link>
-                        </div>
-                      </div>
-                    <div className="col-sm-6 col-md-4 col-lg-3">
-                        <div className="chain-item">
-                          <Link
-                            to={`/generator/Fantom`}
-                            className="chain-link chain-bsc"
-                          >
-                            <span className="title">Fantom Network</span>
-                            <span
-                              className="logo"
-                              style={{
-                                backgroundImage: `url(${fantomLogo})`,
-                              }}
-                            ></span>
-
-                            <span className="text-muted description">
-                              Create your token on Fantom Blockchain
-                            </span>
-                          </Link>
-                        </div>
-                      </div>
-                    <div className="col-sm-6 col-md-4 col-lg-3">
-                        <div className="chain-item">
-                          <Link
-                            to={`/generator/Fuse`}
-                            className="chain-link chain-bsc"
-                          >
-                            <span className="title">Fuse Network</span>
-                            <span
-                              className="logo"
-                              style={{
-                                backgroundImage: `url(${fuseLogo})`,
-                              }}
-                            ></span>
-
-                            <span className="text-muted description">
-                              Create your token on Fuse Blockchain
-                            </span>
-                          </Link>
-                        </div>
-                      </div>
                   </>
                 </div>
               </div>

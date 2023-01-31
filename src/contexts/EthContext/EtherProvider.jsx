@@ -115,14 +115,14 @@ export const EtherProvider = ({ children }) => {
     celoTestnet:44787,
     hecoTestnet:256,
     hecoMainnet:128,
-    OptimismMainnet:10,
-    OptimismGoreli:420,
-    IoTeXMainnet: 4689,
-    IoTeXTestnet:4690,
-    FantomMainnet: 250,
-    FantomTestnet: 4002,
-    FuseMainnet: 122,
-    FuseTestnet: 123,
+    optimismMainnet:10,
+    optimismGoreli:420,
+    iotexMainnet: 4689,
+    iotexTestnet:4690,
+    fantomMainnet: 250,
+    fantomTestnet: 4002,
+    fuseMainnet: 122,
+    fuseTestnet: 123,
   };
 
   const urlLinks = {

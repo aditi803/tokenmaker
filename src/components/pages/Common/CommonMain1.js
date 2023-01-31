@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import "../Eth_page/eth_styles/main.css";
+// import "../Eth_page/eth_styles/main.css";
+import "../Eth_page/eth_styles/main.css"
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+// import { TermsModal } from "../../Layots/TermsModal";
 import { TermsModal } from "../../Layots/TermsModal";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import { toast } from "react-toastify";
 import { HiInformationCircle } from "react-icons/hi";
+// import Tooltip from "../../Layots/ToolTip";
 import Tooltip from "../../Layots/ToolTip";
 //
 // import Link from "react-router-dom";
@@ -27,7 +30,9 @@ import axios from "axios";
 import { ethers } from "ethers";
 import Loader from "../../../loader";
 import { multiStepContext } from "./StepContext";
-const OptimismMain1 = (props) => {
+// import { symbol } from "prop-types";
+
+const Commonmain1 = (props) => {
   const steps = [" ", " ", " "];
 
   const { currentStep, submitted } = useContext(multiStepContext);
@@ -83,6 +88,8 @@ const OptimismMain1 = (props) => {
     network: "",
     agreement: false,
     commissionFee: 150,
+    symbol: "",
+    dynamicNetworkName: "",
   });
 
   //
@@ -116,6 +123,11 @@ const OptimismMain1 = (props) => {
     f_recoverable: true,
     f_accessType: true,
   });
+
+
+  // console.log(location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1), 'Pathname')
+
+  const pathValue = location.pathname.replace('/generator/', "").charAt(0).toUpperCase() + location.pathname.replace('/generator/', "").slice(1)
 
   const {
     tokenType,
@@ -582,17 +594,17 @@ const OptimismMain1 = (props) => {
   useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-      if (parentNetworkName === 'Optimism' && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName.split(" ").join("").toLowerCase().charAt(0).toUpperCase() + parentNetworkName.split(" ").join("").toLowerCase().slice(1) === (location.pathname.replace('/generator/', "").charAt(0).toUpperCase() + location.pathname.replace('/generator/', "").slice(1)) && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
     // setGasFee(selectedCommissionFee)
     setEthFormData(prev => ({
       ...prev,
-      commissionFee: selectedCommissionFee?.networkCommissionFee
+      commissionFee: selectedCommissionFee?.networkCommissionFee,
+      symbol: selectedCommissionFee?.symbol,
+      dynamicNetworkName: selectedCommissionFee?.parentNetworkName
     }))
-    // console.log(selectedCommissionFee, '>>>>>>>>>>>>>>>>>>>>>KKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLLLLLLLLLJJJJJJJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHHHHHHHHH')
-
 
     //eslint-disable-next-line
   }, [ethFormData.tokenType, ethFormData.network, data])
@@ -728,15 +740,7 @@ const OptimismMain1 = (props) => {
           throw "vikcy"
         }
       }
-      // if(networkFunc){
 
-      // console.log(FormData, "formdata eth side");
-      // if (FormData.network === chainId) {
-      // navigate("/generator/final");
-      // console.log(FormData.network, "currentNetworkID");
-
-      // let res = await sendCommision(commissionFee)
-      // console.log(res, "ress send commision matic main")
 
       props.setShow(false);
       // let res = await sendCommision(commissionFee)
@@ -758,13 +762,11 @@ const OptimismMain1 = (props) => {
             FormData
           )
           .then((res) => {
-            // console.log(res, "response");
-            // console.log(contractSource, "contract Source api side ");
             //calling deploy function
             deployContract(res.data.result, FormData).then((res) => {
 
               if (res.error) {
-                navigate("/generator/optimism");
+                navigate("/generator");
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
@@ -801,16 +803,31 @@ const OptimismMain1 = (props) => {
     }
   };
 
-  // {web3Loading ? (
-  //   <button className=" btn-inner - text " disabled>
-  //     {" "}
-  //     Loading ...{" "}
-  //   </button>
-  // ) : (
-  //   <button className=" btn-inner - text " onClick={connectWallet}>
-  //     get accounts
-  //   </button>
-  // )}
+  const [bannerValue, setBannerValue] = useState("")
+
+  const networkData = async () => {
+    console.log("123")
+    console.log(data, "Netwrok data")
+    console.log(location.pathname, "Network")
+    await data.map((value) => {
+      console.log(value, "Banner Data above");
+
+      if ((value.parentNetworkName.split(" ").join("").toLowerCase()) === location.pathname.replace("/generator/","")) {
+        console.log(value, "Banner Data under");
+        return setBannerValue(value.parentNetworkName)
+      }
+    })
+  }
+
+  useEffect(() => {
+    networkData()
+  })
+
+  console.log(data, "Network data1")
+
+  console.log(bannerValue, "Banner Value")
+
+
 
   const formatPath = (path) => {
 
@@ -826,11 +843,11 @@ const OptimismMain1 = (props) => {
           <div className="hero mb-5">
             <div className="container">
               <h1>
-                <span className="sub-highlight">Create Your Optimism Token</span>
+                <span className="sub-highlight">Create Your {bannerValue} Token</span>
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable Optimism Token.
+                Mintable, Burnable {bannerValue} Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -1176,20 +1193,19 @@ const OptimismMain1 = (props) => {
                               onChange={ethMainFormHandler}
                             >
                               <option value='none' selected hidden>Select your network</option>
-
                               {
                                 data.map((item, i) => {
-                                    if (formatPath( item.parentNetworkName) === location.pathname && item.tokenType === 'free') {
-                                      return (
-                                        <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                      )
-                                    }
-                                    else if (formatPath( item.parentNetworkName) === location.pathname && item.tokenType === 'basic') {
+                                  if (formatPath(item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'free') {
+                                    return (
                                       <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                    }
-                                    else if (formatPath( item.parentNetworkName) === location.pathname && item.tokenType === 'custom') {
-                                      <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                    }
+                                    )
+                                  }
+                                  else if (formatPath(item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'basic') {
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
+                                  }
+                                  else if (formatPath(item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'custom') {
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
+                                  }
                                 })}
                             </select>
                             <span className="form-text text-muted">
@@ -1231,7 +1247,7 @@ const OptimismMain1 = (props) => {
                                   {commissionFee
                                     ? commissionFee === "Free"
                                       ? "Free"
-                                      : `${commissionFee} ETH`
+                                      : (commissionFee + " " + ethFormData?.symbol)
                                     : "Free"}
                                 </span>
                               </div>
@@ -1340,4 +1356,4 @@ const OptimismMain1 = (props) => {
   );
 };
 
-export default OptimismMain1;
+export default Commonmain1;
