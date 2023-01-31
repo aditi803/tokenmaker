@@ -88,7 +88,8 @@ const Commonmain1 = (props) => {
     network: "",
     agreement: false,
     commissionFee: 150,
-    symbol: ""
+    symbol: "",
+    dynamicNetworkName: "",
   });
 
   //
@@ -124,9 +125,9 @@ const Commonmain1 = (props) => {
   });
 
 
-  console.log(location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1), 'Pathname')
+  // console.log(location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1), 'Pathname')
 
-  const pathValue =   location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1)
+  const pathValue = location.pathname.replace('/generator/', "").charAt(0).toUpperCase() + location.pathname.replace('/generator/', "").slice(1)
 
   const {
     tokenType,
@@ -590,10 +591,10 @@ const Commonmain1 = (props) => {
     return selctedItem?.[0]
   }
 
-useEffect(() => {
+  useEffect(() => {
     //eslint-disable-next-line
     const selectedCommissionFee = data?.find(({ value, parentNetworkName, subNetworkName, tokenType }) => {
-     if(parentNetworkName.split(" ").join("").toLowerCase().charAt(0).toUpperCase() + parentNetworkName.split(" ").join("").toLowerCase().slice(1) === (location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1)) && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
+      if (parentNetworkName.split(" ").join("").toLowerCase().charAt(0).toUpperCase() + parentNetworkName.split(" ").join("").toLowerCase().slice(1) === (location.pathname.replace('/generator/', "").charAt(0).toUpperCase() + location.pathname.replace('/generator/', "").slice(1)) && (value === ethFormData.network || value === customVampire(ethFormData.network)) && tokenType === ethFormData.tokenType) {
         return true;
       }
     })
@@ -601,10 +602,9 @@ useEffect(() => {
     setEthFormData(prev => ({
       ...prev,
       commissionFee: selectedCommissionFee?.networkCommissionFee,
-      symbol: selectedCommissionFee?.symbol
+      symbol: selectedCommissionFee?.symbol,
+      dynamicNetworkName: selectedCommissionFee?.parentNetworkName
     }))
-    console.log(selectedCommissionFee, 'selectedCommissionFee')
-
 
     //eslint-disable-next-line
   }, [ethFormData.tokenType, ethFormData.network, data])
@@ -740,7 +740,7 @@ useEffect(() => {
           throw "vikcy"
         }
       }
-      
+
 
       props.setShow(false);
       // let res = await sendCommision(commissionFee)
@@ -762,12 +762,11 @@ useEffect(() => {
             FormData
           )
           .then((res) => {
-            
             //calling deploy function
             deployContract(res.data.result, FormData).then((res) => {
 
               if (res.error) {
-                navigate("/generator/optimism");
+                navigate("/generator");
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
@@ -804,7 +803,31 @@ useEffect(() => {
     }
   };
 
-  
+  const [bannerValue, setBannerValue] = useState("")
+
+  const networkData = async () => {
+    console.log("123")
+    console.log(data, "Netwrok data")
+    console.log(location.pathname, "Network")
+    await data.map((value) => {
+      console.log(value, "Banner Data above");
+
+      if ((value.parentNetworkName.split(" ").join("").toLowerCase()) === location.pathname.replace("/generator/","")) {
+        console.log(value, "Banner Data under");
+        return setBannerValue(value.parentNetworkName)
+      }
+    })
+  }
+
+  useEffect(() => {
+    networkData()
+  })
+
+  console.log(data, "Network data1")
+
+  console.log(bannerValue, "Banner Value")
+
+
 
   const formatPath = (path) => {
 
@@ -820,11 +843,11 @@ useEffect(() => {
           <div className="hero mb-5">
             <div className="container">
               <h1>
-                <span className="sub-highlight">Create Your {pathValue} Token</span>
+                <span className="sub-highlight">Create Your {bannerValue} Token</span>
               </h1>
               <p>
                 Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable {pathValue} Token.
+                Mintable, Burnable {bannerValue} Token.
                 <br />
                 No login. No setup. No Coding required.
               </p>
@@ -1172,17 +1195,17 @@ useEffect(() => {
                               <option value='none' selected hidden>Select your network</option>
                               {
                                 data.map((item, i) => {
-                                    if (formatPath( item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'free') {
-                                      return (
-                                        <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                      )
-                                    }
-                                    else if (formatPath( item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'basic') {
+                                  if (formatPath(item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'free') {
+                                    return (
                                       <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                    }
-                                    else if (formatPath( item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'custom') {
-                                      <option value={item.value} key={i}>{item.subNetworkName}</option>
-                                    }
+                                    )
+                                  }
+                                  else if (formatPath(item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'basic') {
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
+                                  }
+                                  else if (formatPath(item.parentNetworkName.split(" ").join("")) === location.pathname && item.tokenType === 'custom') {
+                                    <option value={item.value} key={i}>{item.subNetworkName}</option>
+                                  }
                                 })}
                             </select>
                             <span className="form-text text-muted">

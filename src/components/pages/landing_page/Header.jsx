@@ -21,7 +21,7 @@ const Header = () => {
         const respHeader = await axios.get(HEADER)
         setHeader(respHeader.data.msg)
         setLoader(false)
-        console.log(respHeader.data.msg,"Header resp")
+        // console.log(respHeader.  data.msg,"Header resp")
         const favicon = document.getElementById("favicon");
         document.title = respHeader?.data?.msg?.investorDocumentTitle;
         // console.log(respHeader?.data?.msg?.investorDocumentTitle,"ttile")
