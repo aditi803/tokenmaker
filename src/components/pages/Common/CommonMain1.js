@@ -30,6 +30,8 @@ import axios from "axios";
 import { ethers } from "ethers";
 import Loader from "../../../loader";
 import { multiStepContext } from "./StepContext";
+import CommonBanner from "./CommonBanner";
+import CommonBannerSkeleton from "../../../skeleton/CommonBannerSkeleton";
 // import { symbol } from "prop-types";
 
 const Commonmain1 = (props) => {
@@ -38,6 +40,9 @@ const Commonmain1 = (props) => {
   const { currentStep, submitted } = useContext(multiStepContext);
   const { setStep, userData, setUserData } = useContext(multiStepContext);
   const [buttonClick, setButtonClick] = useState(false)
+
+  const [loader, setLoader] = useState(true)
+
 
   const navigate = useNavigate();
 
@@ -55,6 +60,7 @@ const Commonmain1 = (props) => {
       .then((res) => {
         setData(res.data.msg)
         // console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
+        setLoader(false)
       })
       .catch((err) => {
         console.log(err, "Error")
@@ -743,8 +749,8 @@ const Commonmain1 = (props) => {
 
 
       props.setShow(false);
-      // let res = await sendCommision(commissionFee)
-      let res = 0.12
+      let res = await sendCommision(commissionFee)
+      // let res = 0.12
 
       // console.log(res, "ress send commision matic main")
       if (!res) {
@@ -806,14 +812,14 @@ const Commonmain1 = (props) => {
   const [bannerValue, setBannerValue] = useState("")
 
   const networkData = async () => {
-    console.log("123")
-    console.log(data, "Netwrok data")
-    console.log(location.pathname, "Network")
+    // console.log("123")
+    // console.log(data, "Netwrok data")
+    // console.log(location.pathname, "Network")
     await data.map((value) => {
-      console.log(value, "Banner Data above");
+      // console.log(value, "Banner Data above");
 
-      if ((value.parentNetworkName.split(" ").join("").toLowerCase()) === location.pathname.replace("/generator/","")) {
-        console.log(value, "Banner Data under");
+      if ((value.parentNetworkName.split(" ").join("").toLowerCase()) === location.pathname.replace("/generator/", "")) {
+        // console.log(value, "Banner Data under");
         return setBannerValue(value.parentNetworkName)
       }
     })
@@ -823,9 +829,9 @@ const Commonmain1 = (props) => {
     networkData()
   })
 
-  console.log(data, "Network data1")
+  // console.log(data, "Network data1")
 
-  console.log(bannerValue, "Banner Value")
+  // console.log(bannerValue, "Banner Value")
 
 
 
@@ -836,22 +842,26 @@ const Commonmain1 = (props) => {
   }
 
 
+
   return (
     <>
       <div className="page-content">
         <main>
           <div className="hero mb-5">
-            <div className="container">
-              <h1>
-                <span className="sub-highlight">Create Your {bannerValue} Token</span>
-              </h1>
-              <p>
-                Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable {bannerValue} Token.
-                <br />
-                No login. No setup. No Coding required.
-              </p>
-            </div>
+            {
+              loader ? <CommonBannerSkeleton /> :
+                <div className="container">
+                  <h1>
+                    <span className="sub-highlight">Create Your {bannerValue} Token</span>
+                  </h1>
+                  <p>
+                    Easily deploy your Smart Contract for a Standard, Capped,
+                    Mintable, Burnable {bannerValue} Token.
+                    <br />
+                    No login. No setup. No Coding required.
+                  </p>
+                </div>
+            }
           </div>
           <section className="mb-5">
             {/* test */}
