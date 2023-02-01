@@ -36,19 +36,8 @@ import { multiStepContext } from "./StepContext";
 import { findMetadataPda } from "@metaplex-foundation/js";
 
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import Base58 from "base-58";
 
-//
-// import { Metadata } from '@metaplex-foundation/mpl-token-metadata';
-// import { WebBundlr } from '@bundlr-network/client';
-// import { sign } from 'tweetnacl';
-// import { Buffer } from 'buffer';
 
-// import Link from "react-router-dom";
-// import wallet_model from "../../Modal/Multi-WalletModal";
-//
-
-//
 
 const SolanaMain1 = (props) => {
   // const [tokenType, setTokenType] = useState()
@@ -143,7 +132,6 @@ const SolanaMain1 = (props) => {
       setErrNet(false);
     }
 
-    // console.log(data, "VAMPIRE")
     data.forEach((item) => {
       if (
         item.parentNetworkName === "Solana" &&
@@ -174,7 +162,7 @@ const SolanaMain1 = (props) => {
   useEffect(() => {
     if (wallet && wallet.connected) {
       async function connectProvider() {
-        // console.log(wallet,"wallet");
+
         await wallet.connect();
         const provider = wallet.wallet.adapter;
         // console.log(provider,"provider");
@@ -187,6 +175,9 @@ const SolanaMain1 = (props) => {
   });
 
   useEffect(() => {
+
+    
+
     if (agreement !== false) {
       setErr((prev) => ({
         ...prev,
@@ -634,8 +625,8 @@ const SolanaMain1 = (props) => {
                               // value={supplyType}
                             >
                               <option value="fixed">Fixed</option>
-                              <option value="capped">Capped</option>
-                              <option value="unlimited">Unlimited</option>
+                              {/* <option value="capped">Capped</option>
+                              <option value="unlimited">Unlimited</option> */}
                             </select>
                             <span className="form-text text-muted">
                               Fixed / Capped / Unlimited
