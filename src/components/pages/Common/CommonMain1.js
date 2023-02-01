@@ -810,6 +810,7 @@ const Commonmain1 = (props) => {
   };
 
   const [bannerValue, setBannerValue] = useState("")
+  const [formSymbol, setFormSymbol] = useState("")
 
   const networkData = async () => {
     // console.log("123")
@@ -820,7 +821,10 @@ const Commonmain1 = (props) => {
 
       if ((value.parentNetworkName.split(" ").join("").toLowerCase()) === location.pathname.replace("/generator/", "")) {
         // console.log(value, "Banner Data under");
-        return setBannerValue(value.parentNetworkName)
+        return (
+          setBannerValue(value.parentNetworkName),
+          setFormSymbol(value.symbol)
+        )
       }
     })
   }
@@ -980,7 +984,7 @@ const Commonmain1 = (props) => {
                               onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
-                              You token's symbol (ie Ether)
+                              Your token's symbol (i.e. {formSymbol})
                             </span>
                             <div className="text-danger f-12">
                               {err.tokenSymbolErr}
