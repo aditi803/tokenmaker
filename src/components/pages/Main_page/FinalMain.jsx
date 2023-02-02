@@ -1,11 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import "../Main_page/Main.css";
 
 import { SuccessDeploy } from "./SuccessDeploy";
 import { GlobalContext } from "../../../contexts/EthContext/EtherProvider";
 import { ProgressBar } from "react-bootstrap";
 // import 'bootstrap/';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import CommonBanner from "../Common/CommonBanner";
+import CommonBannerSkeleton from "../../../skeleton/CommonBannerSkeleton";
+import axios from "axios";
 
 export const FinalMain = (props) => {
   //  const  {deploySuccess} = props
@@ -14,27 +17,76 @@ export const FinalMain = (props) => {
   const percentage = 100;
   const { addToken, deploySuccess, deployData, solDeploy } = useContext(GlobalContext);
 
-  // console.log(deploySuccess, "deploy Success final side");
-  // console.log("final main");
+  const [loader, setLoader] = useState(true)
 
+
+
+  let location = useLocation()
+  console.log(location, "PAth is  ")
+
+  const { deployContract, changeNetwork, addNewNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
+    useContext(GlobalContext);
+
+  const networkFee = []
+
+  const [data, setData] = useState([])
+  const getNetworks = () => {
+    axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
+      .then((res) => {
+        setData(res.data.msg)
+        // console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
+        setLoader(false)
+      })
+      .catch((err) => {
+        console.log(err, "Error")
+      })
+  }
+
+  useEffect(() => {
+    getNetworks()
+  }, [setData])
+
+  const [bannerValue, setBannerValue] = useState("")
+
+  const networkData = async () => {
+    console.log("123")
+    console.log(data, "Netwrok data")
+    console.log(location.pathname, "Network")
+    await data.map((value) => {
+      console.log(value, "Banner Data above");
+
+      if ((value.parentNetworkName.split(" ").join("").toLowerCase()) === location.pathname.replace("/generator/", "")) {
+        console.log(value, "Banner Data under");
+        return setBannerValue(value.parentNetworkName)
+      }
+    })
+  }
+
+  useEffect(() => {
+    networkData()
+  })
+
+ 
   return (
     <>
       <div className="page-content">
         <main>
           <div className="hero mb-3 ">
-            <div className="container">
-              <h1>
-                <span style={{ marginTop: "-60px" }} className="sub-highlight">
-                  Create Your Token
-                </span>
-              </h1>
-              <p>
-                Easily deploy your Smart Contract for a Standard, Capped,
-                Mintable, Burnable  Token.
-                <br />
-                No login. No setup. No Coding required.
-              </p>
-            </div>
+
+          {
+              loader ? <CommonBannerSkeleton /> :
+                <div className="container">
+                  <h1>
+                    <span className="sub-highlight">Create Your {bannerValue} Token</span>
+                  </h1>
+                  <p>
+                    Easily deploy your Smart Contract for a Standard, Capped,
+                    Mintable, Burnable {bannerValue} Token.
+                    <br />
+                    No login. No setup. No Coding required.
+                  </p>
+                </div>
+          }
           </div>
           <section className="my-5 py-5">
             <div className="container">

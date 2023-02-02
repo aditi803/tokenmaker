@@ -617,20 +617,29 @@ const SolanaMain1 = (props) => {
                               Supply type
                               <span className="val-required">*</span>
                             </label>
-                            <select
+                            {/* <select
                               className="form-select"
                               name="supplyType"
-                              // disabled={f_supplyType}
+                              disabled={f_supplyType}
+                              onChange={ethMainFormHandler}
+                              value={supplyType}
+                            > */}
+                              <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Fixed"
+                              // name="tokenName"
+                              value="Fixed"
+                              disabled
+                              // onChange={(e) => setTokenName(e.target.value)}
                               // onChange={ethMainFormHandler}
-                              // value={supplyType}
-                            >
-                              <option value="fixed">Fixed</option>
+                            />
                               {/* <option value="capped">Capped</option>
                               <option value="unlimited">Unlimited</option> */}
-                            </select>
-                            <span className="form-text text-muted">
-                              Fixed / Capped / Unlimited
-                            </span>
+                            {/* </select> */}
+                            {/* <span className="form-text text-muted">
+                              Fixed
+                            </span> */}
                           </div>
                           <div className="form-group col-lg-6">
                             <label className="form-label">

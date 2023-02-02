@@ -113,10 +113,10 @@ export const EtherProvider = ({ children }) => {
     avalancheFujiCChain: 43113,
     celoMainnet:42220,
     celoTestnet:44787,
-    hecoTestnet:256,
+    hecoTestnet:256,  
     hecoMainnet:128,
     optimismMainnet:10,
-    optimismGoreli:420,
+    optimismGoerli:420,
     iotexMainnet: 4689,
     iotexTestnet:4690,
     fantomMainnet: 250,
@@ -140,19 +140,24 @@ export const EtherProvider = ({ children }) => {
     43113:{link: "https://testnet.snowtrace.io/", name: "Avalanche Fuji C-Chain Scan", networkName: "Avalanche Fuji C Chain",symbol:"AVAX",rpc:"https://api.avax-test.network/ext/bc/C/rpc"},
     43114:{link: "https://snowtrace.io/", name: "Avalanche Network Scan", networkName: "Avalanche",symbol:"AVAX",rpc:"https://api.avax.network/ext/bc/C/rpc"},
     42220:{link: "https://explorer.celo.org", name: "Celo Network Scan", networkName: "Celo Mainnet",symbol:"CELO",rpc:"https://forno.celo.org"},
-    44787:{link: "https://alfajores-blockscout.celo-testnet.org/", name: "Celo TestNetwork Scan", networkName: "Alfajores Testnet",symbol:"A-CELO",rpc:"https://alfajores-forno.celo-testnet.org"},
-    256:{link: "https://testnet.hecoinfo.com/", name: "Heco TestNetwork Scan", networkName: "HECO Testnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
-    128:{link: "https://scan.hecochain.com", name: "Heco Mainnet Scan", networkName: "heco-mainnet ",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
-    10:{link: "https://optimistic.etherscan.io", name: "Optimism Mainnet Scan", networkName: "Optimism",symbol:"Ether",rpc:"https://mainnet.optimism.io"},
-    420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goreli Scan", networkName: "Optimism Goerli",symbol:"ETH",rpc:"https://goerli.optimism.io"},
-    4689:{link: "https://iotexscan.io", name: "IoTeX Mainnet Scan", networkName: "IoTeX Mainnet",symbol:"IOTX",rpc:"https://babel-api.mainnet.iotex.io"},
-    4690:{link: "https://testnet.iotexscan.io/", name: "IoTeX Testnet Scan", networkName: "IoTeX Testnet",symbol:"IOTX",rpc:"https://babel-api.testnet.iotex.io"},
-    250:{link: "https://ftmscan.com/", name: "Fantom Scan", networkName: "Fantom",symbol:"FTM",rpc:"https://rpc.ftm.tools/"},
+    44787:{link: "https://alfajores-blockscout.celo-testnet.org/", name: "Celo TestNetwork Scan", networkName: "Celo Testnet",symbol:"A-CELO",rpc:"https://alfajores-forno.celo-testnet.org"},
+    256:{link: "https://testnet.hecoinfo.com/", name: "Heco TestNetwork Scan", networkName: "Heco Testnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
+    128:{link: "https://scan.hecochain.com", name: "Heco Mainnet Scan", networkName: "Heco Mainnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
+    10:{link: "https://optimistic.etherscan.io", name: "Optimism Mainnet Scan", networkName: "Optimism Mainnet",symbol:"Ether",rpc:"https://mainnet.optimism.io"},
+    420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goerli Scan", networkName: "Optimism Testnet",symbol:"ETH",rpc:"https://goerli.optimism.io"},
+    4689:{link: "https://iotexscan.io", name: "IoTeX Mainnet Scan", networkName: "Iotex Mainnet",symbol:"IOTX",rpc:"https://babel-api.mainnet.iotex.io"},
+    4690:{link: "https://testnet.iotexscan.io/", name: "IoTeX Testnet Scan", networkName: "Iotex Testnet",symbol:"IOTX",rpc:"https://babel-api.testnet.iotex.io"},
+    250:{link: "https://ftmscan.com/", name: "Fantom Scan", networkName: "Fantom Mainnet",symbol:"FTM",rpc:"https://rpc.ftm.tools/"},
     4002:{link: "https://testnet.ftmscan.com", name: "Fantom testnet Scan", networkName: "Fantom Testnet",symbol:"FTM",rpc:"https://rpc.ankr.com/fantom_testnet"},
     122:{link: "https://explorer.fuse.io", name: "Fuse Mainnet Scan", networkName: "Fuse Mainnet",symbol:"FUSE",rpc:"https://rpc.fuse.io"},
+<<<<<<< HEAD
     123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Sparknet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
     10000:{link: "https://smartbch.org/", name: "Smart Bitcoin Cash Scan", networkName: "Smart Bitcoin Cash",symbol:"BCH",rpc:"https://smartbch.greyh.at"},
     10001:{link: "https://smartbch.org/", name: "Bitcoin Cash Test Token Scan", networkName: "Bitcoin Cash Test Token",symbol:"BCHT",rpc:"https://rpc-testnet.smartbch.org"},
+=======
+    123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Testnet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
+    
+>>>>>>> b783a8ddfd9a1c4bd197a6b24e26320ef03998a7
   }
 
 
