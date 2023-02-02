@@ -123,6 +123,8 @@ export const EtherProvider = ({ children }) => {
     fantomTestnet: 4002,
     fuseMainnet: 122,
     fuseTestnet: 123,
+    bch:10000,
+    
   };
 
   const urlLinks = {
@@ -149,7 +151,8 @@ export const EtherProvider = ({ children }) => {
     4002:{link: "https://testnet.ftmscan.com", name: "Fantom testnet Scan", networkName: "Fantom Testnet",symbol:"FTM",rpc:"https://rpc.ankr.com/fantom_testnet"},
     122:{link: "https://explorer.fuse.io", name: "Fuse Mainnet Scan", networkName: "Fuse Mainnet",symbol:"FUSE",rpc:"https://rpc.fuse.io"},
     123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Sparknet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
-    
+    10000:{link: "https://smartbch.org/", name: "Smart Bitcoin Cash Scan", networkName: "Smart Bitcoin Cash",symbol:"BCH",rpc:"https://smartbch.greyh.at"},
+    10001:{link: "https://smartbch.org/", name: "Bitcoin Cash Test Token Scan", networkName: "Bitcoin Cash Test Token",symbol:"BCHT",rpc:"https://rpc-testnet.smartbch.org"},
   }
 
 

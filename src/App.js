@@ -95,6 +95,7 @@ function App(props) {
 
           <Route path='/generator/Fantom' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
           <Route path='/generator/Fuse' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+          <Route path='/generator/bch' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
         </Routes>
       </Router>
       {/* </WalletAdapter> */}
