@@ -755,7 +755,7 @@ const Commonmain1 = (props) => {
       // console.log(res, "ress send commision matic main")
       if (!res) {
         props.setShow(true)
-        navigate("/generator/optimism");
+        navigate("/generator");
       }
 
       if (res) {

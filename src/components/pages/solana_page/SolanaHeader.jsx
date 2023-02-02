@@ -27,7 +27,7 @@ export const SolanaHeader = (props) => {
     // console.log(finalAmount,"Ada")
     fetchData();
   }, []);
-  
+
   const fetchData = async () => {
     const respHeader = await axios.get(HEADER);
     setHeader(respHeader.data.msg);
@@ -68,6 +68,8 @@ export const SolanaHeader = (props) => {
   // }
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/";
 
+
+
   return (
     <div className="page-header">
       <header className="header navbar-area">
@@ -78,10 +80,11 @@ export const SolanaHeader = (props) => {
                 <Link to="/" className="navbar-brand">
                   {!loader && (
                     <img
-                      // src={imageBaseUrl + header.investorLogoImage}
-                      src="https://cdn-hnjof.nitrocdn.com/rbqEPUqwZnAoyiJEQENsAgBiOCFoQUNg/assets/images/optimized/rev-1b9374e/wp-content/themes/blockbrew-child/media/2023/01/f9c842d749181b725b2174009ffbe8f4.final_Logo.svg"                      alt="Logo"
+                      src={imageBaseUrl + header.investorLogoImage}
+                      // src="https://cdn-hnjof.nitrocdn.com/rbqEPUqwZnAoyiJEQENsAgBiOCFoQUNg/assets/images/optimized/rev-1b9374e/wp-content/themes/blockbrew-child/media/2023/01/f9c842d749181b725b2174009ffbe8f4.final_Logo.svg"                      alt="Logo"
                       className="logoImage"
                       srcSet=""
+                      alt="solana logo "
                     />
                   )}
 
@@ -104,7 +107,7 @@ export const SolanaHeader = (props) => {
                     </span> */}
                 </Link>
                 <div className="nav-btn-div">
-                  <div className="blue-btn ml-auto d-flex align-items-center justify-content-center"  style={{height: "48px",lineHeight: "48px",}}>
+                  <div className="blue-btn ml-auto d-flex align-items-center justify-content-center" style={{ height: "48px", lineHeight: "48px", }}>
                     <>
                       {PublicKey && (
                         <p
@@ -115,7 +118,7 @@ export const SolanaHeader = (props) => {
                         </p>
                       )}
                     </>
-                    <WalletMultiButton className="btn " style={{height: "auto",lineHeight: "0",padding: "0 0 0 10px"}} />
+                    <WalletMultiButton className="btn " style={{ height: "auto", lineHeight: "0", padding: "0 0 0 10px" }} />
                   </div>
                 </div>
               </nav>

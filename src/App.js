@@ -42,7 +42,8 @@ import { FuseMain } from './components/pages/Fuse_page/FuseMain.jsx';
 function App(props) {
   // console.log(props,"props appjs")
   const { net, setNet } = props;
-
+  const [networkPath, setNetworkPath] = useState([])
+  const [netHref, setNetHref] = useState([])
 
   const [header, setHeader] = useState([])
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
@@ -60,6 +61,34 @@ function App(props) {
   }, [])
 
 
+  const getNetworkHanlder = () => {
+    // changeApiStatus(true)
+    axios
+      .get("https://tokenmaker-apis.block-brew.com/network/networkdetails")
+      .then((res) => {
+        setNetworkPath(res.data.msg.items);
+        setNetHref(res.data.msg.items.filter((value) =>
+          value.categoryName !== "Solana"
+        ))
+        // console.log(
+        //   res.data.msg.items,
+        //   "network path app file"
+        // );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getNetworkHanlder()
+  }, [networkPath])
+
+
+  // let networkHref = networkPath.filter((value) =>
+  //   value.categoryName !== "Solana"
+  // )
+
   return (
 
     <EtherProvider>
@@ -72,7 +101,18 @@ function App(props) {
           <Route path='/' element={[<FrontMain />, <ScrollButton />]} />
 
           <Route path='/generator/solana' element={[<SolanaMain net={net} setNet={setNet} />]} />
-          <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          {netHref.length > 0 ? (<>
+
+            {netHref.map((networkVal) => {
+              return <Route path={`/generator/${networkVal.hrefPath}`} element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+            })}
+
+          </>) : ""}
+
+
+
+          {/* <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
           <Route path='/generator/moonriver' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
 
           <Route path='/generator/ethereum' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
@@ -87,14 +127,17 @@ function App(props) {
 
           <Route path='/generator/optimism' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
 
+          <Route path='/generator/IoTeX' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          <Route path='/generator/Fantom' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
+
+          <Route path='/generator/Fuse' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} /> */}
+
           <Route path='/terms' element={<Terms />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
 
           {/* <Route path='/generator/IoTeX' element={[<EthHeader header={header} />, <IotexMain />, <Footer />]} /> */}
-          <Route path='/generator/IoTeX' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
 
-          <Route path='/generator/Fantom' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-          <Route path='/generator/Fuse' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
         </Routes>
       </Router>
       {/* </WalletAdapter> */}
