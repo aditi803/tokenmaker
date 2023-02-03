@@ -150,14 +150,11 @@ export const EtherProvider = ({ children }) => {
     250:{link: "https://ftmscan.com/", name: "Fantom Scan", networkName: "Fantom Mainnet",symbol:"FTM",rpc:"https://rpc.ftm.tools/"},
     4002:{link: "https://testnet.ftmscan.com", name: "Fantom testnet Scan", networkName: "Fantom Testnet",symbol:"FTM",rpc:"https://rpc.ankr.com/fantom_testnet"},
     122:{link: "https://explorer.fuse.io", name: "Fuse Mainnet Scan", networkName: "Fuse Mainnet",symbol:"FUSE",rpc:"https://rpc.fuse.io"},
-<<<<<<< HEAD
     123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Sparknet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
     10000:{link: "https://smartbch.org/", name: "Smart Bitcoin Cash Scan", networkName: "Smart Bitcoin Cash",symbol:"BCH",rpc:"https://smartbch.greyh.at"},
     10001:{link: "https://smartbch.org/", name: "Bitcoin Cash Test Token Scan", networkName: "Bitcoin Cash Test Token",symbol:"BCHT",rpc:"https://rpc-testnet.smartbch.org"},
-=======
     123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Testnet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
     
->>>>>>> b783a8ddfd9a1c4bd197a6b24e26320ef03998a7
   }
 
 
