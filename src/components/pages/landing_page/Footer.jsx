@@ -130,18 +130,13 @@ function Footer() {
                 >
                   <p> Terms of Use</p>
                 </Link>
-                {/* <TermsModal /> */}
                 <Link
                   to="/privacy-policy"
-                  // data-bs-toggle="modal"
-                  // data-bs-target="#exampleModal1"
+                 
                   style={{ color: "#fff" }}
                 >
                   <p>Privacy Policy</p>
                 </Link>
-                {/* <PrivacyPolicy /> */}
-                {/* <p>Wallet</p>
-              <p>Resourses</p> */}
               </div>
               <div className="col-sm-6 col-lg-4">
                 <h5 className="mb-4">Our Newsletter</h5>

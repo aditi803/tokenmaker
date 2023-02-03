@@ -9,7 +9,6 @@ const CommonBanner = ({setLoader, loader}) => {
         axios.get("https://tokenmaker-apis.block-brew.com/commission/commissiondetails")
             .then((res) => {
                 setData(res.data.msg)
-                // console.log(res.data.msg.items, "Aditii ddata jo ni aata ");
                 setLoader(false)
             })
             .catch((err) => {
@@ -27,13 +26,9 @@ const CommonBanner = ({setLoader, loader}) => {
     const [bannerValue, setBannerValue] = useState("")
 
     const networkData = async () => {
-        // console.log("123")
-        // console.log(data, "Netwrok data")
-        // console.log(location.pathname, "Network")
+        
         await data.map((value) => {
-            //   console.log(value, "Banner Data above");
             if ((value.parentNetworkName.split(" ").join("").toLowerCase()) === location.pathname.replace("/generator/", "")) {
-                // console.log(value, "Banner Data under");
                 return setBannerValue(value.parentNetworkName)
             }
         })
@@ -42,11 +37,6 @@ const CommonBanner = ({setLoader, loader}) => {
     useEffect(() => {
         networkData()
     },{loader, setLoader})
-
-    // console.log(data, "Network data1")
-
-    // console.log(bannerValue, "Banner Value")
-
 
     return (
         <div className="container">
