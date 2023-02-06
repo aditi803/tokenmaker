@@ -123,7 +123,8 @@ export const EtherProvider = ({ children }) => {
     fantomTestnet: 4002,
     fuseMainnet: 122,
     fuseTestnet: 123,
-    bch:10000,
+    BchMainnet:10000,
+    BchTestnet:10001,
     
   };
 
@@ -153,7 +154,7 @@ export const EtherProvider = ({ children }) => {
     123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Sparknet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
     10000:{link: "https://smartbch.org/", name: "Smart Bitcoin Cash Scan", networkName: "Smart Bitcoin Cash",symbol:"BCH",rpc:"https://smartbch.greyh.at"},
     10001:{link: "https://smartbch.org/", name: "Bitcoin Cash Test Token Scan", networkName: "Bitcoin Cash Test Token",symbol:"BCHT",rpc:"https://rpc-testnet.smartbch.org"},
-    123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Testnet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
+    // 123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Testnet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
     
   }
 
@@ -317,9 +318,10 @@ export const EtherProvider = ({ children }) => {
 
   const changeNetwork = async (networkID) => {
     try {
+      console.log(networkID, "networkID");
+      
       const explorer = urlLinks[networkID];
       // console.log(networkID, "netwrk id in change network");
-      console.log(networkID, "networkID");
       const chainIdInDecimal = ethers.utils.hexlify(networkID);
 
       console.log(chainIdInDecimal, "chainid in decimal");
