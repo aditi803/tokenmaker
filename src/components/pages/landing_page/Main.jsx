@@ -86,7 +86,7 @@ function Main() {
                       );
                     })}
                   </>
-                  <>
+                  {/* <>
                     <div className="col-sm-6 col-md-4 col-lg-3">
                       <div className="chain-item">
                         <Link
@@ -106,7 +106,7 @@ function Main() {
                         </Link>
                       </div>
                     </div>
-                  </>
+                  </> */}
                 </div>
               </div>
             </>

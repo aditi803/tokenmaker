@@ -88,8 +88,6 @@ export const EtherProvider = ({ children }) => {
     }
   };
 
-
-  let blockNetwork = {}
   const updateNetwork = async () => {
     try {
       if (window.ethereum) {
@@ -119,73 +117,91 @@ export const EtherProvider = ({ children }) => {
     },[])
 
 
-  const blockchainNetworks = {
-    mainnet: 1,
-    gorli: 5,
-    rinkeby: 4,
-    polygonMainnet: 137,
-    polygonMumbai: 80001,
-    binanceSmartChainTestnet: 97,
-    binanceSmartChain: 56,
-    moonRiver: 1285,
-    moonBaseAlpha: 1287,
-    avalanche: 43114,
-    avalancheFujiCChain: 43113,
-    celoMainnet:42220,
-    celoTestnet:44787,
-    hecoTestnet:256,  
-    hecoMainnet:128,
-    optimismMainnet:10,
-    optimismGoerli:420,
-    iotexMainnet: 4689,
-    iotexTestnet:4690,
-    fantomMainnet: 250,
-    fantomTestnet: 4002,
-    fuseMainnet: 122,
-    fuseTestnet: 123,
-    bch:10000,
-    
-  };
+  // const blockchainNetworks = {
 
-  const urlLinks = {
-    97: { link: "https://testnet.bscscan.com/", name: "Bsc Testnet Scan", networkName: "Binance Smart Chain Testnet", symbol: "BNB", rpc: "https://data-seed-prebsc-1-s1.binance.org:8545/" },
-    56: { link: "https://bscscan.com/", name: "Bsc Mainnet Scan", networkName: "Binance Smart Chain", symbol: "BNB", rpc: "https://bsc-dataseed.binance.org/" },
+    let blockchainNetworks = {}
+
+    fullData.forEach((val) => {
+      blockchainNetworks = {...blockchainNetworks, [val.value] : val.chainId * 1 }
+    })
+
+    console.log(blockchainNetworks, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>blockchain")
+    // mainnet: 1,
+    // gorli: 5,
+    // rinkeby: 4,
+    // polygonMainnet: 137,
+    // polygonMumbai: 80001,
+    // binanceSmartChainTestnet: 97,
+    // binanceSmartChain: 56,
+    // moonRiver: 1285,
+    // moonBaseAlpha: 1287,
+    // avalanche: 43114,
+    // avalancheFujiCChain: 43113,
+    // celoMainnet:42220,
+    // celoTestnet:44787,
+    // hecoTestnet:256,  
+    // hecoMainnet:128,
+    // optimismMainnet:10,
+    // optimismGoerli:420,
+    // iotexMainnet: 4689,
+    // iotexTestnet:4690,
+    // fantomMainnet: 250,
+    // fantomTestnet: 4002,
+    // fuseMainnet: 122,
+    // fuseTestnet: 123,
+    // bch:10000,
+  // };
+
+
+  let urlLinks = {}
+
+    console.log(fullData, ">>>>>>>>>>>>>>>>>>>>>fulldata")
+
+  fullData.forEach((val) => {
+    urlLinks = { ...urlLinks, [val.chainId] : {link: val.blockExplorerUrl,name: `${val.networkName} Scan`  ,networkName: val.networkName, symbol: val.symbol, rpc: val.rpcUrl} }
+  })
+
+
+  console.log(urlLinks, "Linkls")
+
+  // const urlLinks = {
+  //   97: { link: "https://testnet.bscscan.com/", name: "Bsc Testnet Scan", networkName: "Binance Smart Chain Testnet", symbol: "BNB", rpc: "https://data-seed-prebsc-1-s1.binance.org:8545/" },
+  //   56: { link: "https://bscscan.com/", name: "Bsc Mainnet Scan", networkName: "Binance Smart Chain", symbol: "BNB", rpc: "https://bsc-dataseed.binance.org/" },
     
-    137: { link: "https://polygonscan.com/", name: "Polygon Mainnet Scan", networkName: "Polygon Mainnet", symbol: "MATIC", rpc: "https://polygon-mainnet.g.alchemy.com/v2/P11J7QqdiWk7NpU9ldBImA58-VB0mkJ-" },
-    80001: { link: "https://mumbai.polygonscan.com/", name: "Polygon Testnet Scan", networkName: "Polygon Mumbai", symbol: "MATIC", rpc: "https://rpc-mumbai.maticvigil.com/" },
+  //   137: { link: "https://polygonscan.com/", name: "Polygon Mainnet Scan", networkName: "Polygon Mainnet", symbol: "MATIC", rpc: "https://polygon-mainnet.g.alchemy.com/v2/P11J7QqdiWk7NpU9ldBImA58-VB0mkJ-" },
+  //   80001: { link: "https://mumbai.polygonscan.com/", name: "Polygon Testnet Scan", networkName: "Polygon Mumbai", symbol: "MATIC", rpc: "https://rpc-mumbai.maticvigil.com/" },
    
-    1: { link: "https://etherscan.io", name: "Ethereum Mainnet Scan", networkName: "Mainnet", symbol: "ETH", rpc: "https://mainnet.infura.io/v3/" },
-    5: { link: "https://goerli.etherscan.io", name: "Goerli Testnet Scan", networkName: "Goerli", symbol: "GoerliETH", rpc: "https://goerli.infura.io/v3/" },
-    4: { link: "https://rinkeby.etherscan.io/", name: "RinkeyBy Testnet Scan", networkName: "RinkeyBy", },
+  //   1: { link: "https://etherscan.io", name: "Ethereum Mainnet Scan", networkName: "Mainnet", symbol: "ETH", rpc: "https://mainnet.infura.io/v3/" },
+  //   5: { link: "https://goerli.etherscan.io", name: "Goerli Testnet Scan", networkName: "Goerli", symbol: "GoerliETH", rpc: "https://goerli.infura.io/v3/" },
+  //   4: { link: "https://rinkeby.etherscan.io/", name: "RinkeyBy Testnet Scan", networkName: "RinkeyBy", },
     
-    1285:{ link: "https://moonriver.moonscan.io/", name: "Moonriver Scan", networkName: "Moon River",symbol:"MOVR",rpc:"https://rpc.api.moonriver.moonbeam.network" },
-    1287:{link: "https://moonbase.moonscan.io/", name: "Moonbase Alpha Scan", networkName: "Moon Base Alpha",symbol:"DEV",rpc:"https://rpc.api.moonbase.moonbeam.network"},
+  //   1285:{ link: "https://moonriver.moonscan.io/", name: "Moonriver Scan", networkName: "Moon River",symbol:"MOVR",rpc:"https://rpc.api.moonriver.moonbeam.network" },
+  //   1287:{link: "https://moonbase.moonscan.io/", name: "Moonbase Alpha Scan", networkName: "Moon Base Alpha",symbol:"DEV",rpc:"https://rpc.api.moonbase.moonbeam.network"},
     
-    43113:{link: "https://testnet.snowtrace.io/", name: "Avalanche Fuji C-Chain Scan", networkName: "Avalanche Fuji C Chain",symbol:"AVAX",rpc:"https://api.avax-test.network/ext/bc/C/rpc"},
-    43114:{link: "https://snowtrace.io/", name: "Avalanche Network Scan", networkName: "Avalanche",symbol:"AVAX",rpc:"https://api.avax.network/ext/bc/C/rpc"},
+  //   43113:{link: "https://testnet.snowtrace.io/", name: "Avalanche Fuji C-Chain Scan", networkName: "Avalanche Fuji C Chain",symbol:"AVAX",rpc:"https://api.avax-test.network/ext/bc/C/rpc"},
+  //   43114:{link: "https://snowtrace.io/", name: "Avalanche Network Scan", networkName: "Avalanche",symbol:"AVAX",rpc:"https://api.avax.network/ext/bc/C/rpc"},
     
-    42220:{link: "https://explorer.celo.org", name: "Celo Network Scan", networkName: "Celo Mainnet",symbol:"CELO",rpc:"https://forno.celo.org"},
-    44787:{link: "https://alfajores-blockscout.celo-testnet.org/", name: "Celo TestNetwork Scan", networkName: "Celo Testnet",symbol:"A-CELO",rpc:"https://alfajores-forno.celo-testnet.org"},
+  //   42220:{link: "https://explorer.celo.org", name: "Celo Network Scan", networkName: "Celo Mainnet",symbol:"CELO",rpc:"https://forno.celo.org"},
+  //   44787:{link: "https://alfajores-blockscout.celo-testnet.org/", name: "Celo TestNetwork Scan", networkName: "Celo Testnet",symbol:"A-CELO",rpc:"https://alfajores-forno.celo-testnet.org"},
     
-    256:{link: "https://testnet.hecoinfo.com/", name: "Heco TestNetwork Scan", networkName: "Heco Testnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
-    128:{link: "https://scan.hecochain.com", name: "Heco Mainnet Scan", networkName: "Heco Mainnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
+  //   256:{link: "https://testnet.hecoinfo.com/", name: "Heco TestNetwork Scan", networkName: "Heco Testnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
+  //   128:{link: "https://scan.hecochain.com", name: "Heco Mainnet Scan", networkName: "Heco Mainnet",symbol:"HT",rpc:"https://http-testnet.hecochain.com"},
     
-    10:{link: "https://optimistic.etherscan.io", name: "Optimism Mainnet Scan", networkName: "Optimism Mainnet",symbol:"Ether",rpc:"https://mainnet.optimism.io"},
-    420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goerli Scan", networkName: "Optimism Goerli",symbol:"ETH",rpc:"https://goerli.optimism.io"},
+  //   10:{link: "https://optimistic.etherscan.io", name: "Optimism Mainnet Scan", networkName: "Optimism Mainnet",symbol:"Ether",rpc:"https://mainnet.optimism.io"},
+  //   420:{link: "https://goerli-explorer.optimism.io", name: "Optimism Goerli Scan", networkName: "Optimism Goerli",symbol:"ETH",rpc:"https://goerli.optimism.io"},
     
-    4689:{link: "https://iotexscan.io", name: "IoTeX Mainnet Scan", networkName: "Iotex Mainnet",symbol:"IOTX",rpc:"https://babel-api.mainnet.iotex.io"},
-    4690:{link: "https://testnet.iotexscan.io/", name: "IoTeX Testnet Scan", networkName: "Iotex Testnet",symbol:"IOTX",rpc:"https://babel-api.testnet.iotex.io"},
+  //   4689:{link: "https://iotexscan.io", name: "IoTeX Mainnet Scan", networkName: "Iotex Mainnet",symbol:"IOTX",rpc:"https://babel-api.mainnet.iotex.io"},
+  //   4690:{link: "https://testnet.iotexscan.io/", name: "IoTeX Testnet Scan", networkName: "Iotex Testnet",symbol:"IOTX",rpc:"https://babel-api.testnet.iotex.io"},
     
-    250:{link: "https://ftmscan.com/", name: "Fantom Scan", networkName: "Fantom Mainnet",symbol:"FTM",rpc:"https://rpc.ftm.tools/"},
-    4002:{link: "https://testnet.ftmscan.com", name: "Fantom testnet Scan", networkName: "Fantom Testnet",symbol:"FTM",rpc:"https://rpc.ankr.com/fantom_testnet"},
+  //   250:{link: "https://ftmscan.com/", name: "Fantom Scan", networkName: "Fantom Mainnet",symbol:"FTM",rpc:"https://rpc.ftm.tools/"},
+  //   4002:{link: "https://testnet.ftmscan.com", name: "Fantom testnet Scan", networkName: "Fantom Testnet",symbol:"FTM",rpc:"https://rpc.ankr.com/fantom_testnet"},
     
-    122:{link: "https://explorer.fuse.io", name: "Fuse Mainnet Scan", networkName: "Fuse Mainnet",symbol:"FUSE",rpc:"https://rpc.fuse.io"},
-    123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Sparknet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
-    10000:{link: "https://smartbch.org/", name: "Smart Bitcoin Cash Scan", networkName: "Smart Bitcoin Cash",symbol:"BCH",rpc:"https://smartbch.greyh.at"},
-    10001:{link: "https://smartbch.org/", name: "Bitcoin Cash Test Token Scan", networkName: "Bitcoin Cash Test Token",symbol:"BCHT",rpc:"https://rpc-testnet.smartbch.org"},
-    123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Testnet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
+  //   122:{link: "https://explorer.fuse.io", name: "Fuse Mainnet Scan", networkName: "Fuse Mainnet",symbol:"FUSE",rpc:"https://rpc.fuse.io"},
+  //   123:{link: "https://docs.fuse.io/general/fuse-network-blockchain/fuse-testnet", name: "Fuse Sparknet Scan", networkName: "Fuse Testnet",symbol:"SPARK",rpc:"https://rpc.fusespark.io"},
+  //   10000:{link: "https://smartbch.org/", name: "Smart Bitcoin Cash Scan", networkName: "Smart Bitcoin Cash",symbol:"BCH",rpc:"https://smartbch.greyh.at"},
+  //   10001:{link: "https://smartbch.org/", name: "Bitcoin Cash Test Token Scan", networkName: "Bitcoin Cash Test Token",symbol:"BCHT",rpc:"https://rpc-testnet.smartbch.org"},
     
-  }
+  // }
 
 
 
@@ -348,10 +364,11 @@ export const EtherProvider = ({ children }) => {
   const changeNetwork = async (networkID) => {
     try {
       const explorer = urlLinks[networkID];
+      console.log(explorer,"expo");
       // console.log(networkID, "netwrk id in change network");
       console.log(networkID, "networkID");
       const chainIdInDecimal = ethers.utils.hexlify(networkID);
-
+      console.log("am here")
       console.log(chainIdInDecimal, "chainid in decimal");
 
       let parseChainId = chainIdInDecimal.replace("0x0", "");
