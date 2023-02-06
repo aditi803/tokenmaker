@@ -47,7 +47,7 @@ const Commonmain1 = (props) => {
   const navigate = useNavigate();
 
   let location = useLocation()
-  console.log(location, "PAth is  ")
+  // console.log(location, "PAth is  ")
 
   const { deployContract, changeNetwork, addNewNetwork, connectedAccAddress, SignInMetamask, blockchainNetworks, sendCommision } =
     useContext(GlobalContext);
@@ -130,9 +130,6 @@ const Commonmain1 = (props) => {
     f_accessType: true,
   });
 
-
-  // console.log(location.pathname.replace('/generator/',"").charAt(0).toUpperCase() + location.pathname.replace('/generator/',"").slice(1), 'Pathname')
-
   const pathValue = location.pathname.replace('/generator/', "").charAt(0).toUpperCase() + location.pathname.replace('/generator/', "").slice(1)
 
   const {
@@ -180,22 +177,7 @@ const Commonmain1 = (props) => {
     }
   }, [supplyType, initialSupply, maximumSupply]);
   useEffect(() => {
-    //
-    // if (recoverable === true) {
-    //   console.log(commissionFee, "gg");
-    //   setEthFormData((prev) => ({
-    //     ...prev,
-    //     mintable: false,
-    //     commissionFee: Number().toFixed(3),
-    //   }));
-    // }
-    // else{
-    //    setEthFormData((prev) => ({
-    //     ...prev,
-    //     mintable: false,
-    //     commissionFee: Number(commissionFee +0.075).toFixed(3),
-    //   }));
-    // }
+    
     if (pausable === true) {
       setEthFormData((prev) => ({
         ...prev,
@@ -229,7 +211,6 @@ const Commonmain1 = (props) => {
         recoverable: false,
       }));
       if (network === "optimismTestnet") {
-        // console.log(data.networkCommissionFeem, "Network inside commisssion feee")
         setEthFormData((prev) => ({
           ...prev,
           commissionFee: data?.find((item) => item.value === ethFormData.network)?.networkCommissionFee,
@@ -890,15 +871,7 @@ const Commonmain1 = (props) => {
                 </div>
               </div>
             </div>
-            {/* {currentStep === 1 ? (
-              <FirstStep />
-            ) : currentStep === 2 ? (
-              <SecondStep />
-            ) : currentStep === 3 ? (
-              <ThirdStep />
-            ) : (
-              <FouthStep />
-            )} */}
+            
             {currentStep === 1 ? (
               // <FirstStep />
 
