@@ -104,8 +104,8 @@ export const EtherProvider = ({ children }) => {
     const networksData = () => {
       axios.get("https://tokenmaker-apis.block-brew.com/network/fullnetwork")
       .then((res) =>{
-        console.log(res.data.msg.items, "Full network data")
-        setFullData(res.data.msg.items)        
+        console.log(res.data.msg, "Full network data")
+        setFullData(res.data.msg)        
       })
       .catch((err) => {
         console.log(err, "Full network error")
@@ -363,10 +363,11 @@ export const EtherProvider = ({ children }) => {
 
   const changeNetwork = async (networkID) => {
     try {
+      console.log(networkID, "networkID");
+      
       const explorer = urlLinks[networkID];
       console.log(explorer,"expo");
       // console.log(networkID, "netwrk id in change network");
-      console.log(networkID, "networkID");
       const chainIdInDecimal = ethers.utils.hexlify(networkID);
       console.log("am here")
       console.log(chainIdInDecimal, "chainid in decimal");

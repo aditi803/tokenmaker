@@ -36,6 +36,7 @@ import { IotexMain } from './components/pages/Iotex_page/IotexMain.jsx';
 import { FantomMain } from './components/pages/Fantom_page/FantomMain.jsx';
 import FuseMain1 from './components/pages/Fuse_page/FuseMain1.jsx';
 import { FuseMain } from './components/pages/Fuse_page/FuseMain.jsx';
+import { BchMain } from './components/pages/Bch_page/BchMain.jsx';
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
@@ -135,6 +136,7 @@ function App(props) {
 
           <Route path='/terms' element={<Terms />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+          <Route path='/generator/bch' element={[<EthHeader header={header} />, <BchMain />, <Footer />]} />
 
           {/* <Route path='/generator/IoTeX' element={[<EthHeader header={header} />, <IotexMain />, <Footer />]} /> */}
 
