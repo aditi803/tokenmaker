@@ -46,6 +46,7 @@ function App(props) {
   const { net, setNet } = props;
   const [networkPath, setNetworkPath] = useState([])
   const [netHref, setNetHref] = useState([])
+  const [loader, setLoader] = useState(true)
 
   const [header, setHeader] = useState([])
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
@@ -84,6 +85,7 @@ function App(props) {
 
   useEffect(() => {
     getNetworkHanlder()
+    setLoader(false)
   }, [networkPath])
 
 
@@ -112,37 +114,10 @@ function App(props) {
 
           </>) : ""}
 
-
-
-          {/* <Route path='/generator/binancesmartchain' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-          <Route path='/generator/moonriver' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-
-          <Route path='/generator/ethereum' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-
-          <Route path='/generator/polygon' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-
-          <Route path='/generator/avalanche' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-
-          <Route path='/generator/celo' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-
-          <Route path='/generator/heco' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-
-          <Route path='/generator/optimism' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-
-          <Route path='/generator/IoTeX' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-
-          <Route path='/generator/Fantom' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
-
-          <Route path='/generator/Fuse' element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} /> */}
-
           <Route path='/terms' element={<Terms />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
-          <Route path='/generator/bch' element={[<EthHeader header={header} />, <BchMain />, <Footer />]} />
-          <Route path='/generator/tron' element={[<EthHeader header={header} />, <TronMain />, <Footer />]} />
-
-          {/* <Route path='/generator/IoTeX' element={[<EthHeader header={header} />, <IotexMain />, <Footer />]} /> */}
-
-        </Routes>
+          {/* <Route path='/generator/bch' element={[<EthHeader header={header} />, <BchMain />, <Footer />]} /> */}
+</Routes>
       </Router>
       {/* </WalletAdapter> */}
       {/* </StepContext> */}

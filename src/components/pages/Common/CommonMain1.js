@@ -705,7 +705,7 @@ const Commonmain1 = (props) => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       // console.log(provider, "provider");
       const { chainId } = await provider.getNetwork();
-      // console.log(chainId, "chainid");
+      console.log(chainId, "chainid");
 
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
@@ -721,7 +721,8 @@ const Commonmain1 = (props) => {
       let networkFunc
       if (FormData.network !== chainId) {
         await addNewNetwork(FormData.network)
-        networkFunc = await changeNetwork(FormData.network);
+        console.log(FormData.network, "Form data network")
+        networkFunc = await changeNetwork(FormData.networkId);
         console.log(networkFunc, "network");
         if (!networkFunc) {
           throw "vikcy"

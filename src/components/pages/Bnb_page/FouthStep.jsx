@@ -66,7 +66,7 @@ const FouthStep = () => {
                                     className="fa-solid fa-circle-info tip"
                                     data-toggle="tooltip"
                                     data-placement="top"
-                                    // data-bs-custom-class="custom-tooltip"
+                                    // data-bs-custom-className="custom-tooltip"
                                     title="The commison fee will be
                                   transferred automatically to us during the contract creation.In case of error,this amount will not be deducted
                                   from your wallet.Only the gas fees will be deducted "
