@@ -155,7 +155,8 @@ export const EtherProvider = ({ children }) => {
 
   let urlLinks = {}
 
-    console.log(fullData, ">>>>>>>>>>>>>>>>>>>>>fulldata")
+    // console.log(fullData, ">>>>>>>>>>>>>>>>>>>>>fulldata")
+    
 
   fullData.forEach((val) => {
     urlLinks = { ...urlLinks, [val.chainId] : {link: val.blockExplorerUrl,name: `${val.networkName} Scan`  ,networkName: val.networkName, symbol: val.symbol, rpc: val.rpcUrl} }
