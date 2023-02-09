@@ -37,6 +37,7 @@ import { FantomMain } from './components/pages/Fantom_page/FantomMain.jsx';
 import FuseMain1 from './components/pages/Fuse_page/FuseMain1.jsx';
 import { FuseMain } from './components/pages/Fuse_page/FuseMain.jsx';
 import { BchMain } from './components/pages/Bch_page/BchMain.jsx';
+import {TronMain }from './components/pages/Tron_Page/TronMain.jsx';
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 

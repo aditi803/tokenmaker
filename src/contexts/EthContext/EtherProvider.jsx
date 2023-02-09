@@ -3,6 +3,7 @@ import { ContractFactory, ethers } from "ethers";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { error } from "jquery";
+const TronWeb = require("tronweb");
 export const GlobalContext = createContext();
 
 export const EtherProvider = ({ children }) => {
@@ -15,7 +16,7 @@ export const EtherProvider = ({ children }) => {
   const [solDeploy, setSolDeploy] = useState(false);
   const [networkData, setNetworkData] = useState([]);
 
-  const [fullData, setFullData] = useState([])
+  const [fullData, setFullData] = useState([]);
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
     tokenSymbol: "",
@@ -108,14 +109,13 @@ export const EtherProvider = ({ children }) => {
         setFullData(res.data.msg)        
       })
       .catch((err) => {
-        console.log(err, "Full network error")
-      })
-    }
+        console.log(err, "Full network error");
+      });
+  };
 
-    useEffect(() => {
-      networksData()
-    },[])
-
+  useEffect(() => {
+    networksData();
+  }, []);
 
   // const blockchainNetworks = {
 
@@ -302,70 +302,68 @@ export const EtherProvider = ({ children }) => {
   //change RPC network if not equal to selected network
 
   const addNewNetwork = async (networkID) => {
-
     try {
-      const explorer = urlLinks[networkID];
-      // console.log(networkID, "netwrk id in change network");
-      console.log(networkID, "networkID");
-      const chainIdInDecimal = ethers.utils.hexlify(networkID);
+      if (networkID !== 1 || 5) {
+        const explorer = urlLinks[networkID];
+        // console.log(networkID, "netwrk id in change network");
+        console.log(networkID, "networkID");
+        const chainIdInDecimal = ethers.utils.hexlify(networkID);
 
-      console.log(chainIdInDecimal, "chainid in decimal");
+        console.log(chainIdInDecimal, "chainid in decimal");
 
-      let parseChainId = chainIdInDecimal.replace("0x0", "");
+        let parseChainId = chainIdInDecimal.replace("0x0", "");
 
-      console.log(parseChainId, "parseChainId middle");
+        console.log(parseChainId, "parseChainId middle");
 
-      if (parseChainId.startsWith("0")) {
-        parseChainId = parseChainId.slice(2, chainIdInDecimal.length);
-        console.log(parseChainId, "parseChainId inner ");
-      }
-      console.log(parseChainId, "parseChainId after ");
-      // das
-      console.log(parseChainId, "parsechainid");
-      //
-      console.log(
-        `0x${parseChainId}`,
-        explorer.networkName,
-        explorer.rpc,
-        explorer.link,
-        explorer.symbol,
-        "expoor"
-      );
+        if (parseChainId.startsWith("0")) {
+          parseChainId = parseChainId.slice(2, chainIdInDecimal.length);
+          console.log(parseChainId, "parseChainId inner ");
+        }
+        console.log(parseChainId, "parseChainId after ");
+        // das
+        console.log(parseChainId, "parsechainid");
+        //
+        console.log(
+          `0x${parseChainId}`,
+          explorer.networkName,
+          explorer.rpc,
+          explorer.link,
+          explorer.symbol,
+          "expoor"
+        );
 
+        const addNetwork = await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: `0x${parseChainId}`,
+              chainName: explorer.networkName,
+              rpcUrls: [explorer.rpc],
+              blockExplorerUrls: [explorer.link],
 
-
-
-
-      const addNetwork = await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [
-          {
-            chainId: `0x${parseChainId}`,
-            chainName: explorer.networkName,
-            rpcUrls: [explorer.rpc],
-            blockExplorerUrls: [explorer.link],
-
-            nativeCurrency: {
-              // name: currencyName,
-              symbol: explorer.symbol, // 2-6 characters long
-              decimals: 18,
+              nativeCurrency: {
+                // name: currencyName,
+                symbol: explorer.symbol, // 2-6 characters long
+                decimals: 18,
+              },
             },
-          },
-        ],
-      });
+          ],
+        });
 
-      console.log(addNetwork, "addNetwork");
+        console.log(addNetwork, "addNetwork");
+      } else {
+        console.log("Ethereum and Goreli");
+      }
     } catch (error) {
-      console.log(error, "addnetwork error")
-      toast.error(error)
+      console.log(error, "addnetwork error");
+      toast.error(error);
     }
-  }
-
+  };
 
   const changeNetwork = async (networkID) => {
     try {
       console.log(networkID, "networkID");
-      
+
       const explorer = urlLinks[networkID];
       console.log(explorer,"expo");
       // console.log(networkID, "netwrk id in change network");
@@ -433,7 +431,6 @@ export const EtherProvider = ({ children }) => {
 
   const sendCommision = async (_commissionFee) => {
     try {
-
       console.log(_commissionFee, "cmsn_fee");
       if (window.ethereum) {
         await window.ethereum.send("eth_requestAccounts");
@@ -473,6 +470,23 @@ export const EtherProvider = ({ children }) => {
   };
 
   //deploy Contract on blockchain
+
+  const deployTron = async (contractSource, newFormData) => {
+    let explorer;
+    const abi = contractSource.abi;
+    const bytecode = contractSource.bytecode;
+    const tronWeb = new TronWeb({
+      fullNode: "https://api.shasta.trongrid.io",
+      privateKey:
+        "37c7db6e714cca9113b38ce38dd4ee7fc813452bfc09ba2ccde72d9db8ed3e36",
+    });
+    const contract = await tronWeb.contract().new({
+      abi: abi,
+      bytecode: bytecode,
+    });
+    console.log(contract,"contract")
+  };
+
   const deployContract = async (contractSource, newFormData) => {
     try {
       let explorer;
@@ -565,7 +579,8 @@ export const EtherProvider = ({ children }) => {
         urlLinks: urlLinks,
         sendCommision: sendCommision,
         networkData,
-         setNetworkData
+        deployTron,
+        setNetworkData,
       }}
     >
       <ToastContainer />

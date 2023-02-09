@@ -54,6 +54,7 @@
     "stream": "^0.0.2",
     "styled-components": "^5.3.6",
     "sweetalert2": "^11.6.16",
+    "tronweb": "^5.1.0",
     "use-tronlink": "^0.0.7",
     "util": "^0.12.5",
     "wagmi": "^0.6.8",
@@ -102,5 +103,20 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "url": "^0.11.0"
-  }
+  },
+  "keywords": [
+    "react",
+    "tronlink",
+    "klever",
+    "integration",
+    "example",
+    "tron",
+    "trx",
+    "blockchain",
+    "tronweb",
+    "wallet",
+    "cryptocurrency",
+    "crypto",
+    "solidity"
+  ]
 }
