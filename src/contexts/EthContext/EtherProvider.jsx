@@ -4,6 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { error } from "jquery";
 const TronWeb = require("tronweb");
+ 
+
+
+
 export const GlobalContext = createContext();
 
 export const EtherProvider = ({ children }) => {
@@ -303,7 +307,13 @@ export const EtherProvider = ({ children }) => {
 
   const addNewNetwork = async (networkID) => {
     try {
-      if (networkID !== 1 || 5) {
+      console.log("add network")
+      
+      if(networkID === 1 || 5){
+        console.log("Ethereum and Goreli");
+      }      
+      else  {
+        console.log("inside network")
         const explorer = urlLinks[networkID];
         // console.log(networkID, "netwrk id in change network");
         console.log(networkID, "networkID");
@@ -351,9 +361,7 @@ export const EtherProvider = ({ children }) => {
         });
 
         console.log(addNetwork, "addNetwork");
-      } else {
-        console.log("Ethereum and Goreli");
-      }
+      } 
     } catch (error) {
       console.log(error, "addnetwork error");
       toast.error(error);
@@ -362,7 +370,7 @@ export const EtherProvider = ({ children }) => {
 
   const changeNetwork = async (networkID) => {
     try {
-      console.log(networkID, "networkID");
+      console.log(networkID, "networkID chng");
 
       const explorer = urlLinks[networkID];
       console.log(explorer,"expo");
@@ -486,6 +494,8 @@ export const EtherProvider = ({ children }) => {
     });
     console.log(contract,"contract")
   };
+
+  
 
   const deployContract = async (contractSource, newFormData) => {
     try {

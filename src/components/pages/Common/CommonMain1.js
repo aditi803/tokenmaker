@@ -707,6 +707,8 @@ const Commonmain1 = (props) => {
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
 
+      console.log(FormData.network,"networkForm");
+
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
       blockchainNetworks[FormData.network]
@@ -722,7 +724,7 @@ const Commonmain1 = (props) => {
       if (FormData.network !== chainId) {
         await addNewNetwork(FormData.network)
         console.log(FormData.network, "Form data network")
-        networkFunc = await changeNetwork(FormData.networkId);
+        networkFunc = await changeNetwork(FormData.network);
         console.log(networkFunc, "network");
         if (!networkFunc) {
           throw "vikcy"

@@ -31,13 +31,7 @@ import { CeloMain } from './components/pages/celo_page/celoMain.jsx';
 import { HecoMain } from './components/pages/Heco_page/hecoMain.jsx';
 import { OptimismMain } from './components/pages/Optimism_page/optimismMain.jsx';
 import Common from './components/pages/Common/CommonMain1.js';
-import { CommonMain } from './components/pages/Common/CommonMain.js';
-import { IotexMain } from './components/pages/Iotex_page/IotexMain.jsx';
-import { FantomMain } from './components/pages/Fantom_page/FantomMain.jsx';
-import FuseMain1 from './components/pages/Fuse_page/FuseMain1.jsx';
-import { FuseMain } from './components/pages/Fuse_page/FuseMain.jsx';
-import { BchMain } from './components/pages/Bch_page/BchMain.jsx';
-import {TronMain }from './components/pages/Tron_Page/TronMain.jsx';
+import { CommonMain } from './components/pages/Common/CommonMain.js'
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
