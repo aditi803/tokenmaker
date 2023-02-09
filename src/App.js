@@ -38,6 +38,7 @@ import FuseMain1 from './components/pages/Fuse_page/FuseMain1.jsx';
 import { FuseMain } from './components/pages/Fuse_page/FuseMain.jsx';
 import { BchMain } from './components/pages/Bch_page/BchMain.jsx';
 import {TronMain }from './components/pages/Tron_Page/TronMain.jsx';
+import Loader from './loader/index.js';
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
@@ -48,10 +49,13 @@ function App(props) {
   const [netHref, setNetHref] = useState([])
   const [loader, setLoader] = useState(true)
 
+  const [loading, setLoading] = useState(false)
+
   const [header, setHeader] = useState([])
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/"
   useEffect(() => {
     const fetchData = async () => {
+      
       const respHeader = await axios.get(HEADER)
       setHeader(respHeader.data.msg)
       // console.log(respHeader.data.msg,"Header resp")
@@ -66,6 +70,7 @@ function App(props) {
 
   const getNetworkHanlder = () => {
     // changeApiStatus(true)
+    setLoading(true)
     axios
       .get("https://tokenmaker-apis.block-brew.com/network/networkdetails")
       .then((res) => {
@@ -73,22 +78,25 @@ function App(props) {
         setNetHref(res.data.msg.items.filter((value) =>
           value.categoryName !== "Solana"
         ))
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false)
       });
   };
 
   useEffect(() => {
     getNetworkHanlder()
     setLoader(false)
-  }, [networkPath])
+  }, [])
 
 
   return (
 
     <EtherProvider>
       <Router>
+          {loading ? <Loader /> : ""}
         <Routes>
           <Route path='/generator' element={<Main header={header} />} />
           <Route path='/' element={[<FrontMain />, <ScrollButton />]} />
