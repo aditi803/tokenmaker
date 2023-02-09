@@ -96,7 +96,7 @@ function App(props) {
 
     <EtherProvider>
       <Router>
-          {loading ? <Loader /> : ""}
+          {/* {loading ? <Loader /> : ""} */}
         <Routes>
           <Route path='/generator' element={<Main header={header} />} />
           <Route path='/' element={[<FrontMain />, <ScrollButton />]} />
