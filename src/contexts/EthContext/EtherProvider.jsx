@@ -109,7 +109,7 @@ export const EtherProvider = ({ children }) => {
     const networksData = () => {
       axios.get("https://tokenmaker-apis.block-brew.com/network/fullnetwork")
       .then((res) =>{
-        console.log(res.data.msg, "Full network data")
+        // console.log(res.data.msg, "Full network data")
         setFullData(res.data.msg)        
       })
       .catch((err) => {
@@ -129,7 +129,7 @@ export const EtherProvider = ({ children }) => {
       blockchainNetworks = {...blockchainNetworks, [val.value] : val.chainId * 1 }
     })
 
-    console.log(blockchainNetworks, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>blockchain")
+    // console.log(blockchainNetworks, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>blockchain")
     // mainnet: 1,
     // gorli: 5,
     // rinkeby: 4,
@@ -167,7 +167,7 @@ export const EtherProvider = ({ children }) => {
   })
 
 
-  console.log(urlLinks, "Linkls")
+  // console.log(urlLinks, "Linkls")
 
   // const urlLinks = {
   //   97: { link: "https://testnet.bscscan.com/", name: "Bsc Testnet Scan", networkName: "Binance Smart Chain Testnet", symbol: "BNB", rpc: "https://data-seed-prebsc-1-s1.binance.org:8545/" },
