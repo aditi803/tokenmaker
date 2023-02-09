@@ -72,10 +72,6 @@ function App(props) {
         setNetHref(res.data.msg.items.filter((value) =>
           value.categoryName !== "Solana"
         ))
-        // console.log(
-        //   res.data.msg.items,
-        //   "network path app file"
-        // );
       })
       .catch((err) => {
         console.log(err);
@@ -88,21 +84,13 @@ function App(props) {
   }, [networkPath])
 
 
-  // let networkHref = networkPath.filter((value) =>
-  //   value.categoryName !== "Solana"
-  // )
-
   return (
 
     <EtherProvider>
-      {/* <StepContext> */}
-      {/* <WalletAdapter> */}
       <Router>
         <Routes>
-
           <Route path='/generator' element={<Main header={header} />} />
           <Route path='/' element={[<FrontMain />, <ScrollButton />]} />
-
           <Route path='/generator/solana' element={[<SolanaMain net={net} setNet={setNet} />]} />
 
           {netHref.length > 0 ? (<>
@@ -115,11 +103,8 @@ function App(props) {
 
           <Route path='/terms' element={<Terms />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
-          {/* <Route path='/generator/bch' element={[<EthHeader header={header} />, <BchMain />, <Footer />]} /> */}
-</Routes>
+        </Routes>
       </Router>
-      {/* </WalletAdapter> */}
-      {/* </StepContext> */}
     </EtherProvider >
   )
 }
