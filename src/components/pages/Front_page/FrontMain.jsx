@@ -64,7 +64,7 @@ export const FrontMain = () => {
       const respSteps = await axios.get(STEPS);
 
       setBanner(respBanner.data.msg);
-      setCustom(respCustom.data.msg);
+      setCustom(respCustom.data.msg.customData);
       setStart(respStart.data.msg);
       // setFeature(respFeature.data.msg)
       setFaq(respFaq.data.msg.faqDetails.items);

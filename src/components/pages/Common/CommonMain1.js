@@ -639,21 +639,27 @@ const Commonmain1 = (props) => {
         tokenNameErr: "Please fill your token name",
       }));
     }
+    // else if (ethFormData.tokenName !==  "/^[A-Za-z]+$/") {
+    //   setErr((prev) => ({
+    //     ...prev,
+    //     tokenNameErr: "Numerical values are not allowed",
+    //   }));
+    // }
 
-    if (ethFormData.tokenSymbol === "") {
+    if (ethFormData.tokenSymbol === ""  ) {
       setErr((prev) => ({
         ...prev,
         tokenSymbolErr: "Please fill your token symbol",
       }));
     }
-
-    // if (ethFormData.agreement === false) {
+    // else if ((ethFormData.tokenSymbol !==  "/^[A-Za-z]+$/" )) {
     //   setErr((prev) => ({
     //     ...prev,
-    //     agreementErr:
-    //       "Please confirm that you have read and understood our terms of use",
+    //     tokenSymbolErr: "Numerical values are not allowed",
     //   }));
+    //   return true;
     // }
+
     if (ethFormData.decimals > 21 || ethFormData.decimals < 6) {
       setErr((prev) => ({
         ...prev,
@@ -669,17 +675,11 @@ const Commonmain1 = (props) => {
 
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
-      // do what u want to do with data
-      // console.log("data");
-      // console.log(err, "da")
-
-      // < Navigate to= "/generator/final" />
-      // console.log(ethFormData, ">>>>>>>>>>>>>>>>");
-      // navigate("/generator/final")
+    
     }
     if (
-      ethFormData.tokenName !== "" &&
-      ethFormData.tokenSymbol !== "" &&
+     ( ethFormData.tokenName !== "")  &&
+      (ethFormData.tokenSymbol !== "" ) &&
       (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
       ethFormData.initialSupply !== ''
     ) {
@@ -831,6 +831,7 @@ const Commonmain1 = (props) => {
 
 
 
+
   return (
     <>
       <div className="page-content">
@@ -936,7 +937,13 @@ const Commonmain1 = (props) => {
                               placeholder="My new token"
                               name="tokenName"
                               value={tokenName}
-                              onChange={ethMainFormHandler}
+                              onChange={(e) => {
+                                if(!e.target.value.match(/^[A-Za-z]+$/)){
+                                  return ;
+                                }
+                                
+                                ethMainFormHandler(e)
+                              }}
                             />
                             <span className="form-text text-muted">
                               The name of your token
@@ -957,7 +964,12 @@ const Commonmain1 = (props) => {
                               maxLength="8"
                               name="tokenSymbol"
                               value={tokenSymbol}
-                              onChange={ethMainFormHandler}
+                              onChange={(e) => {
+                                if(!e.target.value.match(/^[A-Za-z]+$/)){
+                                  return ;
+                                }
+                                ethMainFormHandler(e)
+                              }}
                             />
                             <span className="form-text text-muted">
                               Your token's symbol (i.e. {formSymbol})
