@@ -307,9 +307,9 @@ export const EtherProvider = ({ children }) => {
 
   const addNewNetwork = async (networkID) => {
     try {
-      console.log("add network")
+      console.log(networkID,"add network")
       
-      if(networkID === 1 || 5){
+      if(networkID === 1 || networkID === 5){
         console.log("Ethereum and Goreli");
       }      
       else  {
