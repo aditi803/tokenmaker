@@ -760,7 +760,7 @@ const Commonmain1 = (props) => {
                 props.setShow(true);
                 res.error.code === "ACTION_REJECTED"
                   ? toast.error(
-                    "User Rejected The Request"
+                    "User Rejected The Request !"
                   )
                   : toast.error(res.error.message);
               } else {
