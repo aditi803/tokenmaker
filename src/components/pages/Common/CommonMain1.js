@@ -802,23 +802,26 @@ const Commonmain1 = (props) => {
 
   const [bannerValue, setBannerValue] = useState("")
   const [formSymbol, setFormSymbol] = useState("")
+  const [formValue, setFormValue] = useState("")
 
   const networkData = async () => {
     // console.log("123")
     // console.log(data, "Netwrok data")
     // console.log(location.pathname, "Network")
-    await data.map((value) => {
+    await data.map((val) => {
       // console.log(value, "Banner Data above");
 
-      if ((value.parentNetworkName.split(" ").join("").toLowerCase()) === location.pathname.replace("/generator/", "")) {
+      if ((val.parentNetworkName.split(" ").join("").toLowerCase()) === location.pathname.replace("/generator/", "")) {
         // console.log(value, "Banner Data under");
         return (
-          setBannerValue(value.parentNetworkName),
-          setFormSymbol(value.symbol)
+          setBannerValue(val.parentNetworkName),
+          setFormSymbol(val.symbol),
+          setFormValue(val.value)
         )
       }
     })
   }
+
 
   useEffect(() => {
     networkData()
@@ -1083,7 +1086,7 @@ const Commonmain1 = (props) => {
                                 defaultChecked={verified}
                               />
                               <span className="form-check-label">
-                                Verified on Optimisticscan
+                                Verified on {`${bannerValue.split(" ").join("")}Scan`}
                               </span>
                             </label>
                             <span className="form-text text-muted">
