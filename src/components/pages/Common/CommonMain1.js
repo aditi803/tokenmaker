@@ -715,7 +715,7 @@ const Commonmain1 = (props) => {
         ? Object.assign(FormData, {
           network: blockchainNetworks[FormData.network],
         })
-        : "";
+        :  "";
 
       if (connectedAccAddress.length === 0) {
         await SignInMetamask()
