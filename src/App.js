@@ -108,7 +108,7 @@ function App(props) {
               return <Route path={`/generator/${networkVal.hrefPath}`} element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
             })}
 
-          </>) : ""}
+          </>) : loading ?<Route path={`/generator/*`} element={ <Loader />}/>: ""} 
 
           <Route path='/terms' element={<Terms />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
