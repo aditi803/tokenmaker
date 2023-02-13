@@ -177,7 +177,7 @@ const Commonmain1 = (props) => {
     }
   }, [supplyType, initialSupply, maximumSupply]);
   useEffect(() => {
-    
+
     if (pausable === true) {
       setEthFormData((prev) => ({
         ...prev,
@@ -633,11 +633,17 @@ const Commonmain1 = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (ethFormData.tokenName === "") {
+    
+    console.log("TOO", ethFormData.tokenName.match(/^[A-Za-z]+$/), ">>>>", ethFormData.tokenName)
+    
+    if (ethFormData.tokenName === "" || !ethFormData.tokenName.match(/^[A-Za-z]+$/)) {
+
       setErr((prev) => ({
         ...prev,
-        tokenNameErr: "Please fill your token name",
+        tokenNameErr: !(ethFormData.tokenName === "") && !ethFormData.tokenName.match(/^[A-Za-z]+$/)  ? "Numerical not allowed" : "Please fill your token name",
       }));
+
+      return;
     }
     // else if (ethFormData.tokenName !==  "/^[A-Za-z]+$/") {
     //   setErr((prev) => ({
@@ -645,12 +651,13 @@ const Commonmain1 = (props) => {
     //     tokenNameErr: "Numerical values are not allowed",
     //   }));
     // }
-
-    if (ethFormData.tokenSymbol === ""  ) {
+    
+    if (ethFormData.tokenSymbol === "" || !ethFormData.tokenSymbol.match(/^[A-Za-z]+$/)) {
       setErr((prev) => ({
         ...prev,
-        tokenSymbolErr: "Please fill your token symbol",
+        tokenSymbolErr:  !ethFormData.tokenSymbol.match(/^[A-Za-z]+$/) ? "Numericals not allowed": "Please fill your token symbol",
       }));
+      return;
     }
     // else if ((ethFormData.tokenSymbol !==  "/^[A-Za-z]+$/" )) {
     //   setErr((prev) => ({
@@ -675,11 +682,11 @@ const Commonmain1 = (props) => {
 
 
     if (!err.tokenNameErr && !err.tokenSymbolErr && !err.agreementErr) {
-    
+
     }
     if (
-     ( ethFormData.tokenName !== "")  &&
-      (ethFormData.tokenSymbol !== "" ) &&
+      (ethFormData.tokenName !== "") &&
+      (ethFormData.tokenSymbol !== "") &&
       (ethFormData.decimals <= 21 && ethFormData.decimals >= 6) &&
       ethFormData.initialSupply !== ''
     ) {
@@ -707,7 +714,7 @@ const Commonmain1 = (props) => {
       const { chainId } = await provider.getNetwork();
       console.log(chainId, "chainid");
 
-      console.log(FormData.network,"networkForm");
+      console.log(FormData.network, "networkForm");
 
       //check selected network and set chain id
       // eslint-disable-next-line no-unused-expressions
@@ -875,7 +882,7 @@ const Commonmain1 = (props) => {
                 </div>
               </div>
             </div>
-            
+
             {currentStep === 1 ? (
               // <FirstStep />
 
@@ -938,10 +945,10 @@ const Commonmain1 = (props) => {
                               name="tokenName"
                               value={tokenName}
                               onChange={(e) => {
-                                if(!e.target.value.match(/^[A-Za-z]+$/)){
-                                  return ;
-                                }
-                                
+                                // if (!e.target.value.match(/^[A-Za-z]+$/)) {
+                                //   return;
+                                // }
+
                                 ethMainFormHandler(e)
                               }}
                             />
@@ -965,12 +972,14 @@ const Commonmain1 = (props) => {
                               name="tokenSymbol"
                               value={tokenSymbol}
                               onChange={(e) => {
-                                if(!e.target.value.match(/^[A-Za-z]+$/)){
-                                  return ;
-                                }
+                                // if (!e.target.value.match(/^[A-Z]+$/i)) {
+                                //   return true;
+                                // }
+
                                 ethMainFormHandler(e)
                               }}
-                            />
+                              // onChange={ethMainFormHandler}
+                                                     />
                             <span className="form-text text-muted">
                               Your token's symbol (i.e. {formSymbol})
                             </span>
