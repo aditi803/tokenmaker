@@ -632,15 +632,22 @@ const Commonmain1 = (props) => {
   }, [agreement, tokenName, tokenSymbol, decimals]);
 
   const handleSubmit = (e) => {
+
+
+
+
+    
     e.preventDefault();
     
     console.log("TOO", ethFormData.tokenName.match(/^[A-Za-z]+$/), ">>>>", ethFormData.tokenName)
+
+
     
-    if (ethFormData.tokenName === "" || !ethFormData.tokenName.match(/^[A-Za-z]+$/)) {
+    if (ethFormData.tokenName === "" || !ethFormData.tokenName.match(/^[A-Za-z_ ]+$/)) {
 
       setErr((prev) => ({
         ...prev,
-        tokenNameErr: !(ethFormData.tokenName === "") && !ethFormData.tokenName.match(/^[A-Za-z]+$/)  ? "Numerical not allowed" : "Please fill your token name",
+        tokenNameErr: !(ethFormData.tokenName === "") && !ethFormData.tokenName.match(/^[A-Za-z_ ]+$/)  ? "Numerical not allowed" : "Please fill your token name",
       }));
 
       return;
@@ -652,10 +659,10 @@ const Commonmain1 = (props) => {
     //   }));
     // }
     
-    if (ethFormData.tokenSymbol === "" || !ethFormData.tokenSymbol.match(/^[A-Za-z]+$/)) {
+    if (ethFormData.tokenSymbol === "" || !ethFormData.tokenSymbol.match(/^[A-Za-z_ ]+$/)) {
       setErr((prev) => ({
         ...prev,
-        tokenSymbolErr:  !ethFormData.tokenSymbol.match(/^[A-Za-z]+$/) ? "Numericals not allowed": "Please fill your token symbol",
+        tokenSymbolErr: !(ethFormData.tokenSymbol === "") &&  !ethFormData.tokenSymbol.match(/^[A-Za-z_ ]+$/) ? "Numericals not allowed": "Please fill your token symbol",
       }));
       return;
     }
