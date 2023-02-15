@@ -647,7 +647,7 @@ const Commonmain1 = (props) => {
 
       setErr((prev) => ({
         ...prev,
-        tokenNameErr: !(ethFormData.tokenName === "") && !ethFormData.tokenName.match(/^[A-Za-z_ ]+$/)  ? "Numerical not allowed" : "Please fill your token name",
+        tokenNameErr: !(ethFormData.tokenName === "") && !ethFormData.tokenName.match(/^[A-Za-z_ ]+$/)  ? "Numerical and underscores are not allowed" : "Please fill your token name",
       }));
 
       return;
@@ -662,7 +662,7 @@ const Commonmain1 = (props) => {
     if (ethFormData.tokenSymbol === "" || !ethFormData.tokenSymbol.match(/^[A-Za-z_ ]+$/)) {
       setErr((prev) => ({
         ...prev,
-        tokenSymbolErr: !(ethFormData.tokenSymbol === "") &&  !ethFormData.tokenSymbol.match(/^[A-Za-z_ ]+$/) ? "Numericals not allowed": "Please fill your token symbol",
+        tokenSymbolErr: !(ethFormData.tokenSymbol === "") &&  !ethFormData.tokenSymbol.match(/^[A-Za-z_ ]+$/) ? "Numericals  and underscores are not allowed": "Please fill your token symbol",
       }));
       return;
     }
@@ -729,7 +729,7 @@ const Commonmain1 = (props) => {
         ? Object.assign(FormData, {
           network: blockchainNetworks[FormData.network],
         })
-        :  "";
+        : "";
 
       if (connectedAccAddress.length === 0) {
         await SignInMetamask()
