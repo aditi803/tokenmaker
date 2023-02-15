@@ -643,11 +643,11 @@ const Commonmain1 = (props) => {
 
 
     
-    if (ethFormData.tokenName === "" || !ethFormData.tokenName.match(/^[A-Za-z_ ]+$/)) {
+    if (ethFormData.tokenName === "" || !ethFormData.tokenName.match(/^[A-Za-z.\-_ ]+$/)) {
 
       setErr((prev) => ({
         ...prev,
-        tokenNameErr: !(ethFormData.tokenName === "") && !ethFormData.tokenName.match(/^[A-Za-z_ ]+$/)  ? "Numerical not allowed" : "Please fill your token name",
+        tokenNameErr: !(ethFormData.tokenName === "") && !ethFormData.tokenName.match(/^[A-Za-z.\-_ ]+$/)  ? "Numerical not allowed" : "Please fill your token name",
       }));
 
       return;
@@ -659,10 +659,10 @@ const Commonmain1 = (props) => {
     //   }));
     // }
     
-    if (ethFormData.tokenSymbol === "" || !ethFormData.tokenSymbol.match(/^[A-Za-z_ ]+$/)) {
+    if (ethFormData.tokenSymbol === "" || !ethFormData.tokenSymbol.match(/^[A-Za-z.\-_ ]+$/)) {
       setErr((prev) => ({
         ...prev,
-        tokenSymbolErr: !(ethFormData.tokenSymbol === "") &&  !ethFormData.tokenSymbol.match(/^[A-Za-z_ ]+$/) ? "Numericals not allowed": "Please fill your token symbol",
+        tokenSymbolErr: !(ethFormData.tokenSymbol === "") &&  !ethFormData.tokenSymbol.match(/^[A-Za-z.\-_ ]+$/) ? "Numericals not allowed": "Please fill your token symbol",
       }));
       return;
     }
