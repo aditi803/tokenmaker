@@ -632,16 +632,7 @@ const Commonmain1 = (props) => {
   }, [agreement, tokenName, tokenSymbol, decimals]);
 
   const handleSubmit = (e) => {
-
-
-
-
-    
-    e.preventDefault();
-    
-    console.log("TOO", ethFormData.tokenName.match(/^[A-Za-z]+$/), ">>>>", ethFormData.tokenName)
-
-
+   e.preventDefault();
     
     if (ethFormData.tokenName === "" || !ethFormData.tokenName.match(/^[A-Za-z_ ]+$/)) {
 
@@ -846,8 +837,14 @@ const Commonmain1 = (props) => {
 
   }
 
+  const params= useParams()
+  console.log(params, "param value")
+
+  console.log(window.location.href, "location value")
 
 
+  var locationValue = window.location.href.split("/").pop()
+  console.log(locationValue,"loocation");
 
   return (
     <>
@@ -1074,12 +1071,13 @@ const Commonmain1 = (props) => {
                                 defaultChecked={conforms}
                               />
                               <span className="form-check-label">
-                                Confirms to ERC-20 protocol
+                                {console.log(locationValue,"poop")}
+                                Confirms to {locationValue === "binancesmartchain" ? "BEP 20" : "ERC 20"} protocol
                               </span>
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and confirms to ERC-20 protocol
+                              and confirms to  {locationValue === "binancesmartchain" ? "BEP 20" : "ERC 20"} protocol
                             </span>
                           </div>
                           <div className="form-group">
