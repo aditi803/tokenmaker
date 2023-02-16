@@ -51,7 +51,7 @@ function Main() {
       <div className="page-content">
         <main>
           <SelectBanner />
-
+{/* as */}
           {loader ? (
             <MainSkeleton /> 
           ) : (
