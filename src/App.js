@@ -22,23 +22,14 @@ import { useState } from 'react';
 import axios from "axios";
 import { HEADER } from './api/Api.js';
 import { SolanaMain } from './components/pages/solana_page/SolanaMain.jsx';
-import WalletAdapter from './contexts/solanaContext/SolanaContext.jsx';
-import { MoonRiverMain } from './components/pages/MoonRiver_page/MoonRiverMain';
-import { AvaxMain } from './components/pages/Avax_page/AvaxMain.jsx';
+
 import Terms from './components/Layots/Terms.jsx';
 import PrivacyPolicy from './components/Layots/PrivacyPolicy.jsx';
-import { CeloMain } from './components/pages/celo_page/celoMain.jsx';
-import { HecoMain } from './components/pages/Heco_page/hecoMain.jsx';
-import { OptimismMain } from './components/pages/Optimism_page/optimismMain.jsx';
-import Common from './components/pages/Common/CommonMain1.js';
+
 import { CommonMain } from './components/pages/Common/CommonMain.js';
-import { IotexMain } from './components/pages/Iotex_page/IotexMain.jsx';
-import { FantomMain } from './components/pages/Fantom_page/FantomMain.jsx';
-import FuseMain1 from './components/pages/Fuse_page/FuseMain1.jsx';
-import { FuseMain } from './components/pages/Fuse_page/FuseMain.jsx';
-import { BchMain } from './components/pages/Bch_page/BchMain.jsx';
-import {TronMain }from './components/pages/Tron_Page/TronMain.jsx';
+
 import Loader from './loader/index.js';
+import {Test1} from './components/testing/aave/Test1.jsx';
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
@@ -111,6 +102,7 @@ function App(props) {
           </>) : loading ?<Route path={`/generator/*`} element={ <Loader />}/>: ""} 
 
           <Route path='/terms' element={<Terms />} />
+          <Route path='/test' element={<Test1 />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         </Routes>
       </Router>
