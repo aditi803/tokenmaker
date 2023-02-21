@@ -6,14 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css';
 import { EthHeader } from './components/pages/Eth_page/EthHeader.jsx';
-import { EthMain } from './components/pages/Eth_page/EthMain.jsx';
-import { BnbMain } from './components/pages/Bnb_page/BnbMain.jsx';
-import { MaticMain } from './components/pages/Matic_page/MaticMain.jsx';
-import { FinalMain } from './components/pages/Main_page/FinalMain.jsx';
+
 import { FrontMain } from './components/pages/Front_page/FrontMain.jsx'
 import { EtherProvider } from "./contexts/EthContext/EtherProvider"
 
-import { useHelper } from './contexts/HelperContext/HelperContext.jsx';
 
 
 import ScrollButton from './components/Layots/ScrollButton.jsx';
@@ -98,6 +94,7 @@ function App(props) {
             {netHref.map((networkVal) => {
               return <Route path={`/generator/${networkVal.hrefPath}`} element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
             })}
+            {/* dsf */}
 
           </>) : loading ?<Route path={`/generator/*`} element={ <Loader />}/>: ""} 
 
