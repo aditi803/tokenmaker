@@ -88,7 +88,7 @@ function App(props) {
           <Route path='/generator' element={<Main header={header} />} />
           <Route path='/' element={[<FrontMain />, <ScrollButton />]} />
           <Route path='/generator/solana' element={[<SolanaMain net={net} setNet={setNet} />]} />
-
+{/* nthng */}
           {netHref.length > 0 ? (<>
 
             {netHref.map((networkVal) => {
