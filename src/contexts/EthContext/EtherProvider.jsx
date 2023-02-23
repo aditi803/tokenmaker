@@ -19,7 +19,7 @@ export const EtherProvider = ({ children }) => {
   const [startToggle, setStartToggle] = useState(true);
   const [solDeploy, setSolDeploy] = useState(false);
   const [networkData, setNetworkData] = useState([]);
-
+// sds
   const [fullData, setFullData] = useState([]);
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
