@@ -25,7 +25,7 @@ import PrivacyPolicy from './components/Layots/PrivacyPolicy.jsx';
 import { CommonMain } from './components/pages/Common/CommonMain.js';
 
 import Loader from './loader/index.js';
-import {Test1} from './components/testing/aave/Test1.jsx';
+import Test1 from './components/testing/aave/Test1.jsx';
 // import  PrivacyPolicy  from './components/Layots/PrivacPolicy.jsx';
 // import StepContext from './components/pages/MoonRiver_page/StepContext.jsx';
 
@@ -88,18 +88,18 @@ function App(props) {
           <Route path='/generator' element={<Main header={header} />} />
           <Route path='/' element={[<FrontMain />, <ScrollButton />]} />
           <Route path='/generator/solana' element={[<SolanaMain net={net} setNet={setNet} />]} />
-{/* nthng */}
+
           {netHref.length > 0 ? (<>
 
             {netHref.map((networkVal) => {
               return <Route path={`/generator/${networkVal.hrefPath}`} element={[<EthHeader header={header} />, <CommonMain />, <Footer />]} />
             })}
-            {/* dsf */}
+           
 
           </>) : loading ?<Route path={`/generator/*`} element={ <Loader />}/>: ""} 
 
           <Route path='/terms' element={<Terms />} />
-          <Route path='/test' element={<Test1 />} />
+          <Route path='/test' element={<Test1/>} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         </Routes>
       </Router>

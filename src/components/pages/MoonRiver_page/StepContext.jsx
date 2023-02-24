@@ -1,46 +1,46 @@
-import React,{useState} from 'react'
-import MoonRiverMain1 from './MoonRiverMain1';
+// import React,{useState} from 'react'
+// import MoonRiverMain1 from './MoonRiverMain1';
 
-const multiStepContext = React.createContext();
+// const multiStepContext = React.createContext();
 
-const StepContext = (props) => {
+// const StepContext = (props) => {
 
-    const {setNet,net} = props;
+//     const {setNet,net} = props;
 
-    const [currentStep, setStep] = useState(1);
-    const [userData, setUserData] = useState({
-        tokenType: '',
-        tokenName: '',
-        tokenSymbol:'',
-        decimals: '',
+//     const [currentStep, setStep] = useState(1);
+//     const [userData, setUserData] = useState({
+//         tokenType: '',
+//         tokenName: '',
+//         tokenSymbol:'',
+//         decimals: '',
            
-        });
-    const [finalData, setFinalData] = useState({});
-    const [submitted,setSubmitted] = useState(false);
+//         });
+//     const [finalData, setFinalData] = useState({});
+//     const [submitted,setSubmitted] = useState(false);
 
-    const submitData = () => {
-        setSubmitted(true);
-        setFinalData({...finalData, userData});
-        setUserData('');
-        setStep(1)
-    }
+//     const submitData = () => {
+//         setSubmitted(true);
+//         setFinalData({...finalData, userData});
+//         setUserData('');
+//         setStep(1)
+//     }
 
-  return (
-    <div>
-        <multiStepContext.Provider
-            value={{
-                currentStep,setStep,
-                userData, setUserData,
-                finalData, setFinalData, submitData,
-                submitted,setSubmitted
-            }}>
-            {/* {props?.children} */}
-            <MoonRiverMain1 setShow={props.setShow}/>
-        </multiStepContext.Provider>
-    </div>
-  )
-}
+//   return (
+//     <div>
+//         <multiStepContext.Provider
+//             value={{
+//                 currentStep,setStep,
+//                 userData, setUserData,
+//                 finalData, setFinalData, submitData,
+//                 submitted,setSubmitted
+//             }}>
+//             {/* {props?.children} */}
+//             <MoonRiverMain1 setShow={props.setShow}/>
+//         </multiStepContext.Provider>
+//     </div>
+//   )
+// }
 
-// export default StepContext;
+// // export default StepContext;
 
-export {multiStepContext,StepContext}
+// export {multiStepContext,StepContext}

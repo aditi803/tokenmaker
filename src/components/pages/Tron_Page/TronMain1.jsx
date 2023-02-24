@@ -699,6 +699,7 @@ const TronMain1 = (props) => {
     // setButtonClick(true)
 
     try {
+      
       // console.log(FormData.network, "fromdatanetwork");
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       // console.log(provider, "provider");
