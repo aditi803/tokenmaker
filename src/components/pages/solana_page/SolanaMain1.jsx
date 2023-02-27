@@ -176,7 +176,7 @@ const SolanaMain1 = (props) => {
 
   useEffect(() => {
 
-    
+
 
     if (agreement !== false) {
       setErr((prev) => ({
@@ -441,14 +441,14 @@ const SolanaMain1 = (props) => {
 
       try {
         const signature = await sendTransaction(transaction, connection);
-        console.log(signature,"signature");
+        console.log(signature, "signature");
         props.setShow(false);
 
         const signpay = await connection.confirmTransaction(
           signature,
           "processed"
         );
-        console.log(signpay,"signpay");
+        console.log(signpay, "signpay");
         //   // props.setshow(false)
         //   console.log("transaction ke ooperss");
 
@@ -459,7 +459,7 @@ const SolanaMain1 = (props) => {
             signers: [mintKeypair],
           }
         );
-        console.log(myTransaction,"myTranstrnas");
+        console.log(myTransaction, "myTranstrnas");
         // let txid = await connection.confirmTransaction(signature);
 
         // console.log(myTransaction,"trap");
@@ -624,17 +624,17 @@ const SolanaMain1 = (props) => {
                               onChange={ethMainFormHandler}
                               value={supplyType}
                             > */}
-                              <input
+                            <input
                               type="text"
                               className="form-control"
                               placeholder="Fixed"
                               // name="tokenName"
                               value="Fixed"
                               disabled
-                              // onChange={(e) => setTokenName(e.target.value)}
-                              // onChange={ethMainFormHandler}
+                            // onChange={(e) => setTokenName(e.target.value)}
+                            // onChange={ethMainFormHandler}
                             />
-                              {/* <option value="capped">Capped</option>
+                            {/* <option value="capped">Capped</option>
                               <option value="unlimited">Unlimited</option> */}
                             {/* </select> */}
                             {/* <span className="form-text text-muted">
@@ -653,7 +653,7 @@ const SolanaMain1 = (props) => {
                               name="tokenName"
                               value={tokenName}
                               onChange={(e) => setTokenName(e.target.value)}
-                              // onChange={ethMainFormHandler}
+                            // onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
                               The name of your token
@@ -718,8 +718,8 @@ const SolanaMain1 = (props) => {
                               name="initialSupply"
                               onChange={(e) => setInitialSupply(e.target.value)}
                               value={initialSupply}
-                              //   disabled={f_initialSupply}
-                              // onChange={ethMainFormHandler}
+                            //   disabled={f_initialSupply}
+                            // onChange={ethMainFormHandler}
                             />
                             <span className="form-text text-muted">
                               The number of coins minted during the creation of
@@ -729,13 +729,15 @@ const SolanaMain1 = (props) => {
                               {err.initialSupplyErr}
                             </div>
                           </div>
-                          <button
-                            // type="submit"
-                            className="btn form-btn justify-content-center ms-auto"
-                            onClick={handleSubmit}
-                          >
-                            Next
-                          </button>
+                          <div className="col-12">
+                            <button
+                              // type="submit"
+                              className="btn form-btn ms-auto"
+                              onClick={handleSubmit}
+                            >
+                              Next
+                            </button>
+                          </div>
                         </form>
                       </div>
                     </div>
@@ -757,7 +759,7 @@ const SolanaMain1 = (props) => {
                               value={network}
                               onChange={networkName}
                             >
-                              <option defaultValue="none"   hidden>
+                              <option defaultValue="none" hidden>
                                 Select your network
                               </option>
                               {/* <option>Select your network</option> */}
@@ -770,7 +772,7 @@ const SolanaMain1 = (props) => {
                                     <option
                                       className={
                                         item.value === "solanaMainnet" ||
-                                        item.value === "solanaTestnet"
+                                          item.value === "solanaTestnet"
                                           ? "disabled"
                                           : ""
                                       }
@@ -791,7 +793,7 @@ const SolanaMain1 = (props) => {
                                   <option
                                     className={
                                       item.value === "solanaMainnet" ||
-                                      item.value === "solanaTestnet"
+                                        item.value === "solanaTestnet"
                                         ? "disabled"
                                         : ""
                                     }
@@ -811,7 +813,7 @@ const SolanaMain1 = (props) => {
                                   <option
                                     className={
                                       item.value === "solanaMainnet" ||
-                                      item.value === "solanaTestnet"
+                                        item.value === "solanaTestnet"
                                         ? "disabled"
                                         : ""
                                     }
@@ -931,8 +933,8 @@ const SolanaMain1 = (props) => {
                                   I have read, understood and agreed to the{" "}
                                   <Link
                                     to="/terms"
-                                    // data-bs-toggle="modal"
-                                    // data-bs-target="#exampleModal"
+                                  // data-bs-toggle="modal"
+                                  // data-bs-target="#exampleModal"
                                   >
                                     <u> Terms of Use. </u>
                                   </Link>
@@ -949,7 +951,7 @@ const SolanaMain1 = (props) => {
                           <div className="d-flex justify-content-between">
                             <button
                               type="button"
-                              className="btn form-btn"
+                              className="btn form-btn me-auto ms-0"
                               onClick={() => setStep(1)}
                             >
                               Back

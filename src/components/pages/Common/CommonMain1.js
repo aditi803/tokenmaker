@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { HiInformationCircle } from "react-icons/hi";
 // import Tooltip from "../../Layots/ToolTip";
 import Tooltip from "../../Layots/ToolTip";
+import "../Eth_page/form.css"
 //
 // import Link from "react-router-dom";
 // import wallet_model from "../../Modal/Multi-WalletModal";
@@ -20,7 +21,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
-import "../Eth_page/eth_styles/main.css";
+// import "../Eth_page/eth_styles/main.css";
 import {
   freeDisabled,
   basicDisabled,
@@ -1077,7 +1078,7 @@ const Commonmain1 = (props) => {
                             </label>
                             <span className="form-text text-muted">
                               Your token will const all the functionalities,
-                              and confirms to  {locationValue === "binancesmartchain" ? "BEP 20" : "ERC 20"} protocol
+                              and confirms to  {locationValue === "binancesmartchain" ? "BEP 20" : "ERC 20"}+ protocol
                             </span>
                           </div>
                           <div className="form-group">
@@ -1175,7 +1176,7 @@ const Commonmain1 = (props) => {
                             </span>
                           </div>
                           <div className='d-flex justify-content-between'>
-                            <button type="button" className="btn form-btn" onClick={(e) => {
+                            <button type="button" className="btn form-btn me-auto ms-0" onClick={(e) => {
                               e.preventDefault()
                               setStep(1)
                             }}
@@ -1335,7 +1336,7 @@ const Commonmain1 = (props) => {
                           <div className="d-flex justify-content-between">
                             <button
                               type="button"
-                              className="btn form-btn"
+                              className="btn form-btn ms-0 me-auto"
                               onClick={() => setStep(2)}
                             >
                               Back

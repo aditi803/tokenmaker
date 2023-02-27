@@ -17,9 +17,10 @@
     background: linear-gradient(95.39deg, #C181FF -1.16%, #6010B1 97.84%);
     color: #fff;
     display: flex;
-    margin: auto;
+    margin: 0 0 0 auto;
     padding: 5px 25px;
     cursor: pointer;
+    border:none;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
     transition: all 0.5s;
