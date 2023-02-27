@@ -56,16 +56,10 @@ export const SolanaHeader = (props) => {
   } else if (chainId === 137 || chainId === 80001) {
     chainName = "  MATIC  ";
   }
-  // console.log(chainName, "chainName header side");
-  // console.log(chainId, "chainId header side");
+  
 
-  // console.log(connectedAccAddress, "connected addres header side");
   const accAddress = hideAccAddress(connectedAccAddress);
-  // function myName(){
-  //   if(connectedAccAddress.length !== 0){
-  //     return accAddress
-  //   }else return "Connect your Wallet"
-  // }
+  
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/";
 
 
@@ -81,30 +75,11 @@ export const SolanaHeader = (props) => {
                   {!loader && (
                     <img
                       src={imageBaseUrl + header.investorLogoImage}
-                      // src="https://cdn-hnjof.nitrocdn.com/rbqEPUqwZnAoyiJEQENsAgBiOCFoQUNg/assets/images/optimized/rev-1b9374e/wp-content/themes/blockbrew-child/media/2023/01/f9c842d749181b725b2174009ffbe8f4.final_Logo.svg"                      alt="Logo"
                       className="logoImage"
                       srcSet=""
                       alt="solana logo "
                     />
                   )}
-
-                  {/* <span className="span-1">
-                      <span className="span-2">
-                        <img alt aria-hidden="true" className='img-1'
-                        src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%27257%27%20height=%2725%27/%3e"
-                          />
-                      </span>
-                      <img src="https://tokenmaker.eattheblocks.com/_next/image?url=%2Fimages%2Flogo-token-maker.png&w=384&q=75"
-                      decoding='async' data-nimg='intrinsic'className='img-2' srcSet='https://tokenmaker.eattheblocks.com/_next/image?url=%2Fimages%2Flogo-token-maker.png&w=384&q=75 1x, /_next/image?url=%2Fimages%2Flogo-token-maker.png&w=640&q=75 2x'
-                       alt="Logo" />
-                       <noscript>
-                       <img alt="Logo" srcSet="/_next/image?url=%2Fimages%2Flogo-token-maker.png&amp;w=384&amp;q=75 1x, /_next/image?url=%2Fimages%2Flogo-token-maker.png&amp;w=640&amp;q=75 2x"
-                        src="/_next/image?url=%2Fimages%2Flogo-token-maker.png&amp;w=640&amp;q=75"
-                         decoding="async" data-nimg="intrinsic"
-                          style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%" 
-                          loading="lazy"/>
-                       </noscript>
-                    </span> */}
                 </Link>
                 <div className="nav-btn-div">
                   <div className="blue-btn ml-auto d-flex align-items-center justify-content-center" style={{ height: "48px", lineHeight: "48px", }}>

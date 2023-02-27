@@ -11,7 +11,7 @@ a {
 a {
   text-decoration: none !important;
 }
-
+s
 *,
 :after,
 :before {
@@ -105,6 +105,8 @@ a {
 .chain-link .title {
   font-size: 1.5rem;
 }
+
+
 
 .chain-ethereum .logo {
   background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 1920 1920' enable-background='new 0 0 1920 1920' xml:space='preserve'%3E%3Cg%3E%3Cpolygon fill='%238A92B2' points='959.8,80.7 420.1,976.3 959.8,731 '/%3E%3Cpolygon fill='%2362688F' points='959.8,731 420.1,976.3 959.8,1295.4 '/%3E%3Cpolygon fill='%2362688F' points='1499.6,976.3 959.8,80.7 959.8,731 '/%3E%3Cpolygon fill='%23454A75' points='959.8,1295.4 1499.6,976.3 959.8,731 '/%3E%3Cpolygon fill='%238A92B2' points='420.1,1078.7 959.8,1839.3 959.8,1397.6 '/%3E%3Cpolygon fill='%2362688F' points='959.8,1397.6 959.8,1839.3 1499.9,1078.7 '/%3E%3C/g%3E%3C/svg%3E");
