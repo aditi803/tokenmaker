@@ -6,7 +6,7 @@ import { error } from "jquery";
 const TronWeb = require("tronweb");
  
 
-
+// cohang\
 
 export const GlobalContext = createContext();
 
@@ -19,7 +19,7 @@ export const EtherProvider = ({ children }) => {
   const [startToggle, setStartToggle] = useState(true);
   const [solDeploy, setSolDeploy] = useState(false);
   const [networkData, setNetworkData] = useState([]);
-
+// sdssd
   const [fullData, setFullData] = useState([]);
   const [deployData, setDeployData] = useState({
     tokenAddress: "",
@@ -206,6 +206,7 @@ export const EtherProvider = ({ children }) => {
         );
         // console.log(account, "accctc");
         //set account balance
+
         let provider = new ethers.providers.Web3Provider(window.ethereum);
         const balance = await provider.getBalance(account[0]);
         // console.log(balance, "balance");
@@ -380,6 +381,7 @@ export const EtherProvider = ({ children }) => {
         });
         console.log(tx, "transooc");
         // console.log("tx", tx);
+        
         if (tx.hash) {
           return true;
         } else {
