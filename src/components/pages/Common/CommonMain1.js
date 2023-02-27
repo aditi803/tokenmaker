@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { HiInformationCircle } from "react-icons/hi";
 // import Tooltip from "../../Layots/ToolTip";
 import Tooltip from "../../Layots/ToolTip";
+// import "../Eth_page/form.css"
 import "../Eth_page/form.css"
 //
 // import Link from "react-router-dom";

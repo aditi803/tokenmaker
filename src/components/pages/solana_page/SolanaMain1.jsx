@@ -349,7 +349,8 @@ const SolanaMain1 = (props) => {
       // console.log(`Switched to account ${publicKey.toBase58()}`);
       // console.log(test,"connection>>>");
       if (!publicKey) {
-        // console.log("public key nhi h");
+        console.log("public key nhi h");
+        
         toast.error("Please Connect Your wallet ");
       }
 
