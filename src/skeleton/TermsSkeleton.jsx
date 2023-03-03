@@ -1,6 +1,7 @@
 import { Skeleton } from '@mui/material'
 import React from 'react'
-// aiiii
+// aiiiii
+
 const TermsSkeleton = () => {
   return (
     <div className='page-content mt-5'>
