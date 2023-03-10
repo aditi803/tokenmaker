@@ -406,7 +406,7 @@ export const EtherProvider = ({ children }) => {
     }
   };
 
-  //deploy Contract on blockchain
+  //deploy Contract on blockchain.
 
   const deployTron = async (contractSource, newFormData) => {
     let explorer;
