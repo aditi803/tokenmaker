@@ -80,6 +80,33 @@ export const FrontMain = () => {
   }, []);
 
   const imageBaseUrl = "https://tokenmaker-apis.block-brew.com/images/";
+
+
+  const [visible, setVisible] = useState(false)
+
+  const toggleVisible = () => {
+    const scrolled = document.documentElement.scrollTop;
+    if (scrolled > 300) {
+      setVisible(true)
+    }
+    else if (scrolled <= 300) {
+      setVisible(false)
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+
+      top: 0,
+      behavior: 'smooth'
+      /* you can also use 'auto' behaviour
+        in place of 'smooth' */
+    });
+  };
+
+  window.addEventListener('scroll', toggleVisible);
+
+
   return (
     <>
       {/* <EthHeader /> */}
@@ -186,9 +213,8 @@ export const FrontMain = () => {
                           return (
                             <>
                               <div
-                                className={`col-lg-10 offset-lg-1 ${
-                                  i === steps.length - 1 ? "" : "timeline_right"
-                                } timeline_main`}
+                                className={`col-lg-10 offset-lg-1 ${i === steps.length - 1 ? "" : "timeline_right"
+                                  } timeline_main`}
                                 key={i}
                               >
                                 <div class="row justify-content-center align-items-center">
@@ -243,6 +269,7 @@ export const FrontMain = () => {
                         backgroundColor: `${start.buttonBackgroundColor}`,
                         color: `${start.buttonColor}`,
                       }}
+                      onClick={scrollToTop}
                     >
                       {start.buttonText}
                     </Link>
@@ -264,7 +291,7 @@ export const FrontMain = () => {
                     {features.map((data, index) => (
                       <div className="col-xl-3 col-lg-4 col-md-6 d-flex flex-column mb-lg-3" key={index}>
                         <div className="feature-box mb-4 py-5 px-3">
-                          <img src={imageBaseUrl + data.featureImage} alt=""/>
+                          <img src={imageBaseUrl + data.featureImage} alt="" />
                           <h5 className="my-3">{data.title}</h5>
                           <p>{data.content}</p>
                         </div>
@@ -352,9 +379,8 @@ export const FrontMain = () => {
                                 </h2>
                                 <div
                                   id={`collapseOne2${i}`}
-                                  className={`accordion-collapse collapse overflow-hidden ${
-                                    i === showindex ? "show" : null
-                                  }`}
+                                  className={`accordion-collapse collapse overflow-hidden ${i === showindex ? "show" : null
+                                    }`}
                                   aria-labelledby="headingOne2"
                                   data-bs-parent="#accordionExample"
                                 >
@@ -371,7 +397,7 @@ export const FrontMain = () => {
                       </div>
                     </div>
                   </div>
-                  <div className={`faq_bottom text-center mt-3 mt-md-5`}>
+                  {/* <div className={`faq_bottom text-center mt-3 mt-md-5`}>
                     <h3
                       style={{ color: `${featuresData.headingColor}` }}
                       className="faq-bottom-text"
@@ -388,6 +414,34 @@ export const FrontMain = () => {
                     >
                       Deploy your token
                     </Link>
+                  </div> */}
+                </div>
+              </section>
+              <section className="page-section deploy-token" id="faq">
+                <div className="container">
+                  <div className="">
+                    <div className="row">
+                      <div className="col-12 col-lg-12 faq_left mb-sm-4 mb-lg-0">
+                        <div className={`faq_bottom text-center mt-3 mt-md-5`}>
+                          <h3
+                            style={{ color: `${featuresData.headingColor}` }}
+                            className="faq-bottom-text"
+                          >
+                            What are you waiting for?
+                          </h3>
+                          <Link
+                            to="/generator"
+                            className="blue-btn btn mt-2"
+                            style={{
+                              backgroundColor: `${custom.buttonBackgroundColor}`,
+                              color: `${custom.buttonColor}`,
+                            }}
+                          >
+                            Deploy your token
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>

@@ -211,6 +211,9 @@
     background-color: #6010b1;
     color: #000;
 }
+.deploy-token{
+    background-color: #ebecf2;
+}
 
 /* 
 .accordion-button::after{
