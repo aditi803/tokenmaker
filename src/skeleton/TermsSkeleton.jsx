@@ -1,5 +1,6 @@
 import { Skeleton } from '@mui/material'
 import React from 'react'
+// aiiiii
 
 const TermsSkeleton = () => {
   return (
@@ -17,7 +18,7 @@ const TermsSkeleton = () => {
           <Skeleton variant="rounded" width={1296} height={14} className='my-3' />
           <Skeleton variant="rounded" width={100} height={14} className='my-3' />
           <Skeleton variant="rounded" width={1296} height={14} className='my-3' />
-          <Skeleton variant="rounded" width={150} height={14} className='my-3' />
+          <Skeleton variant="rounded" width={150} height={14} className='my-3' /> 
           <Skeleton variant="rounded" width={1290} height={14} className='my-3' />
           <Skeleton variant="rounded" width={1300} height={14} className='my-3' />
           <Skeleton variant="rounded" width={400} height={14} className='my-3' />
