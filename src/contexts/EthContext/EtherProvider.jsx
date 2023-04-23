@@ -372,6 +372,7 @@ export const EtherProvider = ({ children }) => {
         await window.ethereum.send("eth_requestAccounts");
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
+        console.log(provider,"provider===")
         const signer = provider.getSigner();
         // ethers.utils.getAddress(addr);
         console.log(signer, "signerrrrr");
